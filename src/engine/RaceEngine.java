@@ -1,42 +1,30 @@
 package engine;
 
 import camera.Camera;
-import camera.FreeCamera;
 import camera.TrailingCamera;
 import control.Controller;
 import ships.FileShip;
 import ships.Ship;
+import track.Track;
 import world.World;
 import world.WorldCreator;
 
-class Engine {
-	Camera camera;
-	Controller controller;
-	Painter painter;
-	World world;
-	Ship ship;
+class RaceEngine {
+	private Camera camera;
+	private Controller controller;
+	private Painter painter;
+	private World world;
+	private Track track;
+	private Ship ship;
 	private boolean pause;
 	
-	Engine() {
+	RaceEngine() {
 		int frame = 800, image = frame;
 		Math3D.loadTrig(1000);
 		controller = new Controller(frame, frame);
 		painter = new Painter(frame, image, controller);
-		camera = createCamera();
-	}
-	
-	Engine(Controller controller, Painter painter) {
-		this.controller = controller;
-		this.painter = painter;
-		camera = createCamera();
-	}
-	
-	Ship createShip(int x, int y, int z) {
-		return new FileShip(x, y, z, 0, 0, 0, world);
-	}
-	
-	Camera createCamera() {
-		return new TrailingCamera();
+		camera = new TrailingCamera();
+		createWorld();
 	}
 	
 	private void createWorld() {
@@ -46,16 +34,15 @@ class Engine {
 		WorldCreator wc = new WorldCreator(numChunks, numChunks, numChunks, eachChunkSize);
 		wc.heightMap(65, 25);
 		world = wc.world;
-		ship = createShip(32, 32, 100);
+		ship = new FileShip(32, 32, 100, 0, 0, 0, world);
 		((TrailingCamera) camera).setFollowShip(ship);
 		world.addShip(ship);
 	}
 	
 	void begin() {
-		createWorld();
 		int frame = 0;
 		long beginTime = 0, endTime;
-		while (checkContinue()) {
+		while (true) {
 			while (pause) {
 				checkPause();
 				wait(30);
@@ -83,10 +70,6 @@ class Engine {
 			pause = !pause;
 	}
 	
-	boolean checkContinue() {
-		return !controller.isKeyPressed(Controller.KEY_M);
-	}
-	
 	static void wait(int howLong) {
 		try {
 			Thread.sleep(howLong);
@@ -96,8 +79,6 @@ class Engine {
 	}
 	
 	public static void main(String args[]) {
-		new Engine().begin();
+		new RaceEngine().begin();
 	}
 }
-
-// TODO : don't keep throwing away old buffered image and graphics2d

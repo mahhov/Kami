@@ -5,7 +5,6 @@ import control.Controller;
 import engine.Math3D;
 import engine.Painter;
 import list.LList;
-import particles.Particle;
 import projectiles.Projectile;
 import shapes.Shape;
 import shapes.StaticCube;
@@ -17,7 +16,6 @@ public class World {
 	
 	private LList<Ship> ship;
 	private LList<Projectile> projectile;
-	private Particle[] particle;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight, int chunkSize) {
 		width = chunkWidth * chunkSize;
