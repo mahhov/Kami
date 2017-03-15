@@ -67,6 +67,12 @@ public class Math3D {
 		return dotProductUnormalized(x, y, z, x2, y2, z2) / mag1 / mag2;
 	}
 	
+	public static double dotProduct(double[] v1, double[] v2) {
+		double mag1 = magnitude(v1);
+		double mag2 = magnitude(v2);
+		return dotProductUnormalized(v1, v2) / mag1 / mag2;
+	}
+	
 	public static double dotProductUnormalized(double x, double y, double z, double x2, double y2, double z2) {
 		return x * x2 + y * y2 + z * z2;
 	}
