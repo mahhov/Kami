@@ -20,12 +20,16 @@ class Point {
 	}
 	
 	Point scale(double scale) {
+		return new Point(x * scale, y * scale, z * scale);
+	}
+	
+	Point normalize(double scale) {
 		scale /= Math3D.magnitude(toArray());
 		return new Point(x * scale, y * scale, z * scale);
 	}
 	
 	Point move(Point direction, double distance) {
-		direction = direction.scale(distance);
+		direction = direction.normalize(distance);
 		return new Point(x + direction.x, y + direction.y, z + direction.z);
 	}
 	
