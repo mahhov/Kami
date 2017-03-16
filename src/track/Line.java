@@ -6,12 +6,14 @@ class Line {
 	private Point p1, p2;
 	private Point delta;
 	private double distance;
+	private Point perpendicularVector;
 	
 	Line(Point p1, Point p2) {
 		this.p1 = p1;
 		this.p2 = p2;
 		delta = p2.subtract(p1);
 		distance = Math3D.magnitude(this.delta.toArray());
+		perpendicularVector = new Point(delta.y, -delta.x, 0);
 	}
 	
 	double getHeight(double x, double y) {
@@ -25,7 +27,7 @@ class Line {
 	}
 	
 	Point getPerpendicularVector() {
-		return new Point(delta.y, -delta.x, 0);
+		return perpendicularVector;
 	}
 	
 	Point getDelta() {
