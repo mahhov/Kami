@@ -5,7 +5,7 @@ import engine.Math3D;
 class Line {
 	private Point p1, p2;
 	private Point delta;
-	double distance;
+	private double distance;
 	
 	Line(Point p1, Point p2) {
 		this.p1 = p1;
@@ -26,5 +26,13 @@ class Line {
 	
 	Point getPerpendicularVector() {
 		return new Point(delta.y, -delta.x, 0);
+	}
+	
+	Point getDelta() {
+		return delta;
+	}
+	
+	double getDistance() {
+		return distance;
 	}
 }

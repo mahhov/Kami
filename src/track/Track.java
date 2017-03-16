@@ -11,15 +11,15 @@ public class Track {
 		double width = 100;
 		double edge = 50;
 		Point[] points = new Point[8];
-		int corner = 20, length = 100;
+		int corner = 20, length = 100, climb = 50;
 		int c = 0;
 		points[c++] = new Point(edge + corner, edge + 0, 0);
-		points[c++] = new Point(edge + corner + length, edge + 0, 0);
-		points[c++] = new Point(edge + length + corner * 2, edge + corner, 0);
-		points[c++] = new Point(edge + length + corner * 2, edge + length + corner, 0);
-		points[c++] = new Point(edge + length + corner, edge + length + corner * 2, 0);
-		points[c++] = new Point(edge + corner, edge + length + corner * 2, 0);
-		points[c++] = new Point(edge + 0, edge + length + corner, 0);
+		points[c++] = new Point(edge + corner + length, edge + 0, climb);
+		points[c++] = new Point(edge + length + corner * 2, edge + corner, climb);
+		points[c++] = new Point(edge + length + corner * 2, edge + length + corner, climb * 2);
+		points[c++] = new Point(edge + length + corner, edge + length + corner * 2, climb * 2);
+		points[c++] = new Point(edge + corner, edge + length + corner * 2, climb);
+		points[c++] = new Point(edge + 0, edge + length + corner, climb);
 		points[c++] = new Point(edge + 0, edge + corner, 0);
 		
 		for (int i = 0; i < points.length - 1; i++)

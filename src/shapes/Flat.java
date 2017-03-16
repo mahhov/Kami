@@ -1,16 +1,14 @@
 package shapes;
 
+import engine.Math3D;
+
 import java.awt.*;
 
 public class Flat extends Shape {
 	private double x, y, z;
 	private Surface surface;
 	
-	public Flat(double x, double y, double z, Color color) {
-		this(x, y, z, color, .5);
-	}
-	
-	public Flat(double x, double y, double z, Color color, double size) {
+	public Flat(double x, double y, double z, double[] norm, double size, Color color) {
 		super(null);
 		this.x = x;
 		this.y = y;
@@ -19,21 +17,23 @@ public class Flat extends Shape {
 		if (color == null)
 			color = Color.LIGHT_GRAY;
 		
-		initSurface(color, size);
+		initSurface(norm, size, color);
 	}
 	
-	private void initSurface(Color color, double size) {
-		// dimensions
-		double leftX = x - size;
-		double rightX = x + size;
-		double frontY = y - size;
-		double backY = y + size;
+	private void initSurface(double[] norm, double size, Color color) {
+		// axis  vectors
+		norm = Math3D.setMagnitude(norm, size);
+		double[] right = Math3D.setMagnitude(new double[] {norm[1], -norm[0], 0}, size);
 		
-		// side coordinates
-		double[] xs = new double[] {leftX, rightX, rightX, leftX};
-		double[] ys = new double[] {backY, backY, frontY, frontY};
+		// coordinates
+		double[] leftFront = new double[] {x - norm[0] - right[0], y - norm[1] - right[1], z - norm[2] - right[2]};
+		double[] rightFront = new double[] {x - norm[0] + right[0], y - norm[1] + right[1], z - norm[2] + right[2]};
+		double[] leftBack = new double[] {x + norm[0] - right[0], y + norm[1] - right[1], z + norm[2] - right[2]};
+		double[] rightBack = new double[] {x + norm[0] + right[0], y + norm[1] + right[1], z + norm[2] + right[2]};
 		
 		// from back/left -> back/right -> front/right -> front/left
+		double[] xs = new double[] {leftBack[0], rightBack[0], rightFront[0], leftFront[0]};
+		double[] ys = new double[] {leftBack[1], rightBack[1], rightFront[1], leftFront[1]};
 		surface = new Surface(xs, ys, z, true);
 		surface.setColor(color);
 		surface.setLight(.8);
