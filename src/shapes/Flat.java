@@ -31,10 +31,8 @@ public class Flat extends Shape {
 		double[] leftBack = new double[] {x + norm[0] - right[0], y + norm[1] - right[1], z + norm[2] - right[2]};
 		double[] rightBack = new double[] {x + norm[0] + right[0], y + norm[1] + right[1], z + norm[2] + right[2]};
 		
-		// from back/left -> back/right -> front/right -> front/left
-		double[] xs = new double[] {leftBack[0], rightBack[0], rightFront[0], leftFront[0]};
-		double[] ys = new double[] {leftBack[1], rightBack[1], rightFront[1], leftFront[1]};
-		surface = new Surface(xs, ys, z, true);
+		// surfacew
+		surface = new Surface(leftBack, rightBack, rightFront, leftFront, true);
 		surface.setColor(color);
 		surface.setLight(.8);
 	}
