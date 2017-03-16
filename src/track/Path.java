@@ -25,9 +25,13 @@ class Path {
 	}
 	
 	void addToWorld(World world) {
-		for (int i = 0; i < bone.distance; i += 1) {
-			Point p = bone.interpolate(i / bone.distance);
-			world.addShape((int) p.x, (int) p.y, (int) p.z, new Flat(p.x, p.y, p.z, Color.RED));
-		}
+		int width = 10; // use constructor width
+		Point perpendicularVector = bone.getPerpendicularVector(); // store in class var
+		for (int i = 0; i < bone.distance; i += 1)
+			for (int j = -width; j < width; j += 1) {
+				Point p = bone.interpolate(i / bone.distance);
+				p = p.move(perpendicularVector, j);
+				world.addShape((int) p.x, (int) p.y, (int) p.z, new Flat(p.x, p.y, p.z, Color.RED)); // use angles as well
+			}
 	}
 }

@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/shapes/Flat.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/track/Path.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/track/Track.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/engine/RaceEngine.class" afterPath="$PROJECT_DIR$/out/production/Afto/engine/RaceEngine.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/track/Path.class" afterPath="$PROJECT_DIR$/out/production/Afto/track/Path.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/track/Track.class" afterPath="$PROJECT_DIR$/out/production/Afto/track/Track.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/RaceEngine.java" afterPath="$PROJECT_DIR$/src/engine/RaceEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/track/Line.java" afterPath="$PROJECT_DIR$/src/track/Line.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/track/Path.java" afterPath="$PROJECT_DIR$/src/track/Path.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/track/Point.java" afterPath="$PROJECT_DIR$/src/track/Point.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/track/Track.java" afterPath="$PROJECT_DIR$/src/track/Track.java" />
     </list>
     <ignored path="Afto.iws" />
@@ -36,8 +31,8 @@
       <file leaf-file-name="Track.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/track/Track.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+            <state relative-caret-position="165">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -49,7 +44,7 @@
         <entry file="file://$PROJECT_DIR$/src/track/Path.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="375">
-              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -60,9 +55,12 @@
       <file leaf-file-name="Flat.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/shapes/Flat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
+            <state relative-caret-position="135">
               <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-              <folding />
+              <folding>
+                <element signature="e#180#181#0" expanded="true" />
+                <element signature="e#211#212#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -168,11 +166,11 @@
         <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
         <option value="$PROJECT_DIR$/src/world/World.java" />
         <option value="$PROJECT_DIR$/src/track/Point.java" />
-        <option value="$PROJECT_DIR$/src/shapes/Flat.java" />
         <option value="$PROJECT_DIR$/src/track/Line.java" />
-        <option value="$PROJECT_DIR$/src/track/Path.java" />
-        <option value="$PROJECT_DIR$/src/track/Track.java" />
         <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
+        <option value="$PROJECT_DIR$/src/shapes/Flat.java" />
+        <option value="$PROJECT_DIR$/src/track/Track.java" />
+        <option value="$PROJECT_DIR$/src/track/Path.java" />
       </list>
     </option>
   </component>
@@ -941,12 +939,12 @@
       <updated>1489588747371</updated>
       <workItem from="1489588748615" duration="5212000" />
       <workItem from="1489595059555" duration="9000" />
-      <workItem from="1489633267662" duration="1284000" />
+      <workItem from="1489633267662" duration="1642000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6505000" />
+    <option name="totallyTimeSpent" value="6863000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
@@ -1143,6 +1141,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/world/World.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -1162,36 +1168,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/Chunk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="e#648#649#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/track/Track.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
+        <state relative-caret-position="165">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shapes/Flat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="135">
           <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding />
+          <folding>
+            <element signature="e#180#181#0" expanded="true" />
+            <element signature="e#211#212#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/track/Path.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
