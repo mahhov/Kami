@@ -23,8 +23,8 @@ public class Track {
 		points[c++] = new Point(edge + 0, edge + corner, 0);
 		
 		for (int i = 0; i < points.length - 1; i++)
-			path = path.add(new Path(points[i], points[i + 1], width, width));
-		path = path.add(new Path(points[points.length - 1], points[0], width, width));
+			path = path.add(new Path(points[i], points[i + 1], width, width * 2));
+		path = path.add(new Path(points[points.length - 1], points[0], width, width * 2));
 	}
 	
 	public void addToWorld(World world) {
