@@ -3,7 +3,7 @@ package ships;
 import control.Controller;
 import engine.Math3D;
 import engine.Painter;
-import module.*;
+import shapes.module.*;
 import shapes.Shape;
 import shapes.ShapeParent;
 import shapes.ShipTrigger;

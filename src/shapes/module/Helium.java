@@ -1,4 +1,4 @@
-package module;
+package shapes.module;
 
 import engine.Math3D;
 import ships.Ship;

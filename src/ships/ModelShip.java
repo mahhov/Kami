@@ -222,7 +222,7 @@ public class ModelShip extends Ship implements Serializable {
 	}
 	
 	private void textOutput() {
-		Painter.outputString[0] = "seleced module: " + MODULE_NAMES[moduleSelected];
+		Painter.outputString[0] = "seleced shapes.module: " + MODULE_NAMES[moduleSelected];
 		Painter.outputString[1] = "seleced direction: " + DIRECTION_NAMES[directionSelected];
 		Painter.outputString[2] = saveStatus;
 	}

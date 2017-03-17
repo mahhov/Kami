@@ -1,4 +1,4 @@
-package module;
+package shapes.module;
 
 public class Driver {
 }
