@@ -8,10 +8,12 @@ import world.World;
 
 import java.awt.*;
 
+import static engine.Math3D.BLOCK_FULL;
+import static engine.Math3D.BLOCK_NONE;
+
 public abstract class Module {
 	public int mass;
 	public int[] block;
-	public static final int BLOCK_NONE = 0, BLOCK_PARTIAL = 1, BLOCK_FULL = 2;
 	
 	Module() {
 		mass = 1;

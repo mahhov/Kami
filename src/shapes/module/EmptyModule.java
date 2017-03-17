@@ -4,6 +4,8 @@ import engine.Math3D;
 import shapes.Shape;
 import ships.Ship;
 
+import static engine.Math3D.BLOCK_NONE;
+
 public class EmptyModule extends Module {
 	public EmptyModule() {
 		mass = 0;

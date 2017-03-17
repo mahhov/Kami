@@ -2,29 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/Blaster.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/Driver.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/EmptyModule.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/ForwBlade.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/Helium.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/Hull.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/Module.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Afto/module/Rotor.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/Blaster.java" afterPath="$PROJECT_DIR$/src/shapes/module/Blaster.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/Driver.java" afterPath="$PROJECT_DIR$/src/shapes/module/Driver.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/EmptyModule.java" afterPath="$PROJECT_DIR$/src/shapes/module/EmptyModule.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/ForwBlade.java" afterPath="$PROJECT_DIR$/src/shapes/module/ForwBlade.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/Helium.java" afterPath="$PROJECT_DIR$/src/shapes/module/Helium.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/Hull.java" afterPath="$PROJECT_DIR$/src/shapes/module/Hull.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/Module.java" afterPath="$PROJECT_DIR$/src/shapes/module/Module.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/module/Rotor.java" afterPath="$PROJECT_DIR$/src/shapes/module/Rotor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/list/LList.class" afterPath="$PROJECT_DIR$/out/production/Afto/list/LList.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/ships/ModelShip.class" afterPath="$PROJECT_DIR$/out/production/Afto/ships/ModelShip.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/ships/Ship.class" afterPath="$PROJECT_DIR$/out/production/Afto/ships/Ship.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/engine/Math3D$Angle.class" afterPath="$PROJECT_DIR$/out/production/Afto/engine/Math3D$Angle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/engine/Math3D$Force.class" afterPath="$PROJECT_DIR$/out/production/Afto/engine/Math3D$Force.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/engine/Math3D.class" afterPath="$PROJECT_DIR$/out/production/Afto/engine/Math3D.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/shapes/module/EmptyModule.class" afterPath="$PROJECT_DIR$/out/production/Afto/shapes/module/EmptyModule.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/shapes/module/ForwBlade.class" afterPath="$PROJECT_DIR$/out/production/Afto/shapes/module/ForwBlade.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/shapes/module/Module.class" afterPath="$PROJECT_DIR$/out/production/Afto/shapes/module/Module.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ships/ModelShip.java" afterPath="$PROJECT_DIR$/src/ships/ModelShip.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ships/Ship.java" afterPath="$PROJECT_DIR$/src/ships/Ship.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Math3D.java" afterPath="$PROJECT_DIR$/src/engine/Math3D.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/module/EmptyModule.java" afterPath="$PROJECT_DIR$/src/shapes/module/EmptyModule.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/module/ForwBlade.java" afterPath="$PROJECT_DIR$/src/shapes/module/ForwBlade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/module/Module.java" afterPath="$PROJECT_DIR$/src/shapes/module/Module.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,80 +34,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Track.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/track/Track.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ship.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ships/Ship.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="13" column="49" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
               <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Blaster.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/shapes/module/Blaster.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/list/LList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Path.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/track/Path.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="38" column="61" selection-start-line="38" selection-start-column="61" selection-end-line="38" selection-end-column="61" />
-              <folding>
-                <element signature="e#1037#1038#0" expanded="true" />
-                <element signature="e#1096#1097#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Line.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/track/Line.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-              <folding>
-                <element signature="e#690#691#0" expanded="true" />
-                <element signature="e#723#724#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -151,13 +71,16 @@
         <option value="$PROJECT_DIR$/src/world/World.java" />
         <option value="$PROJECT_DIR$/src/track/Point.java" />
         <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
-        <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
         <option value="$PROJECT_DIR$/src/shapes/Flat.java" />
         <option value="$PROJECT_DIR$/src/track/Line.java" />
         <option value="$PROJECT_DIR$/src/track/Path.java" />
         <option value="$PROJECT_DIR$/src/track/Track.java" />
         <option value="$PROJECT_DIR$/src/list/LList.java" />
+        <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
+        <option value="$PROJECT_DIR$/src/shapes/module/Module.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
+        <option value="$PROJECT_DIR$/src/shapes/module/EmptyModule.java" />
+        <option value="$PROJECT_DIR$/src/shapes/module/ForwBlade.java" />
       </list>
     </option>
   </component>
@@ -968,12 +891,12 @@
       <workItem from="1489588748615" duration="5212000" />
       <workItem from="1489595059555" duration="9000" />
       <workItem from="1489633267662" duration="6584000" />
-      <workItem from="1489723407998" duration="1321000" />
+      <workItem from="1489723407998" duration="1458000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13126000" />
+    <option name="totallyTimeSpent" value="13263000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
@@ -992,7 +915,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="SOQL Query" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1209,58 +1132,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="58" column="39" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="39" />
-          <folding>
-            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
-            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
-            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
-            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
-            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#min#0;class#Math3D#0" expanded="false" />
-            <element signature="method#min#1;class#Math3D#0" expanded="false" />
-            <element signature="method#min#2;class#Math3D#0" expanded="false" />
-            <element signature="method#min#3;class#Math3D#0" expanded="false" />
-            <element signature="method#max#0;class#Math3D#0" expanded="false" />
-            <element signature="method#max#1;class#Math3D#0" expanded="false" />
-            <element signature="method#max#2;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
-            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
-            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#1;class#Math3D#0" expanded="false" />
-            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shapes/Flat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1319,14 +1190,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ships/Ship.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="13" column="49" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/camera/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1335,18 +1198,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
+    <entry file="file://$PROJECT_DIR$/src/shapes/module/Blaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        <state relative-caret-position="420">
+          <caret line="33" column="124" selection-start-line="33" selection-start-column="124" selection-end-line="33" selection-end-column="124" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/shapes/module/Blaster.java">
+    <entry file="file://$PROJECT_DIR$/src/shapes/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ships/Ship.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="13" column="49" selection-start-line="13" selection-start-column="38" selection-end-line="13" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="78" selection-start-line="8" selection-start-column="78" selection-end-line="8" selection-end-column="78" />
+          <folding>
+            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
+            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
+            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
+            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
+            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#min#0;class#Math3D#0" expanded="false" />
+            <element signature="method#min#1;class#Math3D#0" expanded="false" />
+            <element signature="method#min#2;class#Math3D#0" expanded="false" />
+            <element signature="method#min#3;class#Math3D#0" expanded="false" />
+            <element signature="method#max#0;class#Math3D#0" expanded="false" />
+            <element signature="method#max#1;class#Math3D#0" expanded="false" />
+            <element signature="method#max#2;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
+            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
+            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#1;class#Math3D#0" expanded="false" />
+            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shapes/module/Module.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shapes/module/EmptyModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shapes/module/ForwBlade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="83" column="50" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding />
         </state>
       </provider>

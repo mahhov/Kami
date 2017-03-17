@@ -6,6 +6,7 @@ public class Math3D {
 	public static final int LEFT = 0, RIGHT = 1, FRONT = 2, BACK = 3, BOTTOM = 4, TOP = 5, NONE = -1;
 	public static final double[] LEFT_VECTOR = new double[] {-1, 0, 0}, RIGHT_VECTOR = new double[] {1, 0, 0}, FRONT_VECTOR = new double[] {0, 1, 0}, BACK_VECTOR = new double[] {0, -1, 0}, TOP_VECTOR = new double[] {0, 0, 1}, BOTTOM_VECTOR = new double[] {0, 0, -1}, ZERO_VECTOR = new double[] {0, 0, 0};
 	public static final double sqrt2 = Math.sqrt(2), sqrt2Div3 = Math.sqrt(2.0 / 3), sqrt1Div2 = 1 / sqrt2, sqrt1Div5 = 1 / Math.sqrt(5), sqrt3 = Math.sqrt(3);
+	public static final int BLOCK_NONE = 0, BLOCK_PARTIAL = 1, BLOCK_FULL = 2;
 	
 	public static int flipDirection(int direction) {
 		switch (direction) {

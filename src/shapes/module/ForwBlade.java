@@ -8,7 +8,7 @@ import world.World;
 
 import java.awt.*;
 
-import static engine.Math3D.TOP_VECTOR;
+import static engine.Math3D.*;
 
 public class ForwBlade extends Module {
 	private static final double FORCE = .002;
