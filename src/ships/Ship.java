@@ -3,10 +3,10 @@ package ships;
 import control.Controller;
 import engine.Math3D;
 import engine.Painter;
-import shapes.module.*;
 import shapes.Shape;
 import shapes.ShapeParent;
 import shapes.ShipTrigger;
+import shapes.module.*;
 import world.World;
 
 import static ships.Blueprint.*;
@@ -148,6 +148,7 @@ public abstract class Ship implements ShapeParent {
 	
 	void addToWorld(World world) {
 		Shape shape;
+		int[] block;
 		double xc, yc, zc;
 		double dx, dy, dz;
 		for (int xi = 0; xi < part.length; xi++)
@@ -161,7 +162,7 @@ public abstract class Ship implements ShapeParent {
 					yc = y + dx * rightUp[1] + dy * norm[1] + dz * rightUp[4];
 					zc = z + dx * rightUp[2] + dy * norm[2] + dz * rightUp[5];
 					
-					int[] block = getBlock(xi, yi, zi);
+					block = getBlock(xi, yi, zi);
 					
 					shape = part[xi][yi][zi].getShape(xc, yc, zc, angle, angleZ, angleTilt, rightUp, block, this);
 					if (shape != null)

@@ -5,7 +5,7 @@ import camera.FreeCamera;
 import control.Controller;
 import ships.FileShip;
 import ships.Ship;
-import track.Track;
+import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
 
@@ -14,7 +14,8 @@ class RaceEngine {
 	private Controller controller;
 	private Painter painter;
 	private World world;
-	private Track track;
+	//	private Track track;
+	private Terrain terrain;
 	private Ship ship;
 	private boolean pause;
 	
@@ -25,7 +26,8 @@ class RaceEngine {
 		painter = new Painter(frame, image, controller);
 		//		camera = new TrailingCamera();
 		camera = new FreeCamera();
-		track = new Track();
+		//		track = new Track();
+		terrain = new Terrain();
 		createWorld();
 	}
 	
@@ -38,7 +40,8 @@ class RaceEngine {
 		ship = new FileShip(32, 32, 100, 0, 0, 0, world);
 		//		((TrailingCamera) camera).setFollowShip(ship);
 		world.addShip(ship);
-		track.addToWorld(world);
+		//		track.addToWorld(world);
+		terrain.addToWorld(world);
 	}
 	
 	void begin() {
