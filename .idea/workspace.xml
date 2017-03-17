@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/engine/RaceEngine.class" afterPath="$PROJECT_DIR$/out/production/Afto/engine/RaceEngine.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/ships/Ship.class" afterPath="$PROJECT_DIR$/out/production/Afto/ships/Ship.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Afto/terrain/Terrain.class" afterPath="$PROJECT_DIR$/out/production/Afto/terrain/Terrain.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/RaceEngine.java" afterPath="$PROJECT_DIR$/src/engine/RaceEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ships/Ship.java" afterPath="$PROJECT_DIR$/src/ships/Ship.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" afterPath="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,8 +64,8 @@
       <file leaf-file-name="TerrainModule.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="345">
+              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -113,9 +107,9 @@
         <option value="$PROJECT_DIR$/src/shapes/module/EmptyModule.java" />
         <option value="$PROJECT_DIR$/src/shapes/module/ForwBlade.java" />
         <option value="$PROJECT_DIR$/src/ships/Ship.java" />
-        <option value="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
         <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
         <option value="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" />
+        <option value="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
       </list>
     </option>
@@ -950,12 +944,12 @@
       <workItem from="1489588748615" duration="5212000" />
       <workItem from="1489595059555" duration="9000" />
       <workItem from="1489633267662" duration="6584000" />
-      <workItem from="1489723407998" duration="3482000" />
+      <workItem from="1489723407998" duration="3733000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15287000" />
+    <option name="totallyTimeSpent" value="15538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
@@ -1338,30 +1332,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
           <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-          <folding>
-            <element signature="e#117#118#0" expanded="true" />
-            <element signature="e#141#142#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1414,6 +1389,25 @@
             <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
             <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <folding>
+            <element signature="e#117#118#0" expanded="true" />
+            <element signature="e#141#142#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

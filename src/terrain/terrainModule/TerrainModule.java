@@ -21,8 +21,13 @@ public abstract class TerrainModule {
 	
 	public Shape getShape(double xc, double yc, double zc, int[] block) {
 		boolean[] side = new boolean[6];
-		for (int i = 0; i < side.length; i++)
+		boolean visible = false;
+		for (int i = 0; i < side.length; i++) {
 			side[i] = block[i] == BLOCK_NONE;
+			visible = visible || side[i];
+		}
+		if (!visible)
+			return null;
 		return new StaticCube(xc, yc, zc, color, side, .5);
 	}
 }
