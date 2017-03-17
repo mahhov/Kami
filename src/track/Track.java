@@ -8,7 +8,7 @@ public class Track {
 	
 	public Track() {
 		path = new LList<>();
-		double width = 100;
+		double width = 10;
 		double edge = 50;
 		Point[] points = new Point[8];
 		int corner = 20, length = 100, climb = 50;
