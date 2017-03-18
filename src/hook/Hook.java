@@ -1,9 +1,12 @@
 package hook;
 
 import camera.TrailingCamera;
+import control.Controller;
 import engine.Math3D;
+import world.World;
+import world.WorldElement;
 
-public class Hook implements TrailingCamera.Follow {
+public class Hook implements WorldElement, TrailingCamera.Follow {
 	private double x, y, z;
 	private Math3D.Angle angle, angleZ;
 	
@@ -13,6 +16,10 @@ public class Hook implements TrailingCamera.Follow {
 		this.z = z;
 		angle = new Math3D.Angle(0);
 		angleZ = new Math3D.Angle(0);
+	}
+	
+	public void update(World world, Controller controller) {
+		
 	}
 	
 	public double getX() {
