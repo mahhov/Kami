@@ -57,7 +57,7 @@ class RaceEngine {
 			world.drawChunks(painter, camera);
 			painter.repaint();
 			checkPause();
-			wait(30);
+			wait(10);
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
 				Painter.debugString[0] = "fps: " + frame + " ; paint surfaceCount: " + painter.surfaceCount + " ; paint drawCount: " + painter.drawCount;

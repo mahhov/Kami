@@ -13,8 +13,9 @@ public class Terrain {
 		part = new TerrainModule[200][200][100];
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
-				int height = (int) (Math.random() * 100);
-				height = height > 20 ? height : 1;
+				int height = 1;
+				if (Math.random() > .8)
+					height = 7;
 				for (int z = 0; z < height; z++)
 					part[x][y][z] = new FullGray();
 			}
@@ -29,7 +30,7 @@ public class Terrain {
 					if (part[x][y][z] != null) {
 						block = getBlock(x, y, z);
 						
-						shape = part[x][y][z].getShape(x, y, z, block);
+						shape = part[x][y][z].getShape(x + .5, y + .5, z + .5, block);
 						if (shape != null)
 							world.addShape(x, y, z, shape);
 					}
