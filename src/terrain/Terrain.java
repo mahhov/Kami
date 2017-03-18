@@ -30,7 +30,7 @@ public class Terrain {
 					if (part[x][y][z] != null) {
 						block = getBlock(x, y, z);
 						
-						shape = part[x][y][z].getShape(x + .5, y + .5, z + .5, block);
+						shape = part[x][y][z].getShape(x, y, z, block);
 						if (shape != null)
 							world.addShape(x, y, z, shape);
 					}
