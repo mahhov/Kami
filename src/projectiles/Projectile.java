@@ -1,6 +1,5 @@
 package projectiles;
 
-import control.Controller;
 import engine.Math3D;
 import shapes.CubeFrame;
 import shapes.ShapeParent;

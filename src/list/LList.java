@@ -17,7 +17,7 @@ public class LList<T> implements Iterable<LList<T>> {
 	
 	// adds to front
 	public LList<T> add(T node) {
-		LList<T> r = new LList<T>(this, null, node);
+		LList<T> r = new LList<>(this, null, node);
 		this.prev = r;
 		return r;
 	}

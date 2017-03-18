@@ -1,7 +1,6 @@
 package shapes;
 
 import engine.Math3D;
-import ships.Ship;
 
 import java.awt.*;
 
@@ -16,8 +15,8 @@ public class CubeFrame extends Cube {
 	
 	void initSurfaces() {
 		super.initSurfaces();
-		for (int i = 0; i < surface.length; i++)
-			if (surface[i] != null)
-				surface[i].frame = true;
+		for (Surface s : surface)
+			if (s != null)
+				s.frame = true;
 	}
 }

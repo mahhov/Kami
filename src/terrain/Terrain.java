@@ -33,7 +33,7 @@ public class Terrain {
 					}
 	}
 	
-	int[] getBlock(int x, int y, int z) {
+	private int[] getBlock(int x, int y, int z) {
 		int[] block = new int[6];
 		if (x > 0 && part[x - 1][y][z] != null)
 			block[Math3D.LEFT] = part[x - 1][y][z].block[Math3D.RIGHT];

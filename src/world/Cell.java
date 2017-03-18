@@ -20,7 +20,7 @@ public class Cell {
 		shapes = shapes.add(shape);
 	}
 	
-	public void remove(LList lShape) {
+	public void remove(LList<Shape> lShape) {
 		chunk.count--;
 		shapes = shapes.remove(lShape);
 	}
