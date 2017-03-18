@@ -8,8 +8,6 @@
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/hook/Hook.java" afterPath="$PROJECT_DIR$/src/hook/Hook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/Cube.java" afterPath="$PROJECT_DIR$/src/shapes/Cube.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,35 +41,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Hook.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Hook.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/hook/Hook.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+            <state relative-caret-position="648">
+              <caret line="84" column="44" selection-start-line="84" selection-start-column="44" selection-end-line="84" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2841#2842#0" expanded="true" />
-                <element signature="e#2856#2857#0" expanded="true" />
-                <element signature="e#2882#2883#0" expanded="true" />
-                <element signature="e#2897#2898#0" expanded="true" />
-                <element signature="e#2923#2924#0" expanded="true" />
-                <element signature="e#2938#2939#0" expanded="true" />
-                <element signature="e#2968#2969#0" expanded="true" />
-                <element signature="e#2993#2994#0" expanded="true" />
-                <element signature="e#3024#3025#0" expanded="true" />
-                <element signature="e#3050#3051#0" expanded="true" />
-                <element signature="e#3084#3085#0" expanded="true" />
-                <element signature="e#3109#3110#0" expanded="true" />
+                <element signature="e#2722#2723#0" expanded="true" />
+                <element signature="e#2737#2738#0" expanded="true" />
+                <element signature="e#2763#2764#0" expanded="true" />
+                <element signature="e#2778#2779#0" expanded="true" />
+                <element signature="e#2804#2805#0" expanded="true" />
+                <element signature="e#2819#2820#0" expanded="true" />
+                <element signature="e#2849#2850#0" expanded="true" />
+                <element signature="e#2874#2875#0" expanded="true" />
+                <element signature="e#2905#2906#0" expanded="true" />
+                <element signature="e#2931#2932#0" expanded="true" />
+                <element signature="e#2965#2966#0" expanded="true" />
+                <element signature="e#2990#2991#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
+            <state relative-caret-position="122">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -149,8 +147,8 @@
         <option value="$PROJECT_DIR$/src/world/WorldElement.java" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_31.java" />
         <option value="$PROJECT_DIR$/src/shapes/Cube.java" />
-        <option value="$PROJECT_DIR$/src/hook/Hook.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
+        <option value="$PROJECT_DIR$/src/hook/Hook.java" />
       </list>
     </option>
   </component>
@@ -964,12 +962,12 @@
       <workItem from="1489595059555" duration="9000" />
       <workItem from="1489633267662" duration="6584000" />
       <workItem from="1489723407998" duration="4882000" />
-      <workItem from="1489799573199" duration="5816000" />
+      <workItem from="1489799573199" duration="6306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22503000" />
+    <option name="totallyTimeSpent" value="22993000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="0" />
@@ -1290,58 +1288,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="78" selection-start-line="8" selection-start-column="78" selection-end-line="8" selection-end-column="78" />
-          <folding>
-            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
-            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
-            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
-            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
-            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#min#0;class#Math3D#0" expanded="false" />
-            <element signature="method#min#1;class#Math3D#0" expanded="false" />
-            <element signature="method#min#2;class#Math3D#0" expanded="false" />
-            <element signature="method#min#3;class#Math3D#0" expanded="false" />
-            <element signature="method#max#0;class#Math3D#0" expanded="false" />
-            <element signature="method#max#1;class#Math3D#0" expanded="false" />
-            <element signature="method#max#2;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
-            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
-            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#1;class#Math3D#0" expanded="false" />
-            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1517,33 +1463,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/hook/Hook.java">
+    <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+        <state relative-caret-position="122">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="127" column="27" selection-start-line="127" selection-start-column="27" selection-end-line="127" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2841#2842#0" expanded="true" />
-            <element signature="e#2856#2857#0" expanded="true" />
-            <element signature="e#2882#2883#0" expanded="true" />
-            <element signature="e#2897#2898#0" expanded="true" />
-            <element signature="e#2923#2924#0" expanded="true" />
-            <element signature="e#2938#2939#0" expanded="true" />
-            <element signature="e#2968#2969#0" expanded="true" />
-            <element signature="e#2993#2994#0" expanded="true" />
-            <element signature="e#3024#3025#0" expanded="true" />
-            <element signature="e#3050#3051#0" expanded="true" />
-            <element signature="e#3084#3085#0" expanded="true" />
-            <element signature="e#3109#3110#0" expanded="true" />
+            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
+            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
+            <element signature="e#4104#4105#0" expanded="true" />
+            <element signature="e#4163#4164#0" expanded="true" />
+            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
+            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
+            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#min#0;class#Math3D#0" expanded="false" />
+            <element signature="method#min#1;class#Math3D#0" expanded="false" />
+            <element signature="method#min#2;class#Math3D#0" expanded="false" />
+            <element signature="method#min#3;class#Math3D#0" expanded="false" />
+            <element signature="method#max#0;class#Math3D#0" expanded="false" />
+            <element signature="method#max#1;class#Math3D#0" expanded="false" />
+            <element signature="method#max#2;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
+            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
+            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#1;class#Math3D#0" expanded="false" />
+            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
+            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
+    <entry file="file://$PROJECT_DIR$/src/hook/Hook.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="37" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-          <folding />
+        <state relative-caret-position="648">
+          <caret line="84" column="44" selection-start-line="84" selection-start-column="44" selection-end-line="84" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2722#2723#0" expanded="true" />
+            <element signature="e#2737#2738#0" expanded="true" />
+            <element signature="e#2763#2764#0" expanded="true" />
+            <element signature="e#2778#2779#0" expanded="true" />
+            <element signature="e#2804#2805#0" expanded="true" />
+            <element signature="e#2819#2820#0" expanded="true" />
+            <element signature="e#2849#2850#0" expanded="true" />
+            <element signature="e#2874#2875#0" expanded="true" />
+            <element signature="e#2905#2906#0" expanded="true" />
+            <element signature="e#2931#2932#0" expanded="true" />
+            <element signature="e#2965#2966#0" expanded="true" />
+            <element signature="e#2990#2991#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
