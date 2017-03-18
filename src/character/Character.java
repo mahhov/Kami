@@ -9,11 +9,24 @@ import world.World;
 import world.WorldElement;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
+	private static final double JUMP_ACC = .7, RUN_ACC = .1, AIR_RUN_ACC = .015, JET_ACC = .045, CLIMB_ACC = .05, HOOK_ACC = .05, HOOK_SPRING_ACC = .5, JUMP_MULT = 1.5;
+	
+	private static final int JUMP_MAX = 1;
+	private int jumpRemain;
+	
+	private static final int STATE_GROUND = 0, STATE_CLIMB = 1, STATE_JET = 2, STATE_AIR = 3;
+	private int state;
+	
+	private static final int HOOK_NONE = 0, HOOK_THROWING = 1, HOOK_ATTACHED = 2;
+	private int hookState;
+	private double hookx, hooky;
+	
 	private double x, y, z;
 	private double vx, vy, vz;
 	private Math3D.Angle angle, angleZ, angleTilt;
 	private double vAngleFlat;
-	public double[] norm, rightUp;
+	private double[] norm, rightUp;
+	
 	private long drawCounter;
 	
 	public Character(double x, double y, double z) {
@@ -95,6 +108,34 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		y = xyz[1] + safeZone;
 		z = xyz[2] + safeZone;
 	}
+	
+			// if hook button pressed
+				// initiate hook x,y,z,vx,vy,vz
+			// if hook button release
+				// destroy hook
+			// if hooked
+				// vx, vy, vz += direction to Hook * hookAcc
+			
+			// grounded ? runAcc : airAcc
+			// vx/vy += acc :: based on wasd
+	
+			// if up key press && jumpRemain-- > 0
+			// then vz += jumpAcc, vx/vy *= jumpMult
+	
+			// jetting = false
+			// if up key down
+			//	if climbing then vz += climbAcc
+			//  else jetting = true, vz += jetAcc
+	
+			// vz-=gravity
+			// if grounded, , vx/vy/vz *= friction
+			// else if hook, *= hookFriction
+			// else if air, *= airFriction
+	
+			// climbnig = false, grounded = false
+	
+			// x,y,z += vx,vy,vz
+			// avaoid collisions -> set grounded (horizontal collision) and climbing (vertical collision)
 	
 	void addToWorld(World world) {
 		Cube shape = new Cube(x, y, z, angle, angleZ, angleTilt, .5, this);
