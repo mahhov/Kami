@@ -1,5 +1,7 @@
 package control;
 
+import engine.Math3D;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -21,6 +23,7 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
 	int mouseState, rightMouseState;
 	
 	public double[] viewOrig, viewDir;
+	public Math3D.Angle viewAngle;
 	
 	private Robot robot;
 	
@@ -194,7 +197,8 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
 		}
 	}
 	
-	public void setView(double[] orig, double[] dir) {
+	public void setView(Math3D.Angle angle, double[] orig, double[] dir) {
+		viewAngle = angle;
 		viewOrig = orig;
 		viewDir = dir;
 	}

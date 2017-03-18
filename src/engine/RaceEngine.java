@@ -2,7 +2,7 @@ package engine;
 
 import camera.TrailingCamera;
 import control.Controller;
-import hook.Hook;
+import character.Character;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
@@ -14,7 +14,7 @@ class RaceEngine {
 	private World world;
 	//	private Track track;
 	private Terrain terrain;
-	private Hook hook;
+	private Character hook;
 	private boolean pause;
 	
 	RaceEngine() {
@@ -34,7 +34,7 @@ class RaceEngine {
 		int numChunks = worldSize / eachChunkSize;
 		WorldCreator wc = new WorldCreator(numChunks, numChunks, numChunks, eachChunkSize);
 		world = wc.world;
-		hook = new Hook(5, 5, 5);
+		hook = new Character(5, 5, 5);
 		((TrailingCamera) camera).setFollow(hook);
 		world.addElement(hook);
 		terrain.addToWorld(world);
@@ -51,6 +51,7 @@ class RaceEngine {
 			painter.clear();
 			camera.move(controller);
 			camera.update(world.width, world.length, world.height);
+			controller.setView(camera.angle, camera.orig(), camera.normal);
 			world.update(controller);
 			world.drawChunks(painter, camera);
 			painter.repaint();

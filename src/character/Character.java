@@ -1,4 +1,4 @@
-package hook;
+package character;
 
 import camera.TrailingCamera;
 import control.Controller;
@@ -8,7 +8,7 @@ import shapes.ShapeParent;
 import world.World;
 import world.WorldElement;
 
-public class Hook implements WorldElement, TrailingCamera.Follow, ShapeParent {
+public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	private double x, y, z;
 	private double vx, vy, vz;
 	private Math3D.Angle angle, angleZ, angleTilt;
@@ -16,7 +16,7 @@ public class Hook implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	public double[] norm, rightUp;
 	private long drawCounter;
 	
-	public Hook(double x, double y, double z) {
+	public Character(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -65,18 +65,16 @@ public class Hook implements WorldElement, TrailingCamera.Follow, ShapeParent {
 			vz += rightUp[2] * movementMult;
 		}
 		
+		angle = new Math3D.Angle(controller.viewAngle.get());
+		
 		if (controller.isKeyDown(Controller.KEY_SPACE)) {
 			vx += rightUp[3] * movementMult;
 			vy += rightUp[4] * movementMult;
 			vz += rightUp[5] * movementMult;
 		}
 		
-		if (controller.isKeyDown(Controller.KEY_Q)) {
-			vAngleFlat += angleMult;
-		}
-		
-		if (controller.isKeyDown(Controller.KEY_E)) {
-			vAngleFlat -= angleMult;
+		if (controller.isKeyDown(Controller.KEY_SHIFT)) {
+			// grappling character
 		}
 	}
 	
@@ -99,7 +97,7 @@ public class Hook implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	}
 	
 	void addToWorld(World world) {
-		Cube shape = new Cube(x + .5, y + .5, z + .5, angle, angleZ, angleTilt, .5, this);
+		Cube shape = new Cube(x, y, z, angle, angleZ, angleTilt, .5, this);
 		world.addShape((int) x, (int) y, (int) z, shape);
 	}
 	
