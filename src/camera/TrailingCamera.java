@@ -2,14 +2,13 @@ package camera;
 
 import control.Controller;
 import engine.Math3D;
-import ships.Ship;
 
 public class TrailingCamera extends Camera {
 	private final static double MIN_TRAIL = 5, MAX_TRAIL = 60;
 	private final static double TRAIL_SPEED = 2.5, ANGLE_SPEED = .1, MOTION_AVG = .2, MOUSE_DAMP_SPEED = .01;
 	private double trailDistance;
 	private Math3D.Angle trailAngle, trailAngleZ; // todo: camera tilt
-	Ship followShip;
+	//	Ship followShip;
 	private boolean free;
 	
 	public TrailingCamera() {
@@ -19,9 +18,9 @@ public class TrailingCamera extends Camera {
 		free = true;
 	}
 	
-	public void setFollowShip(Ship followShip) {
-		this.followShip = followShip;
-	}
+	//	public void setFollowShip(Ship followShip) {
+	//		this.followShip = followShip;
+	//	}
 	
 	public void move(Controller c) {
 		if (c.isKeyPressed(Controller.KEY_ENTER))
@@ -44,17 +43,17 @@ public class TrailingCamera extends Camera {
 			trailAngleZ.bound();
 			
 		} else {
-			trailAngle.set(Math.PI + followShip.angle.get());
-			trailAngleZ.set(-followShip.angleZ.get() + 30.0 / 180 * Math.PI);
+			//			trailAngle.set(Math.PI + followShip.angle.get());
+			//			trailAngleZ.set(-followShip.angleZ.get() + 30.0 / 180 * Math.PI);
 		}
 		
 		// position
-		double goalx = followShip.x + trailAngle.cos() * trailAngleZ.cos() * trailDistance;
-		double goaly = followShip.y + trailAngle.sin() * trailAngleZ.cos() * trailDistance;
-		double goalz = followShip.z + trailAngleZ.sin() * trailDistance;
-		moveTo(goalx, goaly, goalz, MOTION_AVG);
+		//		double goalx = followShip.x + trailAngle.cos() * trailAngleZ.cos() * trailDistance;
+		//		double goaly = followShip.y + trailAngle.sin() * trailAngleZ.cos() * trailDistance;
+		//		double goalz = followShip.z + trailAngleZ.sin() * trailDistance;
+		//		moveTo(goalx, goaly, goalz, MOTION_AVG);
 		
 		// camera angle
-		lookAt(followShip.x, followShip.y, followShip.z);
+		//		lookAt(followShip.x, followShip.y, followShip.z);
 	}
 }

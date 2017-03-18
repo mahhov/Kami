@@ -12,10 +12,12 @@ public class Terrain {
 	public Terrain() {
 		part = new TerrainModule[200][200][100];
 		for (int x = 0; x < part.length; x++)
-			for (int y = 0; y < part[x].length; y++)
-				for (int z = 0; z < 1; z++) {
+			for (int y = 0; y < part[x].length; y++) {
+				int height = (int) (Math.random() * 100);
+				height = height > 20 ? height : 1;
+				for (int z = 0; z < height; z++)
 					part[x][y][z] = new FullGray();
-				}
+			}
 	}
 	
 	public void addToWorld(World world) {

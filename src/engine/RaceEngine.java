@@ -3,8 +3,6 @@ package engine;
 import camera.Camera;
 import camera.FreeCamera;
 import control.Controller;
-import ships.FileShip;
-import ships.Ship;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
@@ -16,7 +14,7 @@ class RaceEngine {
 	private World world;
 	//	private Track track;
 	private Terrain terrain;
-	private Ship ship;
+	//	private Ship ship;
 	private boolean pause;
 	
 	RaceEngine() {
@@ -37,9 +35,9 @@ class RaceEngine {
 		int numChunks = worldSize / eachChunkSize;
 		WorldCreator wc = new WorldCreator(numChunks, numChunks, numChunks, eachChunkSize);
 		world = wc.world;
-		ship = new FileShip(32, 32, 100, 0, 0, 0, world);
+		//		ship = new FileShip(32, 32, 100, 0, 0, 0, world);
 		//		((TrailingCamera) camera).setFollowShip(ship);
-		world.addShip(ship);
+		//		world.addShip(ship);
 		//		track.addToWorld(world);
 		terrain.addToWorld(world);
 	}

@@ -8,13 +8,13 @@ import list.LList;
 import projectiles.Projectile;
 import shapes.Shape;
 import shapes.StaticCube;
-import ships.Ship;
+//import ships.Ship;
 
 public class World {
 	public final int width, length, height, chunkSize;
 	Chunk[][][] chunk;
 	
-	private LList<Ship> ship;
+	//	private LList<Ship> ship;
 	private LList<Projectile> projectile;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight, int chunkSize) {
@@ -27,7 +27,7 @@ public class World {
 			for (int y = 0; y < chunkLength; y++)
 				for (int z = 0; z < chunkHeight; z++)
 					chunk[x][y][z] = new Chunk();
-		ship = new LList<>();
+		//		ship = new LList<>();
 		projectile = new LList<>();
 	}
 	
@@ -46,9 +46,9 @@ public class World {
 		chunk[cx][cy][cz].add(sx, sy, sz, shape);
 	}
 	
-	public void addShip(Ship ship) {
-		this.ship = this.ship.add(ship);
-	}
+	//	public void addShip(Ship ship) {
+	//		this.ship = this.ship.add(ship);
+	//	}
 	
 	public void addProjectile(Projectile projectile) {
 		this.projectile = this.projectile.add(projectile);
@@ -168,8 +168,8 @@ public class World {
 	// UPDATE
 	
 	public void update(Controller controller) {
-		for (LList<Ship> s : ship)
-			s.node.update(this, controller);
+		//		for (LList<Ship> s : ship)
+		//			s.node.update(this, controller);
 		for (LList<Projectile> p : projectile)
 			p.node.update(this);
 	}
