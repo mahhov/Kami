@@ -22,6 +22,7 @@ public class Cube extends Shape {
 		this(x, y, z, angle, angleZ, angleTilt, size, null, null, shapeParent);
 	}
 	
+	// todo: no point in getting angle and re-computing norm/right/up when could just take in norm/right/up
 	public Cube(double x, double y, double z, Math3D.Angle angle, Math3D.Angle angleZ, Math3D.Angle angleTilt, double size, boolean[] side, Color[] color, ShapeParent shapeParent) {
 		super(shapeParent);
 		this.x = x;

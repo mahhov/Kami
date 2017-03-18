@@ -14,7 +14,7 @@ public class Terrain {
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
 				int height = 1;
-				if (Math.random() > .8)
+				if (Math.random() > 1.8)
 					height = 7;
 				for (int z = 0; z < height; z++)
 					part[x][y][z] = new FullGray();
