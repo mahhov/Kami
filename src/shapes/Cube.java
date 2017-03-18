@@ -55,27 +55,27 @@ public class Cube extends Shape {
 		
 		// from back/left -> back/right -> front/right -> front/left
 		if (side[Math3D.TOP] ^ flipSide)
-			top = new Surface(leftBackTop, rightBackTop, rightFrontTop, leftFrontTop, flipNormal);
+			top = new Surface(leftBackTop, rightBackTop, rightFrontTop, leftFrontTop, !flipNormal);
 		
 		// from back/left -> back/right -> front/right -> front/left
 		if (side[Math3D.BOTTOM] ^ flipSide)
-			bottom = new Surface(leftBackBottom, rightBackBottom, rightFrontBottom, leftFrontBottom, !flipNormal);
+			bottom = new Surface(leftBackBottom, rightBackBottom, rightFrontBottom, leftFrontBottom, flipNormal);
 		
 		// from bottom/back -> top/back -> top/front -> bottom/front
 		if (side[Math3D.LEFT] ^ flipSide)
-			left = new Surface(leftBackBottom, leftBackTop, leftFrontTop, leftFrontBottom, flipNormal);
+			left = new Surface(leftBackBottom, leftBackTop, leftFrontTop, leftFrontBottom, !flipNormal);
 		
 		// from bottom/back -> top/back -> top/front -> bottom/front
 		if (side[Math3D.RIGHT] ^ flipSide)
-			right = new Surface(rightBackBottom, rightBackTop, rightFrontTop, rightFrontBottom, !flipNormal);
+			right = new Surface(rightBackBottom, rightBackTop, rightFrontTop, rightFrontBottom, flipNormal);
 		
 		// from left/bottom -> left/top -> right/top -> right/bottom
 		if (side[Math3D.FRONT] ^ flipSide)
-			front = new Surface(leftFrontBottom, leftFrontTop, rightFrontTop, rightFrontBottom, flipNormal);
+			front = new Surface(leftFrontBottom, leftFrontTop, rightFrontTop, rightFrontBottom, !flipNormal);
 		
 		// from left/bottom -> left/top -> right/top -> right/bottom
 		if (side[Math3D.BACK] ^ flipSide)
-			back = new Surface(leftBackBottom, leftBackTop, rightBackTop, rightBackBottom, !flipNormal);
+			back = new Surface(leftBackBottom, leftBackTop, rightBackTop, rightBackBottom, flipNormal);
 		
 		return new Surface[] {left, right, back, front, bottom, top};
 	}
