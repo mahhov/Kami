@@ -133,7 +133,7 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
 	
 	private int setKeyState(int keyCode, int state) {
 		for (Key k : keys)
-			if (k.code == keyCode) {
+			if (k.code == keyCode && (state != PRESSED || k.state == UP)) {
 				k.state = state;
 				return 0;
 			}
