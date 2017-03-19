@@ -13,12 +13,26 @@ public class Terrain {
 		part = new TerrainModule[200][200][100];
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
-				int height = 1;
-				if (Math.random() > 1.8)
-					height = 7;
-				for (int z = 0; z < height; z++)
-					part[x][y][z] = new FullGray();
+				part[x][y][0] = new FullGray();
+				if (Math.random() > .999)
+					generateTree(x, y);
 			}
+	}
+	
+	private void generateTree(int x, int y) {
+		int height = Math3D.rand(7, 14);
+		int brushSpread = Math3D.rand(1, 4) + height / 5;
+		int brushHeight = Math3D.rand(1, 3);
+		for (int z = 0; z < height; z++)
+			part[x][y][z] = new FullGray();
+		int xs = Math3D.max(x - brushSpread, 0);
+		int xe = Math3D.min(x + brushSpread, part.length - 1);
+		int ys = Math3D.max(y - brushSpread, 0);
+		int ye = Math3D.min(y + brushSpread, part[x].length - 1);
+		for (int xi = xs; xi <= xe; xi++)
+			for (int yi = ys; yi <= ye; yi++)
+				for (int z = height; z < height + brushHeight; z++)
+					part[xi][yi][z] = new FullGray();
 	}
 	
 	public void addToWorld(World world) {
