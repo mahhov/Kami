@@ -18,6 +18,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	
 	private static final int STATE_GROUND = 0, STATE_CLIMB = 1, STATE_AIR = 2;
 	private int state;
+	private boolean jetting;
 	
 	private static final int HOOK_NONE = 0, HOOK_THROWING = 1, HOOK_ATTACHED = 2;
 	private int hookState;
@@ -85,6 +86,8 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		// climbing  or jetting
 		if (controller.isKeyDown(Controller.KEY_SPACE))
 			upwardMove();
+		else
+			jetting = false;
 		
 		// gravity
 		vz -= GRAVITY;
@@ -167,10 +170,13 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void upwardMove() {
-		if (state == STATE_CLIMB)
+		if (state == STATE_CLIMB) {
 			vz += CLIMB_ACC;
-		else
+			jetting = false;
+		} else {
 			vz += JET_ACC;
+			jetting = true;
+		}
 	}
 	
 	private void doFriction() {
@@ -211,6 +217,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void addToWorld(World world) {
+		if (jetting)
+			; // add jet particles
+		if (hookState != HOOK_NONE)
+			; // add hook and rope
 		Cube shape = new Cube(x, y, z, angle, angleZ, angleTilt, .5, this);
 		world.addShape((int) x, (int) y, (int) z, shape);
 	}
