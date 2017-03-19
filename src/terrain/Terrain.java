@@ -43,15 +43,14 @@ public class Terrain {
 				for (int z = 0; z < part[x][y].length; z++)
 					if (part[x][y][z] != null) {
 						block = getBlock(x, y, z);
-						
-						shape = part[x][y][z].getShape(x, y, z, block);
+						shape = part[x][y][z].getShape(x + .5, y + .5, z + .5, block);
 						if (shape != null)
 							world.addShape(x, y, z, shape);
 					}
 	}
 	
 	public boolean checkCollide(double x, double y, double z) {
-		return part[(int) (x + .5)][(int) (y + .5)][(int) (z + .5)] != null;
+		return part[(int) x][(int) y][(int) z] != null;
 	}
 	
 	private int[] getBlock(int x, int y, int z) {
