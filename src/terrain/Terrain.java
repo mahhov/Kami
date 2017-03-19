@@ -50,6 +50,10 @@ public class Terrain {
 					}
 	}
 	
+	public boolean checkCollide(double x, double y, double z) {
+		return part[(int) (x + .5)][(int) (y + .5)][(int) (z + .5)] != null;
+	}
+	
 	private int[] getBlock(int x, int y, int z) {
 		int[] block = new int[6];
 		if (x > 0 && part[x - 1][y][z] != null)

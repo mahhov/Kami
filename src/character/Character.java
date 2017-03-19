@@ -5,6 +5,7 @@ import control.Controller;
 import engine.Math3D;
 import shapes.Cube;
 import shapes.ShapeParent;
+import terrain.Terrain;
 import world.World;
 import world.WorldElement;
 
@@ -46,15 +47,16 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		rightUp = Math3D.axisVectorsTilt(norm, 1., angleZ, angleTilt);
 	}
 	
-	public void update(World world, Controller controller) {
+	public void update(World world, Terrain terrain, Controller controller) {
 		drawCounter++;
-		movement(world, controller);
+		movement(terrain, controller);
 		addToWorld(world);
 	}
 	
-	private void movement(World world, Controller controller) {
+	private void movement(Terrain terrain, Controller controller) {
 		// view angle
-		angle = new Math3D.Angle(controller.viewAngle.get());// view angle
+		angle = new Math3D.Angle(controller.viewAngle.get());
+		computeAxis();
 		
 		// hook
 		if (controller.isKeyDown(Controller.KEY_SHIFT))
@@ -62,7 +64,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 				moveTowardsHook();
 			else if (hookState == HOOK_THROWING) {
 				updateThrowHook();
-				if (checkThrowHookAttach())
+				if (checkThrowHookAttach(terrain))
 					hookState = HOOK_ATTACHED;
 			} else {
 				hookState = HOOK_THROWING;
@@ -90,11 +92,8 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		// friction
 		doFriction();
 		
-		// move x,y,z
-		applyVelocity();
-		
-		// avoid collisions and set state
-		bound(world, controller);
+		// move x,y,z & avoid collisions & set state
+		applyVelocity(terrain);
 	}
 	
 	private void moveTowardsHook() {
@@ -113,7 +112,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		hookz += hookvz;
 	}
 	
-	private boolean checkThrowHookAttach() {
+	private boolean checkThrowHookAttach(Terrain terrain) {
 		// do this
 		return false;
 	}
@@ -159,7 +158,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void jump() {
-		if (jumpRemain == 0 || state == STATE_CLIMB)
+		if (jumpRemain == 0)
 			return;
 		jumpRemain--;
 		vz += JUMP_ACC;
@@ -187,21 +186,28 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		vz = vz * friction;
 	}
 	
-	private void applyVelocity() {
-		x += vx;
-		y += vy;
-		z += vz;
-	}
-	
-	private void bound(World world, Controller controller) {
-		state=STATE_GROUND;
-		jumpRemain= JUMP_MAX;
-		int safeZone = 2;
-		computeAxis();
-		double[] xyz = Math3D.bound(x - safeZone, y - safeZone, z - safeZone, world.width - safeZone * 2, world.length - safeZone * 2, world.height - safeZone * 2);
-		x = xyz[0] + safeZone;
-		y = xyz[1] + safeZone;
-		z = xyz[2] + safeZone;
+	private void applyVelocity(Terrain terrain) {
+		double newx = x + vx;
+		double newy = y + vy;
+		double newz = z + vz;
+		
+		state = STATE_AIR;
+		
+		if (terrain.checkCollide(x, y, newz)) {
+			if (vz < 0) {
+				state = STATE_GROUND;
+				jumpRemain = JUMP_MAX;
+			}
+		} else
+			z = newz;
+		
+		if (terrain.checkCollide(newx, newy, z)) {
+			if (state == STATE_AIR)
+				state = STATE_CLIMB;
+		} else {
+			x = newx;
+			y = newy;
+		}
 	}
 	
 	private void addToWorld(World world) {

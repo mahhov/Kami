@@ -52,7 +52,7 @@ class RaceEngine {
 			camera.move(controller);
 			camera.update(world.width, world.length, world.height);
 			controller.setView(camera.angle, camera.orig(), camera.normal);
-			world.update(controller);
+			world.update(terrain, controller);
 			world.drawChunks(painter, camera);
 			painter.repaint();
 			checkPause();

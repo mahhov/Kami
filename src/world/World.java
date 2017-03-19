@@ -8,6 +8,7 @@ import list.LList;
 import projectiles.Projectile;
 import shapes.Shape;
 import shapes.StaticCube;
+import terrain.Terrain;
 
 public class World {
 	public final int width, length, height, chunkSize;
@@ -166,9 +167,9 @@ public class World {
 	
 	// UPDATE
 	
-	public void update(Controller controller) {
+	public void update(Terrain terrain, Controller controller) {
 		for (LList<WorldElement> e : element)
-			e.node.update(this, controller);
+			e.node.update(this, terrain, controller);
 		for (LList<Projectile> p : projectile)
 			p.node.update(this);
 	}
