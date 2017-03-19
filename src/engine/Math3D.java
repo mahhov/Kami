@@ -187,6 +187,14 @@ public class Math3D {
 		return value;
 	}
 	
+	public static int maxMin(int value, int max, int min) {
+		if (value > max)
+			return max;
+		if (value < min)
+			return min;
+		return value;
+	}
+	
 	public static int min(int val, int min) {
 		if (val > min)
 			return min;

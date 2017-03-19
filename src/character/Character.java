@@ -199,6 +199,13 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		
 		state = STATE_AIR;
 		
+		if (terrain.checkCollide(newx, newy, z)) {
+			state = STATE_CLIMB;
+		} else {
+			x = newx;
+			y = newy;
+		}
+		
 		if (terrain.checkCollide(x, y, newz)) {
 			if (vz < 0) {
 				state = STATE_GROUND;
@@ -206,14 +213,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			}
 		} else
 			z = newz;
-		
-		if (terrain.checkCollide(newx, newy, z)) {
-			if (state == STATE_AIR)
-				state = STATE_CLIMB;
-		} else {
-			x = newx;
-			y = newy;
-		}
 	}
 	
 	private void addToWorld(World world) {

@@ -20,11 +20,17 @@ public class Terrain {
 	}
 	
 	private void generateTree(int x, int y) {
+		x = Math3D.maxMin(x, part.length - 2, 1);
+		y = Math3D.maxMin(y, part[x].length - 2, 1);
 		int height = Math3D.rand(7, 14);
 		int brushSpread = Math3D.rand(1, 4) + height / 5;
 		int brushHeight = Math3D.rand(1, 3);
-		for (int z = 0; z < height; z++)
-			part[x][y][z] = new FullGray();
+		for (int xi = x - 1; xi <= x + 1; xi++)
+			for (int yi = y - 1; yi <= y + 1; yi++)
+				for (int z = 0; z < height; z++)
+					part[xi][yi][z] = new FullGray();
+		//		for (int z = 0; z < height; z++)
+		//			part[x][y][z] = new FullGray();
 		int xs = Math3D.max(x - brushSpread, 0);
 		int xe = Math3D.min(x + brushSpread, part.length - 1);
 		int ys = Math3D.max(y - brushSpread, 0);
