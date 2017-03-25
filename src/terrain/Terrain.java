@@ -193,6 +193,10 @@ public class Terrain {
 		return intersectionFinder.find(orig, dir);
 	}
 	
+	public boolean[] getIntersectionCollide() {
+		return intersectionFinder.collide;
+	}
+	
 	private boolean inBounds(int x, int y, int z) {
 		return x >= 1 && y >= 1 && z >= 1 && x < part.length - 1 && y < part[x].length - 1 && z < part[x][y].length - 1;
 		//		return x >= 0 && y >= 0 && z >= 0 && x < part.length && y < part[x].length && z < part[x][y].length;
