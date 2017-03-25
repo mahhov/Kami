@@ -10,8 +10,8 @@ import world.World;
 import world.WorldElement;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
-	private static final double FRICTION = 0.9, AIR_FRICTION = 0.99, CLIMB_FRICTION = 0.99, GRAVITY = .05;
-	private static final double JUMP_ACC = .7, RUN_ACC = .1, AIR_RUN_ACC = .015, JET_ACC = .045, CLIMB_ACC = .05, HOOK_ACC = .05, JUMP_MULT = 1.5;
+	private static final double FRICTION = 0.9, AIR_FRICTION = 0.99 / 10, CLIMB_FRICTION = 0.99, GRAVITY = .05;
+	private static final double JUMP_ACC = .7, RUN_ACC = .1, AIR_RUN_ACC = .015 * 20*30, JET_ACC = .045, CLIMB_ACC = .05, HOOK_ACC = .05, JUMP_MULT = 1.5;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
@@ -193,26 +193,38 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void applyVelocity(Terrain terrain) {
-		double newx = x + vx;
-		double newy = y + vy;
-		double newz = z + vz;
-		
 		state = STATE_AIR;
 		
-		if (terrain.checkCollide(newx, newy, z)) {
-			state = STATE_CLIMB;
+		vz = 0;
+		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz});
+		if (newxyz != null) {
+			x = newxyz[0];
+			y = newxyz[1];
+			z = newxyz[2];
 		} else {
-			x = newx;
-			y = newy;
+			state = STATE_GROUND;
+			jumpRemain = JUMP_MAX;
 		}
+		//		System.out.println("now xyz " + x + " " + y + " " + z);
 		
-		if (terrain.checkCollide(x, y, newz)) {
-			if (vz < 0) {
-				state = STATE_GROUND;
-				jumpRemain = JUMP_MAX;
-			}
-		} else
-			z = newz;
+		//		double newx = x + vx;
+		//		double newy = y + vy;
+		//		double newz = z + vz;
+		//
+		//		if (terrain.checkCollide(newx, newy, z)) {
+		//			state = STATE_CLIMB;
+		//		} else {
+		//			x = newx;
+		//			y = newy;
+		//		}
+		//
+		//		if (terrain.checkCollide(x, y, newz)) {
+		//			if (vz < 0) {
+		//				state = STATE_GROUND;
+		//				jumpRemain = JUMP_MAX;
+		//			}
+		//		} else
+		//			z = newz;
 	}
 	
 	private void addToWorld(World world) {
@@ -248,3 +260,9 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		return drawCounter;
 	}
 }
+
+// todo : collisoion
+// todo : hook
+// todo : graphics
+// todo : shooting
+// todo : survival

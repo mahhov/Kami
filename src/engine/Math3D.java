@@ -207,26 +207,38 @@ public class Math3D {
 		return val;
 	}
 	
-	public static int min(int val, int val2, int val3) {
+	public static int min(int val1, int val2, int val3) {
 		int min;
-		if (val2 < val)
+		if (val2 < val1)
 			min = val2;
 		else
-			min = val;
+			min = val1;
 		if (min < val3)
 			return min;
 		return val3;
 	}
 	
-	public static double min(double val, double val2, double val3) {
+	public static double min(double val1, double val2, double val3) {
 		double min;
-		if (val2 < val)
+		if (val2 < val1)
 			min = val2;
 		else
-			min = val;
+			min = val1;
 		if (min < val3)
 			return min;
 		return val3;
+	}
+	
+	public static double[] minWhich(double val1, double val2, double val3) {
+		if (val2 < val1)
+			if (val3 < val2)
+				return new double[] {val3, 2};
+			else
+				return new double[] {val2, 1};
+		else if (val3 < val1)
+			return new double[] {val3, 2};
+		else
+			return new double[] {val1, 0};
 	}
 	
 	public static int max(int val, int max) {
@@ -241,12 +253,12 @@ public class Math3D {
 		return val;
 	}
 	
-	public static int max(int val, int val2, int val3) {
+	public static int max(int val1, int val2, int val3) {
 		int max;
-		if (val2 > val)
+		if (val2 > val1)
 			max = val2;
 		else
-			max = val;
+			max = val1;
 		if (max > val3)
 			return max;
 		return val3;

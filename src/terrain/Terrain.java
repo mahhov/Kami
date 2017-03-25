@@ -20,13 +20,14 @@ public class Terrain {
 	}
 	
 	private void generateTree(int x, int y) {
-		x = Math3D.maxMin(x, part.length - 2, 1);
-		y = Math3D.maxMin(y, part[x].length - 2, 1);
+		int thick = 5;
+		x = Math3D.maxMin(x, part.length - thick * 2, thick);
+		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
 		int height = Math3D.rand(7, 14);
 		int brushSpread = Math3D.rand(1, 4) + height / 5;
 		int brushHeight = Math3D.rand(1, 3);
-		for (int xi = x - 1; xi <= x + 1; xi++)
-			for (int yi = y - 1; yi <= y + 1; yi++)
+		for (int xi = x - thick; xi <= x + thick; xi++)
+			for (int yi = y - thick; yi <= y + thick; yi++)
 				for (int z = 0; z < height; z++)
 					part[xi][yi][z] = new FullGray();
 		//		for (int z = 0; z < height; z++)
@@ -57,6 +58,113 @@ public class Terrain {
 	
 	public boolean checkCollide(double x, double y, double z) {
 		return part[(int) x][(int) y][(int) z] != null;
+	}
+	
+	public double[] findIntersection(double[] orig, double[] dir) {
+		double x = orig[0], y = orig[1], z = orig[2];
+		double nextx = x, nexty = y, nextz = z;
+		int intx = (int) x, inty = (int) y, intz = (int) z;
+		double deltax, deltay, deltaz;
+		double movex, movey, movez, move;
+		double[] moveWhich;
+		double moved = 0;
+		int collideNum = 0;
+		boolean[] collide = new boolean[] {Math3D.isZero(dir[0]), Math3D.isZero(dir[1]), Math3D.isZero(dir[2])};
+		
+		while (true) {
+			if (collide[0])
+				movex = Math3D.sqrt3;
+			else {
+				if (dir[0] > 0)
+					deltax = Math3D.notZero(1 + intx - x, 1);
+				else
+					deltax = Math3D.notZero(intx - x, -1);
+				movex = deltax / dir[0];
+			}
+			
+			if (collide[1])
+				movey = Math3D.sqrt3;
+			else {
+				if (dir[1] > 0)
+					deltay = Math3D.notZero(1 + inty - y, 1);
+				else
+					deltay = Math3D.notZero(inty - y, -1);
+				movey = deltay / dir[1];
+			}
+			
+			if (collide[2])
+				movez = Math3D.sqrt3;
+			else {
+				if (dir[2] > 0)
+					deltaz = Math3D.notZero(1 + intz - z, 1);
+				else
+					deltaz = Math3D.notZero(intz - z, -1);
+				movez = deltaz / dir[2];
+			}
+			
+			moveWhich = Math3D.minWhich(movex, movey, movez);
+			move = moveWhich[0] + Math3D.EPSILON;
+			
+			if (moved + move > 1) {
+				move = 1 - moved;
+				nextx += dir[0] * move;
+				nexty += dir[1] * move;
+				nextz += dir[2] * move;
+				
+				intx = (int) nextx;
+				inty = (int) nexty;
+				intz = (int) nextz;
+				
+				if (inBounds(intx, inty, intz) && isEmpty(intx, inty, intz)) {
+					x = orig[0] + dir[0];
+					y = orig[1] + dir[1];
+					z = orig[2] + dir[2];
+					return new double[] {x, y, z};
+				} else
+					return new double[] {x, y, z};
+			}
+			
+			nextx += dir[0] * move;
+			nexty += dir[1] * move;
+			nextz += dir[2] * move;
+			
+			intx = (int) nextx;
+			inty = (int) nexty;
+			intz = (int) nextz;
+			
+			if (!inBounds(intx, inty, intz) || !isEmpty(intx, inty, intz)) {
+				move = moveWhich[0] - Math3D.EPSILON * 1;
+				nextx = x + dir[0] * move;
+				nexty = y + dir[1] * move;
+				nextz = z + dir[2] * move;
+				
+				intx = (int) nextx;
+				inty = (int) nexty;
+				intz = (int) nextz;
+				
+				if (!collide[(int) moveWhich[1]]) {
+					collideNum++;
+					collide[(int) moveWhich[1]] = true;
+					dir[(int) moveWhich[1]] = 0;
+					if (collideNum == 3)
+						return new double[] {x, y, z};
+				}
+			}
+			
+			moved += move;
+			x = nextx;
+			y = nexty;
+			z = nextz;
+		}
+	}
+	
+	private boolean inBounds(int x, int y, int z) {
+		return x >= 1 && y >= 1 && z >= 1 && x < part.length - 1 && y < part[x].length - 1 && z < part[x][y].length - 1;
+		//		return x >= 0 && y >= 0 && z >= 0 && x < part.length && y < part[x].length && z < part[x][y].length;
+	}
+	
+	private boolean isEmpty(int x, int y, int z) {
+		return part[x][y][z] == null;
 	}
 	
 	private int[] getBlock(int x, int y, int z) {
