@@ -8,8 +8,10 @@ import world.World;
 
 public class Terrain {
 	private TerrainModule[][][] part;
+	private IntersectionFinder intersectionFinder;
 	
 	public Terrain() {
+		intersectionFinder = new IntersectionFinder();
 		part = new TerrainModule[200][200][100];
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
@@ -60,18 +62,67 @@ public class Terrain {
 		return part[(int) x][(int) y][(int) z] != null;
 	}
 	
-	public double[] findIntersection(double[] orig, double[] dir) {
-		double x = orig[0], y = orig[1], z = orig[2];
-		double nextx = x, nexty = y, nextz = z;
-		int intx = (int) x, inty = (int) y, intz = (int) z;
-		double deltax, deltay, deltaz;
-		double movex, movey, movez, move;
-		double[] moveWhich;
-		double moved = 0;
-		int collideNum = 0;
-		boolean[] collide = new boolean[] {Math3D.isZero(dir[0]), Math3D.isZero(dir[1]), Math3D.isZero(dir[2])};
+	private class IntersectionFinder {
+		private double[] orig, dir;
+		private double x, y, z;
+		private double nextx, nexty, nextz;
+		private int intx, inty, intz;
+		private double deltax, deltay, deltaz;
+		private double movex, movey, movez, move;
+		private double[] moveWhich;
+		private double moved;
+		private int collideNum;
+		private boolean[] collide;
 		
-		while (true) {
+		private double[] find(double[] orig, double[] dir) {
+			reset(orig, dir);
+			
+			while (true) {
+				prefixComputeMove();
+				
+				if (moved + move > 1) {
+					moveBy(1 - moved);
+					
+					if (isOk()) {
+						x = orig[0] + dir[0];
+						y = orig[1] + dir[1];
+						z = orig[2] + dir[2];
+						return new double[] {x, y, z};
+					} else
+						return new double[] {x, y, z};
+				}
+				
+				moveBy(move + Math3D.EPSILON);
+				
+				if (!isOk()) {
+					moveBy(move - Math3D.EPSILON);
+					
+					if (collideCheck((int) moveWhich[1]))
+						return new double[] {x, y, z};
+				}
+				
+				nextIter();
+			}
+		}
+		
+		private void reset(double[] orig, double[] dir) {
+			this.orig = orig;
+			this.dir = dir;
+			x = orig[0];
+			y = orig[1];
+			z = orig[2];
+			nextx = x;
+			nexty = y;
+			nextz = z;
+			intx = (int) x;
+			inty = (int) y;
+			intz = (int) z;
+			moved = 0;
+			collideNum = 0;
+			collide = new boolean[] {Math3D.isZero(dir[0]), Math3D.isZero(dir[1]), Math3D.isZero(dir[2])};
+		}
+		
+		private void prefixComputeMove() {
 			if (collide[0])
 				movex = Math3D.sqrt3;
 			else {
@@ -103,59 +154,43 @@ public class Terrain {
 			}
 			
 			moveWhich = Math3D.minWhich(movex, movey, movez);
-			move = moveWhich[0] + Math3D.EPSILON;
-			
-			if (moved + move > 1) {
-				move = 1 - moved;
-				nextx += dir[0] * move;
-				nexty += dir[1] * move;
-				nextz += dir[2] * move;
-				
-				intx = (int) nextx;
-				inty = (int) nexty;
-				intz = (int) nextz;
-				
-				if (inBounds(intx, inty, intz) && isEmpty(intx, inty, intz)) {
-					x = orig[0] + dir[0];
-					y = orig[1] + dir[1];
-					z = orig[2] + dir[2];
-					return new double[] {x, y, z};
-				} else
-					return new double[] {x, y, z};
-			}
-			
-			nextx += dir[0] * move;
-			nexty += dir[1] * move;
-			nextz += dir[2] * move;
+			move = moveWhich[0];
+		}
+		
+		private void moveBy(double move) {
+			nextx = x + dir[0] * move;
+			nexty = y + dir[1] * move;
+			nextz = z + dir[2] * move;
 			
 			intx = (int) nextx;
 			inty = (int) nexty;
 			intz = (int) nextz;
-			
-			if (!inBounds(intx, inty, intz) || !isEmpty(intx, inty, intz)) {
-				move = moveWhich[0] - Math3D.EPSILON * 1;
-				nextx = x + dir[0] * move;
-				nexty = y + dir[1] * move;
-				nextz = z + dir[2] * move;
-				
-				intx = (int) nextx;
-				inty = (int) nexty;
-				intz = (int) nextz;
-				
-				if (!collide[(int) moveWhich[1]]) {
-					collideNum++;
-					collide[(int) moveWhich[1]] = true;
-					dir[(int) moveWhich[1]] = 0;
-					if (collideNum == 3)
-						return new double[] {x, y, z};
-				}
+		}
+		
+		private boolean isOk() {
+			return inBounds(intx, inty, intz) && isEmpty(intx, inty, intz);
+		}
+		
+		private boolean collideCheck(int which) {
+			if (!collide[which]) {
+				collideNum++;
+				collide[which] = true;
+				dir[which] = 0;
+				return collideNum == 3;
 			}
-			
+			return false;
+		}
+		
+		private void nextIter() {
 			moved += move;
 			x = nextx;
 			y = nexty;
 			z = nextz;
 		}
+	}
+	
+	public double[] findIntersection(double[] orig, double[] dir) {
+		return intersectionFinder.find(orig, dir);
 	}
 	
 	private boolean inBounds(int x, int y, int z) {
