@@ -81,24 +81,16 @@ public class Terrain {
 			reset(orig, dir);
 			while (true) {
 				prefixComputeMove();
-				
 				if (moved + move > maxMove) {
 					moveBy(maxMove - moved);
-					
-					if (isOk())
-						return new double[] {nextx, nexty, nextz};
-					else
-						return new double[] {x, y, z};
+					return new double[] {nextx, nexty, nextz};
 				}
-				
 				moveBy(move + Math3D.EPSILON);
-				
 				if (!isOk()) {
 					moveBy(move - Math3D.EPSILON);
 					if (collideCheck((int) moveWhich[1]))
 						return new double[] {x, y, z};
 				}
-				
 				nextIter();
 			}
 		}

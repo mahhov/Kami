@@ -31,8 +31,8 @@
       <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
+            <state relative-caret-position="465">
+              <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
               <folding>
                 <element signature="method#Terrain#0;class#Terrain#0" expanded="false" />
                 <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
@@ -750,12 +750,12 @@
       <workItem from="1490318188195" duration="1338000" />
       <workItem from="1490404143831" duration="15026000" />
       <workItem from="1490480480625" duration="1327000" />
-      <workItem from="1490494390585" duration="7129000" />
+      <workItem from="1490494390585" duration="7306000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79894000" />
+    <option name="totallyTimeSpent" value="80071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
@@ -1216,8 +1216,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="96" column="31" selection-start-line="96" selection-start-column="31" selection-end-line="96" selection-end-column="31" />
+        <state relative-caret-position="465">
+          <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
           <folding>
             <element signature="method#Terrain#0;class#Terrain#0" expanded="false" />
             <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
