@@ -60,10 +60,6 @@ public class Terrain {
 					}
 	}
 	
-	public boolean checkCollide(double x, double y, double z) {
-		return part[(int) x][(int) y][(int) z] != null;
-	}
-	
 	private class IntersectionFinder {
 		private double[] orig, dir;
 		private double x, y, z;
