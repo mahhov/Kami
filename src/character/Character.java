@@ -11,8 +11,8 @@ import world.World;
 import world.WorldElement;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
-	private static final double FRICTION = 0.9, AIR_FRICTION = 0.95, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
-	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .015, JET_ACC = .045, CLIMB_ACC = .04999, HOOK_ACC = .05, JUMP_MULT = 1.5;
+	private static final double FRICTION = 0.9, AIR_FRICTION = 0.98, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
+	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .02, JET_ACC = .045, CLIMB_ACC = .055, HOOK_ACC = .05, JUMP_MULT = 1.5;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
