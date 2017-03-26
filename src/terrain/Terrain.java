@@ -79,56 +79,27 @@ public class Terrain {
 		
 		private double[] find(double[] orig, double[] dir) {
 			reset(orig, dir);
-			//			System.out.println("begin");
-			
-			//			System.out.println("begin - dir0 " + isDirZero[0] + " " + isDirZero[1] + " " + isDirZero[2] + " count: " + isDirZeroNum + " | & dir " + dir[0] + " " + dir[1] + " " + dir[2] + " & max move " + maxMove);
 			while (true) {
-				//				System.out.println("iter " + nextx + " " + nexty + " " + nextz);
 				prefixComputeMove();
-				//				System.out.println("iter - dir0 " + isDirZero[0] + " " + isDirZero[1] + " " + isDirZero[2] + " count: " + isDirZeroNum + " | & move " + move + " " + moveWhich[1]);
 				
-				//				System.out.println("move " + move + " & max move " + maxMove + " & moved " + moved + " & move by input " + (maxMove - moved));
 				if (moved + move > maxMove) {
 					moveBy(maxMove - moved);
 					
-					if (isOk()) {
-						//						System.out.println("max move ok return max move");
-						//						x = orig[0] + dir[0] * maxMove;
-						//						y = orig[1] + dir[1] * maxMove;
-						//						z = orig[2] + dir[2] * maxMove;
-						//						return new double[] {x, y, z};
-						//						System.out.println("max move ok " + nextx + " " + nexty + " " + nextz);
+					if (isOk())
 						return new double[] {nextx, nexty, nextz};
-					} else {
-						//						System.out.println("max move not ok, return last " + x + " " + y + " " + z);
+					else
 						return new double[] {x, y, z};
-					}
 				}
 				
-				double[] initial = new double[] {nextx, nexty, nextz};
 				moveBy(move + Math3D.EPSILON);
-				double[] movePlusEpsilon = new double[] {nextx, nexty, nextz};
-				double[] moveMinusEpsilon = new double[] {0, 0, 0};
 				
 				if (!isOk()) {
-					//					System.out.println("not ok");
 					moveBy(move - Math3D.EPSILON);
-					moveMinusEpsilon = new double[] {nextx, nexty, nextz};
-					
-					if (collideCheck((int) moveWhich[1])) {
-						//						System.out.println("collide num " + collideNum + " & zero num " + isDirZeroNum + " return " + x + " " + y + " " + z);
+					if (collideCheck((int) moveWhich[1]))
 						return new double[] {x, y, z};
-					}
 				}
 				
 				nextIter();
-				//				if (z < 3) {
-				//					System.out.println("z is bad");
-				//					System.out.println("initial next xyz " + Math3D.doubles2Str(initial) + " (precise z) " + initial[2]);
-				//					System.out.println("move+epsilon next xyz " + Math3D.doubles2Str(movePlusEpsilon));
-				//					System.out.println("move-epsilon next xyz " + Math3D.doubles2Str(moveMinusEpsilon));
-				//					System.exit(0);
-				//				}
 			}
 		}
 		
@@ -204,8 +175,6 @@ public class Terrain {
 			
 			moveWhich = Math3D.minWhich(movex, movey, movez);
 			move = moveWhich[0];
-			if (move < 0)
-				System.out.println(move);
 		}
 		
 		private void moveBy(double move) {
@@ -231,7 +200,6 @@ public class Terrain {
 					isDirZero[which] = true;
 				}
 				dir[which] = 0;
-				//				System.out.println("collide check - dir0 - " + isDirZero[0] + " " + isDirZero[1] + " " + isDirZero[2] + " count: " + isDirZeroNum);
 				return collideNum == 3 || isDirZeroNum == 3;
 			}
 			return false;
