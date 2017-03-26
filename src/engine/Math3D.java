@@ -57,6 +57,13 @@ public class Math3D {
 		return v;
 	}
 	
+	public static double[] scale(double[] v, double amount) {
+		v[0] *= amount;
+		v[1] *= amount;
+		v[2] *= amount;
+		return v;
+	}
+	
 	public static double[] setMagnitude(double[] v, double mag) {
 		double mult = mag / magnitude(v);
 		return new double[] {v[0] * mult, v[1] * mult, v[2] * mult};
@@ -229,16 +236,16 @@ public class Math3D {
 		return val3;
 	}
 	
-	public static double[] minWhich(double val1, double val2, double val3) {
-		if (val2 < val1)
-			if (val3 < val2)
-				return new double[] {val3, 2};
+	public static double[] minWhich(double val0, double val1, double val2) {
+		if (val1 < val0)
+			if (val2 < val1)
+				return new double[] {val2, 2};
 			else
-				return new double[] {val2, 1};
-		else if (val3 < val1)
-			return new double[] {val3, 2};
+				return new double[] {val1, 1};
+		else if (val2 < val0)
+			return new double[] {val2, 2};
 		else
-			return new double[] {val1, 0};
+			return new double[] {val0, 0};
 	}
 	
 	public static int max(int val, int max) {

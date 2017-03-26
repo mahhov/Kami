@@ -3,6 +3,7 @@ package character;
 import camera.TrailingCamera;
 import control.Controller;
 import engine.Math3D;
+import engine.Painter;
 import shapes.Cube;
 import shapes.ShapeParent;
 import terrain.Terrain;
@@ -10,8 +11,8 @@ import world.World;
 import world.WorldElement;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
-	private static final double FRICTION = 0.9, AIR_FRICTION = 0.99, CLIMB_FRICTION = 0.99, GRAVITY = .05;
-	private static final double JUMP_ACC = .7, RUN_ACC = .1, AIR_RUN_ACC = .015, JET_ACC = .045, CLIMB_ACC = .05, HOOK_ACC = .05, JUMP_MULT = 1.5;
+	private static final double FRICTION = 0.9, AIR_FRICTION = 0.95, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
+	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .015, JET_ACC = .045, CLIMB_ACC = .04999, HOOK_ACC = .05, JUMP_MULT = 1.5;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
@@ -97,6 +98,9 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		
 		// move x,y,z & avoid collisions & set state
 		applyVelocity(terrain);
+		
+		String[] stateString = new String[] {"GROUND", "CLIMB", "AIR"};
+		Painter.debugString[2] = stateString[state];
 	}
 	
 	private void moveTowardsHook() {
@@ -193,19 +197,29 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void applyVelocity(Terrain terrain) {
-		state = STATE_AIR;
+		if (state == STATE_CLIMB && true) {
+			vx *= COLLISION_DAMPER;
+			vy *= COLLISION_DAMPER;
+		}
 		
 		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz});
 		x = newxyz[0];
 		y = newxyz[1];
 		z = newxyz[2];
 		
+		state = STATE_AIR;
 		boolean collide[] = terrain.getIntersectionCollide();
 		if (collide[2]) {
+			vz *= COLLISION_DAMPER;
 			state = STATE_GROUND;
 			jumpRemain = JUMP_MAX;
-		} else if (collide[0] || collide[1])
+		} else if (collide[0]) {
+			vx *= COLLISION_DAMPER;
 			state = STATE_CLIMB;
+		} else if (collide[1]) {
+			vy *= COLLISION_DAMPER;
+			state = STATE_CLIMB;
+		}
 	}
 	
 	private void addToWorld(World world) {
