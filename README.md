@@ -1,1 +1,1 @@
-# Afto
+# Kami - Java 3D voxel platformer
