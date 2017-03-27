@@ -9,13 +9,12 @@ public class TrailingCamera extends Camera {
 	private double trailDistance;
 	private Math3D.Angle trailAngle, trailAngleZ; // todo: camera tilt
 	Follow follow;
-	private boolean free;
+	private double followUp;
 	
 	public TrailingCamera() {
 		trailDistance = MIN_TRAIL + (MAX_TRAIL - MIN_TRAIL) * .5;
 		trailAngle = new Math3D.Angle(0);
 		trailAngleZ = new Math3D.Angle(0);
-		free = true;
 	}
 	
 	public void setFollow(Follow follow) {
@@ -23,8 +22,10 @@ public class TrailingCamera extends Camera {
 	}
 	
 	public void move(Controller c) {
-		if (c.isKeyPressed(Controller.KEY_ENTER))
-			free = !free;
+		if (c.isKeyDown(Controller.KEY_R))
+			followUp = Math3D.min(followUp + 1, 50);
+		if (c.isKeyDown(Controller.KEY_F))
+			followUp = Math3D.max(followUp - 1, 0);
 		
 		// distance
 		if (c.isKeyDown(Controller.KEY_X))
@@ -32,29 +33,24 @@ public class TrailingCamera extends Camera {
 		if (c.isKeyDown(Controller.KEY_Z))
 			trailDistance = Math3D.max(trailDistance - TRAIL_SPEED, MIN_TRAIL);
 		
-		if (free) {
-			// trail angle
-			int[] mouse = c.getMouseMovement();
-			double angle = trailAngle.get() - mouse[0] * MOUSE_DAMP_SPEED;
-			double angleZ = trailAngleZ.get() + mouse[1] * MOUSE_DAMP_SPEED;
-			
-			trailAngle.set(angle);
-			trailAngleZ.set(angleZ);
-			trailAngleZ.bound();
-			
-		} else {
-			trailAngle.set(Math.PI + follow.getAngle());
-			trailAngleZ.set(-follow.getAngleZ() + 30.0 / 180 * Math.PI);
-		}
+		// trail angle
+		int[] mouse = c.getMouseMovement();
+		double angle = trailAngle.get() - mouse[0] * MOUSE_DAMP_SPEED;
+		double angleZ = trailAngleZ.get() + mouse[1] * MOUSE_DAMP_SPEED;
+		
+		trailAngle.set(angle);
+		trailAngleZ.set(angleZ);
+		trailAngleZ.bound();
 		
 		// position
+		double fz = follow.getZ() + followUp;
 		double goalx = follow.getX() + trailAngle.cos() * trailAngleZ.cos() * trailDistance;
 		double goaly = follow.getY() + trailAngle.sin() * trailAngleZ.cos() * trailDistance;
-		double goalz = follow.getZ() + trailAngleZ.sin() * trailDistance;
+		double goalz = fz + trailAngleZ.sin() * trailDistance;
 		moveTo(goalx, goaly, goalz, MOTION_AVG);
 		
 		// camera angle
-		lookAt(follow.getX(), follow.getY(), follow.getZ());
+		lookAt(follow.getX(), follow.getY(), fz);
 	}
 	
 	public interface Follow {
