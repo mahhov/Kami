@@ -226,8 +226,8 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			world.addShape((int) hookx, (int) hooky, (int) hookz, shape);
 		}
 		
-		Cube shape = new Cube(x, y, z, angle, angleZ, angleTilt, .5, this);
-		world.addShape((int) x, (int) y, (int) z, shape);
+		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+		world.addShape((int) x, (int) y, (int) (z + .5), shape);
 	}
 	
 	public double getX() {

@@ -24,7 +24,7 @@ public class Terrain {
 	}
 	
 	private void generateTree(int x, int y, int floor) {
-		int thick = 5;
+		int thick = 4;
 		x = Math3D.maxMin(x, part.length - thick * 2, thick);
 		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
 		int height = Math3D.rand(7, 14);
