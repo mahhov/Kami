@@ -4,9 +4,9 @@ import control.Controller;
 import engine.Math3D;
 
 public class TrailingCamera extends Camera {
-	private final static double MIN_TRAIL = 5, MAX_TRAIL = 60;
-	private final static double MIN_FOLLOW_UP = 0, MAX_FOLLOW_UP = 50;
-	private final static double TRAIL_SPEED = 2.5, ANGLE_SPEED = .1, MOTION_AVG = .2, MOUSE_DAMP_SPEED = .01;
+	private final static double MIN_TRAIL = 5, MAX_TRAIL = 60, TRAIL_SPEED = 2.5;
+	private final static double MIN_FOLLOW_UP = 0, MAX_FOLLOW_UP = 25, FOLLOW_UP_SPEED = 1;
+	private final static double ANGLE_SPEED = .1, MOTION_AVG = .2, MOUSE_DAMP_SPEED = .01;
 	private double trailDistance;
 	private double followUp;
 	private Math3D.Angle trailAngle, trailAngleZ; // todo: camera tilt
@@ -14,7 +14,7 @@ public class TrailingCamera extends Camera {
 	
 	public TrailingCamera() {
 		trailDistance = MIN_TRAIL + (MAX_TRAIL - MIN_TRAIL) * .5;
-		followUp = MIN_FOLLOW_UP + (MIN_FOLLOW_UP - MIN_FOLLOW_UP) * .5;
+		followUp = MIN_FOLLOW_UP + (MAX_FOLLOW_UP - MIN_FOLLOW_UP) * .5;
 		trailAngle = new Math3D.Angle(0);
 		trailAngleZ = new Math3D.Angle(0);
 	}
@@ -25,9 +25,9 @@ public class TrailingCamera extends Camera {
 	
 	public void move(Controller c) {
 		if (c.isKeyDown(Controller.KEY_R))
-			followUp = Math3D.min(followUp + 1, MAX_FOLLOW_UP);
+			followUp = Math3D.min(followUp + FOLLOW_UP_SPEED, MAX_FOLLOW_UP);
 		if (c.isKeyDown(Controller.KEY_F))
-			followUp = Math3D.max(followUp - 1, MIN_FOLLOW_UP);
+			followUp = Math3D.max(followUp - FOLLOW_UP_SPEED, MIN_FOLLOW_UP);
 		
 		// distance
 		if (c.isKeyDown(Controller.KEY_X))
