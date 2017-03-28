@@ -13,7 +13,7 @@ import world.WorldElement;
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	private static final double FRICTION = 0.9, AIR_FRICTION = 0.98, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
 	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .02, JET_ACC = .045, CLIMB_ACC = .055, JUMP_MULT = 1.5;
-	private static final double HOOK_SPEED = .1, HOOK_FRICTION = 1, HOOK_ACC = .05;
+	private static final double HOOK_SPEED = .5, HOOK_FRICTION = 1, HOOK_GRAVITY = 0, HOOK_ACC = .08;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
@@ -113,7 +113,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private boolean updateThrowHook(Terrain terrain) {
 		hookvx *= HOOK_FRICTION;
 		hookvy *= HOOK_FRICTION;
-		hookvz = (hookvz - GRAVITY) * HOOK_FRICTION;
+		hookvz = (hookvz - HOOK_GRAVITY) * HOOK_FRICTION;
 		
 		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz}, false, true);
 		hookx = newxyz[0];

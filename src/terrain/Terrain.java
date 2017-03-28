@@ -24,11 +24,11 @@ public class Terrain {
 	}
 	
 	private void generateTree(int x, int y, int floor) {
-		int thick = 4;
+		int thick = 5;
 		x = Math3D.maxMin(x, part.length - thick * 2, thick);
 		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
 		int height = Math3D.rand(7, 14);
-		int brushSpread = Math3D.rand(1, 4) + height / 5;
+		int brushSpread = Math3D.rand(1, 3) + height / 5;
 		int brushHeight = Math3D.rand(1, 3);
 		for (int xi = x - thick; xi <= x + thick; xi++)
 			for (int yi = y - thick; yi <= y + thick; yi++)
@@ -82,7 +82,7 @@ public class Terrain {
 					return new double[] {nextx, nexty, nextz};
 				}
 				moveBy(move + Math3D.EPSILON);
-				if (!isOk()) {
+				if (!isOk(limitDistance)) {
 					moveBy(move - Math3D.EPSILON);
 					if (collideCheck((int) moveWhich[1], allowSlide))
 						return new double[] {x, y, z};
@@ -175,8 +175,16 @@ public class Terrain {
 			intz = (int) nextz;
 		}
 		
-		private boolean isOk() {
-			return inBounds(intx, inty, intz) && isEmpty(intx, inty, intz);
+		private boolean isOk(boolean limitDistance) {
+			boolean inBounds = inBounds(intx, inty, intz);
+			boolean ok = inBounds && isEmpty(intx, inty, intz);
+			if (limitDistance)
+				return ok;
+			return ok || (!inBounds && comingInBounds());
+		}
+		
+		private boolean comingInBounds() {
+			return (intx >= 1 || dir[0] > 0) && (inty >= 1 || dir[1] > 0) && (intz >= 1 || dir[2] > 0) && (intx < part.length - 1 || dir[0] < 0) && (inty < part[intx].length - 1 || dir[1] < 0) && (intz < part[intx][inty].length - 1 || dir[2] < 0);
 		}
 		
 		private boolean collideCheck(int which, boolean allowSlide) {
