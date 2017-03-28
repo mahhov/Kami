@@ -27,8 +27,8 @@ public class Terrain {
 		int thick = 5;
 		x = Math3D.maxMin(x, part.length - thick * 2, thick);
 		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
-		int height = Math3D.rand(7, 14);
-		int brushSpread = Math3D.rand(1, 3) + height / 5;
+		int height = Math3D.rand(7, 14) + 10;
+		int brushSpread = Math3D.rand(1, 3) + height / 5 - 2;
 		int brushHeight = Math3D.rand(1, 3);
 		for (int xi = x - thick; xi <= x + thick; xi++)
 			for (int yi = y - thick; yi <= y + thick; yi++)
@@ -184,7 +184,7 @@ public class Terrain {
 		}
 		
 		private boolean comingInBounds() {
-			return (intx >= 1 || dir[0] > 0) && (inty >= 1 || dir[1] > 0) && (intz >= 1 || dir[2] > 0) && (intx < part.length - 1 || dir[0] < 0) && (inty < part[intx].length - 1 || dir[1] < 0) && (intz < part[intx][inty].length - 1 || dir[2] < 0);
+			return (intx >= 1 || dir[0] > 0) && (inty >= 1 || dir[1] > 0) && (intz >= 1 || dir[2] > 0) && (intx < part.length - 1 || dir[0] < 0) && (inty < part[0].length - 1 || dir[1] < 0) && (intz < part[0][0].length - 1 || dir[2] < 0);
 		}
 		
 		private boolean collideCheck(int which, boolean allowSlide) {
