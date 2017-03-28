@@ -9,7 +9,7 @@ public class FreeCamera extends Camera {
 	public void move(Controller c) {
 		if (c.isKeyDown(Controller.KEY_ENTER)) {
 			moveTo(0, 0, 25, 1);
-			angle = new Math3D.Angle(Math.PI / 4);
+			angle = new Math3D.Angle(Math3D.PI / 4);
 			angleZ = new Math3D.Angle(0);
 			dirtyNorm = true;
 		}

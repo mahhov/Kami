@@ -28,7 +28,7 @@ public class Camera {
 		y = 0;
 		z = 25;
 		
-		angle = new Math3D.Angle(Math.PI / 4);
+		angle = new Math3D.Angle(Math3D.PI / 4);
 		angleZ = new Math3D.Angle(0);
 		computeNorm();
 	}

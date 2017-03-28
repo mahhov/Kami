@@ -2,7 +2,7 @@ package engine;
 
 
 public class Math3D {
-	public static final double EPSILON = 0.00001;
+	public static final double EPSILON = 0.00001, PI = Math.PI;
 	public static final int LEFT = 0, RIGHT = 1, FRONT = 2, BACK = 3, BOTTOM = 4, TOP = 5, NONE = -1;
 	public static final double[] LEFT_VECTOR = new double[] {-1, 0, 0}, RIGHT_VECTOR = new double[] {1, 0, 0}, FRONT_VECTOR = new double[] {0, 1, 0}, BACK_VECTOR = new double[] {0, -1, 0}, TOP_VECTOR = new double[] {0, 0, 1}, BOTTOM_VECTOR = new double[] {0, 0, -1}, ZERO_VECTOR = new double[] {0, 0, 0};
 	public static final double sqrt2 = Math.sqrt(2), sqrt2Div3 = Math.sqrt(2.0 / 3), sqrt1Div2 = 1 / sqrt2, sqrt1Div5 = 1 / Math.sqrt(5), sqrt3 = Math.sqrt(3);
@@ -297,11 +297,11 @@ public class Math3D {
 		trigAccuracy = accuracy;
 		sinTable = new double[accuracy];
 		for (int i = 0; i < accuracy; i++)
-			sinTable[i] = Math.sin(Math.PI / 2 * i / accuracy);
+			sinTable[i] = Math.sin(PI / 2 * i / accuracy);
 	}
 	
 	public static double xsin(double xd) {
-		double x = xd / Math.PI * 2;
+		double x = xd / PI * 2;
 		
 		int sign;
 		if (x < 0) {
@@ -330,7 +330,7 @@ public class Math3D {
 	}
 	
 	public static double xcos(double x) {
-		return xsin(x + Math.PI / 2);
+		return xsin(x + PI / 2);
 	}
 	
 	public static double sin2(double sin1, double cos1, double sin2, double cos2) {
@@ -413,10 +413,10 @@ public class Math3D {
 		}
 		
 		public void bound() {
-			if (angle < -Math.PI / 2)
-				set(-Math.PI / 2);
-			if (angle > Math.PI / 2)
-				set(Math.PI / 2);
+			if (angle < -PI / 2)
+				set(-PI / 2);
+			if (angle > PI / 2)
+				set(PI / 2);
 		}
 		
 		public static void rotate(Angle angle, Angle angleZ, Angle angleTilt, double[] rightUp, double flat, double up) {
@@ -509,5 +509,9 @@ public class Math3D {
 	
 	public static double rand(double min, double max) {
 		return min + Math.random() * (max - min);
+	}
+	
+	public static Angle randAngle() {
+		return new Angle(rand(-PI, PI));
 	}
 }

@@ -17,7 +17,7 @@ public class Particle implements ShapeParent {
 	private double[] norm, rightUp;
 	private long drawCounter;
 	
-	public Particle(double x, double y, double z, double size, Math3D.Angle angle, Math3D.Angle angleZ, Math3D.Angle angleTilt, double vx, double vy, double vz, Color color, int time) {
+	Particle(double x, double y, double z, double size, Math3D.Angle angle, Math3D.Angle angleZ, Math3D.Angle angleTilt, double vx, double vy, double vz, Color color, int time) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -25,6 +25,22 @@ public class Particle implements ShapeParent {
 		this.angle = angle;
 		this.angleZ = angleZ;
 		this.angleTilt = angleTilt;
+		computeAxis();
+		this.vx = vx;
+		this.vy = vy;
+		this.vz = vz;
+		this.color = color;
+		drawCounter = time;
+	}
+	
+	Particle(double x, double y, double z, double size, double vx, double vy, double vz, Color color, int time) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.size = size;
+		angle = Math3D.randAngle();
+		angleZ = Math3D.randAngle();
+		angleTilt = Math3D.randAngle();
 		computeAxis();
 		this.vx = vx;
 		this.vy = vy;

@@ -18,9 +18,9 @@ public class WorldCreator {
 			for (int y = 0; y < length; y++)
 				for (int z = 0; z < height; z++)
 					if (Math.random() < density) {
-						Math3D.Angle angle = new Math3D.Angle(Math.random() * Math.PI * 2);
-						Math3D.Angle angleZ = new Math3D.Angle(Math.random() * Math.PI * 2);
-						Math3D.Angle angleTilt = new Math3D.Angle(Math.random() * Math.PI * 2);
+						Math3D.Angle angle = Math3D.randAngle();
+						Math3D.Angle angleZ = Math3D.randAngle();
+						Math3D.Angle angleTilt = Math3D.randAngle();
 						double size = Math.random() * 2 + .25;
 						world.addShape(x, y, z, new Cube(x + 0.5, y + 0.5, z + 0.5, angle, angleZ, angleTilt, size, null));
 					}
