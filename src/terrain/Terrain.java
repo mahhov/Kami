@@ -11,7 +11,7 @@ public class Terrain {
 	private IntersectionFinder intersectionFinder;
 	
 	public Terrain() {
-		int size = 500;
+		int size = 200;
 		intersectionFinder = new IntersectionFinder();
 		part = new TerrainModule[size][size][100];
 		for (int x = 0; x < part.length; x++)
