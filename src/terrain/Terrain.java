@@ -73,18 +73,18 @@ public class Terrain {
 		private boolean[] collide;
 		private boolean[] isDirZero;
 		
-		private double[] find(double[] orig, double[] dir) {
+		private double[] find(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance) {
 			reset(orig, dir);
 			while (true) {
 				prefixComputeMove();
-				if (moved + move > maxMove) {
+				if (moved + move > maxMove && limitDistance) {
 					moveBy(maxMove - moved);
 					return new double[] {nextx, nexty, nextz};
 				}
 				moveBy(move + Math3D.EPSILON);
 				if (!isOk()) {
 					moveBy(move - Math3D.EPSILON);
-					if (collideCheck((int) moveWhich[1]))
+					if (collideCheck((int) moveWhich[1], allowSlide))
 						return new double[] {x, y, z};
 				}
 				nextIter();
@@ -179,7 +179,9 @@ public class Terrain {
 			return inBounds(intx, inty, intz) && isEmpty(intx, inty, intz);
 		}
 		
-		private boolean collideCheck(int which) {
+		private boolean collideCheck(int which, boolean allowSlide) {
+			if (!allowSlide)
+				return collide[0] = true;
 			if (!collide[which]) {
 				collideNum++;
 				collide[which] = true;
@@ -201,8 +203,8 @@ public class Terrain {
 		}
 	}
 	
-	public double[] findIntersection(double[] orig, double[] dir) {
-		return intersectionFinder.find(orig, dir);
+	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance) {
+		return intersectionFinder.find(orig, dir, allowSlide, limitDistance);
 	}
 	
 	public boolean[] getIntersectionCollide() {

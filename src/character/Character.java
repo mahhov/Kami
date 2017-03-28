@@ -12,7 +12,8 @@ import world.WorldElement;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	private static final double FRICTION = 0.9, AIR_FRICTION = 0.98, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
-	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .02, JET_ACC = .045, CLIMB_ACC = .055, HOOK_ACC = .05, JUMP_MULT = 1.5, HOOK_SPEED = 5;
+	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .02, JET_ACC = .045, CLIMB_ACC = .055, JUMP_MULT = 1.5;
+	private static final double HOOK_SPEED = .1, HOOK_FRICTION = 1, HOOK_ACC = .05;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
@@ -25,7 +26,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private int hookState;
 	private double hookx, hooky, hookz;
 	private double hookvx, hookvy, hookvz;
-	private double[] view;
 	
 	private double x, y, z;
 	private double vx, vy, vz;
@@ -33,6 +33,8 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private double[] norm, rightUp;
 	
 	private long drawCounter;
+	
+	private double[] tempHookIntersection;
 	
 	public Character(double x, double y, double z) {
 		this.x = x;
@@ -58,7 +60,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private void movement(Terrain terrain, Controller controller) {
 		// view angle
 		angle = new Math3D.Angle(controller.viewAngle.get());
-		view = controller.viewDir;
 		computeAxis();
 		
 		// hook
@@ -70,7 +71,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 					hookState = HOOK_ATTACHED;
 			} else {
 				hookState = HOOK_THROWING;
-				initiateThrowHook();
+				initiateThrowHook(terrain, controller);
 			}
 		else
 			hookState = HOOK_NONE;
@@ -110,26 +111,33 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private boolean updateThrowHook(Terrain terrain) {
-		hookvx *= AIR_FRICTION;
-		hookvy *= AIR_FRICTION;
-		hookvz = (hookvz - GRAVITY) * AIR_FRICTION;
+		hookvx *= HOOK_FRICTION;
+		hookvy *= HOOK_FRICTION;
+		hookvz = (hookvz - GRAVITY) * HOOK_FRICTION;
 		
-		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz});
+		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz}, false, true);
 		hookx = newxyz[0];
 		hooky = newxyz[1];
 		hookz = newxyz[2];
 		
 		boolean collide[] = terrain.getIntersectionCollide();
-		return collide[0] || collide[1] || collide[2];
+		return collide[0];
 	}
 	
-	private void initiateThrowHook() {
+	private void initiateThrowHook(Terrain terrain, Controller controller) {
 		hookx = x;
 		hooky = y;
 		hookz = z;
-		hookvx = view[0] * HOOK_SPEED + vx;
-		hookvy = view[1] * HOOK_SPEED + vy;
-		hookvz = view[2] * HOOK_SPEED + vz;
+		
+		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false);
+		tempHookIntersection = new double[] {xyz[0], xyz[1], xyz[2]};
+		xyz[0] -= x;
+		xyz[1] -= y;
+		xyz[2] -= z;
+		Math3D.scale(xyz, HOOK_SPEED);
+		hookvx = xyz[0] + vx;
+		hookvy = xyz[1] + vy;
+		hookvz = xyz[2] + vz;
 	}
 	
 	private void runningMove(Controller controller) {
@@ -192,12 +200,12 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void applyVelocity(Terrain terrain) {
-		if (state == STATE_CLIMB && true) {
+		if (state == STATE_CLIMB) {
 			vx *= COLLISION_DAMPER;
 			vy *= COLLISION_DAMPER;
 		}
 		
-		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz});
+		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz}, true, true);
 		x = newxyz[0];
 		y = newxyz[1];
 		z = newxyz[2];
@@ -224,6 +232,11 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		if (hookState != HOOK_NONE) { // add hook and rope
 			Cube shape = new Cube(hookx, hooky, hookz, angle, angleZ, angleTilt, .2, this);
 			world.addShape((int) hookx, (int) hooky, (int) hookz, shape);
+		}
+		
+		if (tempHookIntersection != null) {
+			Cube shape = new Cube(tempHookIntersection[0], tempHookIntersection[1], tempHookIntersection[2], angle, angleZ, angleTilt, .2, this);
+			world.addShape((int) tempHookIntersection[0], (int) tempHookIntersection[1], (int) tempHookIntersection[2], shape);
 		}
 		
 		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
@@ -255,7 +268,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 }
 
-// todo : collisoion
 // todo : hook
 // todo : graphics
 // todo : shooting
