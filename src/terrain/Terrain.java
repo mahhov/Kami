@@ -11,8 +11,9 @@ public class Terrain {
 	private IntersectionFinder intersectionFinder;
 	
 	public Terrain() {
+		int size = 500;
 		intersectionFinder = new IntersectionFinder();
-		part = new TerrainModule[200][200][100];
+		part = new TerrainModule[size][size][100];
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
 				part[x][y][0] = new FullGray();
@@ -221,7 +222,6 @@ public class Terrain {
 	
 	private boolean inBounds(int x, int y, int z) {
 		return x >= 1 && y >= 1 && z >= 1 && x < part.length - 1 && y < part[x].length - 1 && z < part[x][y].length - 1;
-		//		return x >= 0 && y >= 0 && z >= 0 && x < part.length && y < part[x].length && z < part[x][y].length;
 	}
 	
 	private boolean isEmpty(int x, int y, int z) {

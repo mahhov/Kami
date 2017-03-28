@@ -4,7 +4,9 @@ import camera.TrailingCamera;
 import control.Controller;
 import engine.Math3D;
 import engine.Painter;
+import particle.SmokeParticle;
 import shapes.Cube;
+import shapes.CubeFrame;
 import shapes.ShapeParent;
 import terrain.Terrain;
 import world.World;
@@ -226,8 +228,8 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void addToWorld(World world) {
-		if (jetting)
-			; // add jet particles
+		if (jetting) // add jet particles
+			world.addParticle(new SmokeParticle(x, y, z));
 		
 		if (hookState != HOOK_NONE) { // add hook and rope
 			Cube shape = new Cube(hookx, hooky, hookz, angle, angleZ, angleTilt, .2, this);
@@ -235,7 +237,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		}
 		
 		if (tempHookIntersection != null) {
-			Cube shape = new Cube(tempHookIntersection[0], tempHookIntersection[1], tempHookIntersection[2], angle, angleZ, angleTilt, .2, this);
+			CubeFrame shape = new CubeFrame(tempHookIntersection[0], tempHookIntersection[1], tempHookIntersection[2], angle, angleZ, angleTilt, .2, this);
 			world.addShape((int) tempHookIntersection[0], (int) tempHookIntersection[1], (int) tempHookIntersection[2], shape);
 		}
 		

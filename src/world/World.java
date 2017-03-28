@@ -5,7 +5,7 @@ import control.Controller;
 import engine.Math3D;
 import engine.Painter;
 import list.LList;
-import projectiles.Projectile;
+import particle.Particle;
 import shapes.Shape;
 import shapes.StaticCube;
 import terrain.Terrain;
@@ -15,7 +15,7 @@ public class World {
 	Chunk[][][] chunk;
 	
 	private LList<WorldElement> element;
-	private LList<Projectile> projectile;
+	private LList<Particle> particle;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight, int chunkSize) {
 		width = chunkWidth * chunkSize;
@@ -28,7 +28,7 @@ public class World {
 				for (int z = 0; z < chunkHeight; z++)
 					chunk[x][y][z] = new Chunk();
 		element = new LList<>();
-		projectile = new LList<>();
+		particle = new LList<>();
 	}
 	
 	void addStaticCube(int x, int y, int z, boolean[] side) {
@@ -50,8 +50,8 @@ public class World {
 		this.element = this.element.add(element);
 	}
 	
-	public void addProjectile(Projectile projectile) {
-		this.projectile = this.projectile.add(projectile);
+	public void addParticle(Particle particle) {
+		this.particle = this.particle.add(particle);
 	}
 	
 	// DRAWING
@@ -170,8 +170,9 @@ public class World {
 	public void update(Terrain terrain, Controller controller) {
 		for (LList<WorldElement> e : element)
 			e.node.update(this, terrain, controller);
-		for (LList<Projectile> p : projectile)
-			p.node.update(this);
+		for (LList<Particle> p : particle)
+			if (p.node.update(this))
+				particle = particle.remove(p);
 	}
 	
 	// UITL
