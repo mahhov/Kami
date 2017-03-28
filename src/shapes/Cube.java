@@ -37,6 +37,10 @@ public class Cube extends Shape {
 		this.color = color != null ? color : new Color[] {PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR};
 	}
 	
+	public Cube(double x, double y, double z, Math3D.Angle angle, Math3D.Angle angleZ, Math3D.Angle angleTilt, double size, Color color, ShapeParent shapeParent) {
+		this(x, y, z, angle, angleZ, angleTilt, size, null, new Color[] {color, color, color, color, color, color}, shapeParent);
+	}
+	
 	Surface[] initSurfacesGeom(Math3D.Angle angle, Math3D.Angle angleZ, Math3D.Angle angleTilt, double normSize, double rightSize, double upSize, boolean[] side, boolean flipNormal, boolean flipSide) {
 		Surface top = null, bottom = null, left = null, right = null, front = null, back = null;
 		

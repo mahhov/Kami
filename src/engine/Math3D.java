@@ -506,4 +506,8 @@ public class Math3D {
 	public static int rand(int min, int max) {
 		return (int) (min + Math.random() * (max - min + 1));
 	}
+	
+	public static double rand(double min, double max) {
+		return min + Math.random() * (max - min);
+	}
 }
