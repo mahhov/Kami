@@ -63,7 +63,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		computeAxis();
 		
 		// hook
-		if (controller.isKeyDown(Controller.KEY_SHIFT))
+		if (controller.isKeyDown(Controller.KEY_SHIFT) || controller.isMouseDown())
 			if (hookState == HOOK_ATTACHED)
 				moveTowardsHook();
 			else if (hookState == HOOK_THROWING) {
