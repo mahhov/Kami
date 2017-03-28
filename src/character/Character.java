@@ -268,7 +268,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 }
 
-// todo : hook
+// todo : hook - why is aim below click
 // todo : graphics
 // todo : shooting
 // todo : survival
