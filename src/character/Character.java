@@ -15,7 +15,7 @@ import world.WorldElement;
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	private static final double FRICTION = 0.9, AIR_FRICTION = 0.98, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
 	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .02, JET_ACC = .045, CLIMB_ACC = .055, JUMP_MULT = 1.5;
-	private static final double HOOK_SPEED = .5, HOOK_FRICTION = 1, HOOK_GRAVITY = 0, HOOK_ACC = .05;
+	private static final double HOOK_SPEED = 20, HOOK_FRICTION = 1, HOOK_GRAVITY = 0, HOOK_ACC = .05;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
@@ -24,7 +24,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private int state;
 	private boolean jetting;
 	
-	private static final int HOOK_NONE = 0, HOOK_THROWING = 1, HOOK_ATTACHED = 2;
+	private static final int HOOK_NONE = 0, HOOK_THROWING = 1, HOOK_ATTACHED = 2, HOOK_ACTIVATED = 3;
 	private int hookState;
 	private double hookx, hooky, hookz;
 	private double hookvx, hookvy, hookvz;
@@ -66,7 +66,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		
 		// hook
 		if (controller.isKeyDown(Controller.KEY_SHIFT) || controller.isMouseDown())
-			if (hookState == HOOK_ATTACHED)
+			if (hookState == HOOK_ATTACHED) {
+				if (controller.isKeyDown(Controller.KEY_SPACE))
+					hookState = HOOK_ACTIVATED;
+			} else if (hookState == HOOK_ACTIVATED)
 				moveTowardsHook();
 			else if (hookState == HOOK_THROWING) {
 				if (updateThrowHook(terrain))

@@ -11,16 +11,14 @@ public class Terrain {
 	private IntersectionFinder intersectionFinder;
 	
 	public Terrain() {
-		int size = 200;
+		int size = 400;
 		intersectionFinder = new IntersectionFinder();
 		part = new TerrainModule[size][size][100];
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
 				part[x][y][0] = new FullGray();
-				part[x][y][1] = new FullGray();
-				part[x][y][2] = new FullGray();
 				if (Math.random() > .999)
-					generateTree(x, y, 2);
+					generateTree(x, y, 0);
 			}
 	}
 	
@@ -28,7 +26,7 @@ public class Terrain {
 		int thick = 5;
 		x = Math3D.maxMin(x, part.length - thick * 2, thick);
 		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
-		int height = Math3D.rand(7, 14) + 10;
+		int height = Math3D.rand(20, 30) + 10;
 		int brushSpread = Math3D.rand(1, 3) + height / 5 - 2;
 		int brushHeight = Math3D.rand(1, 3);
 		for (int xi = x - thick; xi <= x + thick; xi++)
