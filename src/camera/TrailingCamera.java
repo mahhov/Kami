@@ -2,6 +2,7 @@ package camera;
 
 import control.Controller;
 import engine.Math3D;
+import engine.Painter;
 
 public class TrailingCamera extends Camera {
 	private final static double MIN_TRAIL = 5, MAX_TRAIL = 60, TRAIL_SPEED = 2.5;
@@ -13,8 +14,8 @@ public class TrailingCamera extends Camera {
 	Follow follow;
 	
 	public TrailingCamera() {
-		trailDistance = MIN_TRAIL + (MAX_TRAIL - MIN_TRAIL) * .5;
-		followUp = MIN_FOLLOW_UP + (MAX_FOLLOW_UP - MIN_FOLLOW_UP) * .5;
+		trailDistance = 17.5;
+		followUp = 8.5;
 		trailAngle = new Math3D.Angle(0);
 		trailAngleZ = new Math3D.Angle(0);
 	}
@@ -24,6 +25,7 @@ public class TrailingCamera extends Camera {
 	}
 	
 	public void move(Controller c) {
+		Painter.debugString[3] = "trail distance (X & Z): " + trailDistance + " . follow up distance (R and F): " + followUp;
 		if (c.isKeyDown(Controller.KEY_R))
 			followUp = Math3D.min(followUp + FOLLOW_UP_SPEED, MAX_FOLLOW_UP);
 		if (c.isKeyDown(Controller.KEY_F))

@@ -6,9 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/camera/TrailingCamera.java" afterPath="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/character/Character.java" afterPath="$PROJECT_DIR$/src/character/Character.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/RaceEngine.java" afterPath="$PROJECT_DIR$/src/engine/RaceEngine.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/character/Character.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="135" column="20" selection-start-line="135" selection-start-column="20" selection-end-line="135" selection-end-column="20" />
+            <state relative-caret-position="754">
+              <caret line="228" column="26" selection-start-line="228" selection-start-column="26" selection-end-line="228" selection-end-column="26" />
               <folding>
                 <element signature="method#Character#0;class#Character#0" expanded="false" />
                 <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
@@ -59,6 +58,16 @@
                 <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
                 <element signature="method#doFriction#0;class#Character#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TrailingCamera.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/camera/TrailingCamera.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,7 +135,6 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_3.txt" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/control/Controller.java" />
-        <option value="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
         <option value="$PROJECT_DIR$/src/world/World.java" />
         <option value="$PROJECT_DIR$/src/shapes/Cube.java" />
         <option value="$PROJECT_DIR$/src/particle/Particle.java" />
@@ -135,6 +143,7 @@
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
         <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
         <option value="$PROJECT_DIR$/src/character/Character.java" />
+        <option value="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
       </list>
     </option>
   </component>
@@ -818,12 +827,12 @@
       <workItem from="1490574434429" duration="22000" />
       <workItem from="1490574518820" duration="9664000" />
       <workItem from="1490754501048" duration="653000" />
-      <workItem from="1490797844365" duration="99000" />
+      <workItem from="1490797844365" duration="295000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94485000" />
+    <option name="totallyTimeSpent" value="94681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-298" y="-1417" width="3440" height="1417" extended-state="6" />
@@ -1127,14 +1136,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/camera/TrailingCamera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="69" selection-start-line="7" selection-start-column="69" selection-end-line="7" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/lib/tools.jar!/com/sun/xml/internal/xsom/impl/parser/state/particle.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1279,8 +1280,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="135" column="20" selection-start-line="135" selection-start-column="20" selection-end-line="135" selection-end-column="20" />
+        <state relative-caret-position="754">
+          <caret line="228" column="26" selection-start-line="228" selection-start-column="26" selection-end-line="228" selection-end-column="26" />
           <folding>
             <element signature="method#Character#0;class#Character#0" expanded="false" />
             <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
@@ -1289,6 +1290,14 @@
             <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
             <element signature="method#doFriction#0;class#Character#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/camera/TrailingCamera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>
