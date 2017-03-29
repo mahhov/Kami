@@ -25,7 +25,6 @@ public class TrailingCamera extends Camera {
 	}
 	
 	public void move(Controller c) {
-		Painter.debugString[3] = "trail distance (X & Z): " + trailDistance + " . follow up distance (R and F): " + followUp;
 		if (c.isKeyDown(Controller.KEY_R))
 			followUp = Math3D.min(followUp + FOLLOW_UP_SPEED, MAX_FOLLOW_UP);
 		if (c.isKeyDown(Controller.KEY_F))
@@ -36,6 +35,8 @@ public class TrailingCamera extends Camera {
 			trailDistance = Math3D.min(trailDistance + TRAIL_SPEED, MAX_TRAIL);
 		if (c.isKeyDown(Controller.KEY_Z))
 			trailDistance = Math3D.max(trailDistance - TRAIL_SPEED, MIN_TRAIL);
+		
+		Painter.debugString[3] = "trail distance (X & Z): " + trailDistance + " . follow up distance (R and F): " + followUp;
 		
 		// trail angle
 		int[] mouse = c.getMouseMovement();
