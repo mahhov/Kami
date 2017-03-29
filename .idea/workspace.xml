@@ -6,16 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/world/interfaceelement/InterfaceElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/camera/TrailingCamera.java" afterPath="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/character/Character.java" afterPath="$PROJECT_DIR$/src/character/Character.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Math3D.java" afterPath="$PROJECT_DIR$/src/engine/Math3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Painter.java" afterPath="$PROJECT_DIR$/src/engine/Painter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/RaceEngine.java" afterPath="$PROJECT_DIR$/src/engine/RaceEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/World.java" afterPath="$PROJECT_DIR$/src/world/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/WorldElement.java" afterPath="$PROJECT_DIR$/src/world/WorldElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" afterPath="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,25 +29,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RaceEngine.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="39" column="26" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/character/Character.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="469">
-              <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
+            <state relative-caret-position="389">
+              <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
               <folding>
-                <element signature="method#Character#0;class#Character#0" expanded="false" />
                 <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
-                <element signature="method#update#0;class#Character#0" expanded="false" />
+                <element signature="method#init#0;class#Character#0" expanded="false" />
                 <element signature="method#movement#0;class#Character#0" expanded="false" />
                 <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
                 <element signature="method#updateThrowHook#0;class#Character#0" expanded="false" />
@@ -65,110 +46,21 @@
                 <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
                 <element signature="method#doFriction#0;class#Character#0" expanded="false" />
                 <element signature="method#applyVelocity#0;class#Character#0" expanded="false" />
+                <element signature="method#addToWorld#0;class#Character#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/world/World.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-              <folding>
-                <element signature="method#World#0;class#World#0" expanded="false" />
-                <element signature="method#addShape#0;class#World#0" expanded="false" />
-                <element signature="e#1530#1531#0" expanded="true" />
-                <element signature="e#1577#1578#0" expanded="true" />
-                <element signature="e#1640#1641#0" expanded="true" />
-                <element signature="e#1695#1696#0" expanded="true" />
-                <element signature="method#drawInterface#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunks#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunk#0;class#World#0" expanded="false" />
-                <element signature="method#drawRow#0;class#World#0" expanded="false" />
-                <element signature="method#drawColumn#0;class#World#0" expanded="false" />
-                <element signature="method#drawCell#0;class#World#0" expanded="false" />
-                <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
-                <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bar.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Bar.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/world/interfaceelement/Bar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+            <state relative-caret-position="285">
+              <caret line="21" column="22" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#375#376#0" expanded="true" />
-                <element signature="e#447#448#0" expanded="true" />
-                <element signature="e#721#722#0" expanded="true" />
-                <element signature="e#744#745#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Painter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-              <folding>
-                <element signature="method#Painter#0;class#Painter#0" expanded="false" />
-                <element signature="method#clear#0;class#Painter#0" expanded="false" />
-                <element signature="e#1192#1229#0" expanded="false" />
-                <element signature="method#paint#0;class#Painter#0" expanded="false" />
-                <element signature="method#setColor#0;class#Painter#0" expanded="false" />
-                <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Particle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/particle/Particle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InterfaceElement.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/world/interfaceelement/InterfaceElement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorldElement.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/world/WorldElement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorldCreator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/world/WorldCreator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-              <folding>
-                <element signature="method#randDebris#0;class#WorldCreator#0" expanded="false" />
-                <element signature="method#flatFloor#0;class#WorldCreator#0" expanded="false" />
-                <element signature="method#heightMap#0;class#WorldCreator#0" expanded="false" />
+                <element signature="e#708#709#0" expanded="true" />
+                <element signature="e#731#732#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -234,9 +126,9 @@
         <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
         <option value="$PROJECT_DIR$/src/world/World.java" />
         <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
-        <option value="$PROJECT_DIR$/src/character/Character.java" />
-        <option value="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" />
         <option value="$PROJECT_DIR$/src/engine/Painter.java" />
+        <option value="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" />
+        <option value="$PROJECT_DIR$/src/character/Character.java" />
       </list>
     </option>
   </component>
@@ -961,12 +853,12 @@
       <workItem from="1490574434429" duration="22000" />
       <workItem from="1490574518820" duration="9664000" />
       <workItem from="1490754501048" duration="653000" />
-      <workItem from="1490797844365" duration="4313000" />
+      <workItem from="1490797844365" duration="5086000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98699000" />
+    <option name="totallyTimeSpent" value="99472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-298" y="-1417" width="3440" height="1417" extended-state="6" />
@@ -1043,7 +935,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/engine/Engine.java" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_30.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -1348,10 +1239,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <folding>
+            <element signature="method#Painter#0;class#Painter#0" expanded="false" />
+            <element signature="method#clear#0;class#Painter#0" expanded="false" />
+            <element signature="e#1192#1229#0" expanded="false" />
+            <element signature="method#paint#0;class#Painter#0" expanded="false" />
+            <element signature="method#setColor#0;class#Painter#0" expanded="false" />
+            <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+          <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
+            <element signature="method#addShape#0;class#World#0" expanded="false" />
+            <element signature="e#1530#1531#0" expanded="true" />
+            <element signature="e#1577#1578#0" expanded="true" />
+            <element signature="e#1640#1641#0" expanded="true" />
+            <element signature="e#1695#1696#0" expanded="true" />
+            <element signature="method#drawInterface#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunks#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunk#0;class#World#0" expanded="false" />
+            <element signature="method#drawRow#0;class#World#0" expanded="false" />
+            <element signature="method#drawColumn#0;class#World#0" expanded="false" />
+            <element signature="method#drawCell#0;class#World#0" expanded="false" />
+            <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
+            <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/deploy.jar!/com/oracle/deploy/update/UpdateCheck.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2922#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="335" column="81" selection-start-line="335" selection-start-column="81" selection-end-line="335" selection-end-column="81" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
             <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
@@ -1383,7 +1324,6 @@
             <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
             <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
             <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
             <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
             <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
             <element signature="method#transform#2;class#Math3D#0" expanded="false" />
@@ -1405,39 +1345,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/World.java">
+    <entry file="file://$PROJECT_DIR$/src/world/interfaceelement/Bar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+        <state relative-caret-position="285">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="22" />
           <folding>
-            <element signature="method#World#0;class#World#0" expanded="false" />
-            <element signature="method#addShape#0;class#World#0" expanded="false" />
-            <element signature="e#1530#1531#0" expanded="true" />
-            <element signature="e#1577#1578#0" expanded="true" />
-            <element signature="e#1640#1641#0" expanded="true" />
-            <element signature="e#1695#1696#0" expanded="true" />
-            <element signature="method#drawInterface#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunks#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunk#0;class#World#0" expanded="false" />
-            <element signature="method#drawRow#0;class#World#0" expanded="false" />
-            <element signature="method#drawColumn#0;class#World#0" expanded="false" />
-            <element signature="method#drawCell#0;class#World#0" expanded="false" />
-            <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
-            <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#708#709#0" expanded="true" />
+            <element signature="e#731#732#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
+        <state relative-caret-position="389">
+          <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
           <folding>
-            <element signature="method#Character#0;class#Character#0" expanded="false" />
             <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
-            <element signature="method#update#0;class#Character#0" expanded="false" />
+            <element signature="method#init#0;class#Character#0" expanded="false" />
             <element signature="method#movement#0;class#Character#0" expanded="false" />
             <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
             <element signature="method#updateThrowHook#0;class#Character#0" expanded="false" />
@@ -1447,35 +1373,7 @@
             <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
             <element signature="method#doFriction#0;class#Character#0" expanded="false" />
             <element signature="method#applyVelocity#0;class#Character#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-          <folding>
-            <element signature="method#Painter#0;class#Painter#0" expanded="false" />
-            <element signature="method#clear#0;class#Painter#0" expanded="false" />
-            <element signature="e#1192#1229#0" expanded="false" />
-            <element signature="method#paint#0;class#Painter#0" expanded="false" />
-            <element signature="method#setColor#0;class#Painter#0" expanded="false" />
-            <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/interfaceelement/Bar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-            <element signature="e#447#448#0" expanded="true" />
-            <element signature="e#721#722#0" expanded="true" />
-            <element signature="e#744#745#0" expanded="true" />
+            <element signature="method#addToWorld#0;class#Character#0" expanded="false" />
           </folding>
         </state>
       </provider>

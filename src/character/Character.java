@@ -34,7 +34,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private Math3D.Angle angle, angleZ, angleTilt;
 	private double[] norm, rightUp;
 	
-	private static final int HEALTH_MAX = 20;
+	private static final int HEALTH_MAX = 2000;
 	private int health;
 	private Bar healthBar;
 	
@@ -48,6 +48,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		angleZ = new Math3D.Angle(0);
 		angleTilt = new Math3D.Angle(0);
 		computeAxis();
+		health = HEALTH_MAX;
 	}
 	
 	private void computeAxis() {
@@ -56,14 +57,21 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	public void init(World world) {
-		healthBar = new Bar(.01, .98, .4, .01);
+		healthBar = new Bar(.02, .96, .48, .02);
 		world.addInterfaceElement(healthBar);
 	}
 	
 	public void update(World world, Terrain terrain, Controller controller) {
 		drawCounter++;
+		interaction(terrain);
 		movement(terrain, controller);
 		addToWorld(world);
+	}
+	
+	private void interaction(Terrain terrain) {
+		if (z < 1.1)
+			health--;
+		healthBar.setFill(1.0 * health / HEALTH_MAX);
 	}
 	
 	private void movement(Terrain terrain, Controller controller) {

@@ -7,7 +7,7 @@ import java.awt.*;
 public class Bar implements InterfaceElement {
 	private double x, y, width, height, fill;
 	private static final Color DEFAULT_BACK_COLOR = Color.CYAN, DEFAULT_FILL_COLOR = Color.GREEN;
-	private Color backColor, borderColor, fillColor;
+	private Color backColor, fillColor;
 	
 	public Bar(double x, double y, double width, double height) {
 		this(x, y, width, height, DEFAULT_BACK_COLOR, DEFAULT_FILL_COLOR);
