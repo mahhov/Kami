@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Kami:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Kami_jar</output-path>
+    <root id="archive" name="Kami.jar">
+      <element id="module-output" name="Kami" />
+    </root>
+  </artifact>
+</component>
