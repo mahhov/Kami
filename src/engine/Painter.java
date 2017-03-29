@@ -103,4 +103,10 @@ public class Painter extends JFrame {
 			}
 		}
 	}
+	
+	public void rectangle(double x, double y, double width, double height, Color color) {
+		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
+		brush.setColor(color);
+		brush.fillRect(xywh[0], xywh[1], xywh[2], xywh[3]);
+	}
 }

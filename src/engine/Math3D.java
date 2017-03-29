@@ -350,6 +350,13 @@ public class Math3D {
 		return (tan1 + tan2) / (1 - tan1 * tan2);
 	}
 	
+	public static int[] transform(double[] a, int scale) {
+		int[] aa = new int[a.length];
+		for (int i = 0; i < a.length; i++)
+			aa[i] = (int) (a[i] * scale);
+		return aa;
+	}
+	
 	public static double[] transform(double[] a, int scale, int shift) {
 		double[] aa = new double[a.length];
 		for (int i = 0; i < a.length; i++)

@@ -2,7 +2,6 @@ package engine;
 
 import camera.TrailingCamera;
 import character.Character;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import control.Controller;
 import terrain.Terrain;
 import world.World;
@@ -38,6 +37,7 @@ class RaceEngine {
 		hook = new Character(5, 5, 5);
 		((TrailingCamera) camera).setFollow(hook);
 		world.addElement(hook);
+		world.initWorldElements();
 		terrain.addToWorld(world);
 	}
 	
@@ -54,7 +54,7 @@ class RaceEngine {
 			camera.update(world.width, world.length, world.height);
 			controller.setView(camera.angle, camera.orig(), camera.normal);
 			world.update(terrain, controller);
-			world.drawChunks(painter, camera);
+			world.draw(painter, camera);
 			painter.repaint();
 			checkPause();
 			wait(10);
@@ -81,7 +81,7 @@ class RaceEngine {
 		}
 	}
 	
-	private static void printInstructions(){
+	private static void printInstructions() {
 		System.out.println("Kami - Java 3D voxel platformer");
 		System.out.println("W A S D to move");
 		System.out.println("R F to move camera up / down");

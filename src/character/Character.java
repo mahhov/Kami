@@ -10,6 +10,7 @@ import shapes.ShapeParent;
 import terrain.Terrain;
 import world.World;
 import world.WorldElement;
+import world.interfaceelement.Bar;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
 	private static final double FRICTION = 0.9, AIR_FRICTION = 0.98, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
@@ -33,6 +34,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private Math3D.Angle angle, angleZ, angleTilt;
 	private double[] norm, rightUp;
 	
+	private static final int HEALTH_MAX = 20;
+	private int health;
+	private Bar healthBar;
+	
 	private long drawCounter;
 	
 	public Character(double x, double y, double z) {
@@ -48,6 +53,11 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private void computeAxis() {
 		norm = Math3D.norm(angle, angleZ, 1.);
 		rightUp = Math3D.axisVectorsTilt(norm, 1., angleZ, angleTilt);
+	}
+	
+	public void init(World world) {
+		healthBar = new Bar(.01, .98, .4, .01);
+		world.addInterfaceElement(healthBar);
 	}
 	
 	public void update(World world, Terrain terrain, Controller controller) {

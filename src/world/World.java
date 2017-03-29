@@ -9,6 +9,7 @@ import particle.Particle;
 import shapes.Shape;
 import shapes.StaticCube;
 import terrain.Terrain;
+import world.interfaceelement.InterfaceElement;
 
 public class World {
 	public final int width, length, height, chunkSize;
@@ -16,6 +17,7 @@ public class World {
 	
 	private LList<WorldElement> element;
 	private LList<Particle> particle;
+	private LList<InterfaceElement> interfaceElement;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight, int chunkSize) {
 		width = chunkWidth * chunkSize;
@@ -29,6 +31,7 @@ public class World {
 					chunk[x][y][z] = new Chunk();
 		element = new LList<>();
 		particle = new LList<>();
+		interfaceElement = new LList<>();
 	}
 	
 	void addStaticCube(int x, int y, int z, boolean[] side) {
@@ -50,13 +53,27 @@ public class World {
 		this.element = this.element.add(element);
 	}
 	
+	public void addInterfaceElement(InterfaceElement element) {
+		interfaceElement = interfaceElement.add(element);
+	}
+	
 	public void addParticle(Particle particle) {
 		this.particle = this.particle.add(particle);
 	}
 	
 	// DRAWING
 	
-	public void drawChunks(Painter painter, Camera c) {
+	public void draw(Painter painter, Camera c) {
+		drawChunks(painter, c);
+		drawInterface(painter);
+	}
+	
+	private void drawInterface(Painter painter) {
+		for (LList<InterfaceElement> e : interfaceElement)
+			e.node.draw(painter);
+	}
+	
+	private void drawChunks(Painter painter, Camera c) {
 		int boundaries[] = c.cullBoundaries();
 		int volumeRaw = (boundaries[1] - boundaries[0]) * (boundaries[3] - boundaries[2]) * (boundaries[5] - boundaries[4]) / 100000;
 		
@@ -166,6 +183,11 @@ public class World {
 	}
 	
 	// UPDATE
+	
+	public void initWorldElements() {
+		for (LList<WorldElement> e : element)
+			e.node.init(this);
+	}
 	
 	public void update(Terrain terrain, Controller controller) {
 		for (LList<WorldElement> e : element)
