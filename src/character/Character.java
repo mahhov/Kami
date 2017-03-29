@@ -36,8 +36,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	
 	private long drawCounter;
 	
-	private double[] tempHookIntersection;
-	
 	public Character(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
@@ -135,7 +133,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		hookz = z;
 		
 		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false);
-		tempHookIntersection = new double[] {xyz[0], xyz[1], xyz[2]};
 		xyz[0] -= x;
 		xyz[1] -= y;
 		xyz[2] -= z;
@@ -237,11 +234,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		if (hookState != HOOK_NONE) { // add hook and rope
 			Cube shape = new Cube(hookx, hooky, hookz, angle, angleZ, angleTilt, .2, this);
 			world.addShape((int) hookx, (int) hooky, (int) hookz, shape);
-		}
-		
-		if (tempHookIntersection != null) {
-			CubeFrame shape = new CubeFrame(tempHookIntersection[0], tempHookIntersection[1], tempHookIntersection[2], angle, angleZ, angleTilt, .2, this);
-			world.addShape((int) tempHookIntersection[0], (int) tempHookIntersection[1], (int) tempHookIntersection[2], shape);
 		}
 		
 		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
