@@ -15,12 +15,13 @@ class IntersectionFinder {
 	private int collideNum, isDirZeroNum;
 	boolean[] collide;
 	private boolean[] isDirZero;
+	private boolean inBounds;
 	
 	IntersectionFinder(Terrain terrain) {
 		this.terrain = terrain;
 	}
 	
-	double[] find(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance) {
+	double[] find(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge) {
 		reset(orig, dir);
 		while (true) {
 			prefixComputeMove();
@@ -31,7 +32,7 @@ class IntersectionFinder {
 			moveBy(move + Math3D.EPSILON);
 			if (!isOk(limitDistance)) {
 				moveBy(move - Math3D.EPSILON);
-				if (collideCheck((int) moveWhich[1], allowSlide))
+				if (collideCheck((int) moveWhich[1], allowSlide, allowCollideWithEdge))
 					return new double[] {x, y, z};
 			}
 			nextIter();
@@ -123,14 +124,16 @@ class IntersectionFinder {
 	}
 	
 	private boolean isOk(boolean limitDistance) {
-		boolean inBounds = inBounds();
+		inBounds = isInBounds();
 		boolean ok = inBounds && isEmpty();
 		if (limitDistance)
 			return ok;
-		return ok || (!inBounds && comingInBounds());
+		return ok || (!inBounds && isComingInBounds());
 	}
 	
-	private boolean collideCheck(int which, boolean allowSlide) {
+	private boolean collideCheck(int which, boolean allowSlide, boolean allowCollideWithEdge) {
+		if (!allowCollideWithEdge && !inBounds)
+			return collide[1] = true;
 		if (!allowSlide)
 			return collide[0] = true;
 		if (!collide[which]) {
@@ -153,11 +156,11 @@ class IntersectionFinder {
 		z = nextz;
 	}
 	
-	private boolean comingInBounds() {
+	private boolean isComingInBounds() {
 		return (intx >= 1 || dir[0] > 0) && (inty >= 1 || dir[1] > 0) && (intz >= 1 || dir[2] > 0) && (intx < terrain.part.length - 1 || dir[0] < 0) && (inty < terrain.part[0].length - 1 || dir[1] < 0) && (intz < terrain.part[0][0].length - 1 || dir[2] < 0);
 	}
 	
-	private boolean inBounds() {
+	private boolean isInBounds() {
 		return intx >= 1 && inty >= 1 && intz >= 1 && intx < terrain.part.length - 1 && inty < terrain.part[intx].length - 1 && intz < terrain.part[intx][inty].length - 1;
 	}
 	

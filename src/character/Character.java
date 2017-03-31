@@ -87,8 +87,11 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			} else if (hookState == HOOK_ACTIVATED)
 				moveTowardsHook();
 			else if (hookState == HOOK_THROWING) {
-				if (updateThrowHook(terrain))
-					hookState = HOOK_ATTACHED;
+				boolean[] collide = updateThrowHook(terrain);
+				if (collide[0])
+					hookState = HOOK_ATTACHED; // collide with terrain
+				else if (collide[1])
+					hookState = HOOK_NONE; // collide with boundary
 			} else {
 				hookState = HOOK_THROWING;
 				initiateThrowHook(terrain, controller);
@@ -130,18 +133,17 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		vz += dir[2] * HOOK_ACC;
 	}
 	
-	private boolean updateThrowHook(Terrain terrain) {
+	private boolean[] updateThrowHook(Terrain terrain) {
 		hookvx *= HOOK_FRICTION;
 		hookvy *= HOOK_FRICTION;
 		hookvz = (hookvz - HOOK_GRAVITY) * HOOK_FRICTION;
 		
-		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz}, false, true);
+		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz}, false, true, false);
 		hookx = newxyz[0];
 		hooky = newxyz[1];
 		hookz = newxyz[2];
 		
-		boolean collide[] = terrain.getIntersectionCollide();
-		return collide[0];
+		return terrain.getIntersectionCollide();
 	}
 	
 	private void initiateThrowHook(Terrain terrain, Controller controller) {
@@ -149,7 +151,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		hooky = y;
 		hookz = z;
 		
-		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false);
+		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false, true);
 		xyz[0] -= x;
 		xyz[1] -= y;
 		xyz[2] -= z;
@@ -224,7 +226,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			vy *= COLLISION_DAMPER;
 		}
 		
-		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz}, true, true);
+		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz}, true, true, true);
 		x = newxyz[0];
 		y = newxyz[1];
 		z = newxyz[2];

@@ -6,8 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/character/Character.java" afterPath="$PROJECT_DIR$/src/character/Character.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" afterPath="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
     </list>
     <ignored path="Afto.iws" />
@@ -30,37 +31,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/character/Character.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="91" column="70" selection-start-line="91" selection-start-column="70" selection-end-line="91" selection-end-column="70" />
+              <folding>
+                <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
+                <element signature="method#init#0;class#Character#0" expanded="false" />
+                <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
+                <element signature="method#runningMove#0;class#Character#0" expanded="false" />
+                <element signature="method#jump#0;class#Character#0" expanded="false" />
+                <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
+                <element signature="method#doFriction#0;class#Character#0" expanded="false" />
+                <element signature="method#addToWorld#0;class#Character#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+            <state relative-caret-position="360">
+              <caret line="61" column="137" selection-start-line="61" selection-start-column="137" selection-end-line="61" selection-end-column="137" />
               <folding>
                 <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
                 <element signature="e#1103#1139#0" expanded="false" />
                 <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
-                <element signature="e#2090#2091#0" expanded="true" />
-                <element signature="e#2165#2166#0" expanded="true" />
-                <element signature="e#2212#2213#0" expanded="true" />
-                <element signature="e#2252#2253#0" expanded="true" />
+                <element signature="e#2264#2265#0" expanded="true" />
+                <element signature="e#2304#2305#0" expanded="true" />
                 <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IntersectionFinder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IntersectionFinder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+            <state relative-caret-position="314">
+              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
               <folding>
-                <element signature="e#488#489#0" expanded="true" />
-                <element signature="e#517#518#0" expanded="true" />
+                <element signature="e#515#516#0" expanded="true" />
+                <element signature="e#544#545#0" expanded="true" />
                 <element signature="method#reset#0;class#IntersectionFinder#0" expanded="false" />
                 <element signature="method#prefixComputeMove#0;class#IntersectionFinder#0" expanded="false" />
                 <element signature="method#moveBy#0;class#IntersectionFinder#0" expanded="false" />
-                <element signature="method#collideCheck#0;class#IntersectionFinder#0" expanded="false" />
                 <element signature="method#nextIter#0;class#IntersectionFinder#0" expanded="false" />
               </folding>
             </state>
@@ -128,8 +145,8 @@
         <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
         <option value="$PROJECT_DIR$/src/engine/Painter.java" />
         <option value="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" />
-        <option value="$PROJECT_DIR$/src/character/Character.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
+        <option value="$PROJECT_DIR$/src/character/Character.java" />
         <option value="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
       </list>
     </option>
@@ -874,15 +891,15 @@
       <workItem from="1490754501048" duration="653000" />
       <workItem from="1490797844365" duration="5121000" />
       <workItem from="1490842360533" duration="843000" />
-      <workItem from="1490996787463" duration="792000" />
+      <workItem from="1490996787463" duration="2371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101142000" />
+    <option name="totallyTimeSpent" value="102721000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1137" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1230,6 +1247,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
           <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
+          <folding>
+            <element signature="method#Painter#0;class#Painter#0" expanded="false" />
+            <element signature="method#clear#0;class#Painter#0" expanded="false" />
+            <element signature="e#1192#1229#0" expanded="false" />
+            <element signature="method#paint#0;class#Painter#0" expanded="false" />
+            <element signature="method#setColor#0;class#Painter#0" expanded="false" />
+            <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1329,22 +1354,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
+          <folding>
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="method#reset#0;class#IntersectionFinder#0" expanded="false" />
+            <element signature="method#prefixComputeMove#0;class#IntersectionFinder#0" expanded="false" />
+            <element signature="method#moveBy#0;class#IntersectionFinder#0" expanded="false" />
+            <element signature="method#nextIter#0;class#IntersectionFinder#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="287" column="18" selection-start-line="287" selection-start-column="18" selection-end-line="287" selection-end-column="18" />
+        <state relative-caret-position="241">
+          <caret line="91" column="70" selection-start-line="91" selection-start-column="70" selection-end-line="91" selection-end-column="70" />
           <folding>
             <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
             <element signature="method#init#0;class#Character#0" expanded="false" />
-            <element signature="method#movement#0;class#Character#0" expanded="false" />
             <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
-            <element signature="method#updateThrowHook#0;class#Character#0" expanded="false" />
-            <element signature="method#initiateThrowHook#0;class#Character#0" expanded="false" />
             <element signature="method#runningMove#0;class#Character#0" expanded="false" />
             <element signature="method#jump#0;class#Character#0" expanded="false" />
             <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
             <element signature="method#doFriction#0;class#Character#0" expanded="false" />
-            <element signature="method#applyVelocity#0;class#Character#0" expanded="false" />
             <element signature="method#addToWorld#0;class#Character#0" expanded="false" />
           </folding>
         </state>
@@ -1352,33 +1388,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+        <state relative-caret-position="360">
+          <caret line="61" column="137" selection-start-line="61" selection-start-column="137" selection-end-line="61" selection-end-column="137" />
           <folding>
             <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
             <element signature="e#1103#1139#0" expanded="false" />
             <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
-            <element signature="e#2090#2091#0" expanded="true" />
-            <element signature="e#2165#2166#0" expanded="true" />
-            <element signature="e#2212#2213#0" expanded="true" />
-            <element signature="e#2252#2253#0" expanded="true" />
+            <element signature="e#2264#2265#0" expanded="true" />
+            <element signature="e#2304#2305#0" expanded="true" />
             <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
-          <folding>
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#517#518#0" expanded="true" />
-            <element signature="method#reset#0;class#IntersectionFinder#0" expanded="false" />
-            <element signature="method#prefixComputeMove#0;class#IntersectionFinder#0" expanded="false" />
-            <element signature="method#moveBy#0;class#IntersectionFinder#0" expanded="false" />
-            <element signature="method#collideCheck#0;class#IntersectionFinder#0" expanded="false" />
-            <element signature="method#nextIter#0;class#IntersectionFinder#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -59,8 +59,8 @@ public class Terrain {
 					}
 	}
 	
-	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance) {
-		return intersectionFinder.find(orig, dir, allowSlide, limitDistance);
+	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge) {
+		return intersectionFinder.find(orig, dir, allowSlide, limitDistance, allowCollideWithEdge);
 	}
 	
 	public boolean[] getIntersectionCollide() {
