@@ -4,11 +4,15 @@
     <option name="SCOPE_TYPE" value="8" />
     <option name="CUSTOM_SCOPE_NAME" value="Unnamed" />
   </component>
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Kami:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/camera/TrailingCamera.java" afterPath="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/character/Character.java" afterPath="$PROJECT_DIR$/src/character/Character.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/particle/SmokeParticle.java" afterPath="$PROJECT_DIR$/src/particle/SmokeParticle.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,11 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/character/Character.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="17" column="99" selection-start-line="17" selection-start-column="99" selection-end-line="17" selection-end-column="99" />
+            <state relative-caret-position="314">
+              <caret line="251" column="29" selection-start-line="251" selection-start-column="29" selection-end-line="251" selection-end-column="29" />
               <folding>
                 <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
                 <element signature="method#init#0;class#Character#0" expanded="false" />
@@ -43,8 +47,17 @@
                 <element signature="method#jump#0;class#Character#0" expanded="false" />
                 <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
                 <element signature="method#doFriction#0;class#Character#0" expanded="false" />
-                <element signature="method#addToWorld#0;class#Character#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SmokeParticle.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/particle/SmokeParticle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="7" column="88" selection-start-line="7" selection-start-column="88" selection-end-line="7" selection-end-column="88" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,7 +164,6 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/shapes/Cube.java" />
         <option value="$PROJECT_DIR$/src/particle/Particle.java" />
-        <option value="$PROJECT_DIR$/src/particle/SmokeParticle.java" />
         <option value="$PROJECT_DIR$/src/world/UIElement.java" />
         <option value="$PROJECT_DIR$/src/world/interfaceelement/InterfaceElement.java" />
         <option value="$PROJECT_DIR$/src/world/WorldElement.java" />
@@ -165,6 +177,7 @@
         <option value="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
         <option value="$PROJECT_DIR$/src/control/Controller.java" />
         <option value="$PROJECT_DIR$/src/character/Character.java" />
+        <option value="$PROJECT_DIR$/src/particle/SmokeParticle.java" />
       </list>
     </option>
   </component>
@@ -909,12 +922,12 @@
       <workItem from="1490797844365" duration="5121000" />
       <workItem from="1490842360533" duration="843000" />
       <workItem from="1490996787463" duration="2371000" />
-      <workItem from="1490999369872" duration="1250000" />
+      <workItem from="1490999369872" duration="1797000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103971000" />
+    <option name="totallyTimeSpent" value="104518000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
@@ -1186,16 +1199,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/particle/SmokeParticle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="197" selection-start-line="10" selection-start-column="197" selection-end-line="10" selection-end-column="197" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/world/WorldCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1293,62 +1296,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
-            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
-            <element signature="method#normalize#0;class#Math3D#0" expanded="false" />
-            <element signature="method#scale#0;class#Math3D#0" expanded="false" />
-            <element signature="method#setMagnitude#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
-            <element signature="method#axisVectorsTilt#1;class#Math3D#0" expanded="false" />
-            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
-            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
-            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#maxMin#1;class#Math3D#0" expanded="false" />
-            <element signature="method#min#0;class#Math3D#0" expanded="false" />
-            <element signature="method#min#1;class#Math3D#0" expanded="false" />
-            <element signature="method#min#2;class#Math3D#0" expanded="false" />
-            <element signature="method#min#3;class#Math3D#0" expanded="false" />
-            <element signature="method#minWhich#0;class#Math3D#0" expanded="false" />
-            <element signature="method#max#0;class#Math3D#0" expanded="false" />
-            <element signature="method#max#1;class#Math3D#0" expanded="false" />
-            <element signature="method#max#2;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
-            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
-            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#2;class#Math3D#0" expanded="false" />
-            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/world/interfaceelement/Bar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1401,10 +1348,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="516" column="25" selection-start-line="516" selection-start-column="25" selection-end-line="516" selection-end-column="25" />
+          <folding>
+            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
+            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
+            <element signature="method#normalize#0;class#Math3D#0" expanded="false" />
+            <element signature="method#scale#0;class#Math3D#0" expanded="false" />
+            <element signature="method#setMagnitude#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
+            <element signature="method#axisVectorsTilt#1;class#Math3D#0" expanded="false" />
+            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
+            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
+            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#maxMin#1;class#Math3D#0" expanded="false" />
+            <element signature="method#min#0;class#Math3D#0" expanded="false" />
+            <element signature="method#min#1;class#Math3D#0" expanded="false" />
+            <element signature="method#min#2;class#Math3D#0" expanded="false" />
+            <element signature="method#min#3;class#Math3D#0" expanded="false" />
+            <element signature="method#minWhich#0;class#Math3D#0" expanded="false" />
+            <element signature="method#max#0;class#Math3D#0" expanded="false" />
+            <element signature="method#max#1;class#Math3D#0" expanded="false" />
+            <element signature="method#max#2;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
+            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
+            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#2;class#Math3D#0" expanded="false" />
+            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
+            <element signature="e#13920#13921#0" expanded="true" />
+            <element signature="e#13967#13968#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="17" column="99" selection-start-line="17" selection-start-column="99" selection-end-line="17" selection-end-column="99" />
+        <state relative-caret-position="314">
+          <caret line="251" column="29" selection-start-line="251" selection-start-column="29" selection-end-line="251" selection-end-column="29" />
           <folding>
             <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
             <element signature="method#init#0;class#Character#0" expanded="false" />
@@ -1413,8 +1418,15 @@
             <element signature="method#jump#0;class#Character#0" expanded="false" />
             <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
             <element signature="method#doFriction#0;class#Character#0" expanded="false" />
-            <element signature="method#addToWorld#0;class#Character#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/particle/SmokeParticle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="7" column="88" selection-start-line="7" selection-start-column="88" selection-end-line="7" selection-end-column="88" />
+          <folding />
         </state>
       </provider>
     </entry>
