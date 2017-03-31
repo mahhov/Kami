@@ -17,7 +17,7 @@ public class Terrain {
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
 				part[x][y][0] = new FullGray();
-				if (Math.random() > .999)
+				if (Math.random() > .9993)
 					generateTree(x, y, 0);
 			}
 	}

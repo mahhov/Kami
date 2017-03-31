@@ -11,7 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/character/Character.java" afterPath="$PROJECT_DIR$/src/character/Character.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Character.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/character/Character.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="224" column="8" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="8" />
+            <state relative-caret-position="371">
+              <caret line="238" column="32" selection-start-line="238" selection-start-column="32" selection-end-line="238" selection-end-column="32" />
               <folding>
                 <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
                 <element signature="method#init#0;class#Character#0" expanded="false" />
@@ -81,14 +81,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+            <state relative-caret-position="225">
+              <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
               <folding>
                 <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
-                <element signature="e#1103#1139#0" expanded="false" />
+                <element signature="e#1104#1140#0" expanded="false" />
                 <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
                 <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
               </folding>
@@ -171,12 +171,12 @@
         <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
         <option value="$PROJECT_DIR$/src/engine/Painter.java" />
         <option value="$PROJECT_DIR$/src/world/interfaceelement/Bar.java" />
-        <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
         <option value="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
         <option value="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
         <option value="$PROJECT_DIR$/src/control/Controller.java" />
         <option value="$PROJECT_DIR$/src/particle/SmokeParticle.java" />
         <option value="$PROJECT_DIR$/src/character/Character.java" />
+        <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
       </list>
     </option>
   </component>
@@ -921,12 +921,12 @@
       <workItem from="1490797844365" duration="5121000" />
       <workItem from="1490842360533" duration="843000" />
       <workItem from="1490996787463" duration="2371000" />
-      <workItem from="1490999369872" duration="1982000" />
+      <workItem from="1490999369872" duration="2092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104703000" />
+    <option name="totallyTimeSpent" value="104813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
@@ -1318,19 +1318,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
-          <folding>
-            <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
-            <element signature="e#1103#1139#0" expanded="false" />
-            <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
-            <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/camera/TrailingCamera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1415,8 +1402,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="224" column="8" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="8" />
+        <state relative-caret-position="371">
+          <caret line="238" column="32" selection-start-line="238" selection-start-column="32" selection-end-line="238" selection-end-column="32" />
           <folding>
             <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
             <element signature="method#init#0;class#Character#0" expanded="false" />
@@ -1425,6 +1412,19 @@
             <element signature="method#jump#0;class#Character#0" expanded="false" />
             <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
             <element signature="method#doFriction#0;class#Character#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+          <folding>
+            <element signature="method#generateTree#0;class#Terrain#0" expanded="false" />
+            <element signature="e#1104#1140#0" expanded="false" />
+            <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
+            <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
           </folding>
         </state>
       </provider>
