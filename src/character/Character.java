@@ -90,7 +90,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			else if (hookState == HOOK_THROWING) {
 				boolean[] collide = updateThrowHook(terrain);
 				if (collide[0])
-					hookState = HOOK_ATTACHED; // collide with terrain
+					hookState = HOOK_ACTIVATED; // collide with terrain
 				else if (collide[1])
 					hookState = HOOK_NONE; // collide with boundary
 			} else if (hookPress) {
@@ -222,11 +222,6 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void applyVelocity(Terrain terrain) {
-		if (state == STATE_CLIMB) {
-			vx *= COLLISION_DAMPER;
-			vy *= COLLISION_DAMPER;
-		}
-		
 		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz}, true, true, true);
 		x = newxyz[0];
 		y = newxyz[1];
