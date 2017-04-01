@@ -27,7 +27,7 @@ public class Terrain {
 		x = Math3D.maxMin(x, part.length - thick * 2, thick);
 		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
 		int height = Math3D.rand(20, 30) + 10;
-		int brushSpread = Math3D.rand(1, 3) + height / 5 - 2;
+		int brushSpread = Math3D.rand(1, 3) + height / 5 - 4;
 		int brushHeight = Math3D.rand(1, 3);
 		for (int xi = x - thick; xi <= x + thick; xi++)
 			for (int yi = y - thick; yi <= y + thick; yi++)

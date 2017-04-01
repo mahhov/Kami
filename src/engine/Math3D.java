@@ -521,4 +521,8 @@ public class Math3D {
 	public static Angle randAngle() {
 		return new Angle(rand(-PI, PI));
 	}
+	
+	public static double avg(double x, double y, double weight) {
+		return x + (y - x) * weight;
+	}
 }
