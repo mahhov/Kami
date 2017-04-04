@@ -12,11 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/camera/Camera.java" afterPath="$PROJECT_DIR$/src/camera/Camera.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/character/Character.java" afterPath="$PROJECT_DIR$/src/character/Character.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Math3D.java" afterPath="$PROJECT_DIR$/src/engine/Math3D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/RaceEngine.java" afterPath="$PROJECT_DIR$/src/engine/RaceEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/particle/SmokeParticle.java" afterPath="$PROJECT_DIR$/src/particle/SmokeParticle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/StaticCube.java" afterPath="$PROJECT_DIR$/src/shapes/StaticCube.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/Surface.java" afterPath="$PROJECT_DIR$/src/shapes/Surface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" afterPath="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +42,8 @@
       <file leaf-file-name="Character.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/character/Character.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="236" column="35" selection-start-line="236" selection-start-column="35" selection-end-line="236" selection-end-column="35" />
+            <state relative-caret-position="75">
+              <caret line="15" column="67" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
               <folding>
                 <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
                 <element signature="method#init#0;class#Character#0" expanded="false" />
@@ -59,8 +60,8 @@
       <file leaf-file-name="Math3D.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="747">
-              <caret line="525" column="35" selection-start-line="525" selection-start-column="35" selection-end-line="525" selection-end-column="35" />
+            <state relative-caret-position="701">
+              <caret line="508" column="52" selection-start-line="508" selection-start-column="37" selection-end-line="508" selection-end-column="52" />
               <folding>
                 <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
                 <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
@@ -112,43 +113,102 @@
                 <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
                 <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
                 <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
-                <element signature="e#14107#14108#0" expanded="true" />
-                <element signature="e#14141#14142#0" expanded="true" />
+                <element signature="e#13775#13776#0" expanded="true" />
+                <element signature="e#13812#13813#0" expanded="true" />
+                <element signature="e#13853#13854#0" expanded="true" />
+                <element signature="e#13899#13900#0" expanded="true" />
+                <element signature="e#13958#13959#0" expanded="true" />
+                <element signature="e#14013#14014#0" expanded="true" />
+                <element signature="e#14060#14061#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SmokeParticle.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/particle/SmokeParticle.java">
+      <file leaf-file-name="Camera.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/camera/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="316" selection-start-line="10" selection-start-column="316" selection-end-line="10" selection-end-column="316" />
+            <state relative-caret-position="105">
+              <caret line="8" column="191" selection-start-line="8" selection-start-column="191" selection-end-line="8" selection-end-column="191" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/control/Controller.java">
+      <file leaf-file-name="Painter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="181" column="30" selection-start-line="181" selection-start-column="19" selection-end-line="181" selection-end-column="30" />
+            <state relative-caret-position="315">
+              <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+              <folding>
+                <element signature="method#Painter#0;class#Painter#0" expanded="false" />
+                <element signature="method#clear#0;class#Painter#0" expanded="false" />
+                <element signature="e#1192#1229#0" expanded="false" />
+                <element signature="method#paint#0;class#Painter#0" expanded="false" />
+                <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Surface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/shapes/Surface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="647">
+              <caret line="93" column="34" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+            <state relative-caret-position="210">
+              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
               <folding>
                 <element signature="e#1104#1140#0" expanded="false" />
-                <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
                 <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FullGray.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#140#141#0" expanded="true" />
+                <element signature="e#165#166#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TerrainModule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StaticCube.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/shapes/StaticCube.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="831">
+              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+              <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+              <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
+              <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+              <caret line="74" column="28" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+              <caret line="79" column="27" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -156,48 +216,9 @@
       <file leaf-file-name="RaceEngine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
+            <state relative-caret-position="30">
+              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/world/World.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-              <folding>
-                <element signature="method#World#0;class#World#0" expanded="false" />
-                <element signature="method#drawInterface#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunks#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
-                <element signature="method#drawChunk#0;class#World#0" expanded="false" />
-                <element signature="method#drawRow#0;class#World#0" expanded="false" />
-                <element signature="method#drawColumn#0;class#World#0" expanded="false" />
-                <element signature="method#drawCell#0;class#World#0" expanded="false" />
-                <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
-                <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IntersectionFinder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
-              <folding>
-                <element signature="e#515#516#0" expanded="true" />
-                <element signature="e#544#545#0" expanded="true" />
-                <element signature="method#reset#0;class#IntersectionFinder#0" expanded="false" />
-                <element signature="method#prefixComputeMove#0;class#IntersectionFinder#0" expanded="false" />
-                <element signature="method#moveBy#0;class#IntersectionFinder#0" expanded="false" />
-                <element signature="method#nextIter#0;class#IntersectionFinder#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -236,7 +257,6 @@
         <option value="$PROJECT_DIR$/src/shapes/module/EmptyModule.java" />
         <option value="$PROJECT_DIR$/src/shapes/module/ForwBlade.java" />
         <option value="$PROJECT_DIR$/src/ships/Ship.java" />
-        <option value="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" />
         <option value="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
         <option value="$PROJECT_DIR$/src/world/Cell.java" />
         <option value="$PROJECT_DIR$/src/projectiles/Projectile.java" />
@@ -261,11 +281,15 @@
         <option value="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
         <option value="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
         <option value="$PROJECT_DIR$/src/control/Controller.java" />
-        <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
         <option value="$PROJECT_DIR$/src/particle/SmokeParticle.java" />
-        <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
-        <option value="$PROJECT_DIR$/src/character/Character.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
+        <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
+        <option value="$PROJECT_DIR$/src/character/Character.java" />
+        <option value="$PROJECT_DIR$/src/shapes/StaticCube.java" />
+        <option value="$PROJECT_DIR$/src/camera/Camera.java" />
+        <option value="$PROJECT_DIR$/src/shapes/Surface.java" />
+        <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
+        <option value="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" />
       </list>
     </option>
   </component>
@@ -286,9 +310,10 @@
     <scope name="Unnamed" pattern="(src:camera.*||src:control.*||src:engine.*||src:projectiles.*||src:shapes.*||src:terrain.*||src:terrain.terrainModule.*||src:list.*)&amp;&amp;!src:ships.module.*&amp;&amp;!src:ships.*&amp;&amp;!src:track.*||src:world.*" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1137" />
+    <option name="x" value="-298" />
+    <option name="y" value="-1417" />
+    <option name="width" value="3440" />
+    <option name="height" value="1417" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -331,8 +356,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -443,7 +469,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1010,31 +1035,33 @@
       <workItem from="1490797844365" duration="5121000" />
       <workItem from="1490842360533" duration="843000" />
       <workItem from="1490996787463" duration="2371000" />
-      <workItem from="1490999369872" duration="3846000" />
+      <workItem from="1490999369872" duration="4550000" />
+      <workItem from="1491021669490" duration="1209000" />
+      <workItem from="1491315651954" duration="660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106567000" />
+    <option name="totallyTimeSpent" value="109140000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1137" extended-state="0" />
+    <frame x="-298" y="-1417" width="3440" height="1417" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32679096" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32640493" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29270634" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Anonymous Apex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12855741" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12009238" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32777232" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26783812" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14802825" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="SOQL Query" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917467" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1092,20 +1119,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/shapes/StaticCube.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="92" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/track/Point.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/shapes/Flat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -1153,17 +1166,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ships/Ship.java" />
     <entry file="file://$PROJECT_DIR$/src/ships/module/Hull.java" />
-    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-          <folding>
-            <element signature="e#117#118#0" expanded="false" />
-            <element signature="e#141#142#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/world/Cell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1199,14 +1201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1318,22 +1312,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="110" column="5" selection-start-line="110" selection-start-column="5" selection-end-line="110" selection-end-column="5" />
-          <folding>
-            <element signature="method#Painter#0;class#Painter#0" expanded="false" />
-            <element signature="method#clear#0;class#Painter#0" expanded="false" />
-            <element signature="e#1192#1229#0" expanded="false" />
-            <element signature="method#paint#0;class#Painter#0" expanded="false" />
-            <element signature="method#setColor#0;class#Painter#0" expanded="false" />
-            <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1357,8 +1335,8 @@
         <state relative-caret-position="855">
           <caret line="135" column="37" selection-start-line="135" selection-start-column="37" selection-end-line="135" selection-end-column="37" />
           <folding>
-            <element signature="e#515#516#0" expanded="true" />
-            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="false" />
+            <element signature="e#544#545#0" expanded="false" />
             <element signature="method#reset#0;class#IntersectionFinder#0" expanded="false" />
             <element signature="method#prefixComputeMove#0;class#IntersectionFinder#0" expanded="false" />
             <element signature="method#moveBy#0;class#IntersectionFinder#0" expanded="false" />
@@ -1387,22 +1365,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="30" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/camera/Camera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="47" column="32" selection-start-line="45" selection-start-column="8" selection-end-line="47" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/camera/TrailingCamera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1415,7 +1377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="443">
           <caret line="181" column="30" selection-start-line="181" selection-start-column="19" selection-end-line="181" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1427,10 +1388,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shapes/StaticCube.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="831">
+          <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
+          <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+          <caret line="61" column="27" selection-start-line="61" selection-start-column="27" selection-end-line="61" selection-end-column="27" />
+          <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
+          <caret line="74" column="28" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
+          <caret line="79" column="27" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/character/Character.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="15" column="67" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
+          <folding>
+            <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
+            <element signature="method#init#0;class#Character#0" expanded="false" />
+            <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
+            <element signature="method#runningMove#0;class#Character#0" expanded="false" />
+            <element signature="method#jump#0;class#Character#0" expanded="false" />
+            <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
+            <element signature="method#doFriction#0;class#Character#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="525" column="35" selection-start-line="525" selection-start-column="35" selection-end-line="525" selection-end-column="35" />
+        <state relative-caret-position="701">
+          <caret line="508" column="52" selection-start-line="508" selection-start-column="37" selection-end-line="508" selection-end-column="52" />
           <folding>
             <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
             <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
@@ -1482,36 +1488,66 @@
             <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
             <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
             <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
-            <element signature="e#14107#14108#0" expanded="true" />
-            <element signature="e#14141#14142#0" expanded="true" />
+            <element signature="e#13775#13776#0" expanded="true" />
+            <element signature="e#13812#13813#0" expanded="true" />
+            <element signature="e#13853#13854#0" expanded="true" />
+            <element signature="e#13899#13900#0" expanded="true" />
+            <element signature="e#13958#13959#0" expanded="true" />
+            <element signature="e#14013#14014#0" expanded="true" />
+            <element signature="e#14060#14061#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/character/Character.java">
+    <entry file="file://$PROJECT_DIR$/src/camera/Camera.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="236" column="35" selection-start-line="236" selection-start-column="35" selection-end-line="236" selection-end-column="35" />
+        <state relative-caret-position="105">
+          <caret line="8" column="191" selection-start-line="8" selection-start-column="191" selection-end-line="8" selection-end-column="191" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
           <folding>
-            <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
-            <element signature="method#init#0;class#Character#0" expanded="false" />
-            <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
-            <element signature="method#runningMove#0;class#Character#0" expanded="false" />
-            <element signature="method#jump#0;class#Character#0" expanded="false" />
-            <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
-            <element signature="method#doFriction#0;class#Character#0" expanded="false" />
+            <element signature="method#Painter#0;class#Painter#0" expanded="false" />
+            <element signature="method#clear#0;class#Painter#0" expanded="false" />
+            <element signature="e#1192#1229#0" expanded="false" />
+            <element signature="method#paint#0;class#Painter#0" expanded="false" />
+            <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shapes/Surface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="93" column="34" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="60" selection-start-line="29" selection-start-column="60" selection-end-line="29" selection-end-column="60" />
+        <state relative-caret-position="210">
+          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
           <folding>
             <element signature="e#1104#1140#0" expanded="false" />
-            <element signature="method#addToWorld#0;class#Terrain#0" expanded="false" />
             <element signature="method#getBlock#0;class#Terrain#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#140#141#0" expanded="true" />
+            <element signature="e#165#166#0" expanded="true" />
           </folding>
         </state>
       </provider>

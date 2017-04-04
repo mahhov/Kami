@@ -13,9 +13,9 @@ import world.WorldElement;
 import world.interfaceelement.Bar;
 
 public class Character implements WorldElement, TrailingCamera.Follow, ShapeParent {
-	private static final double FRICTION = 0.9, AIR_FRICTION = 0.98, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
-	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .04, JET_ACC = .045, CLIMB_ACC = .055, JUMP_MULT = 1.5;
-	private static final double HOOK_SPEED = .2, HOOK_FRICTION = 1, HOOK_GRAVITY = 0, HOOK_ACC = .1;
+	private static final double FRICTION = 0.9, AIR_FRICTION = 0.97, CLIMB_FRICTION = .99, GRAVITY = .05, COLLISION_DAMPER = .1;
+	private static final double JUMP_ACC = .2, RUN_ACC = .1, AIR_RUN_ACC = .04, JET_ACC = .04, CLIMB_ACC = .055, JUMP_MULT = 1.5;
+	private static final double HOOK_SPEED = .2, HOOK_FRICTION = 1, HOOK_GRAVITY = 0, HOOK_ACC = .05;
 	
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;

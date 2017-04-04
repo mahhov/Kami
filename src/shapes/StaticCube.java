@@ -47,24 +47,24 @@ public class StaticCube extends Shape {
 		if (side[Math3D.TOP]) {
 			top = new Surface(xs, ys, topZ, true);
 			top.setColor(color);
-			top.setLight(.8);
+			top.setLight(1);
 		}
 		if (side[Math3D.BOTTOM]) {
 			bottom = new Surface(xs, ys, bottomZ, false);
 			bottom.setColor(color);
-			bottom.setLight(.2);
+			bottom.setLight(1);
 		}
 		
 		// from bottom/back -> top/back -> top/front -> bottom/front
 		if (side[Math3D.LEFT]) {
 			left = new Surface(leftX, ys, zs, true);
 			left.setColor(color);
-			left.setLight(.6);
+			left.setLight(1);
 		}
 		if (side[Math3D.RIGHT]) {
 			right = new Surface(rightX, ys, zs, false);
 			right.setColor(color);
-			right.setLight(.4);
+			right.setLight(1);
 		}
 		
 		xs = new double[] {leftX, leftX, rightX, rightX};
@@ -72,12 +72,12 @@ public class StaticCube extends Shape {
 		if (side[Math3D.FRONT]) {
 			front = new Surface(xs, frontY, zs, true);
 			front.setColor(color);
-			front.setLight(.7);
+			front.setLight(1);
 		}
 		if (side[Math3D.BACK]) {
 			back = new Surface(xs, backY, zs, false);
 			back.setColor(color);
-			back.setLight(.3);
+			back.setLight(1);
 		}
 	}
 	

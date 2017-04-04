@@ -506,6 +506,10 @@ public class Math3D {
 		return str;
 	}
 	
+	public static boolean flip(double headsWeight) {
+		return Math.random() < headsWeight;
+	}
+	
 	public static int rand(int max) {
 		return (int) (Math.random() * max);
 	}

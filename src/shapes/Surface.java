@@ -74,8 +74,13 @@ public class Surface {
 	}
 	
 	void setLight(double l) {
-		light = l * (Math3D.dotProductUnormalized(normal, Camera.LIGHT_SOURCE) + 1);
-		light = Math3D.min(light, 1);
+		double ll = 0, lll;
+		for (double[] lightSource : Camera.LIGHT_SOURCE) {
+			lll = Math3D.dotProductUnormalized(normal, lightSource);
+			if (lll > ll)
+				ll = lll;
+		}
+		light = Math3D.min(l * ll, 1);
 	}
 	
 	void setClip(int clipState) {
