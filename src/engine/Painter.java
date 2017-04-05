@@ -9,6 +9,7 @@ import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 import static camera.Camera.MIN_LIGHT;
+import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
 public class Painter extends JFrame {
 	public static String[] debugString = new String[] {"", "", "", "", "", ""};
@@ -16,18 +17,23 @@ public class Painter extends JFrame {
 	
 	private final int FRAME_SIZE, IMAGE_SIZE;
 	private static int borderSize = 0;
-	Graphics2D brush;
 	private BufferedImage canvas;
+	Graphics2D brush;
+	private Graphics frameBrush;
 	int surfaceCount, drawCount;
 	Area clip;
 	
 	Painter(int frameSize, int imageSize, Controller controller) {
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
-		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, 1);
+		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, TYPE_INT_RGB);
 		brush = (Graphics2D) canvas.getGraphics();
 		getContentPane().setSize(FRAME_SIZE, FRAME_SIZE);
+		
+		System.out.println(this.getGraphics());
 		pack();
+		System.out.println(this.getGraphics());
+		
 		borderSize = getHeight();
 		setSize(FRAME_SIZE, FRAME_SIZE + borderSize);
 		setLocationRelativeTo(null);
@@ -35,26 +41,26 @@ public class Painter extends JFrame {
 		addKeyListener(controller);
 		addMouseMotionListener(controller);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setIgnoreRepaint(true);
 		setVisible(true);
+		frameBrush = this.getGraphics();
 	}
 	
 	void clear() {
 		surfaceCount = 0;
 		drawCount = 0;
-		//		brush.setBackground(Color.WHITE);
-		//		brush.clearRect(0, 0, IMAGE_SIZE, IMAGE_SIZE);
-		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, 1);
-		brush = (Graphics2D) canvas.getGraphics();
+		//		 brush.setColor(new Color(0f, 0f, 0f, .2f));
+		brush.setColor(Color.BLACK);
+		brush.fillRect(0, 0, IMAGE_SIZE, IMAGE_SIZE);
 	}
 	
-	public void paint(Graphics graphics) {
-		// graphics.drawImage(canvas, 0, borderSize, FRAME_SIZE, FRAME_SIZE, null);
+	public void paint() {
 		brush.setColor(Color.WHITE);
 		for (int i = 0; i < debugString.length; i++)
 			brush.drawString(debugString[i], 25, 25 + 25 * i);
 		for (int i = 0; i < outputString.length; i++)
 			brush.drawString(outputString[i], 25, 650 + 25 * i);
-		graphics.drawImage(canvas, 0, borderSize, null);
+		frameBrush.drawImage(canvas, 0, borderSize, null);
 	}
 	
 	private void setColor(double light, Color color) {

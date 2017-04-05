@@ -55,7 +55,7 @@ class RaceEngine {
 			controller.setView(camera.angle, camera.orig(), camera.normal);
 			world.update(terrain, controller);
 			world.draw(painter, camera);
-			painter.repaint();
+			painter.paint();
 			checkPause();
 			wait(10);
 			endTime = System.nanoTime() + 1;
