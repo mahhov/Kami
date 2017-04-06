@@ -29,11 +29,7 @@ public class Painter extends JFrame {
 		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, TYPE_INT_RGB);
 		brush = (Graphics2D) canvas.getGraphics();
 		getContentPane().setSize(FRAME_SIZE, FRAME_SIZE);
-		
-		System.out.println(this.getGraphics());
 		pack();
-		System.out.println(this.getGraphics());
-		
 		borderSize = getHeight();
 		setSize(FRAME_SIZE, FRAME_SIZE + borderSize);
 		setLocationRelativeTo(null);

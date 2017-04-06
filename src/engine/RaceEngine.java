@@ -47,7 +47,7 @@ class RaceEngine {
 		while (true) {
 			while (pause) {
 				checkPause();
-				wait(30);
+				sleep(30);
 			}
 			painter.clear();
 			camera.move(controller);
@@ -57,7 +57,7 @@ class RaceEngine {
 			world.draw(painter, camera);
 			painter.paint();
 			checkPause();
-			wait(10);
+			sleep(10);
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
 				Painter.debugString[0] = "fps: " + frame + " ; paint surfaceCount: " + painter.surfaceCount + " ; paint drawCount: " + painter.drawCount;
@@ -73,7 +73,7 @@ class RaceEngine {
 			pause = !pause;
 	}
 	
-	static void wait(int howLong) {
+	static void sleep(int howLong) {
 		try {
 			Thread.sleep(howLong);
 		} catch (InterruptedException e) {
