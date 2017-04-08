@@ -5,9 +5,9 @@ import engine.Math3D;
 import engine.Painter;
 
 public class TrailingCamera extends Camera {
-	private final static double MIN_TRAIL = 5, MAX_TRAIL = 60, TRAIL_SPEED = 2.5;
-	private final static double MIN_FOLLOW_UP = 0, MAX_FOLLOW_UP = 25, FOLLOW_UP_SPEED = 1;
-	private final static double ANGLE_SPEED = .1, MOTION_AVG = .2, MOUSE_DAMP_SPEED = .01;
+	private static final double MIN_TRAIL = 5, MAX_TRAIL = 60, TRAIL_SPEED = 2.5;
+	private static final double MIN_FOLLOW_UP = 0, MAX_FOLLOW_UP = 25, FOLLOW_UP_SPEED = 1;
+	private static final double ANGLE_SPEED = .1, MOTION_AVG = .2, MOUSE_DAMP_SPEED = .01;
 	private double trailDistance;
 	private double followUp;
 	private Math3D.Angle trailAngle, trailAngleZ; // todo: camera tilt

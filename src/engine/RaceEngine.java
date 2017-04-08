@@ -30,9 +30,7 @@ class RaceEngine {
 	
 	private void createWorld() {
 		int worldSize = 750;
-		int eachChunkSize = 5;
-		int numChunks = worldSize / eachChunkSize;
-		WorldCreator wc = new WorldCreator(numChunks, numChunks, numChunks, eachChunkSize);
+		WorldCreator wc = new WorldCreator(worldSize / World.CHUNK_SIZE, worldSize / World.CHUNK_SIZE, worldSize / World.CHUNK_SIZE);
 		world = wc.world;
 		hook = new Character(5, 5, 5);
 		((TrailingCamera) camera).setFollow(hook);
@@ -82,7 +80,7 @@ class RaceEngine {
 	}
 	
 	private static void printInstructions() {
-		System.out.println("Kami - Java 3D voxel platformer");
+		System.out.println("Kami - Java 3D voxel platformer . jar 3");
 		System.out.println("W A S D to move");
 		System.out.println("R F to move camera up / down");
 		System.out.println("Z X to move camera farther / nearer");

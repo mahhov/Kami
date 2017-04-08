@@ -7,19 +7,24 @@ import terrain.terrainModule.TerrainModule;
 import world.World;
 
 public class Terrain {
-	TerrainModule[][][] part;
+	private static final int CHUNK_SIZE = 50;
+	int width, length, height;
+	private TerrainModule[][][] part;
+	//	private TerrainChunk[][][] terrainChunk;
 	private IntersectionFinder intersectionFinder;
 	
 	public Terrain() {
-		int size = 400;
+		width = length = 400;
+		height = 50;
 		intersectionFinder = new IntersectionFinder(this);
-		part = new TerrainModule[size][size][50];
+		part = new TerrainModule[width][length][height];
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++) {
 				part[x][y][0] = new FullGray();
 				if (Math.random() > .9993)
 					generateTree(x, y, 0);
 			}
+		//		terrainChunk = new TerrainChunk[400 / CHUNK_SIZE][400 / CHUNK_SIZE][50 / CHUNK_SIZE];
 	}
 	
 	private void generateTree(int x, int y, int floor) {
@@ -33,8 +38,6 @@ public class Terrain {
 			for (int yi = y - thick; yi <= y + thick; yi++)
 				for (int z = floor; z < height + floor; z++)
 					part[xi][yi][z] = new FullGray();
-		//		for (int z = 0; z < height; z++)
-		//			part[x][y][z] = new FullGray();
 		int xs = Math3D.max(x - brushSpread, 0);
 		int xe = Math3D.min(x + brushSpread, part.length - 1);
 		int ys = Math3D.max(y - brushSpread, 0);
@@ -82,5 +85,9 @@ public class Terrain {
 		if (z < part[0][0].length - 1 && part[x][y][z + 1] != null)
 			block[Math3D.TOP] = part[x][y][z + 1].block[Math3D.BOTTOM];
 		return block;
+	}
+	
+	boolean isEmpty(int x, int y, int z) {
+		return part[x][y][z] == null;
 	}
 }

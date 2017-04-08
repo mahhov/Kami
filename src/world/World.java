@@ -12,23 +12,23 @@ import terrain.Terrain;
 import world.interfaceelement.InterfaceElement;
 
 public class World {
-	public final int width, length, height, chunkSize;
-	Chunk[][][] chunk;
+	public static final int CHUNK_SIZE = 5;
+	public final int width, length, height;
+	WorldChunk[][][] chunk;
 	
 	private LList<WorldElement> element;
 	private LList<Particle> particle;
 	private LList<InterfaceElement> interfaceElement;
 	
-	public World(int chunkWidth, int chunkLength, int chunkHeight, int chunkSize) {
-		width = chunkWidth * chunkSize;
-		height = chunkLength * chunkSize;
-		length = chunkHeight * chunkSize;
-		this.chunkSize = chunkSize;
-		chunk = new Chunk[chunkWidth][chunkLength][chunkHeight];
+	public World(int chunkWidth, int chunkLength, int chunkHeight) {
+		width = chunkWidth * CHUNK_SIZE;
+		height = chunkLength * CHUNK_SIZE;
+		length = chunkHeight * CHUNK_SIZE;
+		chunk = new WorldChunk[chunkWidth][chunkLength][chunkHeight];
 		for (int x = 0; x < chunkWidth; x++)
 			for (int y = 0; y < chunkLength; y++)
 				for (int z = 0; z < chunkHeight; z++)
-					chunk[x][y][z] = new Chunk();
+					chunk[x][y][z] = new WorldChunk();
 		element = new LList<>();
 		particle = new LList<>();
 		interfaceElement = new LList<>();
@@ -39,13 +39,13 @@ public class World {
 	}
 	
 	public void addShape(int x, int y, int z, Shape shape) {
-		int cx = x / chunkSize;
-		int cy = y / chunkSize;
-		int cz = z / chunkSize;
-		int sx = x - cx * chunkSize;
-		int sy = y - cy * chunkSize;
-		int sz = z - cz * chunkSize;
-		chunk[cx][cy][cz].safeInit(chunkSize);
+		int cx = x / CHUNK_SIZE;
+		int cy = y / CHUNK_SIZE;
+		int cz = z / CHUNK_SIZE;
+		int sx = x - cx * CHUNK_SIZE;
+		int sy = y - cy * CHUNK_SIZE;
+		int sz = z - cz * CHUNK_SIZE;
+		chunk[cx][cy][cz].safeInit(CHUNK_SIZE);
 		chunk[cx][cy][cz].add(sx, sy, sz, shape);
 	}
 	
@@ -121,15 +121,15 @@ public class World {
 			return;
 		if (xSide == Math3D.RIGHT) {
 			int startx = cx == fromChunkCoord[0] ? fromChunkCoord[3] : 0;
-			for (int x = startx; x < chunkSize; x++)
+			for (int x = startx; x < CHUNK_SIZE; x++)
 				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x);
 		} else if (xSide == Math3D.LEFT) {
-			int endx = cx == toChunkCoord[0] ? toChunkCoord[3] : chunkSize - 1;
+			int endx = cx == toChunkCoord[0] ? toChunkCoord[3] : CHUNK_SIZE - 1;
 			for (int x = endx; x >= 0; x--)
 				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x);
 		} else {
 			int startx = cx == fromChunkCoord[0] ? fromChunkCoord[3] : 0;
-			int endx = cx == toChunkCoord[0] ? toChunkCoord[3] : chunkSize - 1;
+			int endx = cx == toChunkCoord[0] ? toChunkCoord[3] : CHUNK_SIZE - 1;
 			for (int x = startx; x < cameraChunkCoord[3]; x++)
 				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, Math3D.RIGHT, ySide, zSide, x);
 			for (int x = endx; x > cameraChunkCoord[3]; x--)
@@ -141,15 +141,15 @@ public class World {
 	private void drawRow(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x) {
 		if (ySide == Math3D.BACK) {
 			int starty = cy == fromChunkCoord[1] ? fromChunkCoord[4] : 0;
-			for (int y = starty; y < chunkSize; y++)
+			for (int y = starty; y < CHUNK_SIZE; y++)
 				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, y);
 		} else if (ySide == Math3D.FRONT) {
-			int endy = cy == toChunkCoord[1] ? toChunkCoord[4] : chunkSize - 1;
+			int endy = cy == toChunkCoord[1] ? toChunkCoord[4] : CHUNK_SIZE - 1;
 			for (int y = endy; y >= 0; y--)
 				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, y);
 		} else {
 			int starty = cy == fromChunkCoord[1] ? fromChunkCoord[4] : 0;
-			int endy = cy == toChunkCoord[1] ? toChunkCoord[4] : chunkSize - 1;
+			int endy = cy == toChunkCoord[1] ? toChunkCoord[4] : CHUNK_SIZE - 1;
 			for (int y = starty; y < cameraChunkCoord[4]; y++)
 				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, Math3D.BACK, zSide, x, y);
 			for (int y = endy; y > cameraChunkCoord[4]; y--)
@@ -161,15 +161,15 @@ public class World {
 	private void drawColumn(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x, int y) {
 		if (zSide == Math3D.TOP) {
 			int startz = cz == fromChunkCoord[2] ? fromChunkCoord[5] : 0;
-			for (int z = startz; z < chunkSize; z++)
+			for (int z = startz; z < CHUNK_SIZE; z++)
 				drawCell(painter, c, cx, cy, cz, xSide, ySide, zSide, x, y, z);
 		} else if (zSide == Math3D.BOTTOM) {
-			int endz = cz == toChunkCoord[2] ? toChunkCoord[5] : chunkSize - 1;
+			int endz = cz == toChunkCoord[2] ? toChunkCoord[5] : CHUNK_SIZE - 1;
 			for (int z = endz; z >= 0; z--)
 				drawCell(painter, c, cx, cy, cz, xSide, ySide, zSide, x, y, z);
 		} else {
 			int startz = cz == fromChunkCoord[2] ? fromChunkCoord[5] : 0;
-			int endz = cz == toChunkCoord[2] ? toChunkCoord[5] : chunkSize - 1;
+			int endz = cz == toChunkCoord[2] ? toChunkCoord[5] : CHUNK_SIZE - 1;
 			for (int z = startz; z < cameraChunkCoord[5]; z++)
 				drawCell(painter, c, cx, cy, cz, xSide, ySide, Math3D.TOP, x, y, z);
 			for (int z = endz; z > cameraChunkCoord[5]; z--)
@@ -200,12 +200,12 @@ public class World {
 	// UITL
 	
 	private int[] getChunkCoord(int x, int y, int z) {
-		int cx = x / chunkSize;
-		int cy = y / chunkSize;
-		int cz = z / chunkSize;
-		x -= cx * chunkSize;
-		y -= cy * chunkSize;
-		z -= cz * chunkSize;
+		int cx = x / CHUNK_SIZE;
+		int cy = y / CHUNK_SIZE;
+		int cz = z / CHUNK_SIZE;
+		x -= cx * CHUNK_SIZE;
+		y -= cy * CHUNK_SIZE;
+		z -= cz * CHUNK_SIZE;
 		return new int[] {cx, cy, cz, x, y, z};
 	}
 	

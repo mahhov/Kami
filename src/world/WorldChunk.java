@@ -4,7 +4,7 @@ import camera.Camera;
 import engine.Painter;
 import shapes.Shape;
 
-public class Chunk {
+public class WorldChunk {
 	private Cell[][][] cell;
 	int count;
 	
@@ -35,14 +35,14 @@ public class Chunk {
 		cell[x][y][z].add(shape);
 	}
 	
-	//	Shape remove(int x, int y, int z, Cell.LinkedShapes shape) {
-	//		return remove(cell[x][y][z], shape);
-	//	}
-	//
-	//	public Shape remove(Cell c, Cell.LinkedShapes shape) {
-	//		return c.remove(shape);
-	//	}
-	
+//		Shape remove(int x, int y, int z, Cell.LinkedShapes shape) {
+//			return remove(cell[x][y][z], shape);
+//		}
+//
+//		public Shape remove(Cell c, Cell.LinkedShapes shape) {
+//			return c.remove(shape);
+//		}
+//
 	void draw(int x, int y, int z, Painter painter, Camera c, int xSide, int ySide, int zSide) {
 		cell[x][y][z].drawAll(painter, c, xSide, ySide, zSide);
 	}

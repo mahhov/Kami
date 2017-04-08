@@ -7,10 +7,10 @@ import shapes.Shape;
 import shapes.Surface;
 
 public class Cell {
-	Chunk chunk;
+	WorldChunk chunk;
 	private LList<Shape> shapes;
 	
-	Cell(Chunk chunk) {
+	Cell(WorldChunk chunk) {
 		this.chunk = chunk;
 		shapes = new LList<>();
 	}

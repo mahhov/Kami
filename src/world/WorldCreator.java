@@ -9,8 +9,8 @@ import java.util.Random;
 public class WorldCreator {
 	public World world;
 	
-	public WorldCreator(int chunkWidth, int chunkLength, int chunkHeight, int chunkSize) {
-		world = new World(chunkWidth, chunkLength, chunkHeight, chunkSize);
+	public WorldCreator(int chunkWidth, int chunkLength, int chunkHeight) {
+		world = new World(chunkWidth, chunkLength, chunkHeight);
 	}
 	
 	public void randDebris(int chunkSize, int width, int length, int height, double density) {
