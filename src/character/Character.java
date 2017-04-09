@@ -289,7 +289,3 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		return drawCounter;
 	}
 }
-
-// todo : graphics
-// todo : shooting
-// todo : survival

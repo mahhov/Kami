@@ -14,7 +14,7 @@ class RaceEngine {
 	private World world;
 	//	private Track track;
 	private Terrain terrain;
-	private Character hook;
+	private Character character;
 	private boolean pause;
 	
 	RaceEngine() {
@@ -23,7 +23,6 @@ class RaceEngine {
 		controller = new Controller(frame, frame);
 		painter = new Painter(frame, image, controller);
 		camera = new TrailingCamera();
-		// track = new Track();
 		terrain = new Terrain();
 		createWorld();
 	}
@@ -32,11 +31,10 @@ class RaceEngine {
 		int worldSize = 750;
 		WorldCreator wc = new WorldCreator(worldSize / World.CHUNK_SIZE, worldSize / World.CHUNK_SIZE, worldSize / World.CHUNK_SIZE);
 		world = wc.world;
-		hook = new Character(5, 5, 5);
-		((TrailingCamera) camera).setFollow(hook);
-		world.addElement(hook);
+		character = new Character(5, 5, 5);
+		((TrailingCamera) camera).setFollow(character);
+		world.addElement(character);
 		world.initWorldElements();
-		terrain.addToWorld(world);
 	}
 	
 	void begin() {
@@ -52,6 +50,7 @@ class RaceEngine {
 			camera.update(world.width, world.length, world.height);
 			controller.setView(camera.angle, camera.orig(), camera.normal);
 			world.update(terrain, controller);
+			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), 5, world);
 			world.draw(painter, camera);
 			painter.paint();
 			checkPause();
@@ -96,3 +95,8 @@ class RaceEngine {
 		new RaceEngine().begin();
 	}
 }
+
+// todo : graphics
+// todo : shooting
+// todo : survival
+// todo : environment (e.g. clouds, zone types, world generation)

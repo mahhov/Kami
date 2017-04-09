@@ -1,65 +1,65 @@
 package terrain;
 
-import engine.Math3D;
-import shapes.Shape;
 import terrain.terrainModule.FullGray;
-import terrain.terrainModule.TerrainModule;
 import world.World;
 
 public class Terrain {
-	private static final int CHUNK_SIZE = 50;
+	private static final int CHUNK_SIZE = 10;
 	int width, length, height;
-	private TerrainModule[][][] part;
-	//	private TerrainChunk[][][] terrainChunk;
+	//	private TerrainModule[][][] part;
+	private TerrainChunk[][][] terrainChunk;
 	private IntersectionFinder intersectionFinder;
 	
+	//	public Terrain() {
+	//		width = length = 400;
+	//		height = 50;
+	//		intersectionFinder = new IntersectionFinder(this);
+	//		part = new TerrainModule[width][length][height];
+	//		for (int x = 0; x < part.length; x++)
+	//			for (int y = 0; y < part[x].length; y++) {
+	//				part[x][y][0] = new FullGray();
+	//				if (Math.random() > .9993)
+	//					generateTree(x, y, 0);
+	//			}
+	//	}
+	
 	public Terrain() {
-		width = length = 400;
-		height = 50;
 		intersectionFinder = new IntersectionFinder(this);
-		part = new TerrainModule[width][length][height];
-		for (int x = 0; x < part.length; x++)
-			for (int y = 0; y < part[x].length; y++) {
-				part[x][y][0] = new FullGray();
-				if (Math.random() > .9993)
-					generateTree(x, y, 0);
-			}
-		//		terrainChunk = new TerrainChunk[400 / CHUNK_SIZE][400 / CHUNK_SIZE][50 / CHUNK_SIZE];
+		terrainChunk = new TerrainChunk[50][50][10];
+		width = terrainChunk.length * CHUNK_SIZE;
+		length = terrainChunk[0].length * CHUNK_SIZE;
+		height = terrainChunk[0][0].length * CHUNK_SIZE;
 	}
 	
-	private void generateTree(int x, int y, int floor) {
-		int thick = 5;
-		x = Math3D.maxMin(x, part.length - thick * 2, thick);
-		y = Math3D.maxMin(y, part[x].length - thick * 2, thick);
-		int height = Math3D.rand(20, 30) + 10;
-		int brushSpread = Math3D.rand(1, 3) + height / 5 - 4;
-		int brushHeight = Math3D.rand(1, 3);
-		for (int xi = x - thick; xi <= x + thick; xi++)
-			for (int yi = y - thick; yi <= y + thick; yi++)
-				for (int z = floor; z < height + floor; z++)
-					part[xi][yi][z] = new FullGray();
-		int xs = Math3D.max(x - brushSpread, 0);
-		int xe = Math3D.min(x + brushSpread, part.length - 1);
-		int ys = Math3D.max(y - brushSpread, 0);
-		int ye = Math3D.min(y + brushSpread, part[x].length - 1);
-		for (int xi = xs; xi <= xe; xi++)
-			for (int yi = ys; yi <= ye; yi++)
-				for (int z = height + floor; z < height + brushHeight + floor; z++)
-					part[xi][yi][z] = new FullGray();
+	private void generate(int cx, int cy, int cz, World world) {
+		for (int x = 0; x < CHUNK_SIZE; x++)
+			for (int y = 0; y < CHUNK_SIZE; y++)
+				terrainChunk[cx][cy][cz].add(x, y, 0, new FullGray());
+		addToWorld(cx, cy, cz, world);
 	}
 	
-	public void addToWorld(World world) {
-		Shape shape;
-		int block[];
-		for (int x = 0; x < part.length; x++)
-			for (int y = 0; y < part[x].length; y++)
-				for (int z = 0; z < part[x][y].length; z++)
-					if (part[x][y][z] != null) {
-						block = getBlock(x, y, z);
-						shape = part[x][y][z].getShape(x + .5, y + .5, z + .5, block);
-						if (shape != null)
-							world.addShape(x, y, z, shape);
-					}
+	public void expand(int x, int y, int z, int buffer, World world) {
+		for (int xi = -1; xi < 2; xi++)
+			for (int yi = -1; yi < 2; yi++)
+				for (int zi = -1; zi < 2; zi++)
+					expand(x + xi * buffer, y + yi * buffer, z + zi * buffer, world);
+	}
+	
+	private void expand(int x, int y, int z, World world) {
+		if (x < 0 || x >= width || y < 0 || y >= length || z < 0 || z >= height)
+			return;
+		int[] coord = getChunkCoord(x, y, z);
+		if (terrainChunk[coord[0]][coord[1]][coord[2]] == null) {
+			terrainChunk[coord[0]][coord[1]][coord[2]] = new TerrainChunk(CHUNK_SIZE);
+			generate(coord[0], coord[1], coord[2], world);
+		}
+	}
+	
+	private void addToWorld(int cx, int cy, int cz, World world) {
+		int offX = cx * CHUNK_SIZE;
+		int offY = cy * CHUNK_SIZE;
+		int offZ = cz * CHUNK_SIZE;
+		terrainChunk[cx][cy][cz].addToWorld(offX, offY, offZ, world);
 	}
 	
 	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge) {
@@ -70,24 +70,18 @@ public class Terrain {
 		return intersectionFinder.collide;
 	}
 	
-	private int[] getBlock(int x, int y, int z) {
-		int[] block = new int[6];
-		if (x > 0 && part[x - 1][y][z] != null)
-			block[Math3D.LEFT] = part[x - 1][y][z].block[Math3D.RIGHT];
-		if (x < part.length - 1 && part[x + 1][y][z] != null)
-			block[Math3D.RIGHT] = part[x + 1][y][z].block[Math3D.LEFT];
-		if (y > 0 && part[x][y - 1][z] != null)
-			block[Math3D.FRONT] = part[x][y - 1][z].block[Math3D.BACK];
-		if (y < part[0].length - 1 && part[x][y + 1][z] != null)
-			block[Math3D.BACK] = part[x][y + 1][z].block[Math3D.FRONT];
-		if (z > 0 && part[x][y][z - 1] != null)
-			block[Math3D.BOTTOM] = part[x][y][z - 1].block[Math3D.TOP];
-		if (z < part[0][0].length - 1 && part[x][y][z + 1] != null)
-			block[Math3D.TOP] = part[x][y][z + 1].block[Math3D.BOTTOM];
-		return block;
+	private int[] getChunkCoord(int x, int y, int z) {
+		int cx = x / CHUNK_SIZE;
+		int cy = y / CHUNK_SIZE;
+		int cz = z / CHUNK_SIZE;
+		x -= cx * CHUNK_SIZE;
+		y -= cy * CHUNK_SIZE;
+		z -= cz * CHUNK_SIZE;
+		return new int[] {cx, cy, cz, x, y, z};
 	}
 	
 	boolean isEmpty(int x, int y, int z) {
-		return part[x][y][z] == null;
+		int[] coord = getChunkCoord(x, y, z);
+		return terrainChunk[coord[0]][coord[1]][coord[2]] != null && terrainChunk[coord[0]][coord[1]][coord[2]].isEmpty(coord[3], coord[4], coord[5]);
 	}
 }
