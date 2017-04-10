@@ -7,7 +7,7 @@ import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
 
-class RaceEngine {
+class KamiEngine {
 	private TrailingCamera camera;
 	private Controller controller;
 	private Painter painter;
@@ -17,7 +17,7 @@ class RaceEngine {
 	private Character character;
 	private boolean pause;
 	
-	RaceEngine() {
+	KamiEngine() {
 		int frame = 800, image = frame;
 		Math3D.loadTrig(1000);
 		controller = new Controller(frame, frame);
@@ -91,8 +91,8 @@ class RaceEngine {
 	}
 	
 	public static void main(String args[]) {
-		RaceEngine.printInstructions();
-		new RaceEngine().begin();
+		KamiEngine.printInstructions();
+		new KamiEngine().begin();
 	}
 }
 
