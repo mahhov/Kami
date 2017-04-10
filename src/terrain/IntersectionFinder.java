@@ -124,7 +124,7 @@ class IntersectionFinder {
 	}
 	
 	private boolean isOk(boolean limitDistance) {
-		inBounds = isInBounds();
+		inBounds = terrain.isInBounds(intx, inty, intz);
 		boolean ok = inBounds && terrain.isEmpty(intx, inty, intz);
 		if (limitDistance)
 			return ok;
@@ -158,9 +158,5 @@ class IntersectionFinder {
 	
 	private boolean isComingInBounds() {
 		return (intx >= 1 || dir[0] > 0) && (inty >= 1 || dir[1] > 0) && (intz >= 1 || dir[2] > 0) && (intx < terrain.width - 1 || dir[0] < 0) && (inty < terrain.length - 1 || dir[1] < 0) && (intz < terrain.height - 1 || dir[2] < 0);
-	}
-	
-	private boolean isInBounds() {
-		return intx >= 1 && inty >= 1 && intz >= 1 && intx < terrain.width - 1 && inty < terrain.length - 1 && intz < terrain.height - 1;
 	}
 }

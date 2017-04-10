@@ -11,14 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="minor">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/RaceEngine.java" afterPath="$PROJECT_DIR$/src/engine/RaceEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/shapes/StaticCube.java" afterPath="$PROJECT_DIR$/src/shapes/StaticCube.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" afterPath="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/TerrainChunk.java" afterPath="$PROJECT_DIR$/src/terrain/TerrainChunk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" afterPath="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/World.java" afterPath="$PROJECT_DIR$/src/world/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/WorldCreator.java" afterPath="$PROJECT_DIR$/src/world/WorldCreator.java" />
     </list>
     <ignored path="Afto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,28 +34,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="92" column="52" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="52" />
+            <state relative-caret-position="718">
+              <caret line="122" column="16" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
               <folding>
                 <element signature="method#Terrain#0;class#Terrain#0" expanded="false" />
                 <element signature="method#expand#0;class#Terrain#0" expanded="false" />
                 <element signature="method#findIntersection#0;class#Terrain#0" expanded="false" />
                 <element signature="method#getChunkCoord#0;class#Terrain#0" expanded="false" />
-                <element signature="method#isEmpty#0;class#Terrain#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/list/LList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -78,6 +61,51 @@
                 <element signature="e#2266#2267#0" expanded="true" />
                 <element signature="e#2291#2292#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IntersectionFinder.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="126" column="54" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/world/World.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="733">
+              <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+              <folding>
+                <element signature="method#World#0;class#World#0" expanded="false" />
+                <element signature="method#draw#0;class#World#0" expanded="false" />
+                <element signature="method#drawInterface#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunks#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunk#0;class#World#0" expanded="false" />
+                <element signature="method#drawRow#0;class#World#0" expanded="false" />
+                <element signature="method#drawColumn#0;class#World#0" expanded="false" />
+                <element signature="method#drawCell#0;class#World#0" expanded="false" />
+                <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
+                <element signature="method#update#0;class#World#0" expanded="false" />
+                <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
+                <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RaceEngine.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,7 +169,6 @@
         <option value="$PROJECT_DIR$/src/engine/Math3D.java" />
         <option value="$PROJECT_DIR$/src/terrain/terrainModule/FullGray.java" />
         <option value="$PROJECT_DIR$/src/engine/Painter.java" />
-        <option value="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
         <option value="$PROJECT_DIR$/src/world/Chunk.java" />
         <option value="$PROJECT_DIR$/src/world/WorldChunk.java" />
         <option value="$PROJECT_DIR$/src/camera/TrailingCamera.java" />
@@ -152,6 +179,7 @@
         <option value="$PROJECT_DIR$/src/world/World.java" />
         <option value="$PROJECT_DIR$/src/terrain/TerrainChunk.java" />
         <option value="$PROJECT_DIR$/src/character/Character.java" />
+        <option value="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
       </list>
     </option>
@@ -909,12 +937,12 @@
       <workItem from="1491574778894" duration="1340000" />
       <workItem from="1491624984151" duration="420000" />
       <workItem from="1491688704595" duration="9273000" />
-      <workItem from="1491779469405" duration="2953000" />
+      <workItem from="1491779469405" duration="3815000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134851000" />
+    <option name="totallyTimeSpent" value="135713000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1137" extended-state="0" />
@@ -1280,14 +1308,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1875">
-          <caret line="127" column="45" selection-start-line="127" selection-start-column="45" selection-end-line="127" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/camera/TrailingCamera.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -1300,14 +1320,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -1357,29 +1369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-          <folding>
-            <element signature="method#World#0;class#World#0" expanded="false" />
-            <element signature="method#draw#0;class#World#0" expanded="false" />
-            <element signature="method#drawInterface#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunks#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunk#0;class#World#0" expanded="false" />
-            <element signature="method#drawRow#0;class#World#0" expanded="false" />
-            <element signature="method#drawColumn#0;class#World#0" expanded="false" />
-            <element signature="method#drawCell#0;class#World#0" expanded="false" />
-            <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
-            <element signature="method#update#0;class#World#0" expanded="false" />
-            <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
-            <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/character/Character.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -1404,6 +1393,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/list/LList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/TerrainChunk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
@@ -1418,25 +1415,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/list/LList.java">
+    <entry file="file://$PROJECT_DIR$/src/terrain/IntersectionFinder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="323">
+          <caret line="126" column="54" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="92" column="52" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="52" />
+        <state relative-caret-position="718">
+          <caret line="122" column="16" selection-start-line="122" selection-start-column="16" selection-end-line="122" selection-end-column="16" />
           <folding>
             <element signature="method#Terrain#0;class#Terrain#0" expanded="false" />
             <element signature="method#expand#0;class#Terrain#0" expanded="false" />
             <element signature="method#findIntersection#0;class#Terrain#0" expanded="false" />
             <element signature="method#getChunkCoord#0;class#Terrain#0" expanded="false" />
-            <element signature="method#isEmpty#0;class#Terrain#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="733">
+          <caret line="216" column="0" selection-start-line="216" selection-start-column="0" selection-end-line="216" selection-end-column="0" />
+          <folding>
+            <element signature="method#World#0;class#World#0" expanded="false" />
+            <element signature="method#draw#0;class#World#0" expanded="false" />
+            <element signature="method#drawInterface#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunks#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunk#0;class#World#0" expanded="false" />
+            <element signature="method#drawRow#0;class#World#0" expanded="false" />
+            <element signature="method#drawColumn#0;class#World#0" expanded="false" />
+            <element signature="method#drawCell#0;class#World#0" expanded="false" />
+            <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
+            <element signature="method#update#0;class#World#0" expanded="false" />
+            <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
+            <element signature="method#isCellEmpty#0;class#World#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/RaceEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>

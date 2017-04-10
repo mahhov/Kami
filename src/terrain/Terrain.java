@@ -116,4 +116,13 @@ public class Terrain {
 		int[] coord = getChunkCoord(x, y, z);
 		return terrainChunk[coord[0]][coord[1]][coord[2]] != null && terrainChunk[coord[0]][coord[1]][coord[2]].isEmpty(coord[3], coord[4], coord[5]);
 	}
+	
+	boolean isInBounds(int x, int y, int z) {
+		if (x >= 1 && y >= 1 && z >= 1 && x < width - 1 && y < length - 1 && z < height - 1) {
+			int[] coord = getChunkCoord(x, y, z);
+			if (terrainChunk[coord[0]][coord[1]][coord[2]] != null)
+				return true;
+		}
+		return false;
+	}
 }
