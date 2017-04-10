@@ -34,10 +34,6 @@ public class World {
 		interfaceElement = new LList<>();
 	}
 	
-	void addStaticCube(int x, int y, int z, boolean[] side) {
-		addShape(x, y, z, new StaticCube(x + 0.5, y + 0.5, z + 0.5, null, side));
-	}
-	
 	public void addShape(int x, int y, int z, Shape shape) {
 		int cx = x / CHUNK_SIZE;
 		int cy = y / CHUNK_SIZE;

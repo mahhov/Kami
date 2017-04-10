@@ -2,19 +2,28 @@ package terrain;
 
 import engine.Math3D;
 import shapes.Shape;
+import shapes.ShapeParent;
 import terrain.terrainModule.TerrainModule;
 import world.World;
 
-public class TerrainChunk {
+public class TerrainChunk implements ShapeParent {
+	private long drawCounter;
+	 boolean drawDirty;
+	boolean generated;
+	private int offX, offY, offZ;
 	private TerrainModule[][][] part;
 	private int count;
 	
-	TerrainChunk(int size) {
+	TerrainChunk(int offX, int offY, int offZ, int size) {
+		this.offX = offX;
+		this.offY = offY;
+		this.offZ = offZ;
 		part = new TerrainModule[size][size][size];
 		count = 0;
 	}
 	
 	void add(int x, int y, int z, TerrainModule module) {
+		drawDirty = true;
 		if (part[x][y][z] == null)
 			count++;
 		part[x][y][z] = module;
@@ -24,9 +33,12 @@ public class TerrainChunk {
 		return part[x][y][z];
 	}
 	
-	void addToWorld(int offX, int offY, int offZ, World world) {
+	void addToWorld(World world) {
 		if (isEmpty())
 			return;
+		drawCounter++;
+		drawDirty = false;
+		
 		Shape shape;
 		int block[];
 		TerrainModule module;
@@ -36,7 +48,7 @@ public class TerrainChunk {
 					module = get(x, y, z);
 					if (module != null) {
 						block = getBlock(x, y, z);
-						shape = module.getShape(offX + x + .5, offY + y + .5, offZ + z + .5, block);
+						shape = module.getShape(offX + x + .5, offY + y + .5, offZ + z + .5, block, this);
 						if (shape != null)
 							world.addShape(offX + x, offY + y, offZ + z, shape);
 					}
@@ -66,5 +78,9 @@ public class TerrainChunk {
 	
 	private boolean isEmpty() {
 		return count == 0;
+	}
+	
+	public long getDrawCounter() {
+		return drawCounter;
 	}
 }

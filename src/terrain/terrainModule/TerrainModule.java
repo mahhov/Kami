@@ -2,6 +2,7 @@ package terrain.terrainModule;
 
 import shapes.Shape;
 import shapes.StaticCube;
+import terrain.TerrainChunk;
 
 import java.awt.*;
 
@@ -19,7 +20,7 @@ public abstract class TerrainModule {
 			block[i] = BLOCK_FULL;
 	}
 	
-	public Shape getShape(double xc, double yc, double zc, int[] block) {
+	public Shape getShape(double xc, double yc, double zc, int[] block, TerrainChunk chunk) {
 		boolean[] side = new boolean[6];
 		boolean visible = false;
 		for (int i = 0; i < side.length; i++) {
@@ -28,6 +29,6 @@ public abstract class TerrainModule {
 		}
 		if (!visible)
 			return null;
-		return new StaticCube(xc, yc, zc, color, side, .5);
+		return new StaticCube(xc, yc, zc, color, side, .5, chunk);
 	}
 }

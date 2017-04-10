@@ -1,27 +1,17 @@
 package terrain;
 
+import engine.Math3D;
+import list.LList;
 import terrain.terrainModule.FullGray;
+import terrain.terrainModule.TerrainModule;
 import world.World;
 
 public class Terrain {
-	private static final int CHUNK_SIZE = 10;
+	private static final int CHUNK_SIZE = 20;
 	int width, length, height;
-	//	private TerrainModule[][][] part;
 	private TerrainChunk[][][] terrainChunk;
 	private IntersectionFinder intersectionFinder;
-	
-	//	public Terrain() {
-	//		width = length = 400;
-	//		height = 50;
-	//		intersectionFinder = new IntersectionFinder(this);
-	//		part = new TerrainModule[width][length][height];
-	//		for (int x = 0; x < part.length; x++)
-	//			for (int y = 0; y < part[x].length; y++) {
-	//				part[x][y][0] = new FullGray();
-	//				if (Math.random() > .9993)
-	//					generateTree(x, y, 0);
-	//			}
-	//	}
+	private LList<TerrainChunk> dirtyDrawChunk;
 	
 	public Terrain() {
 		intersectionFinder = new IntersectionFinder(this);
@@ -32,10 +22,52 @@ public class Terrain {
 	}
 	
 	private void generate(int cx, int cy, int cz, World world) {
-		for (int x = 0; x < CHUNK_SIZE; x++)
-			for (int y = 0; y < CHUNK_SIZE; y++)
-				terrainChunk[cx][cy][cz].add(x, y, 0, new FullGray());
-		addToWorld(cx, cy, cz, world);
+		dirtyDrawChunk = new LList();
+		dirtyDrawChunk = dirtyDrawChunk.add(terrainChunk[cx][cy][cz]);
+		terrainChunk[cx][cy][cz].generated = true;
+		if (cz == 0) {
+			for (int x = 0; x < CHUNK_SIZE; x++)
+				for (int y = 0; y < CHUNK_SIZE; y++) {
+					terrainChunk[cx][cy][cz].add(x, y, 0, new FullGray());
+					if (Math.random() > .9993)
+						generateTree(cx * CHUNK_SIZE + x, cy * CHUNK_SIZE + y, 0);
+				}
+			if (cx == 3 && cy == 0) {
+				for (int x = 0; x < 100; x++)
+					for (int z = 1; z < 10; z++)
+						add(x, 5, z, new FullGray());
+			}
+		}
+	}
+	
+	private void add(int x, int y, int z, TerrainModule terrainModule) {
+		int[] coord = getChunkCoord(x, y, z);
+		if (terrainChunk[coord[0]][coord[1]][coord[2]] == null)
+			terrainChunk[coord[0]][coord[1]][coord[2]] = new TerrainChunk(coord[0] * CHUNK_SIZE, coord[1] * CHUNK_SIZE, coord[2] * CHUNK_SIZE, CHUNK_SIZE);
+		if (!terrainChunk[coord[0]][coord[1]][coord[2]].drawDirty)
+			dirtyDrawChunk = dirtyDrawChunk.add(terrainChunk[coord[0]][coord[1]][coord[2]]);
+		terrainChunk[coord[0]][coord[1]][coord[2]].add(coord[3], coord[4], coord[5], terrainModule);
+	}
+	
+	private void generateTree(int x, int y, int floor) {
+		int thick = 5;
+		x = Math3D.maxMin(x, width - thick * 2, thick);
+		y = Math3D.maxMin(y, length - thick * 2, thick);
+		int height = Math3D.rand(20, 30) + 10;
+		int brushSpread = Math3D.rand(1, 3) + height / 5 - 4;
+		int brushHeight = Math3D.rand(1, 3);
+		for (int xi = x - thick; xi <= x + thick; xi++)
+			for (int yi = y - thick; yi <= y + thick; yi++)
+				for (int z = floor; z < height + floor; z++)
+					add(xi, yi, z, new FullGray());
+		int xs = Math3D.max(x - brushSpread, 0);
+		int xe = Math3D.min(x + brushSpread, width - 1);
+		int ys = Math3D.max(y - brushSpread, 0);
+		int ye = Math3D.min(y + brushSpread, length - 1);
+		for (int xi = xs; xi <= xe; xi++)
+			for (int yi = ys; yi <= ye; yi++)
+				for (int z = height + floor; z < height + brushHeight + floor; z++)
+					add(xi, yi, z, new FullGray());
 	}
 	
 	public void expand(int x, int y, int z, int buffer, World world) {
@@ -49,17 +81,17 @@ public class Terrain {
 		if (x < 0 || x >= width || y < 0 || y >= length || z < 0 || z >= height)
 			return;
 		int[] coord = getChunkCoord(x, y, z);
-		if (terrainChunk[coord[0]][coord[1]][coord[2]] == null) {
-			terrainChunk[coord[0]][coord[1]][coord[2]] = new TerrainChunk(CHUNK_SIZE);
+		if (terrainChunk[coord[0]][coord[1]][coord[2]] == null)
+			terrainChunk[coord[0]][coord[1]][coord[2]] = new TerrainChunk(coord[0] * CHUNK_SIZE, coord[1] * CHUNK_SIZE, coord[2] * CHUNK_SIZE, CHUNK_SIZE);
+		if (!terrainChunk[coord[0]][coord[1]][coord[2]].generated) {
 			generate(coord[0], coord[1], coord[2], world);
+			addToWorld(world);
 		}
 	}
 	
-	private void addToWorld(int cx, int cy, int cz, World world) {
-		int offX = cx * CHUNK_SIZE;
-		int offY = cy * CHUNK_SIZE;
-		int offZ = cz * CHUNK_SIZE;
-		terrainChunk[cx][cy][cz].addToWorld(offX, offY, offZ, world);
+	private void addToWorld(World world) {
+		for (LList<TerrainChunk> c : dirtyDrawChunk)
+			c.node.addToWorld(world);
 	}
 	
 	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge) {

@@ -8,12 +8,12 @@ public class StaticCube extends Shape {
 	private double x, y, z;
 	private Surface top, bottom, left, right, front, back;
 	
-	public StaticCube(double x, double y, double z, Color color, boolean side[]) {
-		this(x, y, z, color, side, .5);
+	public StaticCube(double x, double y, double z, Color color, boolean side[], ShapeParent shapeParent) {
+		this(x, y, z, color, side, .5, shapeParent);
 	}
 	
-	public StaticCube(double x, double y, double z, Color color, boolean side[], double size) {
-		super(null);
+	public StaticCube(double x, double y, double z, Color color, boolean side[], double size, ShapeParent shapeParent) {
+		super(shapeParent);
 		this.x = x;
 		this.y = y;
 		this.z = z;

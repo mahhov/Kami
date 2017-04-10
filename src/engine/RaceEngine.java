@@ -100,3 +100,10 @@ class RaceEngine {
 // todo : shooting
 // todo : survival
 // todo : environment (e.g. clouds, zone types, world generation)
+
+// todo : chunks
+// generation
+// structures
+// boundless in all directions
+// world chunk null pre check, no initial assignment
+// intersection finder
