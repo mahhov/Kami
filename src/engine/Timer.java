@@ -11,7 +11,7 @@ public class Timer {
 		long etime = System.nanoTime();
 		long milli = (etime - startTime) / 1000000L;
 		String timeString = milli > 1000 ? milli / 1000 + " s" : milli + " ms";
-		System.out.println("( " + key + " )j time: " + timeString);
+		System.out.println("( " + key + " ) time: " + timeString);
 	}
 	
 }

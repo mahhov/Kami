@@ -33,12 +33,10 @@ public class Cell {
 				remove(lShape);
 			else
 				for (Surface s : surfaces)
-					if (s != null)
-						painter.clipPolygon(s.toCamera(c), s.tempDistanceLight, s.color, s.clipState, s.frame);
+					if (s != null) {
+						double xy[][] = s.toCamera(c);
+						painter.clipPolygon(xy, s.tempDistanceLight, s.color, s.clipState, s.frame);
+					}
 		}
-	}
-	
-	public boolean isEmpty() {
-		return shapes == null;
 	}
 }

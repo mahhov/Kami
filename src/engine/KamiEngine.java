@@ -51,6 +51,8 @@ class KamiEngine {
 			world.update(terrain, controller);
 			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), 5, world);
 			world.draw(painter, camera);
+			if (controller.isKeyPressed(Controller.KEY_SLASH))
+				painter.toggleWire();
 			painter.paint();
 			checkPause();
 			sleep(10);
@@ -82,6 +84,7 @@ class KamiEngine {
 		System.out.println("W A S D to move");
 		System.out.println("R F to move camera up / down");
 		System.out.println("Z X to move camera farther / nearer");
+		System.out.println("Press / to toggle wire mode");
 		System.out.println("Space tap to jump");
 		System.out.println("Space press to jet pack");
 		System.out.println("Space press while running into a wall to climb the wall");
@@ -99,6 +102,4 @@ class KamiEngine {
 // todo : shooting
 // todo : survival
 // todo : environment (e.g. clouds, zone types, world generation)
-
-// boundless in all directions
-// world chunk null pre check, no initial assignment
+// todo : true boundless terrain/world

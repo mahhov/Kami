@@ -15,6 +15,10 @@ public class Painter extends JFrame {
 	public static String[] debugString = new String[] {"", "", "", "", "", ""};
 	public static String[] outputString = new String[] {"", "", "", "", "", ""};
 	
+	private final static String[] wireString = new String[] {"NORMAL", "WIRE", "NORMAL + WIRE"};
+	private final static int WIRE_ONLY = 1, WIRE_AND = 2;
+	private int wireMode;
+	
 	private final int FRAME_SIZE, IMAGE_SIZE;
 	private static int borderSize = 0;
 	private BufferedImage canvas;
@@ -98,7 +102,9 @@ public class Painter extends JFrame {
 		} else {
 			if (clipState == Surface.CLIP_SET)
 				brush.setClip(clip);
-			polygon(xy, light, color, frame);
+			polygon(xy, light, color, frame || wireMode == WIRE_ONLY);
+			if (wireMode == WIRE_AND && !frame)
+				polygon(xy, light, color, true);
 			if (clipState == Surface.CLIP_RESET) {
 				clip = new Area();
 				brush.setClip(null);
@@ -110,5 +116,11 @@ public class Painter extends JFrame {
 		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
 		brush.setColor(color);
 		brush.fillRect(xywh[0], xywh[1], xywh[2], xywh[3]);
+	}
+	
+	void toggleWire() {
+		if (++wireMode == 3)
+			wireMode = 0;
+		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle";
 	}
 }
