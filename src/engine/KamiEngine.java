@@ -17,7 +17,7 @@ class KamiEngine {
 	private boolean pause;
 	
 	KamiEngine() {
-		int frame = 800, image = frame;
+		int frame = 200, image = frame;
 		Math3D.loadTrig(1000);
 		controller = new Controller(frame, frame);
 		painter = new Painter(frame, image, controller);
