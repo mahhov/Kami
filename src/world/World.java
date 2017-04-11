@@ -23,8 +23,8 @@ public class World {
 	public World(int chunkWidth, int chunkLength, int chunkHeight) {
 		Timer.timeStart();
 		width = chunkWidth * CHUNK_SIZE;
-		height = chunkLength * CHUNK_SIZE;
-		length = chunkHeight * CHUNK_SIZE;
+		length = chunkLength * CHUNK_SIZE;
+		height = chunkHeight * CHUNK_SIZE;
 		chunk = new WorldChunk[chunkWidth][chunkLength][chunkHeight];
 		element = new LList<>();
 		particle = new LList<>();
