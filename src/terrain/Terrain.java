@@ -8,14 +8,14 @@ import world.World;
 
 public class Terrain {
 	private static final int CHUNK_SIZE = 20;
-	int width, length, height;
+	public int width, length, height;
 	private TerrainChunk[][][] terrainChunk;
 	private IntersectionFinder intersectionFinder;
 	private LList<TerrainChunk> dirtyDrawChunk;
 	
 	public Terrain() {
 		intersectionFinder = new IntersectionFinder(this);
-		terrainChunk = new TerrainChunk[50][50][10];
+		terrainChunk = new TerrainChunk[150][150][10];
 		width = terrainChunk.length * CHUNK_SIZE;
 		length = terrainChunk[0].length * CHUNK_SIZE;
 		height = terrainChunk[0][0].length * CHUNK_SIZE;
@@ -118,7 +118,7 @@ public class Terrain {
 	}
 	
 	boolean isInBounds(int x, int y, int z) {
-		if (x >= 1 && y >= 1 && z >= 1 && x < width - 1 && y < length - 1 && z < height - 1) {
+		if (x >= 1 && y >= 1 && z >= 1 && x < width - 2 && y < length - 2 && z < height - 2) {
 			int[] coord = getChunkCoord(x, y, z);
 			if (terrainChunk[coord[0]][coord[1]][coord[2]] != null)
 				return true;

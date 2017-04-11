@@ -12,7 +12,6 @@ class KamiEngine {
 	private Controller controller;
 	private Painter painter;
 	private World world;
-	//	private Track track;
 	private Terrain terrain;
 	private Character character;
 	private boolean pause;
@@ -28,8 +27,7 @@ class KamiEngine {
 	}
 	
 	private void createWorld() {
-		int worldSize = 750;
-		WorldCreator wc = new WorldCreator(worldSize / World.CHUNK_SIZE, worldSize / World.CHUNK_SIZE, worldSize / World.CHUNK_SIZE);
+		WorldCreator wc = new WorldCreator(terrain.width / World.CHUNK_SIZE, terrain.length / World.CHUNK_SIZE, terrain.height / World.CHUNK_SIZE);
 		world = wc.world;
 		character = new Character(5, 5, 5);
 		((TrailingCamera) camera).setFollow(character);
@@ -101,9 +99,5 @@ class KamiEngine {
 // todo : survival
 // todo : environment (e.g. clouds, zone types, world generation)
 
-// todo : chunks
-// generation
-// structures
 // boundless in all directions
 // world chunk null pre check, no initial assignment
-// intersection finder

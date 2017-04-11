@@ -204,13 +204,4 @@ public class World {
 		z -= cz * CHUNK_SIZE;
 		return new int[] {cx, cy, cz, x, y, z};
 	}
-	
-	public boolean isCellEmpty(int x, int y, int z) {
-		int[] c = getChunkCoord(x, y, z);
-		return chunk[c[0]][c[1]][c[2]].isCellEmpty(c[3], c[4], c[5]);
-	}
-	
-	public boolean inBounds(double x, double y, double z) {
-		return x > 0 && y > 0 && z > 0 && x < width - 1 && y < length - 1 && z < height - 1;
-	}
 }
