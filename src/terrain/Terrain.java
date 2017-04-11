@@ -1,9 +1,10 @@
 package terrain;
 
 import engine.Math3D;
+import engine.Timer;
 import list.LList;
-import terrain.terrainModule.FullGray;
-import terrain.terrainModule.TerrainModule;
+import terrain.terrainmodule.FullGray;
+import terrain.terrainmodule.TerrainModule;
 import world.World;
 
 public class Terrain {
@@ -14,11 +15,13 @@ public class Terrain {
 	private LList<TerrainChunk> dirtyDrawChunk;
 	
 	public Terrain() {
+		Timer.timeStart();
 		intersectionFinder = new IntersectionFinder(this);
-		terrainChunk = new TerrainChunk[150][150][10];
+		terrainChunk = new TerrainChunk[500][500][10];
 		width = terrainChunk.length * CHUNK_SIZE;
 		length = terrainChunk[0].length * CHUNK_SIZE;
 		height = terrainChunk[0][0].length * CHUNK_SIZE;
+		Timer.timeEnd("terrain constructor");
 	}
 	
 	private void generate(int cx, int cy, int cz, World world) {

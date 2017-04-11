@@ -4,10 +4,10 @@ import camera.Camera;
 import control.Controller;
 import engine.Math3D;
 import engine.Painter;
+import engine.Timer;
 import list.LList;
 import particle.Particle;
 import shapes.Shape;
-import shapes.StaticCube;
 import terrain.Terrain;
 import world.interfaceelement.InterfaceElement;
 
@@ -21,17 +21,16 @@ public class World {
 	private LList<InterfaceElement> interfaceElement;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight) {
+		Timer.timeStart();
 		width = chunkWidth * CHUNK_SIZE;
 		height = chunkLength * CHUNK_SIZE;
 		length = chunkHeight * CHUNK_SIZE;
 		chunk = new WorldChunk[chunkWidth][chunkLength][chunkHeight];
-		for (int x = 0; x < chunkWidth; x++)
-			for (int y = 0; y < chunkLength; y++)
-				for (int z = 0; z < chunkHeight; z++)
-					chunk[x][y][z] = new WorldChunk();
 		element = new LList<>();
 		particle = new LList<>();
 		interfaceElement = new LList<>();
+		Timer.timeEnd("world constructor");
+		System.out.println("world size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
 	}
 	
 	public void addShape(int x, int y, int z, Shape shape) {
@@ -41,7 +40,8 @@ public class World {
 		int sx = x - cx * CHUNK_SIZE;
 		int sy = y - cy * CHUNK_SIZE;
 		int sz = z - cz * CHUNK_SIZE;
-		chunk[cx][cy][cz].safeInit(CHUNK_SIZE);
+		if (chunk[cx][cy][cz] == null)
+			chunk[cx][cy][cz] = new WorldChunk(CHUNK_SIZE);
 		chunk[cx][cy][cz].add(sx, sy, sz, shape);
 	}
 	
@@ -113,7 +113,7 @@ public class World {
 	}
 	
 	private void drawChunk(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
-		if (chunk[cx][cy][cz].isEmpty())
+		if (chunk[cx][cy][cz] == null || chunk[cx][cy][cz].isEmpty())
 			return;
 		if (xSide == Math3D.RIGHT) {
 			int startx = cx == fromChunkCoord[0] ? fromChunkCoord[3] : 0;

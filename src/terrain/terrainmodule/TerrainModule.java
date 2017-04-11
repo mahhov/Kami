@@ -1,4 +1,4 @@
-package terrain.terrainModule;
+package terrain.terrainmodule;
 
 import shapes.Shape;
 import shapes.StaticCube;

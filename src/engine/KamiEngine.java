@@ -36,6 +36,7 @@ class KamiEngine {
 	}
 	
 	void begin() {
+		System.out.println("Begin");
 		int frame = 0;
 		long beginTime = 0, endTime;
 		while (true) {

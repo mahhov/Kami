@@ -3,12 +3,12 @@ package terrain;
 import engine.Math3D;
 import shapes.Shape;
 import shapes.ShapeParent;
-import terrain.terrainModule.TerrainModule;
+import terrain.terrainmodule.TerrainModule;
 import world.World;
 
 public class TerrainChunk implements ShapeParent {
 	private long drawCounter;
-	 boolean drawDirty;
+	boolean drawDirty;
 	boolean generated;
 	private int offX, offY, offZ;
 	private TerrainModule[][][] part;
