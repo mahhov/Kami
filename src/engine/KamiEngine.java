@@ -17,7 +17,7 @@ class KamiEngine {
 	private boolean pause;
 	
 	KamiEngine() {
-		int frame = 200, image = frame;
+		int frame = 400, image = frame;
 		Math3D.loadTrig(1000);
 		controller = new Controller(frame, frame);
 		painter = new Painter(frame, image, controller);
@@ -49,7 +49,7 @@ class KamiEngine {
 			camera.update(world.width, world.length, world.height);
 			controller.setView(camera.angle, camera.orig(), camera.normal);
 			world.update(terrain, controller);
-			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), 5, world);
+			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), world);
 			world.draw(painter, camera);
 			if (controller.isKeyPressed(Controller.KEY_SLASH))
 				painter.toggleWire();

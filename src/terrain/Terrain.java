@@ -8,7 +8,7 @@ import terrain.terrainmodule.TerrainModule;
 import world.World;
 
 public class Terrain {
-	private static final int CHUNK_SIZE = 20;
+	private static final int CHUNK_SIZE = 20, CHUNK_BUFFER = 3;
 	public int width, length, height;
 	private TerrainChunk[][][] terrainChunk;
 	private IntersectionFinder intersectionFinder;
@@ -73,21 +73,21 @@ public class Terrain {
 					add(xi, yi, z, new FullGray());
 	}
 	
-	public void expand(int x, int y, int z, int buffer, World world) {
-		for (int xi = -1; xi < 2; xi++)
-			for (int yi = -1; yi < 2; yi++)
-				for (int zi = -1; zi < 2; zi++)
-					expand(x + xi * buffer, y + yi * buffer, z + zi * buffer, world);
+	public void expand(int x, int y, int z, World world) {
+		int[] coord = getChunkCoord(x, y, z);
+		for (int xi = -CHUNK_BUFFER; xi <= CHUNK_BUFFER; xi++)
+			for (int yi = -CHUNK_BUFFER; yi <= CHUNK_BUFFER; yi++)
+				for (int zi = -CHUNK_BUFFER; zi <= CHUNK_BUFFER; zi++)
+					expandChunk(coord[0] + xi, coord[1] + yi, coord[2] + zi, world);
 	}
 	
-	private void expand(int x, int y, int z, World world) {
-		if (x < 0 || x >= width || y < 0 || y >= length || z < 0 || z >= height)
+	private void expandChunk(int cx, int cy, int cz, World world) {
+		if (cx < 0 || cx >= terrainChunk.length || cy < 0 || cy >= terrainChunk[0].length || cz < 0 || cz >= terrainChunk[0][0].length)
 			return;
-		int[] coord = getChunkCoord(x, y, z);
-		if (terrainChunk[coord[0]][coord[1]][coord[2]] == null)
-			terrainChunk[coord[0]][coord[1]][coord[2]] = new TerrainChunk(coord[0] * CHUNK_SIZE, coord[1] * CHUNK_SIZE, coord[2] * CHUNK_SIZE, CHUNK_SIZE);
-		if (!terrainChunk[coord[0]][coord[1]][coord[2]].generated) {
-			generate(coord[0], coord[1], coord[2], world);
+		if (terrainChunk[cx][cy][cz] == null)
+			terrainChunk[cx][cy][cz] = new TerrainChunk(cx * CHUNK_SIZE, cy * CHUNK_SIZE, cz * CHUNK_SIZE, CHUNK_SIZE);
+		if (!terrainChunk[cx][cy][cz].generated) {
+			generate(cx, cy, cz, world);
 			addToWorld(world);
 		}
 	}
