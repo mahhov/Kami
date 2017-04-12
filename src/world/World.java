@@ -30,7 +30,7 @@ public class World {
 		particle = new LList<>();
 		interfaceElement = new LList<>();
 		Timer.timeEnd("world constructor");
-		System.out.println("world size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
+		System.out.println("world chunk size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
 	}
 	
 	public void addShape(int x, int y, int z, Shape shape) {

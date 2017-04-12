@@ -17,7 +17,7 @@ class KamiEngine {
 	private boolean pause;
 	
 	KamiEngine() {
-		int frame = 400, image = frame;
+		int frame = 800, image = frame;
 		Math3D.loadTrig(1000);
 		controller = new Controller(frame, frame);
 		painter = new Painter(frame, image, controller);
@@ -80,7 +80,7 @@ class KamiEngine {
 	}
 	
 	private static void printInstructions() {
-		System.out.println("Kami - Java 3D voxel platformer . jar 3");
+		System.out.println("Kami - Java 3D voxel platformer . jar 4");
 		System.out.println("W A S D to move");
 		System.out.println("R F to move camera up / down");
 		System.out.println("Z X to move camera farther / nearer");
