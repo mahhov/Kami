@@ -3,11 +3,14 @@ package engine;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
+import sky.Sky;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
 
 class KamiEngine {
+	private static final int FRAME = 800, IMAGE = FRAME;
+	
 	private TrailingCamera camera;
 	private Controller controller;
 	private Painter painter;
@@ -17,10 +20,9 @@ class KamiEngine {
 	private boolean pause;
 	
 	KamiEngine() {
-		int frame = 800, image = frame;
 		Math3D.loadTrig(1000);
-		controller = new Controller(frame, frame);
-		painter = new Painter(frame, image, controller);
+		controller = new Controller(FRAME, FRAME);
+		painter = new Painter(FRAME, IMAGE, controller);
 		camera = new TrailingCamera();
 		terrain = new Terrain();
 		createWorld();
@@ -30,8 +32,9 @@ class KamiEngine {
 		WorldCreator wc = new WorldCreator(terrain.width / World.CHUNK_SIZE, terrain.length / World.CHUNK_SIZE, terrain.height / World.CHUNK_SIZE);
 		world = wc.world;
 		character = new Character(5, 5, 5);
-		((TrailingCamera) camera).setFollow(character);
+		camera.setFollow(character);
 		world.addElement(character);
+		world.addElement(new Sky(FRAME));
 		world.initWorldElements();
 	}
 	
@@ -103,3 +106,4 @@ class KamiEngine {
 // todo : survival
 // todo : environment (e.g. clouds, zone types, world generation)
 // todo : true boundless terrain/world
+// todo : border drawing, ambient sky, ambient music, particles when you shoot the grappling hook.

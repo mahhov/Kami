@@ -18,6 +18,7 @@ public class World {
 	
 	private LList<WorldElement> element;
 	private LList<Particle> particle;
+	private LList<InterfaceElement> backgroundElement;
 	private LList<InterfaceElement> interfaceElement;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight) {
@@ -28,6 +29,7 @@ public class World {
 		chunk = new WorldChunk[chunkWidth][chunkLength][chunkHeight];
 		element = new LList<>();
 		particle = new LList<>();
+		backgroundElement = new LList<>();
 		interfaceElement = new LList<>();
 		Timer.timeEnd("world constructor");
 		System.out.println("world chunk size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
@@ -49,6 +51,10 @@ public class World {
 		this.element = this.element.add(element);
 	}
 	
+	public void addBackgroundElement(InterfaceElement element) {
+		backgroundElement = backgroundElement.add(element);
+	}
+	
 	public void addInterfaceElement(InterfaceElement element) {
 		interfaceElement = interfaceElement.add(element);
 	}
@@ -60,8 +66,14 @@ public class World {
 	// DRAWING
 	
 	public void draw(Painter painter, Camera c) {
+		drawBackground(painter);
 		drawChunks(painter, c);
 		drawInterface(painter);
+	}
+	
+	private void drawBackground(Painter painter) {
+		for (LList<InterfaceElement> e : backgroundElement)
+			e.node.draw(painter);
 	}
 	
 	private void drawInterface(Painter painter) {

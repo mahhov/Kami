@@ -15,8 +15,8 @@ public class Painter extends JFrame {
 	public static String[] debugString = new String[] {"", "", "", "", "", ""};
 	public static String[] outputString = new String[] {"", "", "", "", "", ""};
 	
-	private final static String[] wireString = new String[] {"NORMAL", "WIRE", "NORMAL + WIRE"};
-	private final static int WIRE_ONLY = 1, WIRE_AND = 2;
+	private static final String[] wireString = new String[] {"NORMAL", "WIRE", "NORMAL + WIRE"};
+	private static final int WIRE_ONLY = 1, WIRE_AND = 2;
 	private int wireMode;
 	
 	private final int FRAME_SIZE, IMAGE_SIZE;
@@ -61,6 +61,7 @@ public class Painter extends JFrame {
 		for (int i = 0; i < outputString.length; i++)
 			brush.drawString(outputString[i], 25, 650 + 25 * i);
 		frameBrush.drawImage(canvas, 0, borderSize, null);
+		//		frameBrush.drawImage(canvas, 0, borderSize, FRAME_SIZE, borderSize + FRAME_SIZE, 0, 0, IMAGE_SIZE, IMAGE_SIZE, null);
 	}
 	
 	private void setColor(double light, Color color) {
@@ -70,6 +71,10 @@ public class Painter extends JFrame {
 			light = Math3D.min(1, light);
 			brush.setColor(new Color((int) (light * color.getRed()), (int) (light * color.getGreen()), (int) (light * color.getBlue())));
 		}
+	}
+	
+	public void drawImage(BufferedImage image, int shift) {
+		brush.drawImage(image, 0, 0, 800, 800, shift, 0, shift + 800, 800, null);
 	}
 	
 	public void polygon(double[][] xy, double light, Color color, boolean frame) {

@@ -11,9 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="070a223e-6aee-4ae7-90be-903d8df97143" name="Default" comment="minor">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sky/Sky.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/modelShipScratch.ot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/track/Line.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/track/Path.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/track/Point.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/track/Track.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/KamiEngine.java" afterPath="$PROJECT_DIR$/src/engine/KamiEngine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/terrain/Terrain.java" afterPath="$PROJECT_DIR$/src/terrain/Terrain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engine/Painter.java" afterPath="$PROJECT_DIR$/src/engine/Painter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/world/World.java" afterPath="$PROJECT_DIR$/src/world/World.java" />
     </list>
     <ignored path="Afto.iws" />
@@ -35,171 +41,136 @@
     <favorites_list name="Afto" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4132153">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="615">
-                  <caret line="46" column="72" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
-                  <folding>
-                    <element signature="method#findIntersection#0;class#Terrain#0" expanded="false" />
-                    <element signature="method#getChunkCoord#0;class#Terrain#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/world/World.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="198">
-                  <caret line="32" column="44" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="44" />
-                  <folding>
-                    <element signature="method#draw#0;class#World#0" expanded="false" />
-                    <element signature="method#drawInterface#0;class#World#0" expanded="false" />
-                    <element signature="method#drawChunks#0;class#World#0" expanded="false" />
-                    <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
-                    <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
-                    <element signature="method#drawRow#0;class#World#0" expanded="false" />
-                    <element signature="method#drawColumn#0;class#World#0" expanded="false" />
-                    <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
-                    <element signature="method#update#0;class#World#0" expanded="false" />
-                    <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Timer.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/engine/Timer.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#104#105#0" expanded="true" />
-                    <element signature="e#140#141#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="KamiEngine.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/engine/KamiEngine.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Surface.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/shapes/Surface.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="540">
-                  <caret line="89" column="46" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                    <element signature="method#Surface#0;class#Surface#0" expanded="false" />
-                    <element signature="method#Surface#1;class#Surface#0" expanded="false" />
-                    <element signature="method#Surface#2;class#Surface#0" expanded="false" />
-                    <element signature="method#Surface#3;class#Surface#0" expanded="false" />
-                    <element signature="method#Surface#4;class#Surface#0" expanded="false" />
-                    <element signature="method#setNormal#0;class#Surface#0" expanded="false" />
-                    <element signature="e#1559#1586#0" expanded="false" />
-                    <element signature="e#2048#2049#0" expanded="false" />
-                    <element signature="e#2064#2065#0" expanded="false" />
-                    <element signature="method#setLight#0;class#Surface#0" expanded="false" />
-                    <element signature="e#2332#2333#0" expanded="false" />
-                    <element signature="e#2365#2366#0" expanded="false" />
-                    <element signature="method#toCamera#0;class#Surface#0" expanded="false" />
-                    <element signature="class#NullSurface#0;class#Surface#0" expanded="false" />
-                    <element signature="e#3464#3465#0" expanded="false" />
-                    <element signature="e#3484#3485#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Painter.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1605">
-                  <caret line="116" column="30" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Camera.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/camera/Camera.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="105">
-                  <caret line="8" column="191" selection-start-line="8" selection-start-column="191" selection-end-line="8" selection-end-column="191" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#2064#2065#0" expanded="false" />
-                    <element signature="e#2106#2107#0" expanded="false" />
-                    <element signature="e#4118#4119#0" expanded="false" />
-                    <element signature="e#4154#4155#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Controller.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/control/Controller.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                    <element signature="e#2971#2972#0" expanded="false" />
-                    <element signature="e#3015#3016#0" expanded="false" />
-                    <element signature="e#4550#4551#0" expanded="false" />
-                    <element signature="e#4620#4621#0" expanded="false" />
-                    <element signature="e#5059#5060#0" expanded="false" />
-                    <element signature="e#5084#5085#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Cell.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/world/Cell.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="495">
-                  <caret line="37" column="41" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
-                  <folding>
-                    <element signature="imports" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="TerrainChunk.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/terrain/TerrainChunk.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152">
-                  <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Sky.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sky/Sky.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Surface.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/shapes/Surface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+              <folding>
+                <element signature="method#Surface#0;class#Surface#0" expanded="false" />
+                <element signature="method#Surface#1;class#Surface#0" expanded="false" />
+                <element signature="method#Surface#2;class#Surface#0" expanded="false" />
+                <element signature="method#Surface#3;class#Surface#0" expanded="false" />
+                <element signature="method#Surface#4;class#Surface#0" expanded="false" />
+                <element signature="method#setNormal#0;class#Surface#0" expanded="false" />
+                <element signature="e#1559#1586#0" expanded="false" />
+                <element signature="method#setLight#0;class#Surface#0" expanded="false" />
+                <element signature="class#NullSurface#0;class#Surface#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Math3D.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="541">
+              <caret line="512" column="22" selection-start-line="512" selection-start-column="22" selection-end-line="512" selection-end-column="22" />
+              <folding>
+                <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
+                <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
+                <element signature="method#normalize#0;class#Math3D#0" expanded="false" />
+                <element signature="method#scale#0;class#Math3D#0" expanded="false" />
+                <element signature="method#setMagnitude#0;class#Math3D#0" expanded="false" />
+                <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
+                <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
+                <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
+                <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
+                <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
+                <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
+                <element signature="method#axisVectorsTilt#1;class#Math3D#0" expanded="false" />
+                <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
+                <element signature="method#norm#0;class#Math3D#0" expanded="false" />
+                <element signature="method#norm#1;class#Math3D#0" expanded="false" />
+                <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
+                <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
+                <element signature="method#maxMin#1;class#Math3D#0" expanded="false" />
+                <element signature="method#min#0;class#Math3D#0" expanded="false" />
+                <element signature="method#min#1;class#Math3D#0" expanded="false" />
+                <element signature="method#min#2;class#Math3D#0" expanded="false" />
+                <element signature="method#min#3;class#Math3D#0" expanded="false" />
+                <element signature="method#minWhich#0;class#Math3D#0" expanded="false" />
+                <element signature="method#max#0;class#Math3D#0" expanded="false" />
+                <element signature="method#max#1;class#Math3D#0" expanded="false" />
+                <element signature="method#max#2;class#Math3D#0" expanded="false" />
+                <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
+                <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
+                <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
+                <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
+                <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
+                <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
+                <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
+                <element signature="method#transform#0;class#Math3D#0" expanded="false" />
+                <element signature="method#transform#1;class#Math3D#0" expanded="false" />
+                <element signature="method#transform#2;class#Math3D#0" expanded="false" />
+                <element signature="method#pow#0;class#Math3D#0" expanded="false" />
+                <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
+                <element signature="method#bound#0;class#Math3D#0" expanded="false" />
+                <element signature="class#Force#0;class#Math3D#0" expanded="false" />
+                <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
+                <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
+                <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
+                <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
+                <element signature="e#13812#13813#0" expanded="true" />
+                <element signature="e#13853#13854#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KamiEngine.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/KamiEngine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="11" column="55" selection-start-line="11" selection-start-column="55" selection-end-line="11" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/world/World.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="342">
+              <caret line="79" column="35" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#World#0;class#World#0" expanded="false" />
+                <element signature="method#addShape#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
+                <element signature="method#drawChunk#0;class#World#0" expanded="false" />
+                <element signature="method#drawRow#0;class#World#0" expanded="false" />
+                <element signature="method#drawColumn#0;class#World#0" expanded="false" />
+                <element signature="method#drawCell#0;class#World#0" expanded="false" />
+                <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
+                <element signature="method#update#0;class#World#0" expanded="false" />
+                <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -220,8 +191,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/world/Track.java" />
-        <option value="$PROJECT_DIR$/src/world/Path.java" />
         <option value="$PROJECT_DIR$/src/track/Point.java" />
         <option value="$PROJECT_DIR$/src/shapes/Flat.java" />
         <option value="$PROJECT_DIR$/src/track/Line.java" />
@@ -259,7 +228,6 @@
         <option value="$PROJECT_DIR$/src/shapes/StaticCube.java" />
         <option value="$PROJECT_DIR$/src/world/WorldCreator.java" />
         <option value="$PROJECT_DIR$/src/terrain/terrainModule/TerrainModule.java" />
-        <option value="$PROJECT_DIR$/src/character/Character.java" />
         <option value="$PROJECT_DIR$/src/terrain/IntersectionFinder.java" />
         <option value="$PROJECT_DIR$/src/engine/RaceEngine.java" />
         <option value="$PROJECT_DIR$/src/chunk/Chunk.java" />
@@ -267,10 +235,13 @@
         <option value="$PROJECT_DIR$/src/terrain/TerrainChunk.java" />
         <option value="$PROJECT_DIR$/src/world/Cell.java" />
         <option value="$PROJECT_DIR$/src/engine/Timer.java" />
-        <option value="$PROJECT_DIR$/src/engine/Painter.java" />
-        <option value="$PROJECT_DIR$/src/world/World.java" />
         <option value="$PROJECT_DIR$/src/terrain/Terrain.java" />
+        <option value="$PROJECT_DIR$/modelShipScratch.ot" />
+        <option value="$PROJECT_DIR$/src/character/Character.java" />
+        <option value="$PROJECT_DIR$/src/world/World.java" />
+        <option value="$PROJECT_DIR$/src/engine/Painter.java" />
         <option value="$PROJECT_DIR$/src/engine/KamiEngine.java" />
+        <option value="$PROJECT_DIR$/src/sky/Sky.java" />
       </list>
     </option>
   </component>
@@ -291,10 +262,9 @@
     <scope name="Unnamed" pattern="(src:camera.*||src:control.*||src:engine.*||src:projectiles.*||src:shapes.*||src:terrain.*||src:terrain.terrainmodule.*||src:list.*)&amp;&amp;!src:ships.module.*&amp;&amp;!src:ships.*&amp;&amp;!src:track.*||src:world.*" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-298" />
-    <option name="y" value="-1417" />
-    <option name="width" value="3440" />
-    <option name="height" value="1417" />
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1137" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -303,10 +273,61 @@
           <State>
             <id />
           </State>
+          <State>
+            <id>Android &gt; Lint &gt; Correctness</id>
+          </State>
+          <State>
+            <id>Android Lint for Kotlin</id>
+          </State>
+          <State>
+            <id>Class metricsJava</id>
+          </State>
+          <State>
+            <id>Class structureJava</id>
+          </State>
+          <State>
+            <id>Code style issuesJava</id>
+          </State>
+          <State>
+            <id>Declaration redundancyJava</id>
+          </State>
+          <State>
+            <id>Encapsulation issuesJava</id>
+          </State>
+          <State>
+            <id>Initialization issuesJava</id>
+          </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Java EE issues</id>
+          </State>
+          <State>
+            <id>Logging issuesJava</id>
+          </State>
+          <State>
+            <id>Memory issuesJava</id>
+          </State>
+          <State>
+            <id>Naming conventionsJava</id>
+          </State>
+          <State>
+            <id>Performance issuesJava</id>
+          </State>
+          <State>
+            <id>Security issuesJava</id>
+          </State>
+          <State>
+            <id>Serialization issuesJava</id>
+          </State>
+          <State>
+            <id>Threading issuesJava</id>
+          </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>Android</id>
+            <id>StaticVariableNamingConvention</id>
           </State>
         </selected-state>
       </profile-state>
@@ -337,9 +358,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -389,20 +407,6 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kami" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kami" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="terrain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -422,7 +426,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="particle" />
+              <option name="myItemId" value="sky" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -437,40 +441,21 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kami" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Kami" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="engine" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="IlluminatedCloudApplicationConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.By Scope" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -1044,31 +1029,33 @@
       <workItem from="1491688704595" duration="9273000" />
       <workItem from="1491779469405" duration="5391000" />
       <workItem from="1491875824106" duration="4333000" />
-      <workItem from="1491963462266" duration="1767000" />
+      <workItem from="1491963462266" duration="2635000" />
+      <workItem from="1492093010686" duration="2584000" />
+      <workItem from="1492182406989" duration="2010000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143389000" />
+    <option name="totallyTimeSpent" value="148851000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-298" y="-1417" width="3440" height="1417" extended-state="6" />
+    <frame x="0" y="23" width="1920" height="1137" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32482827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32409546" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29270634" sideWeight="0.50208336" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Anonymous Apex" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19245574" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19234544" sideWeight="0.49791667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="5.885815E-4" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.06176784" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="SOQL Query" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1126,8 +1113,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ships/module/Helium.java" />
-    <entry file="file://$PROJECT_DIR$/src/ships/module/Blaster.java" />
     <entry file="file://$PROJECT_DIR$/src/shapes/CubeFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1178,13 +1163,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="30" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/ext/nashorn.jar!/jdk/nashorn/internal/runtime/arrays/LengthNotWritableFilter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1206,13 +1184,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/particle/Particle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/world/interfaceelement/InterfaceElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1224,13 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/WorldElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1252,72 +1216,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="10" column="316" selection-start-line="10" selection-start-column="316" selection-end-line="10" selection-end-column="316" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="508" column="52" selection-start-line="508" selection-start-column="37" selection-end-line="508" selection-end-column="52" />
-          <folding>
-            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
-            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
-            <element signature="method#normalize#0;class#Math3D#0" expanded="false" />
-            <element signature="method#scale#0;class#Math3D#0" expanded="false" />
-            <element signature="method#setMagnitude#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
-            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
-            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
-            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
-            <element signature="method#axisVectorsTilt#1;class#Math3D#0" expanded="false" />
-            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
-            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
-            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
-            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#maxMin#1;class#Math3D#0" expanded="false" />
-            <element signature="method#min#0;class#Math3D#0" expanded="false" />
-            <element signature="method#min#1;class#Math3D#0" expanded="false" />
-            <element signature="method#min#2;class#Math3D#0" expanded="false" />
-            <element signature="method#min#3;class#Math3D#0" expanded="false" />
-            <element signature="method#minWhich#0;class#Math3D#0" expanded="false" />
-            <element signature="method#max#0;class#Math3D#0" expanded="false" />
-            <element signature="method#max#1;class#Math3D#0" expanded="false" />
-            <element signature="method#max#2;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
-            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
-            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
-            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#0;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#1;class#Math3D#0" expanded="false" />
-            <element signature="method#transform#2;class#Math3D#0" expanded="false" />
-            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
-            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
-            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
-            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
-            <element signature="e#13775#13776#0" expanded="false" />
-            <element signature="e#13812#13813#0" expanded="false" />
-            <element signature="e#13853#13854#0" expanded="false" />
-            <element signature="e#13899#13900#0" expanded="false" />
-            <element signature="e#13958#13959#0" expanded="false" />
-            <element signature="e#14013#14014#0" expanded="false" />
-            <element signature="e#14060#14061#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1405,30 +1303,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/character/Character.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="16" column="59" selection-start-line="16" selection-start-column="59" selection-end-line="16" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#Character#0;class#Character#0" expanded="false" />
-            <element signature="method#computeAxis#0;class#Character#0" expanded="false" />
-            <element signature="method#init#0;class#Character#0" expanded="false" />
-            <element signature="method#update#0;class#Character#0" expanded="false" />
-            <element signature="method#interaction#0;class#Character#0" expanded="false" />
-            <element signature="method#movement#0;class#Character#0" expanded="false" />
-            <element signature="method#moveTowardsHook#0;class#Character#0" expanded="false" />
-            <element signature="method#updateThrowHook#0;class#Character#0" expanded="false" />
-            <element signature="method#initiateThrowHook#0;class#Character#0" expanded="false" />
-            <element signature="method#runningMove#0;class#Character#0" expanded="false" />
-            <element signature="method#jump#0;class#Character#0" expanded="false" />
-            <element signature="method#upwardMove#0;class#Character#0" expanded="false" />
-            <element signature="method#doFriction#0;class#Character#0" expanded="false" />
-            <element signature="method#applyVelocity#0;class#Character#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/list/LList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1454,16 +1328,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/terrain/TerrainChunk.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/Home/jre/lib/ext/jfxrt.jar!/javafx/scene/Camera.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-915">
@@ -1483,9 +1347,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="37" column="41" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1493,15 +1355,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2971#2972#0" expanded="false" />
-            <element signature="e#3015#3016#0" expanded="false" />
-            <element signature="e#4550#4551#0" expanded="false" />
-            <element signature="e#4620#4621#0" expanded="false" />
-            <element signature="e#5059#5060#0" expanded="false" />
-            <element signature="e#5084#5085#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1509,39 +1363,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="8" column="191" selection-start-line="8" selection-start-column="191" selection-end-line="8" selection-end-column="191" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2064#2065#0" expanded="false" />
-            <element signature="e#2106#2107#0" expanded="false" />
-            <element signature="e#4118#4119#0" expanded="false" />
-            <element signature="e#4154#4155#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/shapes/Surface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="89" column="46" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#Surface#0;class#Surface#0" expanded="false" />
-            <element signature="method#Surface#1;class#Surface#0" expanded="false" />
-            <element signature="method#Surface#2;class#Surface#0" expanded="false" />
-            <element signature="method#Surface#3;class#Surface#0" expanded="false" />
-            <element signature="method#Surface#4;class#Surface#0" expanded="false" />
-            <element signature="method#setNormal#0;class#Surface#0" expanded="false" />
-            <element signature="e#1559#1586#0" expanded="false" />
-            <element signature="e#2048#2049#0" expanded="false" />
-            <element signature="e#2064#2065#0" expanded="false" />
-            <element signature="method#setLight#0;class#Surface#0" expanded="false" />
-            <element signature="e#2332#2333#0" expanded="false" />
-            <element signature="e#2365#2366#0" expanded="false" />
-            <element signature="method#toCamera#0;class#Surface#0" expanded="false" />
-            <element signature="class#NullSurface#0;class#Surface#0" expanded="false" />
-            <element signature="e#3464#3465#0" expanded="false" />
-            <element signature="e#3484#3485#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1552,49 +1374,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1605">
-          <caret line="116" column="30" selection-start-line="116" selection-start-column="30" selection-end-line="116" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/engine/Timer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="225">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding>
-            <element signature="e#104#105#0" expanded="true" />
-            <element signature="e#140#141#0" expanded="true" />
+            <element signature="e#104#105#0" expanded="false" />
+            <element signature="e#140#141#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/world/World.java">
+    <entry file="file://$PROJECT_DIR$/modelShipScratch.ot" />
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="32" column="44" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="44" />
-          <folding>
-            <element signature="method#draw#0;class#World#0" expanded="false" />
-            <element signature="method#drawInterface#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunks#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
-            <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
-            <element signature="method#drawRow#0;class#World#0" expanded="false" />
-            <element signature="method#drawColumn#0;class#World#0" expanded="false" />
-            <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
-            <element signature="method#update#0;class#World#0" expanded="false" />
-            <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/particle/Particle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/character/Character.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/WorldElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/terrain/Terrain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
+        <state relative-caret-position="0">
           <caret line="46" column="72" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
           <folding>
             <element signature="method#findIntersection#0;class#Terrain#0" expanded="false" />
@@ -1603,11 +1428,145 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/terrain/TerrainChunk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="79" column="35" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#World#0;class#World#0" expanded="false" />
+            <element signature="method#addShape#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunksRow#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunksColumn#0;class#World#0" expanded="false" />
+            <element signature="method#drawChunk#0;class#World#0" expanded="false" />
+            <element signature="method#drawRow#0;class#World#0" expanded="false" />
+            <element signature="method#drawColumn#0;class#World#0" expanded="false" />
+            <element signature="method#drawCell#0;class#World#0" expanded="false" />
+            <element signature="method#initWorldElements#0;class#World#0" expanded="false" />
+            <element signature="method#update#0;class#World#0" expanded="false" />
+            <element signature="method#getChunkCoord#0;class#World#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Painter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="64" column="5" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
+          <folding>
+            <element signature="method#setColor#0;class#Painter#0" expanded="false" />
+            <element signature="method#polygon#0;class#Painter#0" expanded="false" />
+            <element signature="method#clipPolygon#0;class#Painter#0" expanded="false" />
+            <element signature="method#rectangle#0;class#Painter#0" expanded="false" />
+            <element signature="method#toggleWire#0;class#Painter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/engine/KamiEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        <state relative-caret-position="75">
+          <caret line="11" column="55" selection-start-line="11" selection-start-column="55" selection-end-line="11" selection-end-column="55" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Math3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="512" column="22" selection-start-line="512" selection-start-column="22" selection-end-line="512" selection-end-column="22" />
+          <folding>
+            <element signature="method#flipDirection#0;class#Math3D#0" expanded="false" />
+            <element signature="method#magnitude#0;class#Math3D#0" expanded="false" />
+            <element signature="method#normalize#0;class#Math3D#0" expanded="false" />
+            <element signature="method#scale#0;class#Math3D#0" expanded="false" />
+            <element signature="method#setMagnitude#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#0;class#Math3D#0" expanded="false" />
+            <element signature="method#dotProduct#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductNormalized#1;class#Math3D#0" expanded="false" />
+            <element signature="method#crossProductUnormalized#0;class#Math3D#0" expanded="false" />
+            <element signature="method#axisVectors#0;class#Math3D#0" expanded="false" />
+            <element signature="method#axisVectorsTilt#1;class#Math3D#0" expanded="false" />
+            <element signature="method#upVector#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#0;class#Math3D#0" expanded="false" />
+            <element signature="method#norm#1;class#Math3D#0" expanded="false" />
+            <element signature="method#rotation#0;class#Math3D#0" expanded="false" />
+            <element signature="method#maxMin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#maxMin#1;class#Math3D#0" expanded="false" />
+            <element signature="method#min#0;class#Math3D#0" expanded="false" />
+            <element signature="method#min#1;class#Math3D#0" expanded="false" />
+            <element signature="method#min#2;class#Math3D#0" expanded="false" />
+            <element signature="method#min#3;class#Math3D#0" expanded="false" />
+            <element signature="method#minWhich#0;class#Math3D#0" expanded="false" />
+            <element signature="method#max#0;class#Math3D#0" expanded="false" />
+            <element signature="method#max#1;class#Math3D#0" expanded="false" />
+            <element signature="method#max#2;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#0;class#Math3D#0" expanded="false" />
+            <element signature="method#notZero#1;class#Math3D#0" expanded="false" />
+            <element signature="method#loadTrig#0;class#Math3D#0" expanded="false" />
+            <element signature="method#xsin#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#tan2#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#0;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#1;class#Math3D#0" expanded="false" />
+            <element signature="method#transform#2;class#Math3D#0" expanded="false" />
+            <element signature="method#pow#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#update#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#set#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#sin#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#cos#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#rotate#0;class#Angle#0;class#Math3D#0" expanded="false" />
+            <element signature="method#bound#0;class#Math3D#0" expanded="false" />
+            <element signature="class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#add#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#prepare#0;class#Force#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#0;class#Math3D#0" expanded="false" />
+            <element signature="method#doubles2Str#1;class#Math3D#0" expanded="false" />
+            <element signature="e#13812#13813#0" expanded="true" />
+            <element signature="e#13853#13854#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shapes/Surface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding>
+            <element signature="method#Surface#0;class#Surface#0" expanded="false" />
+            <element signature="method#Surface#1;class#Surface#0" expanded="false" />
+            <element signature="method#Surface#2;class#Surface#0" expanded="false" />
+            <element signature="method#Surface#3;class#Surface#0" expanded="false" />
+            <element signature="method#Surface#4;class#Surface#0" expanded="false" />
+            <element signature="method#setNormal#0;class#Surface#0" expanded="false" />
+            <element signature="e#1559#1586#0" expanded="false" />
+            <element signature="method#setLight#0;class#Surface#0" expanded="false" />
+            <element signature="class#NullSurface#0;class#Surface#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sky/Sky.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
