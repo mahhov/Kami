@@ -50,7 +50,7 @@ class KamiEngine {
 			painter.clear();
 			camera.move(controller);
 			camera.update(world.width, world.length, world.height);
-			controller.setView(camera.angle, camera.orig(), camera.normal);
+			controller.setView(camera.angle, camera.angleZ, camera.orig(), camera.normal);
 			world.update(terrain, controller);
 			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), world);
 			world.draw(painter, camera);

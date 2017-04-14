@@ -23,7 +23,7 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
 	int mouseState, rightMouseState;
 	
 	public double[] viewOrig, viewDir;
-	public Math3D.Angle viewAngle;
+	public Math3D.Angle viewAngle, viewAngleZ;
 	
 	private Robot robot;
 	
@@ -197,8 +197,9 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
 		}
 	}
 	
-	public void setView(Math3D.Angle angle, double[] orig, double[] dir) {
+	public void setView(Math3D.Angle angle, Math3D.Angle angleZ, double[] orig, double[] dir) {
 		viewAngle = angle;
+		viewAngleZ = angleZ;
 		viewOrig = orig;
 		viewDir = dir;
 	}

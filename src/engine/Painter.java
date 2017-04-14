@@ -49,7 +49,7 @@ public class Painter extends JFrame {
 	void clear() {
 		surfaceCount = 0;
 		drawCount = 0;
-		//		 brush.setColor(new Color(0f, 0f, 0f, .2f));
+		//		brush.setColor(new Color(0f, 0f, 0f, .2f));
 		brush.setColor(Color.BLACK);
 		brush.fillRect(0, 0, IMAGE_SIZE, IMAGE_SIZE);
 	}
@@ -73,8 +73,8 @@ public class Painter extends JFrame {
 		}
 	}
 	
-	public void drawImage(BufferedImage image, int shift) {
-		brush.drawImage(image, 0, 0, 800, 800, shift, 0, shift + 800, 800, null);
+	public void drawImage(BufferedImage image, int shift, int shiftVert) {
+		brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
 	public void polygon(double[][] xy, double light, Color color, boolean frame) {
