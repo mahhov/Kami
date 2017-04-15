@@ -1,5 +1,6 @@
 package character;
 
+import ambient.Music;
 import camera.TrailingCamera;
 import control.Controller;
 import engine.Math3D;
@@ -148,6 +149,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void initiateThrowHook(Terrain terrain, Controller controller) {
+		Music.HOOK.play();
 		hookx = x;
 		hooky = y;
 		hookz = z;

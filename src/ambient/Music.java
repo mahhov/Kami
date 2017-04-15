@@ -7,7 +7,8 @@ import java.io.File;
 
 public class Music {
 	
-	public static final Music BGMUSIC = new Music("nightwishTaikatalvi.wav", 240000, 6854927, true, -10, 0);
+	public static final Music BGMUSIC = new Music("nightwishTaikatalvi", 240000, 6854927, true, -10, 0);
+	public static final Music HOOK = new Music("boom1", 0, 15645, false, -10, 0);
 	// keep volume between -25 and 0 (except the background music)
 	
 	private File file;
@@ -21,15 +22,15 @@ public class Music {
 		Music test = BGMUSIC;
 		System.out.println(test.file.getAbsolutePath());
 		System.out.println(test.getClip().getFrameLength());
-		test.start = 240000;
-		test.end = test.start + 6000000;
+		test.start = 0;
+		test.end = 15645;
 		test.loop = true;
 		test.play(0, 0);
 		Thread.sleep(6000);
 	}
 	
 	Music(String fileName, int start, int end, boolean loop, double volume, double balance) {
-		file = new File("sounds/" + fileName);
+		file = new File("sounds/" + fileName + ".wav");
 		this.start = start;
 		this.end = end;
 		this.loop = loop;
