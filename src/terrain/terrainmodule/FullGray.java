@@ -12,6 +12,6 @@ public class FullGray extends TerrainModule {
 	private static Color randColor() {
 		if (Math3D.flip(.1))
 			return new Color(Math3D.rand(0, 255), Math3D.rand(0, 255), Math3D.rand(0, 255));
-		return Color.GRAY;
+		return new Color(0, 80, 120);
 	}
 }

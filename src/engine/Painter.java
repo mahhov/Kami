@@ -15,9 +15,12 @@ public class Painter extends JFrame {
 	public static String[] debugString = new String[] {"", "", "", "", "", ""};
 	public static String[] outputString = new String[] {"", "", "", "", "", ""};
 	
+	// paint mode
 	private static final String[] wireString = new String[] {"NORMAL", "WIRE", "NORMAL + WIRE"};
 	private static final int WIRE_ONLY = 1, WIRE_AND = 2;
 	private int wireMode;
+	private static final AlphaComposite BLUR_COMPOSITE = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .2f);
+	private boolean blur;
 	
 	private final int FRAME_SIZE, IMAGE_SIZE;
 	private static int borderSize = 0;
@@ -28,6 +31,7 @@ public class Painter extends JFrame {
 	Area clip;
 	
 	Painter(int frameSize, int imageSize, Controller controller) {
+		setPaintModeString();
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
 		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, TYPE_INT_RGB);
@@ -49,9 +53,6 @@ public class Painter extends JFrame {
 	void clear() {
 		surfaceCount = 0;
 		drawCount = 0;
-		//		brush.setColor(new Color(0f, 0f, 0f, .2f));
-		brush.setColor(Color.BLACK);
-		brush.fillRect(0, 0, IMAGE_SIZE, IMAGE_SIZE);
 	}
 	
 	public void paint() {
@@ -74,7 +75,12 @@ public class Painter extends JFrame {
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
-		brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
+		if (blur) {
+			brush.setComposite(BLUR_COMPOSITE);
+			brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
+			brush.setComposite(AlphaComposite.Src);
+		} else
+			brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
 	public void polygon(double[][] xy, double light, Color color, boolean frame) {
@@ -123,9 +129,19 @@ public class Painter extends JFrame {
 		brush.fillRect(xywh[0], xywh[1], xywh[2], xywh[3]);
 	}
 	
-	void toggleWire() {
-		if (++wireMode == 3)
-			wireMode = 0;
-		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle";
+	void updateMode(Controller controller) {
+		if (controller.isKeyPressed(Controller.KEY_SLASH)) {
+			if (++wireMode == 3)
+				wireMode = 0;
+			setPaintModeString();
+		}
+		if (controller.isKeyPressed(Controller.KEY_RIGHT_CAROT)) {
+			blur = !blur;
+			setPaintModeString();
+		}
+	}
+	
+	private void setPaintModeString() {
+		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle)  :  blur " + (blur ? "ENABLED" : "DISABLED") + " (press . to toggle)";
 	}
 }

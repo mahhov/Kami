@@ -56,8 +56,7 @@ class KamiEngine {
 			world.update(terrain, controller);
 			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), world);
 			world.draw(painter, camera);
-			if (controller.isKeyPressed(Controller.KEY_SLASH))
-				painter.toggleWire();
+			painter.updateMode(controller);
 			painter.paint();
 			checkPause();
 			sleep(10);

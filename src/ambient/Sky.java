@@ -25,6 +25,9 @@ public class Sky implements WorldElement, InterfaceElement {
 		// init
 		backgroundImage = new BufferedImage(WIDTH * 2, WIDTH * 2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D brush = (Graphics2D) backgroundImage.getGraphics();
+		// background
+		brush.setColor(new Color(30, 0, 50));
+		brush.fillRect(0, 0, WIDTH, WIDTH);
 		// random stars
 		int colorMax = 150;
 		for (int i = 0; i < 1000; i++) {
