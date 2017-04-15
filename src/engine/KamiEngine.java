@@ -1,9 +1,10 @@
 package engine;
 
+import ambient.Music;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
-import sky.Sky;
+import ambient.Sky;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
@@ -20,6 +21,7 @@ class KamiEngine {
 	private boolean pause;
 	
 	KamiEngine() {
+		Music.BGMUSIC.play();
 		Math3D.loadTrig(1000);
 		controller = new Controller(FRAME, FRAME);
 		painter = new Painter(FRAME, IMAGE, controller);
@@ -107,3 +109,4 @@ class KamiEngine {
 // todo : environment (e.g. clouds, zone types, world generation)
 // todo : true boundless terrain/world
 // todo : border drawing, ambient sky, ambient music, particles when you shoot the grappling hook.
+// todo : max range to hook, and check intersection finder for slow down bug

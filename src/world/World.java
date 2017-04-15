@@ -12,7 +12,7 @@ import terrain.Terrain;
 import world.interfaceelement.InterfaceElement;
 
 public class World {
-	public static final int CHUNK_SIZE = 5;
+	public static final int CHUNK_SIZE = 10;
 	public final int width, length, height;
 	WorldChunk[][][] chunk;
 	
