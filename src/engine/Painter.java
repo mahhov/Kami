@@ -19,14 +19,14 @@ public class Painter extends JFrame {
 	private static final String[] wireString = new String[] {"NORMAL", "WIRE", "NORMAL + WIRE"};
 	private static final int WIRE_ONLY = 1, WIRE_AND = 2;
 	private int wireMode;
-	private static final AlphaComposite BLUR_COMPOSITE = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .2f);
+	private static final AlphaComposite BLUR_COMPOSITE = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .4f);
 	private boolean blur;
 	
 	private final int FRAME_SIZE, IMAGE_SIZE;
 	private static int borderSize = 0;
 	private BufferedImage canvas;
 	Graphics2D brush;
-	private Graphics frameBrush;
+	private Graphics2D frameBrush;
 	int surfaceCount, drawCount;
 	Area clip;
 	
@@ -47,7 +47,7 @@ public class Painter extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setIgnoreRepaint(true);
 		setVisible(true);
-		frameBrush = this.getGraphics();
+		frameBrush = (Graphics2D) this.getGraphics();
 	}
 	
 	void clear() {
@@ -75,12 +75,7 @@ public class Painter extends JFrame {
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
-		if (blur) {
-			brush.setComposite(BLUR_COMPOSITE);
-			brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
-			brush.setComposite(AlphaComposite.Src);
-		} else
-			brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
+		brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
 	public void polygon(double[][] xy, double light, Color color, boolean frame) {
@@ -136,7 +131,10 @@ public class Painter extends JFrame {
 			setPaintModeString();
 		}
 		if (controller.isKeyPressed(Controller.KEY_RIGHT_CAROT)) {
-			blur = !blur;
+			if (blur = !blur) {
+				frameBrush.setComposite(BLUR_COMPOSITE);
+			} else
+				frameBrush.setComposite(AlphaComposite.Src);
 			setPaintModeString();
 		}
 	}

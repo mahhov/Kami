@@ -10,7 +10,7 @@ import world.World;
 import world.WorldCreator;
 
 class KamiEngine {
-	private static final int FRAME = 800, IMAGE = FRAME;
+	private static final int FRAME = 400, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
 	private Controller controller;
@@ -111,7 +111,6 @@ class KamiEngine {
 // todo : particles when you shoot the grappling hook.
 // todo : max range to hook, and check intersection finder for slow down bug
 // todo : toggle controls for bg music and sound affects
-// todo : painter alpha blur fix
 // todo : multi cube character
 // todo : multi cube character collision
 // todo : flying sound affect
