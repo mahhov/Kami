@@ -108,7 +108,6 @@ class KamiEngine {
 // todo : environment (e.g. clouds, zone types, world generation)
 // todo : true boundless terrain/world
 // todo : border drawing
-// todo : particles when you shoot the grappling hook.
 // todo : max range to hook, and check intersection finder for slow down bug
 // todo : toggle controls for bg music and sound affects
 // todo : multi cube character

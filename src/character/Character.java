@@ -5,6 +5,7 @@ import camera.TrailingCamera;
 import control.Controller;
 import engine.Math3D;
 import engine.Painter;
+import particle.HookParticle;
 import particle.SmokeParticle;
 import shapes.Cube;
 import shapes.ShapeParent;
@@ -84,15 +85,14 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		boolean hookPress = controller.isKeyPressed(Controller.KEY_SHIFT) || controller.isMousePressed();
 		if (hookPress || controller.isKeyDown(Controller.KEY_SHIFT) || controller.isMouseDown()) {
 			if (hookState == HOOK_ATTACHED) {
-				if (controller.isKeyDown(Controller.KEY_SPACE))
-					hookState = HOOK_ACTIVATED;
+				hookState = HOOK_ACTIVATED;
 			} else if (hookState == HOOK_ACTIVATED)
 				moveTowardsHook();
 			else if (hookState == HOOK_THROWING) {
 				boolean[] collide = updateThrowHook(terrain);
 				if (collide[0]) { // collide with terrain
 					Music.HOOK.play();
-					hookState = HOOK_ACTIVATED;
+					hookState = HOOK_ATTACHED;
 				} else if (collide[1])
 					hookState = HOOK_NONE; // collide with boundary
 			} else if (hookPress) {
@@ -246,6 +246,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void addToWorld(World world) {
+		if (hookState == HOOK_ATTACHED)
+			for (int i = 0; i < 10; i++)
+				world.addParticle(new HookParticle(hookx, hooky, hookz));
+		
 		if (jetting)
 			world.addParticle(new SmokeParticle(x, y, z));
 		
