@@ -1,10 +1,10 @@
 package engine;
 
 import ambient.Music;
+import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
-import ambient.Sky;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
@@ -21,7 +21,6 @@ class KamiEngine {
 	private boolean pause;
 	
 	KamiEngine() {
-		Music.BGMUSIC.play();
 		Math3D.loadTrig(1000);
 		controller = new Controller(FRAME, FRAME);
 		painter = new Painter(FRAME, IMAGE, controller);
@@ -42,6 +41,7 @@ class KamiEngine {
 	
 	void begin() {
 		System.out.println("Begin");
+//		Music.BGMUSIC.play();
 		int frame = 0;
 		long beginTime = 0, endTime;
 		while (true) {
@@ -107,5 +107,11 @@ class KamiEngine {
 // todo : survival
 // todo : environment (e.g. clouds, zone types, world generation)
 // todo : true boundless terrain/world
-// todo : border drawing, ambient sky, ambient music, particles when you shoot the grappling hook.
+// todo : border drawing
+// todo : particles when you shoot the grappling hook.
 // todo : max range to hook, and check intersection finder for slow down bug
+// todo : toggle controls for bg music and sound affects
+// todo : painter alpha blur fix
+// todo : multi cube character
+// todo : multi cube character collision
+// todo : flying sound affect

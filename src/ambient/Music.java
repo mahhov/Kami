@@ -1,41 +1,43 @@
 package ambient;
 
-import engine.Math3D;
-
 import javax.sound.sampled.*;
 import java.io.File;
 
 public class Music {
 	
-	public static final Music BGMUSIC = new Music("nightwishTaikatalvi", 240000, 6854927, true, -10, 0);
-	public static final Music HOOK = new Music("boom1", 0, 15645, false, -10, 0);
+	public static final Music BGMUSIC = new Music("nightwishTaikatalvi", 240000, 6854927, true, -10);
+	public static final Music HOOK = new Music("boom1", 0, 15645, false, -15);
+	public static final Music ZIP = new Music("zip", 5000, 15000, false, 0);
 	// keep volume between -25 and 0 (except the background music)
 	
 	private File file;
 	private int start, end;
 	private boolean loop;
-	private double volume, balance;
+	private double volume;
+	private Clip clip;
+	private FloatControl volumeControl;
 	// volume from -80 to 6 inclusive
 	// balance from -1 to 1 inclusive
 	
 	public static void main(String[] arg) throws InterruptedException {
-		Music test = BGMUSIC;
+		Music test = ZIP;
 		System.out.println(test.file.getAbsolutePath());
 		System.out.println(test.getClip().getFrameLength());
-		test.start = 0;
-		test.end = 15645;
+		test.start = 5000;
+		test.end = 15000;
 		test.loop = true;
-		test.play(0, 0);
+		test.play();
 		Thread.sleep(6000);
 	}
 	
-	Music(String fileName, int start, int end, boolean loop, double volume, double balance) {
+	Music(String fileName, int start, int end, boolean loop, double volume) {
 		file = new File("sounds/" + fileName + ".wav");
 		this.start = start;
 		this.end = end;
 		this.loop = loop;
 		this.volume = volume;
-		this.balance = balance;
+		clip = getClip();
+		volumeControl = ((FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN));
 	}
 	
 	private Clip getClip() {
@@ -58,30 +60,7 @@ public class Music {
 	}
 	
 	public void play() {
-		play(0, 0);
-	}
-	
-	public void play(double dx, double dy) {
-		double d = Math3D.magnitude(dx, dy);
-		if (d < 50)
-			d = 50;
-		double volume = 50 - Math.log(d * d) * 5;
-		if (volume < -55)
-			volume = -55;
-		double balance = dx / 350f;
-		if (balance > 1)
-			balance = 1;
-		if (balance < -1)
-			balance = -1;
-		playHelper(volume, balance);
-	}
-	
-	private void playHelper(double volume, double balance) {
-		Clip clip = getClip();
-		
-		((FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN)).setValue((float) (volume + this.volume));
-		((FloatControl) clip.getControl(FloatControl.Type.PAN)).setValue((float) (balance + this.balance));
-		
+		setVolume(volume);
 		if (loop) {
 			clip.setFramePosition(start);
 			clip.setLoopPoints(start, end);
@@ -90,5 +69,9 @@ public class Music {
 			clip.setFramePosition(start);
 			clip.start();
 		}
+	}
+	
+	public void setVolume(double volume) {
+		volumeControl.setValue((float) volume);
 	}
 }

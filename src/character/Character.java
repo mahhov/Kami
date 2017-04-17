@@ -90,9 +90,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 				moveTowardsHook();
 			else if (hookState == HOOK_THROWING) {
 				boolean[] collide = updateThrowHook(terrain);
-				if (collide[0])
-					hookState = HOOK_ACTIVATED; // collide with terrain
-				else if (collide[1])
+				if (collide[0]) { // collide with terrain
+					Music.HOOK.play();
+					hookState = HOOK_ACTIVATED;
+				} else if (collide[1])
 					hookState = HOOK_NONE; // collide with boundary
 			} else if (hookPress) {
 				hookState = HOOK_THROWING;
@@ -149,7 +150,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void initiateThrowHook(Terrain terrain, Controller controller) {
-		Music.HOOK.play();
+		Music.ZIP.play();
 		hookx = x;
 		hooky = y;
 		hookz = z;
