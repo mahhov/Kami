@@ -2,12 +2,14 @@ package ambient;
 
 import javax.sound.sampled.*;
 import java.io.File;
+import java.io.FileInputStream;
 
 public class Music {
 	
 	public static final Music BGMUSIC = new Music("nightwishTaikatalvi", 240000, 6854927, true, -10);
 	public static final Music HOOK = new Music("boom1", 0, 15645, false, -15);
 	public static final Music ZIP = new Music("zip", 5000, 15000, false, 0);
+	public static final Music WOOSH = new Music("woosh", 2500, 5500, false, 0);
 	// keep volume between -25 and 0 (except the background music)
 	
 	private File file;
@@ -20,12 +22,9 @@ public class Music {
 	// balance from -1 to 1 inclusive
 	
 	public static void main(String[] arg) throws InterruptedException {
-		Music test = ZIP;
+		Music test = WOOSH;
 		System.out.println(test.file.getAbsolutePath());
 		System.out.println(test.getClip().getFrameLength());
-		test.start = 5000;
-		test.end = 15000;
-		test.loop = true;
 		test.play();
 		Thread.sleep(6000);
 	}
@@ -42,13 +41,11 @@ public class Music {
 	
 	private Clip getClip() {
 		try {
-			AudioInputStream audio = AudioSystem.getAudioInputStream(file);
+			AudioInputStream audio = AudioSystem.getAudioInputStream(file); // todo: figure out how to not have to open audio file twice
 			AudioFormat format = audio.getFormat();
-			if (format.getChannels() == 1) {
-				format = new AudioFormat(format.getSampleRate(),
-						format.getSampleSizeInBits(), 2, true, false);
-				audio = AudioSystem.getAudioInputStream(format, audio);
-			}
+			if (format.getChannels() == 1)
+				format = new AudioFormat(format.getSampleRate(), format.getSampleSizeInBits(), 2, true, false);
+			audio = new AudioInputStream(new FileInputStream(file), format, end + 1);
 			Clip clip = AudioSystem.getClip();
 			clip.open(audio);
 			audio.close();
@@ -67,6 +64,7 @@ public class Music {
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} else {
 			clip.setFramePosition(start);
+			clip.setLoopPoints(start, end);
 			clip.start();
 		}
 	}
