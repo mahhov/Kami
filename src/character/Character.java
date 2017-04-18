@@ -269,6 +269,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		}
 		
 		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+		//		Cuboid shape = new Cuboid(x, y, z + .5, angle, angleZ, angleTilt, .5, 2, 2, null, null, this);
 		world.addShape((int) x, (int) y, (int) (z + .5), shape);
 	}
 	
