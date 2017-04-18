@@ -22,6 +22,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private static final int JUMP_MAX = 1;
 	private int jumpRemain;
 	
+	private static final String[] STATE_STRING = new String[] {"GROUND", "CLIMB", "AIR"};
 	private static final int STATE_GROUND = 0, STATE_CLIMB = 1, STATE_AIR = 2;
 	private int state;
 	private boolean jetting;
@@ -125,8 +126,13 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		// move x,y,z & avoid collisions & set state
 		applyVelocity(terrain);
 		
-		String[] stateString = new String[] {"GROUND", "CLIMB", "AIR"};
-		Painter.debugString[2] = stateString[state];
+		double vsq = Math3D.magnitudeSqrd(vx, vy, vz);
+		boolean vfast = vsq > 2;
+		if (vfast)
+			Music.WOOSH.play();
+		
+		Painter.debugString[2] = STATE_STRING[state];
+		Painter.debugString[4] = "velocity " + vsq + (vfast ? "XXXXXXXXXXXXXXXXXX" : "");
 	}
 	
 	private void moveTowardsHook() {

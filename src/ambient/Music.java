@@ -22,10 +22,12 @@ public class Music {
 	// balance from -1 to 1 inclusive
 	
 	public static void main(String[] arg) throws InterruptedException {
-		Music test = WOOSH;
+		Music test = BGMUSIC;
 		System.out.println(test.file.getAbsolutePath());
 		System.out.println(test.getClip().getFrameLength());
 		test.play();
+		Thread.sleep(6000);
+		System.out.println(test.clip.isRunning());
 		Thread.sleep(6000);
 	}
 	
@@ -36,7 +38,9 @@ public class Music {
 		this.loop = loop;
 		this.volume = volume;
 		clip = getClip();
+		clip.setLoopPoints(start, end);
 		volumeControl = ((FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN));
+		setVolume(volume);
 	}
 	
 	private Clip getClip() {
@@ -57,16 +61,13 @@ public class Music {
 	}
 	
 	public void play() {
-		setVolume(volume);
-		if (loop) {
-			clip.setFramePosition(start);
-			clip.setLoopPoints(start, end);
+		if (clip.isRunning())
+			return;
+		clip.setFramePosition(start);
+		if (loop)
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
-		} else {
-			clip.setFramePosition(start);
-			clip.setLoopPoints(start, end);
+		else
 			clip.start();
-		}
 	}
 	
 	public void setVolume(double volume) {
