@@ -279,14 +279,23 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		//		world.addShape((int) x, (int) y, (int) (z + .5), shape);
 		
 		double[] leg = new double[] {.5, .5, .5};
-		double[] body = new double[] {.8, .6, 1.5};
+		double legGap = .8;
+		double[] body = new double[] {.8, .6, 1};
 		double[] head = new double[] {1, 1, 1};
+		double[] shoulder = new double[] {.5, .5, .5};
+		double shoulderDownOffset = .1;
+		double shoulderGap = body[0] + shoulder[0];
+		
 		double stackz = z + leg[2];
-		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, leg[0], leg[1], leg[2], null, null, this));
-		stackz += body[2];
+		world.addShape((int) (x + rightUp[0] * legGap), (int) (y + rightUp[1] * legGap), (int) (stackz + rightUp[2] * legGap), new Cuboid(x + rightUp[0] * legGap, y + rightUp[1] * legGap, stackz + rightUp[2] * legGap, angle, angleZ, angleTilt, leg[0], leg[1], leg[2], null, null, this));
+		world.addShape((int) (x + rightUp[0] * -legGap), (int) (y + rightUp[1] * -legGap), (int) (stackz + rightUp[2] * -legGap), new Cuboid(x + rightUp[0] * -legGap, y + rightUp[1] * -legGap, stackz + rightUp[2] * -legGap, angle, angleZ, angleTilt, leg[0], leg[1], leg[2], null, null, this));
+		stackz += leg[2] + body[2];
 		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, body[0], body[1], body[2], null, null, this));
-		stackz += head[2];
+		stackz += body[2] + head[2];
 		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, head[0], head[1], head[2], null, null, this));
+		stackz += -head[2] - shoulderDownOffset;
+		world.addShape((int) (x + rightUp[0] * shoulderGap), (int) (y + rightUp[1] * shoulderGap), (int) (stackz + rightUp[2] * shoulderGap), new Cuboid(x + rightUp[0] * shoulderGap, y + rightUp[1] * shoulderGap, stackz + rightUp[2] * shoulderGap, angle, angleZ, angleTilt, shoulder[0], shoulder[1], shoulder[2], null, null, this));
+		world.addShape((int) (x + rightUp[0] * -shoulderGap), (int) (y + rightUp[1] * -shoulderGap), (int) (stackz + rightUp[2] * -shoulderGap), new Cuboid(x + rightUp[0] * -shoulderGap, y + rightUp[1] * -shoulderGap, stackz + rightUp[2] * -shoulderGap, angle, angleZ, angleTilt, shoulder[0], shoulder[1], shoulder[2], null, null, this));
 	}
 	
 	public double getVsq() {
