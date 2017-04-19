@@ -20,7 +20,9 @@ public class Painter extends JFrame {
 	private static final int WIRE_ONLY = 1, WIRE_AND = 2;
 	private int wireMode;
 	private static final AlphaComposite BLUR_COMPOSITE = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, .4f);
-	private boolean blur;
+	private static final String[] blurString = new String[] {"OFF", "ON ALWAYS", "ON DYNAMIC"};
+	private static final int BLUR_OFF = 0, BLUR_FULL = 1, BLUR_DYNAMIC = 2;
+	private int blurMode;
 	
 	private final int FRAME_SIZE, IMAGE_SIZE;
 	private static int borderSize = 0;
@@ -131,15 +133,24 @@ public class Painter extends JFrame {
 			setPaintModeString();
 		}
 		if (controller.isKeyPressed(Controller.KEY_RIGHT_CAROT)) {
-			if (blur = !blur) {
+			if (++blurMode == 3)
+				blurMode = 0;
+			if (blurMode == BLUR_FULL)
 				frameBrush.setComposite(BLUR_COMPOSITE);
-			} else
+			else if (blurMode == BLUR_OFF)
 				frameBrush.setComposite(AlphaComposite.Src);
 			setPaintModeString();
 		}
 	}
 	
+	public void setBlur(double blur) {
+		if (blurMode == BLUR_DYNAMIC) {
+			blur = Math3D.maxMin(blur, 1, .1);
+			frameBrush.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) blur));
+		}
+	}
+	
 	private void setPaintModeString() {
-		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle)  :  blur " + (blur ? "ENABLED" : "DISABLED") + " (press . to toggle)";
+		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle)  :  blur " + blurString[blurMode] + " (press . to toggle)";
 	}
 }

@@ -1,5 +1,6 @@
 package engine;
 
+import ambient.Blur;
 import ambient.Music;
 import ambient.Sky;
 import camera.TrailingCamera;
@@ -36,6 +37,7 @@ class KamiEngine {
 		camera.setFollow(character);
 		world.addElement(character);
 		world.addElement(new Sky(FRAME));
+		world.addElement(new Blur(character));
 		world.initWorldElements();
 	}
 	

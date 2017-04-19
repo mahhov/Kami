@@ -34,7 +34,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	private double hookvx, hookvy, hookvz;
 	
 	private double x, y, z;
-	private double vx, vy, vz;
+	private double vx, vy, vz, vsq;
 	private Math3D.Angle angle, angleZ, angleTilt;
 	private double[] norm, rightUp;
 	
@@ -127,13 +127,13 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		// move x,y,z & avoid collisions & set state
 		applyVelocity(terrain);
 		
-		double vsq = Math3D.magnitudeSqrd(vx, vy, vz);
+		// woosh sound
+		vsq = Math3D.magnitudeSqrd(vx, vy, vz);
 		boolean vfast = vsq > 2;
 		if (vfast)
 			Music.WOOSH.play();
 		
 		Painter.debugString[2] = STATE_STRING[state];
-		Painter.debugString[4] = "velocity " + vsq + (vfast ? "XXXXXXXXXXXXXXXXXX" : "");
 	}
 	
 	private void moveTowardsHook() {
@@ -287,6 +287,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, body[0], body[1], body[2], null, null, this));
 		stackz += head[2];
 		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, head[0], head[1], head[2], null, null, this));
+	}
+	
+	public double getVsq() {
+		return vsq;
 	}
 	
 	public double getX() {
