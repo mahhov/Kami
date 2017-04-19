@@ -113,3 +113,4 @@ class KamiEngine {
 // todo : multi cube character
 // todo : multi cube character collision
 // todo : flying sound affect
+// todo : blur based on velocity

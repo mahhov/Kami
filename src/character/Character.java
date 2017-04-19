@@ -8,6 +8,7 @@ import engine.Painter;
 import particle.HookParticle;
 import particle.SmokeParticle;
 import shapes.Cube;
+import shapes.Cuboid;
 import shapes.ShapeParent;
 import terrain.Terrain;
 import world.World;
@@ -274,9 +275,18 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			}
 		}
 		
-		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
-		//		Cuboid shape = new Cuboid(x, y, z + .5, angle, angleZ, angleTilt, .5, 2, 2, null, null, this);
-		world.addShape((int) x, (int) y, (int) (z + .5), shape);
+		//		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+		//		world.addShape((int) x, (int) y, (int) (z + .5), shape);
+		
+		double[] leg = new double[] {.5, .5, .5};
+		double[] body = new double[] {.8, .6, 1.5};
+		double[] head = new double[] {1, 1, 1};
+		double stackz = z + leg[2];
+		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, leg[0], leg[1], leg[2], null, null, this));
+		stackz += body[2];
+		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, body[0], body[1], body[2], null, null, this));
+		stackz += head[2];
+		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, head[0], head[1], head[2], null, null, this));
 	}
 	
 	public double getX() {

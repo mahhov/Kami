@@ -27,8 +27,6 @@ public class Music {
 		System.out.println(test.getClip().getFrameLength());
 		test.play();
 		Thread.sleep(6000);
-		System.out.println(test.clip.isRunning());
-		Thread.sleep(6000);
 	}
 	
 	Music(String fileName, int start, int end, boolean loop, double volume) {
