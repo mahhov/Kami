@@ -26,7 +26,7 @@ public class Terrain {
 	}
 	
 	private void generate(int cx, int cy, int cz) {
-		dirtyDrawChunk = new LList();
+		dirtyDrawChunk = new LList<>();
 		dirtyDrawChunk = dirtyDrawChunk.add(terrainChunk[cx][cy][cz]);
 		terrainChunk[cx][cy][cz].generated = true;
 		if (cz == 0) {
@@ -98,8 +98,8 @@ public class Terrain {
 			c.node.addToWorld(world);
 	}
 	
-	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge) {
-		return intersectionFinder.find(orig, dir, allowSlide, limitDistance, allowCollideWithEdge);
+	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge, int buffer) {
+		return intersectionFinder.find(orig, dir, allowSlide, limitDistance, allowCollideWithEdge, buffer);
 	}
 	
 	public boolean[] getIntersectionCollide() {
@@ -121,8 +121,8 @@ public class Terrain {
 		return terrainChunk[coord[0]][coord[1]][coord[2]] != null && terrainChunk[coord[0]][coord[1]][coord[2]].isEmpty(coord[3], coord[4], coord[5]);
 	}
 	
-	boolean isInBounds(int x, int y, int z) {
-		if (x >= 1 && y >= 1 && z >= 1 && x < width - 2 && y < length - 2 && z < height - 2) {
+	boolean isInBounds(int x, int y, int z, int buffer) {
+		if (x >= 1 + buffer && y >= 1 + buffer && z >= 1 + buffer && x < width - 2 - buffer && y < length - 2 - buffer && z < height - 2 - buffer) {
 			int[] coord = getChunkCoord(x, y, z);
 			if (terrainChunk[coord[0]][coord[1]][coord[2]] != null)
 				return true;

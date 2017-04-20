@@ -91,6 +91,7 @@ class KamiEngine {
 		System.out.println("R F to move camera up / down");
 		System.out.println("Z X to move camera farther / nearer");
 		System.out.println("Press / to toggle wire mode");
+		System.out.println("Press . to toggle blur mode");
 		System.out.println("Space tap to jump");
 		System.out.println("Space press to jet pack");
 		System.out.println("Space press while running into a wall to climb the wall");
@@ -112,6 +113,6 @@ class KamiEngine {
 // todo : border drawing
 // todo : max range to hook, and check intersection finder for slow down bug
 // todo : toggle controls for bg music and sound affects
-// todo : multi cube character
 // todo : multi cube character collision
 // todo : flying sound affect
+// todo : moving character animation

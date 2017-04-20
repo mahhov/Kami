@@ -36,6 +36,9 @@ public class World {
 	}
 	
 	public void addShape(int x, int y, int z, Shape shape) {
+		x = Math3D.maxMin(x, width - 1, 0);
+		y = Math3D.maxMin(y, length - 1, 0);
+		z = Math3D.maxMin(z, height - 1, 0);
 		int cx = x / CHUNK_SIZE;
 		int cy = y / CHUNK_SIZE;
 		int cz = z / CHUNK_SIZE;

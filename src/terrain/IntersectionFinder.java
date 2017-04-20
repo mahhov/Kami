@@ -16,13 +16,14 @@ class IntersectionFinder {
 	boolean[] collide;
 	private boolean[] isDirZero;
 	private boolean inBounds;
+	private int buffer;
 	
 	IntersectionFinder(Terrain terrain) {
 		this.terrain = terrain;
 	}
 	
-	double[] find(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge) {
-		reset(orig, dir);
+	double[] find(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge, int buffer) {
+		reset(orig, dir, buffer);
 		while (true) {
 			prefixComputeMove();
 			if (moved + move > maxMove && limitDistance) {
@@ -39,7 +40,7 @@ class IntersectionFinder {
 		}
 	}
 	
-	private void reset(double[] orig, double[] dir) {
+	private void reset(double[] orig, double[] dir, int buffer) {
 		this.orig = orig;
 		this.dir = dir;
 		x = orig[0];
@@ -70,6 +71,7 @@ class IntersectionFinder {
 			dir[2] = 0;
 			isDirZeroNum++;
 		}
+		this.buffer = buffer;
 	}
 	
 	private void prefixComputeMove() {
@@ -124,7 +126,7 @@ class IntersectionFinder {
 	}
 	
 	private boolean isOk(boolean limitDistance) {
-		inBounds = terrain.isInBounds(intx, inty, intz);
+		inBounds = terrain.isInBounds(intx, inty, intz, buffer);
 		boolean ok = inBounds && terrain.isEmpty(intx, inty, intz);
 		if (limitDistance)
 			return ok;

@@ -148,7 +148,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		hookvy *= HOOK_FRICTION;
 		hookvz = (hookvz - HOOK_GRAVITY) * HOOK_FRICTION;
 		
-		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz}, false, true, false);
+		double newxyz[] = terrain.findIntersection(new double[] {hookx, hooky, hookz}, new double[] {hookvx, hookvy, hookvz}, false, true, false, 0);
 		hookx = newxyz[0];
 		hooky = newxyz[1];
 		hookz = newxyz[2];
@@ -162,7 +162,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		hooky = y;
 		hookz = z;
 		
-		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false, true);
+		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false, true, 0);
 		xyz[0] -= x;
 		xyz[1] -= y;
 		xyz[2] -= z;
@@ -232,7 +232,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void applyVelocity(Terrain terrain) {
-		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz}, true, true, true);
+		double[] newxyz = terrain.findIntersection(new double[] {x, y, z}, new double[] {vx, vy, vz}, true, true, true, 0);
 		x = newxyz[0];
 		y = newxyz[1];
 		z = newxyz[2];
@@ -279,23 +279,27 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		//		world.addShape((int) x, (int) y, (int) (z + .5), shape);
 		
 		double[] leg = new double[] {.5, .5, .5};
-		double legGap = .8;
-		double[] body = new double[] {.8, .6, 1};
+		double legGap = 1;
+		double[] body = new double[] {1.5, 1.5, 1.5};
 		double[] head = new double[] {1, 1, 1};
 		double[] shoulder = new double[] {.5, .5, .5};
-		double shoulderDownOffset = .1;
-		double shoulderGap = body[0] + shoulder[0];
+		double shoulderDownOffset = 1;
+		double shoulderGap = body[0] + shoulder[0] + .5;
 		
 		double stackz = z + leg[2];
-		world.addShape((int) (x + rightUp[0] * legGap), (int) (y + rightUp[1] * legGap), (int) (stackz + rightUp[2] * legGap), new Cuboid(x + rightUp[0] * legGap, y + rightUp[1] * legGap, stackz + rightUp[2] * legGap, angle, angleZ, angleTilt, leg[0], leg[1], leg[2], null, null, this));
-		world.addShape((int) (x + rightUp[0] * -legGap), (int) (y + rightUp[1] * -legGap), (int) (stackz + rightUp[2] * -legGap), new Cuboid(x + rightUp[0] * -legGap, y + rightUp[1] * -legGap, stackz + rightUp[2] * -legGap, angle, angleZ, angleTilt, leg[0], leg[1], leg[2], null, null, this));
-		stackz += leg[2] + body[2];
-		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, body[0], body[1], body[2], null, null, this));
-		stackz += body[2] + head[2];
-		world.addShape((int) x, (int) y, (int) stackz, new Cuboid(x, y, stackz, angle, angleZ, angleTilt, head[0], head[1], head[2], null, null, this));
+		addBodyPieceToWorld(x + rightUp[0] * legGap, y + rightUp[1] * legGap, stackz + rightUp[2] * legGap, leg[0], leg[1], leg[2], world);
+		addBodyPieceToWorld(x + rightUp[0] * -legGap, y + rightUp[1] * -legGap, stackz + rightUp[2] * -legGap, leg[0], leg[1], leg[2], world);
+		stackz += leg[2] + body[2] + .5;
+		addBodyPieceToWorld(x, y, stackz, body[0], body[1], body[2], world);
+		stackz += body[2] + head[2] + .5;
+		addBodyPieceToWorld(x, y, stackz, head[0], head[1], head[2], world);
 		stackz += -head[2] - shoulderDownOffset;
-		world.addShape((int) (x + rightUp[0] * shoulderGap), (int) (y + rightUp[1] * shoulderGap), (int) (stackz + rightUp[2] * shoulderGap), new Cuboid(x + rightUp[0] * shoulderGap, y + rightUp[1] * shoulderGap, stackz + rightUp[2] * shoulderGap, angle, angleZ, angleTilt, shoulder[0], shoulder[1], shoulder[2], null, null, this));
-		world.addShape((int) (x + rightUp[0] * -shoulderGap), (int) (y + rightUp[1] * -shoulderGap), (int) (stackz + rightUp[2] * -shoulderGap), new Cuboid(x + rightUp[0] * -shoulderGap, y + rightUp[1] * -shoulderGap, stackz + rightUp[2] * -shoulderGap, angle, angleZ, angleTilt, shoulder[0], shoulder[1], shoulder[2], null, null, this));
+		addBodyPieceToWorld(x + rightUp[0] * shoulderGap, y + rightUp[1] * shoulderGap, stackz + rightUp[2] * shoulderGap, shoulder[0], shoulder[1], shoulder[2], world);
+		addBodyPieceToWorld(x + rightUp[0] * -shoulderGap, y + rightUp[1] * -shoulderGap, stackz + rightUp[2] * -shoulderGap, shoulder[0], shoulder[1], shoulder[2], world);
+	}
+	
+	private void addBodyPieceToWorld(double x, double y, double z, double w, double l, double h, World world) {
+		world.addShape((int) x, (int) y, (int) z, new Cuboid(x, y, z, angle, angleZ, angleTilt, w, l, h, null, null, this));
 	}
 	
 	public double getVsq() {
