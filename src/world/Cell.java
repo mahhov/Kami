@@ -35,7 +35,9 @@ public class Cell {
 				for (Surface s : surfaces)
 					if (s != null) {
 						double xy[][] = s.toCamera(c);
-						painter.clipPolygon(xy, s.tempDistanceLight, s.color, s.clipState, s.frame);
+						//						painter.clipPolygon(xy, s.tempDistanceLight, s.color, s.clipState, s.frame);
+						if (xy != null)
+							painter.line(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, s.color);
 					}
 		}
 	}

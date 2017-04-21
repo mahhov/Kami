@@ -120,6 +120,16 @@ public class Painter extends JFrame {
 		}
 	}
 	
+	public void line(double x1, double y1, double x2, double y2, double light, Color color) {
+		surfaceCount++;
+		if ((x1 > -.5 && x1 < .5 && y1 < .5 && y1 > -.5) || (x2 > -.5 && x2 < .5 && y2 < .5 && y2 > -.5)) {
+			drawCount++;
+			int[] xyScaled = Math3D.transform(new double[] {x1, y1, x2, y2}, IMAGE_SIZE, IMAGE_SIZE / 2);
+			setColor(light, color);
+			brush.drawLine(xyScaled[0], xyScaled[1], xyScaled[2], xyScaled[3]);
+		}
+	}
+	
 	public void rectangle(double x, double y, double width, double height, Color color) {
 		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
 		brush.setColor(color);
