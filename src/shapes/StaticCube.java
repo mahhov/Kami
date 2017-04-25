@@ -1,12 +1,15 @@
 package shapes;
 
 import engine.Math3D;
+import shapes.drawelement.Line;
+import shapes.drawelement.Surface;
 
 import java.awt.*;
 
 public class StaticCube extends Shape {
 	private double x, y, z;
 	private Surface top, bottom, left, right, front, back;
+	Line[] line;
 	
 	public StaticCube(double x, double y, double z, Color color, boolean side[], ShapeParent shapeParent) {
 		this(x, y, z, color, side, .5, shapeParent);
@@ -26,10 +29,10 @@ public class StaticCube extends Shape {
 				side[i] = true;
 		}
 		
-		initSurfaces(color, side, size);
+		initGeom(color, side, size);
 	}
 	
-	private void initSurfaces(Color color, boolean[] side, double size) {
+	void initGeom(Color color, boolean[] side, double size) {
 		// dimensions
 		double topZ = z + size;
 		double bottomZ = z - size;
@@ -86,7 +89,10 @@ public class StaticCube extends Shape {
 		Surface ySurface = ySide == Math3D.FRONT ? front : (ySide == Math3D.BACK ? back : null);
 		Surface zSurface = zSide == Math3D.BOTTOM ? bottom : (zSide == Math3D.TOP ? top : null);
 		return new Surface[] {xSurface, ySurface, zSurface};
-		//			return new Surface[] {top, bottom, left, right, front, back};
+	}
+	
+	public Line[] drawLines() {
+		return line;
 	}
 }
 

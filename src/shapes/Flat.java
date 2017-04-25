@@ -1,6 +1,7 @@
 package shapes;
 
 import engine.Math3D;
+import shapes.drawelement.Surface;
 
 import java.awt.*;
 
@@ -35,10 +36,6 @@ public class Flat extends Shape {
 		surface = new Surface(leftBack, rightBack, rightFront, leftFront, true);
 		surface.setColor(color);
 		surface.setLight(.8);
-	}
-	
-	Surface[] getSurfaces(int xSide, int ySide, int zSide) {
-		return new Surface[] {surface};
 	}
 }
 

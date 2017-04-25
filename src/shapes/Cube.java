@@ -1,6 +1,8 @@
 package shapes;
 
 import engine.Math3D;
+import shapes.drawelement.Line;
+import shapes.drawelement.Surface;
 
 import java.awt.*;
 
@@ -13,8 +15,9 @@ public class Cube extends Shape {
 	private double x, y, z;
 	Math3D.Angle angle, angleZ, angleTilt;
 	double size;
-	private boolean surfacesDirty;
+	private boolean geomDirty;
 	Surface[] surface;
+	Line[] line;
 	boolean[] side;
 	Color[] color;
 	
@@ -32,7 +35,7 @@ public class Cube extends Shape {
 		this.angleZ = angleZ;
 		this.angleTilt = angleTilt;
 		this.size = size;
-		surfacesDirty = true;
+		geomDirty = true;
 		this.side = side != null ? side : new boolean[] {true, true, true, true, true, true};
 		this.color = color != null ? color : new Color[] {PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR, PRIMARY_COLOR};
 	}
@@ -94,12 +97,20 @@ public class Cube extends Shape {
 			}
 	}
 	
+	void initLines() {
+		line = null;
+	}
+	
 	Surface[] getSurfaces(int xSide, int ySide, int zSide) {
-		if (surfacesDirty) {
+		if (geomDirty) {
 			initSurfaces();
-			surfacesDirty = false;
+			initLines();
+			geomDirty = false;
 		}
 		return surface;
 	}
 	
+	public Line[] drawLines() {
+		return line;
+	}
 }

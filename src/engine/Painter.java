@@ -1,7 +1,7 @@
 package engine;
 
 import control.Controller;
-import shapes.Surface;
+import shapes.drawelement.Surface;
 
 import javax.swing.*;
 import java.awt.*;

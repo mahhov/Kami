@@ -1,5 +1,7 @@
 package shapes;
 
+import shapes.drawelement.Line;
+import shapes.drawelement.Surface;
 
 public class Shape {
 	ShapeParent shapeParent;
@@ -11,14 +13,18 @@ public class Shape {
 			drawCounter = shapeParent.getDrawCounter();
 	}
 	
+	// return: empty Surface[] -> nothing to draw. null -> ready to be removed from the world
+	final public Surface[] drawSurfaces(int xSide, int ySide, int zSide) {
+		if (shapeParent != null && drawCounter != shapeParent.getDrawCounter())
+			return null;
+		return getSurfaces(xSide, ySide, zSide);
+	}
+	
 	Surface[] getSurfaces(int xSide, int ySide, int zSide) {
 		return new Surface[0];
 	}
 	
-	// return: empty Surface[] -> nothing to draw. null -> ready to be removed from the world
-	final public Surface[] draw(int xSide, int ySide, int zSide) {
-		if (shapeParent != null && drawCounter != shapeParent.getDrawCounter())
-			return null;
-		return getSurfaces(xSide, ySide, zSide);
+	public Line[] drawLines() {
+		return new Line[0];
 	}
 }

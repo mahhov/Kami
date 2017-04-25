@@ -275,10 +275,10 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			}
 		}
 		
-		//		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
-		//		world.addShape((int) x, (int) y, (int) (z + .5), shape);
+				Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+				world.addShape((int) x, (int) y, (int) (z + .5), shape);
 		
-		double[] leg = new double[] {.5, .5, .5};
+		/*double[] leg = new double[] {.5, .5, .5};
 		double legGap = 1;
 		double[] body = new double[] {1.5, 1.5, 1.5};
 		double[] head = new double[] {1, 1, 1};
@@ -295,7 +295,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		addBodyPieceToWorld(x, y, stackz, head[0], head[1], head[2], world);
 		stackz += -head[2] - shoulderDownOffset;
 		addBodyPieceToWorld(x + rightUp[0] * shoulderGap, y + rightUp[1] * shoulderGap, stackz + rightUp[2] * shoulderGap, shoulder[0], shoulder[1], shoulder[2], world);
-		addBodyPieceToWorld(x + rightUp[0] * -shoulderGap, y + rightUp[1] * -shoulderGap, stackz + rightUp[2] * -shoulderGap, shoulder[0], shoulder[1], shoulder[2], world);
+		addBodyPieceToWorld(x + rightUp[0] * -shoulderGap, y + rightUp[1] * -shoulderGap, stackz + rightUp[2] * -shoulderGap, shoulder[0], shoulder[1], shoulder[2], world);*/
 	}
 	
 	private void addBodyPieceToWorld(double x, double y, double z, double w, double l, double h, World world) {

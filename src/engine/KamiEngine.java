@@ -11,7 +11,7 @@ import world.World;
 import world.WorldCreator;
 
 class KamiEngine {
-	private static final int FRAME = 400, IMAGE = FRAME;
+	private static final int FRAME = 800, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
 	private Controller controller;
