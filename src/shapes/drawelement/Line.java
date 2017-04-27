@@ -5,8 +5,9 @@ import java.awt.*;
 public class Line extends DrawElement {
 	public Color color;
 	
-	private Line(double[][] coord) {
+	public Line(double[][] coord) {
 		this.coord = coord;
+		color = Color.BLACK;
 	}
 	
 	public void setColor(Color c) {

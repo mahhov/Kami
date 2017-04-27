@@ -82,6 +82,36 @@ public class StaticCube extends Shape {
 			back.setColor(color);
 			back.setLight(1);
 		}
+		
+		// lines
+		line = new Line[12];
+		if (side[Math3D.BACK] && side[Math3D.BOTTOM])
+			line[0] = new Line(new double[][] {{leftX, backY, bottomZ}, {rightX, backY, bottomZ}});
+		if (side[Math3D.LEFT] && side[Math3D.BOTTOM])
+			line[1] = new Line(new double[][] {{leftX, backY, bottomZ}, {leftX, frontY, bottomZ}});
+		if (side[Math3D.LEFT] && side[Math3D.BACK])
+			line[2] = new Line(new double[][] {{leftX, backY, bottomZ}, {leftX, backY, topZ}});
+		
+		if (side[Math3D.FRONT] && side[Math3D.BOTTOM])
+			line[3] = new Line(new double[][] {{rightX, frontY, bottomZ}, {leftX, frontY, bottomZ}});
+		if (side[Math3D.RIGHT] && side[Math3D.BOTTOM])
+			line[4] = new Line(new double[][] {{rightX, frontY, bottomZ}, {rightX, backY, bottomZ}});
+		if (side[Math3D.RIGHT] && side[Math3D.FRONT])
+			line[5] = new Line(new double[][] {{rightX, frontY, bottomZ}, {rightX, frontY, topZ}});
+		
+		if (side[Math3D.BACK] && side[Math3D.TOP])
+			line[6] = new Line(new double[][] {{leftX, backY, topZ}, {rightX, backY, topZ}});
+		if (side[Math3D.LEFT] && side[Math3D.TOP])
+			line[7] = new Line(new double[][] {{leftX, backY, topZ}, {leftX, frontY, topZ}});
+		if (side[Math3D.LEFT] && side[Math3D.BACK])
+			line[8] = new Line(new double[][] {{leftX, backY, topZ}, {leftX, backY, bottomZ}});
+		
+		if (side[Math3D.BACK] && side[Math3D.TOP])
+			line[9] = new Line(new double[][] {{rightX, frontY, topZ}, {leftX, frontY, topZ}});
+		if (side[Math3D.RIGHT] && side[Math3D.TOP])
+			line[10] = new Line(new double[][] {{rightX, frontY, topZ}, {rightX, backY, topZ}});
+		if (side[Math3D.RIGHT] && side[Math3D.FRONT])
+			line[11] = new Line(new double[][] {{rightX, frontY, topZ}, {rightX, frontY, bottomZ}});
 	}
 	
 	Surface[] getSurfaces(int xSide, int ySide, int zSide) {

@@ -116,3 +116,8 @@ class KamiEngine {
 // todo : multi cube character collision
 // todo : flying sound affect
 // todo : moving character animation
+// todo : cell shading
+// todo : spawn center terrain
+// todo : flying hiss sound
+// todo : skate state
+// todo : race mode

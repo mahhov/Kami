@@ -40,11 +40,12 @@ class Cell {
 						double xy[][] = s.toCamera(c);
 						painter.clipPolygon(xy, s.tempDistanceLight, s.color, s.clipState, s.frame);
 					}
-//				if (line != null)
-//					for (Line l : line) {
-//						double xy[][] = l.toCamera(c);
-//						painter.line(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, l.color);
-//					}
+				if (line != null)
+					for (Line l : line)
+						if (l != null) {
+							double xy[][] = l.toCamera(c);
+							painter.line(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, l.color);
+						}
 			}
 		}
 	}

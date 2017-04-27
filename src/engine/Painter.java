@@ -87,6 +87,7 @@ public class Painter extends JFrame {
 				if (xy[0][i] > -.5 && xy[0][i] < .5 && xy[1][i] < .5 && xy[1][i] > -.5) {
 					drawCount++;
 					int[][] xyScaled = Math3D.transform(xy, IMAGE_SIZE, IMAGE_SIZE / 2);
+					brush.setStroke(new BasicStroke(1));
 					if (frame) {
 						brush.setColor(Color.cyan);
 						brush.drawPolygon(xyScaled[0], xyScaled[1], xyScaled[0].length);
@@ -126,6 +127,7 @@ public class Painter extends JFrame {
 			drawCount++;
 			int[] xyScaled = Math3D.transform(new double[] {x1, y1, x2, y2}, IMAGE_SIZE, IMAGE_SIZE / 2);
 			setColor(light, color);
+			brush.setStroke(new BasicStroke(10));
 			brush.drawLine(xyScaled[0], xyScaled[1], xyScaled[2], xyScaled[3]);
 		}
 	}
