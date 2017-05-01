@@ -29,10 +29,6 @@ public class TerrainChunk implements ShapeParent {
 		part[x][y][z] = module;
 	}
 	
-	TerrainModule get(int x, int y, int z) {
-		return part[x][y][z];
-	}
-	
 	void addToWorld(World world) {
 		if (isEmpty())
 			return;
@@ -41,14 +37,12 @@ public class TerrainChunk implements ShapeParent {
 		
 		Shape shape;
 		int block[];
-		TerrainModule module;
 		for (int x = 0; x < part.length; x++)
 			for (int y = 0; y < part[x].length; y++)
 				for (int z = 0; z < part[x][y].length; z++) {
-					module = get(x, y, z);
-					if (module != null) {
+					if (part[x][y][z] != null) {
 						block = getBlock(x, y, z);
-						shape = module.getShape(offX + x + .5, offY + y + .5, offZ + z + .5, block, this);
+						shape = part[x][y][z].getShape(offX + x + .5, offY + y + .5, offZ + z + .5, block, this);
 						if (shape != null)
 							world.addShape(offX + x, offY + y, offZ + z, shape);
 					}

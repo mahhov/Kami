@@ -22,7 +22,7 @@ public class World {
 	private LList<InterfaceElement> interfaceElement;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight) {
-		Timer.timeStart();
+		Timer.timeStart(0);
 		width = chunkWidth * CHUNK_SIZE;
 		length = chunkLength * CHUNK_SIZE;
 		height = chunkHeight * CHUNK_SIZE;
@@ -31,7 +31,7 @@ public class World {
 		particle = new LList<>();
 		backgroundElement = new LList<>();
 		interfaceElement = new LList<>();
-		Timer.timeEnd("world constructor");
+		Timer.timeEnd(0, "world constructor");
 		System.out.println("world chunk size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
 	}
 	
@@ -69,9 +69,23 @@ public class World {
 	// DRAWING
 	
 	public void draw(Painter painter, Camera c) {
+		Timer.timeStart(3);
+		Timer.timePause(3);
+		Timer.timeStart(4);
+		Timer.timePause(4);
+		Timer.timeStart(1);
 		drawBackground(painter);
+		Timer.timeEnd(1, "background", 10);
+		Timer.timeStart(1);
 		drawChunks(painter, c);
+		Timer.timeEnd(1, "chunks", 60 / 10);
+		Timer.timeStart(1);
 		drawInterface(painter);
+		Timer.timeEnd(1, "interface", 10);
+		Timer.timePause(3);
+		Timer.timeEnd(3, "Cell.draw aggregated", 40 / 10);
+		Timer.timePause(4);
+		Timer.timeEnd(4, "toCamera aggregated", 20 / 10);
 	}
 	
 	private void drawBackground(Painter painter) {
