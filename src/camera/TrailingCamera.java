@@ -2,7 +2,7 @@ package camera;
 
 import control.Controller;
 import engine.Math3D;
-import engine.Painter;
+import paint.Painter;
 
 public class TrailingCamera extends Camera {
 	private static final double MIN_TRAIL = 5, MAX_TRAIL = 60, TRAIL_SPEED = 2.5;

@@ -3,9 +3,10 @@ package world;
 import camera.Camera;
 import control.Controller;
 import engine.Math3D;
-import engine.Painter;
 import engine.Timer;
 import list.LList;
+import paint.Painter;
+import paint.PainterQueue;
 import particle.Particle;
 import shapes.Shape;
 import terrain.Terrain;
@@ -68,37 +69,37 @@ public class World {
 	
 	// DRAWING
 	
-	public void draw(Painter painter, Camera c) {
+	public void draw(PainterQueue painterQueue, Camera c) {
 		Timer.timeStart(3);
 		Timer.timePause(3);
 		Timer.timeStart(4);
 		Timer.timePause(4);
 		Timer.timeStart(1);
-		drawBackground(painter);
+		drawBackground(painterQueue);
 		Timer.timeEnd(1, "background", 10);
 		Timer.timeStart(1);
-		drawChunks(painter, c);
-		Timer.timeEnd(1, "chunks", 60 / 10);
+		drawChunks(painterQueue, c);
+		Timer.timeEnd(1, "chunks", 60);
 		Timer.timeStart(1);
-		drawInterface(painter);
+		drawInterface(painterQueue);
 		Timer.timeEnd(1, "interface", 10);
 		Timer.timePause(3);
-		Timer.timeEnd(3, "Cell.draw aggregated", 40 / 10);
+		Timer.timeEnd(3, "Cell.draw aggregated", 40);
 		Timer.timePause(4);
-		Timer.timeEnd(4, "toCamera aggregated", 20 / 10);
+		Timer.timeEnd(4, "toCamera aggregated", 20);
 	}
 	
-	private void drawBackground(Painter painter) {
+	private void drawBackground(PainterQueue painterQueue) {
 		for (LList<InterfaceElement> e : backgroundElement)
-			e.node.draw(painter);
+			e.node.draw(painterQueue);
 	}
 	
-	private void drawInterface(Painter painter) {
+	private void drawInterface(PainterQueue painterQueue) {
 		for (LList<InterfaceElement> e : interfaceElement)
-			e.node.draw(painter);
+			e.node.draw(painterQueue);
 	}
 	
-	private void drawChunks(Painter painter, Camera c) {
+	private void drawChunks(PainterQueue painterQueue, Camera c) {
 		int boundaries[] = c.cullBoundaries();
 		int volumeRaw = (boundaries[1] - boundaries[0]) * (boundaries[3] - boundaries[2]) * (boundaries[5] - boundaries[4]) / 100000;
 		
@@ -119,92 +120,92 @@ public class World {
 		Painter.debugString[1] = "(unit 100,000) volume raw " + volumeRaw + " ; (unit 100,000) volume bound " + volumeBound + " ; volume chunk " + volumeChunk;
 		
 		for (int x = fromChunkCoord[0]; x < cameraChunkCoord[0]; x++)
-			drawChunksRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.RIGHT);
+			drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.RIGHT);
 		for (int x = toChunkCoord[0]; x > cameraChunkCoord[0]; x--)
-			drawChunksRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.LEFT);
-		drawChunksRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cameraChunkCoord[0], Math3D.NONE);
+			drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.LEFT);
+		drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cameraChunkCoord[0], Math3D.NONE);
 	}
 	
-	private void drawChunksRow(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int x, int xSide) {
+	private void drawChunksRow(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int x, int xSide) {
 		for (int y = fromChunkCoord[1]; y < cameraChunkCoord[1]; y++)
-			drawChunksColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, xSide, Math3D.BACK);
+			drawChunksColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, xSide, Math3D.BACK);
 		for (int y = toChunkCoord[1]; y > cameraChunkCoord[1]; y--)
-			drawChunksColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, xSide, Math3D.FRONT);
-		drawChunksColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, cameraChunkCoord[1], xSide, Math3D.NONE);
+			drawChunksColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, xSide, Math3D.FRONT);
+		drawChunksColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, cameraChunkCoord[1], xSide, Math3D.NONE);
 	}
 	
-	private void drawChunksColumn(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int x, int y, int xSide, int ySide) {
+	private void drawChunksColumn(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int x, int y, int xSide, int ySide) {
 		for (int z = fromChunkCoord[2]; z < cameraChunkCoord[2]; z++)
-			drawChunk(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.TOP);
+			drawChunk(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.TOP);
 		for (int z = toChunkCoord[2]; z > cameraChunkCoord[2]; z--)
-			drawChunk(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.BOTTOM);
-		drawChunk(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, cameraChunkCoord[2], xSide, ySide, Math3D.NONE);
+			drawChunk(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.BOTTOM);
+		drawChunk(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, cameraChunkCoord[2], xSide, ySide, Math3D.NONE);
 	}
 	
-	private void drawChunk(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
+	private void drawChunk(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
 		if (chunk[cx][cy][cz] == null || chunk[cx][cy][cz].isEmpty())
 			return;
 		if (xSide == Math3D.RIGHT) {
 			int startx = cx == fromChunkCoord[0] ? fromChunkCoord[3] : 0;
 			for (int x = startx; x < CHUNK_SIZE; x++)
-				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x);
+				drawRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x);
 		} else if (xSide == Math3D.LEFT) {
 			int endx = cx == toChunkCoord[0] ? toChunkCoord[3] : CHUNK_SIZE - 1;
 			for (int x = endx; x >= 0; x--)
-				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x);
+				drawRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x);
 		} else {
 			int startx = cx == fromChunkCoord[0] ? fromChunkCoord[3] : 0;
 			int endx = cx == toChunkCoord[0] ? toChunkCoord[3] : CHUNK_SIZE - 1;
 			for (int x = startx; x < cameraChunkCoord[3]; x++)
-				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, Math3D.RIGHT, ySide, zSide, x);
+				drawRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, Math3D.RIGHT, ySide, zSide, x);
 			for (int x = endx; x > cameraChunkCoord[3]; x--)
-				drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, Math3D.LEFT, ySide, zSide, x);
-			drawRow(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, cameraChunkCoord[3]);
+				drawRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, Math3D.LEFT, ySide, zSide, x);
+			drawRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, cameraChunkCoord[3]);
 		}
 	}
 	
-	private void drawRow(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x) {
+	private void drawRow(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x) {
 		if (ySide == Math3D.BACK) {
 			int starty = cy == fromChunkCoord[1] ? fromChunkCoord[4] : 0;
 			for (int y = starty; y < CHUNK_SIZE; y++)
-				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, y);
+				drawColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, y);
 		} else if (ySide == Math3D.FRONT) {
 			int endy = cy == toChunkCoord[1] ? toChunkCoord[4] : CHUNK_SIZE - 1;
 			for (int y = endy; y >= 0; y--)
-				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, y);
+				drawColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, y);
 		} else {
 			int starty = cy == fromChunkCoord[1] ? fromChunkCoord[4] : 0;
 			int endy = cy == toChunkCoord[1] ? toChunkCoord[4] : CHUNK_SIZE - 1;
 			for (int y = starty; y < cameraChunkCoord[4]; y++)
-				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, Math3D.BACK, zSide, x, y);
+				drawColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, Math3D.BACK, zSide, x, y);
 			for (int y = endy; y > cameraChunkCoord[4]; y--)
-				drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, Math3D.FRONT, zSide, x, y);
-			drawColumn(painter, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, cameraChunkCoord[4]);
+				drawColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, Math3D.FRONT, zSide, x, y);
+			drawColumn(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide, x, cameraChunkCoord[4]);
 		}
 	}
 	
-	private void drawColumn(Painter painter, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x, int y) {
+	private void drawColumn(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x, int y) {
 		if (zSide == Math3D.TOP) {
 			int startz = cz == fromChunkCoord[2] ? fromChunkCoord[5] : 0;
 			for (int z = startz; z < CHUNK_SIZE; z++)
-				drawCell(painter, c, cx, cy, cz, xSide, ySide, zSide, x, y, z);
+				drawCell(painterQueue, c, cx, cy, cz, xSide, ySide, zSide, x, y, z);
 		} else if (zSide == Math3D.BOTTOM) {
 			int endz = cz == toChunkCoord[2] ? toChunkCoord[5] : CHUNK_SIZE - 1;
 			for (int z = endz; z >= 0; z--)
-				drawCell(painter, c, cx, cy, cz, xSide, ySide, zSide, x, y, z);
+				drawCell(painterQueue, c, cx, cy, cz, xSide, ySide, zSide, x, y, z);
 		} else {
 			int startz = cz == fromChunkCoord[2] ? fromChunkCoord[5] : 0;
 			int endz = cz == toChunkCoord[2] ? toChunkCoord[5] : CHUNK_SIZE - 1;
 			for (int z = startz; z < cameraChunkCoord[5]; z++)
-				drawCell(painter, c, cx, cy, cz, xSide, ySide, Math3D.TOP, x, y, z);
+				drawCell(painterQueue, c, cx, cy, cz, xSide, ySide, Math3D.TOP, x, y, z);
 			for (int z = endz; z > cameraChunkCoord[5]; z--)
-				drawCell(painter, c, cx, cy, cz, xSide, ySide, Math3D.BOTTOM, x, y, z);
-			drawCell(painter, c, cx, cy, cz, xSide, ySide, zSide, x, y, cameraChunkCoord[5]);
+				drawCell(painterQueue, c, cx, cy, cz, xSide, ySide, Math3D.BOTTOM, x, y, z);
+			drawCell(painterQueue, c, cx, cy, cz, xSide, ySide, zSide, x, y, cameraChunkCoord[5]);
 		}
 	}
 	
-	private void drawCell(Painter painter, Camera c, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x, int y, int z) {
-		chunk[cx][cy][cz].draw(x, y, z, painter, c, xSide, ySide, zSide);
+	private void drawCell(PainterQueue painterQueue, Camera c, int cx, int cy, int cz, int xSide, int ySide, int zSide, int x, int y, int z) {
+		chunk[cx][cy][cz].draw(x, y, z, painterQueue, c, xSide, ySide, zSide);
 	}
 	
 	// UPDATE

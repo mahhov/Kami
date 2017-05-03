@@ -2,7 +2,8 @@ package ambient;
 
 import character.Character;
 import control.Controller;
-import engine.Painter;
+import paint.PainterBlur;
+import paint.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldElement;
@@ -24,7 +25,7 @@ public class Blur implements WorldElement, InterfaceElement {
 		blur = 1 - character.getVsq() / 3 * .8;
 	}
 	
-	public void draw(Painter painter) {
-		painter.setBlur(blur);
+	public void draw(PainterQueue painterQueue) {
+		painterQueue.add(new PainterBlur(blur));
 	}
 }

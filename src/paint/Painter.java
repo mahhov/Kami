@@ -1,6 +1,7 @@
-package engine;
+package paint;
 
 import control.Controller;
+import engine.Math3D;
 import shapes.drawelement.Surface;
 
 import javax.swing.*;
@@ -27,12 +28,12 @@ public class Painter extends JFrame {
 	private final int FRAME_SIZE, IMAGE_SIZE;
 	private static int borderSize = 0;
 	private BufferedImage canvas;
-	Graphics2D brush;
+	private Graphics2D brush;
 	private Graphics2D frameBrush;
-	int surfaceCount, drawCount;
-	Area clip;
+	public int surfaceCount, drawCount;
+	private Area clip;
 	
-	Painter(int frameSize, int imageSize, Controller controller) {
+	public Painter(int frameSize, int imageSize, Controller controller) {
 		setPaintModeString();
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
@@ -52,7 +53,7 @@ public class Painter extends JFrame {
 		frameBrush = (Graphics2D) this.getGraphics();
 	}
 	
-	void clear() {
+	public void clear() {
 		surfaceCount = 0;
 		drawCount = 0;
 	}
@@ -76,11 +77,11 @@ public class Painter extends JFrame {
 		}
 	}
 	
-	public void drawImage(BufferedImage image, int shift, int shiftVert) {
+	void drawImage(BufferedImage image, int shift, int shiftVert) {
 		brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
-	public void polygon(double[][] xy, double light, Color color, boolean frame) {
+	void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
 		if (xy != null) {
 			surfaceCount++;
 			for (int i = 0; i < xy[0].length; i++)
@@ -100,7 +101,7 @@ public class Painter extends JFrame {
 		}
 	}
 	
-	public void clipPolygon(double[][] xy, double light, Color color, int clipState, boolean frame) {
+	void drawClipPolygon(double[][] xy, double light, Color color, int clipState, boolean frame) {
 		if (clipState == Surface.CLIP_ADD) {
 			if (clip == null)
 				clip = new Area();
@@ -111,9 +112,9 @@ public class Painter extends JFrame {
 		} else {
 			if (clipState == Surface.CLIP_SET)
 				brush.setClip(clip);
-			polygon(xy, light, color, frame || wireMode == WIRE_ONLY);
+			drawPolygon(xy, light, color, frame || wireMode == WIRE_ONLY);
 			if (wireMode == WIRE_AND && !frame)
-				polygon(xy, light, color, true);
+				drawPolygon(xy, light, color, true);
 			if (clipState == Surface.CLIP_RESET) {
 				clip = new Area();
 				brush.setClip(null);
@@ -121,7 +122,7 @@ public class Painter extends JFrame {
 		}
 	}
 	
-	public void line(double x1, double y1, double x2, double y2, double light, Color color) {
+	void drawLine(double x1, double y1, double x2, double y2, double light, Color color) {
 		surfaceCount++;
 		if ((x1 > -.5 && x1 < .5 && y1 < .5 && y1 > -.5) || (x2 > -.5 && x2 < .5 && y2 < .5 && y2 > -.5)) {
 			drawCount++;
@@ -132,13 +133,24 @@ public class Painter extends JFrame {
 		}
 	}
 	
-	public void rectangle(double x, double y, double width, double height, Color color) {
+	void drawRectangle(double x, double y, double width, double height, Color color) {
 		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
 		brush.setColor(color);
 		brush.fillRect(xywh[0], xywh[1], xywh[2], xywh[3]);
 	}
 	
-	void updateMode(Controller controller) {
+	void drawBlur(double blur) {
+		if (blurMode == BLUR_DYNAMIC) {
+			blur = Math3D.maxMin(blur, 1, .1);
+			frameBrush.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) blur));
+		}
+	}
+	
+	public void drawPainterElement(PainterElement e) {
+		e.paint(this);
+	}
+	
+	public void updateMode(Controller controller) {
 		if (controller.isKeyPressed(Controller.KEY_SLASH)) {
 			if (++wireMode == 3)
 				wireMode = 0;
@@ -152,13 +164,6 @@ public class Painter extends JFrame {
 			else if (blurMode == BLUR_OFF)
 				frameBrush.setComposite(AlphaComposite.Src);
 			setPaintModeString();
-		}
-	}
-	
-	public void setBlur(double blur) {
-		if (blurMode == BLUR_DYNAMIC) {
-			blur = Math3D.maxMin(blur, 1, .1);
-			frameBrush.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) blur));
 		}
 	}
 	

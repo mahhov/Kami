@@ -2,7 +2,8 @@ package ambient;
 
 import control.Controller;
 import engine.Math3D;
-import engine.Painter;
+import paint.PainterImage;
+import paint.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldElement;
@@ -71,7 +72,7 @@ public class Sky implements WorldElement, InterfaceElement {
 		paintBackground(controller);
 	}
 	
-	public void draw(Painter painter) {
-		painter.drawImage(backgroundImage, shift, shiftVert);
+	public void draw(PainterQueue painterQueue) {
+		painterQueue.add(new PainterImage(backgroundImage, shift, shiftVert));
 	}
 }

@@ -1,11 +1,12 @@
 package engine;
 
 import ambient.Blur;
-import ambient.Music;
 import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
+import paint.Painter;
+import paint.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
@@ -43,7 +44,7 @@ class KamiEngine {
 	
 	void begin() {
 		System.out.println("Begin");
-//		Music.BGMUSIC.play();
+		//		Music.BGMUSIC.play();
 		int frame = 0;
 		long beginTime = 0, endTime;
 		while (true) {
@@ -57,15 +58,17 @@ class KamiEngine {
 			camera.update(world.width, world.length, world.height);
 			controller.setView(camera.angle, camera.angleZ, camera.orig(), camera.normal);
 			world.update(terrain, controller);
-			Timer.timeEnd(0,"loop 1", 20);
+			Timer.timeEnd(0, "loop 1", 20);
 			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), world);
 			Timer.timeStart(0);
-			world.draw(painter, camera);
-			Timer.timeEnd(0,"world.draw", 100);
+			PainterQueue painterQueue = new PainterQueue();
+			world.draw(painterQueue, camera);
+			Timer.timeEnd(0, "world.draw", 100);
 			Timer.timeStart(0);
 			painter.updateMode(controller);
+			painter.drawPainterElement(painterQueue);
 			painter.paint();
-			Timer.timeEnd(0,"painter", 100);
+			Timer.timeEnd(0, "painter", 100);
 			checkPause();
 			sleep(10);
 			endTime = System.nanoTime() + 1;

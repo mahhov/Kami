@@ -1,6 +1,7 @@
 package world.interfaceelement;
 
-import engine.Painter;
+import paint.PainterQueue;
+import paint.PainterRectangle;
 
 import java.awt.*;
 
@@ -26,8 +27,8 @@ public class Bar implements InterfaceElement {
 		this.fill = fill;
 	}
 	
-	public void draw(Painter painter) {
-		painter.rectangle(x, y, width, height, backColor);
-		painter.rectangle(x, y, width * fill, height, fillColor);
+	public void draw(PainterQueue painterQueue) {
+		painterQueue.add(new PainterRectangle(x, y, width, height, backColor));
+		painterQueue.add(new PainterRectangle(x, y, width * fill, height, fillColor));
 	}
 }

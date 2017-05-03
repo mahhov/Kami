@@ -1,9 +1,11 @@
 package world;
 
 import camera.Camera;
-import engine.Painter;
 import engine.Timer;
 import list.LList;
+import paint.PainterClipPolygon;
+import paint.PainterLine;
+import paint.PainterQueue;
 import shapes.Shape;
 import shapes.drawelement.Line;
 import shapes.drawelement.Surface;
@@ -27,7 +29,7 @@ class Cell {
 		shapes = shapes.remove(lShape);
 	}
 	
-	public void drawAll(Painter painter, Camera c, int xSide, int ySide, int zSide) {
+	public void drawAll(PainterQueue painterQueue, Camera c, int xSide, int ySide, int zSide) {
 		Timer.timePause(3);
 		Surface surfaces[];
 		Line line[];
@@ -41,14 +43,13 @@ class Cell {
 				for (Surface s : surfaces)
 					if (s != null) {
 						double xy[][] = s.toCamera(c);
-						
-						painter.clipPolygon(xy, s.tempDistanceLight, s.color, s.clipState, s.frame);
+						painterQueue.add(new PainterClipPolygon(xy, s.tempDistanceLight, s.color, s.clipState, s.frame));
 					}
 				if (line != null && false)
 					for (Line l : line)
 						if (l != null) {
 							double xy[][] = l.toCamera(c);
-							painter.line(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, l.color);
+							painterQueue.add(new PainterLine(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, l.color));
 						}
 			}
 			Timer.timePause(4);

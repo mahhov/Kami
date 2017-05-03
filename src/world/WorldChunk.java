@@ -1,7 +1,8 @@
 package world;
 
 import camera.Camera;
-import engine.Painter;
+import paint.Painter;
+import paint.PainterQueue;
 import shapes.Shape;
 
 class WorldChunk {
@@ -25,7 +26,7 @@ class WorldChunk {
 		cell[x][y][z].add(shape);
 	}
 	
-	void draw(int x, int y, int z, Painter painter, Camera c, int xSide, int ySide, int zSide) {
-		cell[x][y][z].drawAll(painter, c, xSide, ySide, zSide);
+	void draw(int x, int y, int z, PainterQueue painterQueue, Camera c, int xSide, int ySide, int zSide) {
+		cell[x][y][z].drawAll(painterQueue, c, xSide, ySide, zSide);
 	}
 }

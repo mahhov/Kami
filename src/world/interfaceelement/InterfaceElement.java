@@ -1,7 +1,7 @@
 package world.interfaceelement;
 
-import engine.Painter;
+import paint.PainterQueue;
 
 public interface InterfaceElement {
-	public void draw(Painter painter);
+	void draw(PainterQueue painterQueue);
 }

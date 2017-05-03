@@ -4,7 +4,7 @@ import ambient.Music;
 import camera.TrailingCamera;
 import control.Controller;
 import engine.Math3D;
-import engine.Painter;
+import paint.Painter;
 import particle.HookParticle;
 import particle.SmokeParticle;
 import shapes.Cube;
