@@ -24,20 +24,20 @@ class IntersectionFinder {
 	}
 	
 	double[] find(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge, int buffer) {
-		Timer.timeStart(2);
+		Timer.FIND.timeStart();
 		reset(orig, dir, buffer);
 		while (true) {
 			prefixComputeMove();
 			if (moved + move > maxMove && limitDistance) {
 				moveBy(maxMove - moved);
-				Timer.timeEnd(2, "find", 1000);
+				Timer.FIND.timeEnd();
 				return new double[] {nextx, nexty, nextz};
 			}
 			moveBy(move + Math3D.EPSILON);
 			if (!isOk(limitDistance)) {
 				moveBy(move - Math3D.EPSILON);
 				if (collideCheck((int) moveWhich[1], allowSlide, allowCollideWithEdge)) {
-					Timer.timeEnd(2, "find2", 1000);
+					Timer.FIND.timeEnd();
 					return new double[] {x, y, z};
 				}
 			}

@@ -2,6 +2,7 @@ package paint;
 
 import control.Controller;
 import engine.Math3D;
+import engine.Timer;
 import shapes.drawelement.Surface;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import java.awt.image.BufferedImage;
 import static camera.Camera.MIN_LIGHT;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
-public class Painter extends JFrame {
+public class Painter extends JFrame implements Runnable {
 	public static String[] debugString = new String[] {"", "", "", "", "", ""};
 	public static String[] outputString = new String[] {"", "", "", "", "", ""};
 	
@@ -33,6 +34,8 @@ public class Painter extends JFrame {
 	public int surfaceCount, drawCount;
 	private Area clip;
 	
+	private PainterQueue painterQueue;
+	
 	public Painter(int frameSize, int imageSize, Controller controller) {
 		setPaintModeString();
 		FRAME_SIZE = frameSize;
@@ -51,11 +54,7 @@ public class Painter extends JFrame {
 		setIgnoreRepaint(true);
 		setVisible(true);
 		frameBrush = (Graphics2D) this.getGraphics();
-	}
-	
-	public void clear() {
-		surfaceCount = 0;
-		drawCount = 0;
+		painterQueue = new PainterQueue();
 	}
 	
 	public void paint() {
@@ -146,10 +145,6 @@ public class Painter extends JFrame {
 		}
 	}
 	
-	public void drawPainterElement(PainterElement e) {
-		e.paint(this);
-	}
-	
 	public void updateMode(Controller controller) {
 		if (controller.isKeyPressed(Controller.KEY_SLASH)) {
 			if (++wireMode == 3)
@@ -165,9 +160,55 @@ public class Painter extends JFrame {
 				frameBrush.setComposite(AlphaComposite.Src);
 			setPaintModeString();
 		}
+		
+		if (controller.isKeyPressed(Controller.KEY_1)) {
+			if (++x == 3)
+				x = 0;
+			String[] s = new String[] {"normal", "4x paint()", "4x painterQueue.paint()"};
+			System.out.println("x mode " + s[x]);
+		}
+		
 	}
 	
 	private void setPaintModeString() {
 		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle)  :  blur " + blurString[blurMode] + " (press . to toggle)";
+	}
+	
+	public boolean isPainterQueueDone() {
+		return !painterQueue.drawReady;
+	}
+	
+	public void setPainterQueue(PainterQueue painterQueue) {
+		this.painterQueue = painterQueue;
+	}
+	
+	private int x = 0;
+	
+	public void run() {
+		while (true) {
+			if (painterQueue.drawReady) {
+				surfaceCount = 0;
+				drawCount = 0;
+				Timer.PAINTER_QUEUE_PAINT.timeStart();
+				painterQueue.paint(this);
+				Timer.PAINTER_QUEUE_PAINT.timeEnd();
+				if (x == 2) {
+					painterQueue.paint(this);
+					painterQueue.paint(this);
+					painterQueue.paint(this);
+				}
+				painterQueue.drawReady = false;
+				debugString[5] = "paint surfaceCount: " + surfaceCount + " ; paint drawCount: " + drawCount;
+				Timer.PAINT.timeStart();
+				paint();
+				Timer.PAINT.timeEnd();
+				if (x == 1) {
+					paint();
+					paint();
+					paint();
+				}
+			}
+			Math3D.sleep(10);
+		}
 	}
 }

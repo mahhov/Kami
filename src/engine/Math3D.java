@@ -529,4 +529,12 @@ public class Math3D {
 	public static double avg(double x, double y, double weight) {
 		return x + (y - x) * weight;
 	}
+	
+	public static void sleep(int howLong) {
+		try {
+			Thread.sleep(howLong);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }

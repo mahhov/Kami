@@ -45,53 +45,49 @@ class KamiEngine {
 	void begin() {
 		System.out.println("Begin");
 		//		Music.BGMUSIC.play();
-		int frame = 0;
+		int frame = 0, engineFrame = 0;
 		long beginTime = 0, endTime;
+		new Thread(painter).start();
 		while (true) {
 			while (pause) {
 				checkPause();
-				sleep(30);
+				Math3D.sleep(30);
 			}
-			Timer.timeStart(0);
-			painter.clear();
+			Timer.LOOP_1.timeStart();
 			camera.move(controller);
 			camera.update(world.width, world.length, world.height);
 			controller.setView(camera.angle, camera.angleZ, camera.orig(), camera.normal);
 			world.update(terrain, controller);
-			Timer.timeEnd(0, "loop 1", 20);
+			Timer.LOOP_1.timeEnd();
 			terrain.expand((int) character.getX(), (int) character.getY(), (int) character.getZ(), world);
-			Timer.timeStart(0);
-			PainterQueue painterQueue = new PainterQueue();
-			world.draw(painterQueue, camera);
-			Timer.timeEnd(0, "world.draw", 100);
-			Timer.timeStart(0);
 			painter.updateMode(controller);
-			painter.drawPainterElement(painterQueue);
-			painter.paint();
-			Timer.timeEnd(0, "painter", 100);
+			
+			if (painter.isPainterQueueDone()) {
+				PainterQueue painterQueue = new PainterQueue();
+				Timer.WORLD_DRAW.timeStart();
+				world.draw(painterQueue, camera);
+				Timer.WORLD_DRAW.timeEnd();
+				painterQueue.drawReady = true;
+				painter.setPainterQueue(painterQueue);
+				frame++;
+			}
+			engineFrame++;
 			checkPause();
-			sleep(10);
+			Thread.yield();
+			Math3D.sleep(10);
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
-				Painter.debugString[0] = "fps: " + frame + " ; paint surfaceCount: " + painter.surfaceCount + " ; paint drawCount: " + painter.drawCount;
+				Painter.debugString[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
 				frame = 0;
+				engineFrame = 0;
 				beginTime = endTime;
 			}
-			frame++;
 		}
 	}
 	
 	private void checkPause() {
 		if (controller.isKeyPressed(Controller.KEY_P))
 			pause = !pause;
-	}
-	
-	static void sleep(int howLong) {
-		try {
-			Thread.sleep(howLong);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private static void printInstructions() {

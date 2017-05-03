@@ -30,11 +30,11 @@ class Cell {
 	}
 	
 	public void drawAll(PainterQueue painterQueue, Camera c, int xSide, int ySide, int zSide) {
-		Timer.timePause(3);
+		Timer.CELL_DRAW_AGGREGATED.timePause();
 		Surface surfaces[];
 		Line line[];
 		for (LList<Shape> lShape : shapes) {
-			Timer.timePause(4);
+			Timer.TO_CAMERA_AGGREGATED.timePause();
 			surfaces = lShape.node.drawSurfaces(xSide, ySide, zSide);
 			line = lShape.node.drawLines();
 			if (surfaces == null)
@@ -52,8 +52,8 @@ class Cell {
 							painterQueue.add(new PainterLine(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, l.color));
 						}
 			}
-			Timer.timePause(4);
+			Timer.TO_CAMERA_AGGREGATED.timePause();
 		}
-		Timer.timePause(3);
+		Timer.CELL_DRAW_AGGREGATED.timePause();
 	}
 }

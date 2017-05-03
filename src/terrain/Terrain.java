@@ -16,13 +16,13 @@ public class Terrain {
 	private LList<TerrainChunk> dirtyDrawChunk;
 	
 	public Terrain() {
-		Timer.timeStart(0);
+		Timer.TERRAIN_CONSTRUCTOR.timeStart();
 		intersectionFinder = new IntersectionFinder(this);
 		terrainChunk = new TerrainChunk[500 / mult][500 / mult][10 / mult];
 		width = terrainChunk.length * CHUNK_SIZE;
 		length = terrainChunk[0].length * CHUNK_SIZE;
 		height = terrainChunk[0][0].length * CHUNK_SIZE;
-		Timer.timeEnd(0, "terrain constructor");
+		Timer.TERRAIN_CONSTRUCTOR.timeEnd();
 		System.out.println("terrain size " + width + " " + length + " " + height);
 	}
 	
@@ -75,7 +75,7 @@ public class Terrain {
 	}
 	
 	public void expand(int x, int y, int z, World world) {
-		Timer.timeStart(0);
+		Timer.EXPAND.timeStart();
 		dirtyDrawChunk = new LList<>();
 		int[] coord = getChunkCoord(x, y, z);
 		for (int xi = -CHUNK_BUFFER; xi <= CHUNK_BUFFER; xi++)
@@ -83,7 +83,7 @@ public class Terrain {
 				for (int zi = -CHUNK_BUFFER; zi <= CHUNK_BUFFER; zi++)
 					expandChunk(coord[0] + xi, coord[1] + yi, coord[2] + zi, world);
 		addToWorld(world);
-		Timer.timeEnd(0, "expand", 20);
+		Timer.EXPAND.timeEnd();
 	}
 	
 	private void expandChunk(int cx, int cy, int cz, World world) {
@@ -96,13 +96,13 @@ public class Terrain {
 	}
 	
 	private void addToWorld(World world) {
-		Timer.timeStart(1);
+		Timer.ADD_TO_WORLD.timeStart();
 		int i = 0;
 		for (LList<TerrainChunk> c : dirtyDrawChunk) {
 			c.node.addToWorld(world);
 			i++;
 		}
-		Timer.timeEnd(1, "add to world " + i, 10);
+		Timer.ADD_TO_WORLD.timeEnd();
 	}
 	
 	public double[] findIntersection(double[] orig, double[] dir, boolean allowSlide, boolean limitDistance, boolean allowCollideWithEdge, int buffer) {

@@ -23,7 +23,7 @@ public class World {
 	private LList<InterfaceElement> interfaceElement;
 	
 	public World(int chunkWidth, int chunkLength, int chunkHeight) {
-		Timer.timeStart(0);
+		Timer.WORLD_CONSTRUCTOR.timeStart();
 		width = chunkWidth * CHUNK_SIZE;
 		length = chunkLength * CHUNK_SIZE;
 		height = chunkHeight * CHUNK_SIZE;
@@ -32,7 +32,7 @@ public class World {
 		particle = new LList<>();
 		backgroundElement = new LList<>();
 		interfaceElement = new LList<>();
-		Timer.timeEnd(0, "world constructor");
+		Timer.WORLD_CONSTRUCTOR.timeEnd();
 		System.out.println("world chunk size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
 	}
 	
@@ -70,23 +70,24 @@ public class World {
 	// DRAWING
 	
 	public void draw(PainterQueue painterQueue, Camera c) {
-		Timer.timeStart(3);
-		Timer.timePause(3);
-		Timer.timeStart(4);
-		Timer.timePause(4);
-		Timer.timeStart(1);
+		
+		Timer.CELL_DRAW_AGGREGATED.timeStart();
+		Timer.CELL_DRAW_AGGREGATED.timePause();
+		Timer.TO_CAMERA_AGGREGATED.timeStart();
+		Timer.TO_CAMERA_AGGREGATED.timePause();
+		Timer.BACKGROUND.timeStart();
 		drawBackground(painterQueue);
-		Timer.timeEnd(1, "background", 10);
-		Timer.timeStart(1);
+		Timer.BACKGROUND.timeEnd();
+		Timer.CHUNKS.timeStart();
 		drawChunks(painterQueue, c);
-		Timer.timeEnd(1, "chunks", 60);
-		Timer.timeStart(1);
+		Timer.CHUNKS.timeEnd();
+		Timer.INTERFACE.timeStart();
 		drawInterface(painterQueue);
-		Timer.timeEnd(1, "interface", 10);
-		Timer.timePause(3);
-		Timer.timeEnd(3, "Cell.draw aggregated", 40);
-		Timer.timePause(4);
-		Timer.timeEnd(4, "toCamera aggregated", 20);
+		Timer.INTERFACE.timeEnd();
+		Timer.CELL_DRAW_AGGREGATED.timePause();
+		Timer.CELL_DRAW_AGGREGATED.timeEnd();
+		Timer.TO_CAMERA_AGGREGATED.timePause();
+		Timer.TO_CAMERA_AGGREGATED.timeEnd();
 	}
 	
 	private void drawBackground(PainterQueue painterQueue) {
