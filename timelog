@@ -1,0 +1,14 @@
+( World Constructor ) time: 102 ms
+( Background ) time: 0 ms
+( Chunks ) time: 5 ms
+( Interface ) time: 0 ms
+( Cell.draw aggregated ) time: 2 ms
+( toCamera aggregated ) time: 0 ms
+( painterQueue.paint() ) time: 0 ms
+( paint() ) time: 6 ms
+( loop 1 ) time: 0 ms
+( world.draw ) time: 5 ms
+( find ) time: 0 ms
+( Terrain Constructor ) time: 7 ms
+( expand ) time: 0 ms
+( add to world ) time: 0 ms

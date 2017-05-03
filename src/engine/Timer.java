@@ -18,7 +18,7 @@ public class Timer {
 	public static final Time EXPAND = new Time("expand", 20, true);
 	public static final Time ADD_TO_WORLD = new Time("add to world", 10, true);
 	
-	private static void writeFile() {
+	static void writeFile() {
 		String s = "";
 		s += WORLD_CONSTRUCTOR.toFileString();
 		s += BACKGROUND.toFileString();
@@ -39,6 +39,7 @@ public class Timer {
 			PrintWriter out = new PrintWriter("timelog");
 			out.write(s);
 			out.close();
+			System.out.println("timerlog written");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -53,6 +54,7 @@ public class Timer {
 		private Time(String name, long minDuration, boolean write) {
 			this.name = name;
 			this.minDuration = minDuration;
+			this.write = write;
 		}
 		
 		public void timeStart() {
@@ -71,15 +73,15 @@ public class Timer {
 			avgTime += milli;
 			count++;
 			if (milli >= minDuration)
-				System.out.println("( " + name + " ) time: " + toString(milli));
+				System.out.println(toString(milli));
 		}
 		
-		private static String toString(long milli) {
-			return milli > 1000 ? milli / 1000 + " s" : milli + " ms";
+		private String toString(long milli) {
+			return "( " + name + " ) time: " + (milli > 1000 ? milli / 1000 + " s" : milli + " ms");
 		}
 		
 		private String toFileString() {
-			return write ? avgTime / count + "\n" : "";
+			return write ? toString(avgTime / count) + "\n" : "";
 		}
 	}
 }

@@ -12,7 +12,7 @@ import world.World;
 import world.WorldCreator;
 
 class KamiEngine {
-	private static final int FRAME = 800, IMAGE = FRAME;
+	private static final int FRAME = 400, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
 	private Controller controller;
@@ -73,7 +73,7 @@ class KamiEngine {
 			}
 			engineFrame++;
 			checkPause();
-			Thread.yield();
+			checkWriteTimer();
 			Math3D.sleep(10);
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
@@ -90,6 +90,11 @@ class KamiEngine {
 			pause = !pause;
 	}
 	
+	private void checkWriteTimer() {
+		if (controller.isKeyPressed(Controller.KEY_ENTER))
+			Timer.writeFile();
+	}
+	
 	private static void printInstructions() {
 		System.out.println("Kami - Java 3D voxel platformer . jar 4");
 		System.out.println("W A S D to move");
@@ -102,6 +107,9 @@ class KamiEngine {
 		System.out.println("Space press while running into a wall to climb the wall");
 		System.out.println("Move mouse to move camera and direction");
 		System.out.println("Press shift or press mouse button to throw grappling hook");
+		
+		System.out.println("temp - 1 to switch extra paint mode");
+		System.out.println("temp - enter to write out timer log");
 	}
 	
 	public static void main(String args[]) {
