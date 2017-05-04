@@ -38,15 +38,7 @@ public final class LList<T> implements Iterable<LList<T>> {
 	}
 	
 	public final Iterable<LList<T>> reverseIterator() {
-		return new Iterable<LList<T>>() {
-			public final Iterator<LList<T>> iterator() {
-				return new LListReverseIterator();
-			}
-		};
-		
-		// todo: which is better?
-		//		return () -> new LListReverseIterator();
-		//		return LListReverseIterator::new;
+		return LListReverseIterator::new;
 	}
 	
 	private final class LListIterator implements Iterator<LList<T>> {

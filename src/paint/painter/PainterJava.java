@@ -1,8 +1,9 @@
-package paint;
+package paint.painter;
 
 import control.Controller;
 import engine.Math3D;
 import engine.Timer;
+import paint.painterelement.PainterQueue;
 import shapes.drawelement.Surface;
 
 import javax.swing.*;
@@ -13,10 +14,7 @@ import java.awt.image.BufferedImage;
 import static camera.Camera.MIN_LIGHT;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
-public class Painter extends JFrame implements Runnable {
-	public static String[] debugString = new String[] {"", "", "", "", "", ""};
-	public static String[] outputString = new String[] {"", "", "", "", "", ""};
-	
+public class PainterJava extends JFrame implements Painter {
 	// paint mode
 	private static final String[] wireString = new String[] {"NORMAL", "WIRE", "NORMAL + WIRE"};
 	private static final int WIRE_ONLY = 1, WIRE_AND = 2;
@@ -36,7 +34,7 @@ public class Painter extends JFrame implements Runnable {
 	
 	private PainterQueue painterQueue;
 	
-	public Painter(int frameSize, int imageSize, Controller controller) {
+	public PainterJava(int frameSize, int imageSize, Controller controller) {
 		setPaintModeString();
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
@@ -59,10 +57,10 @@ public class Painter extends JFrame implements Runnable {
 	
 	public void paint() {
 		brush.setColor(Color.WHITE);
-		for (int i = 0; i < debugString.length; i++)
-			brush.drawString(debugString[i], 25, 25 + 25 * i);
-		for (int i = 0; i < outputString.length; i++)
-			brush.drawString(outputString[i], 25, 650 + 25 * i);
+		for (int i = 0; i < DEBUG_STRING.length; i++)
+			brush.drawString(DEBUG_STRING[i], 25, 25 + 25 * i);
+		for (int i = 0; i < OUTPUT_STRING.length; i++)
+			brush.drawString(OUTPUT_STRING[i], 25, 650 + 25 * i);
 		frameBrush.drawImage(canvas, 0, borderSize, null);
 		//		frameBrush.drawImage(canvas, 0, borderSize, FRAME_SIZE, borderSize + FRAME_SIZE, 0, 0, IMAGE_SIZE, IMAGE_SIZE, null);
 	}
@@ -76,11 +74,11 @@ public class Painter extends JFrame implements Runnable {
 		}
 	}
 	
-	void drawImage(BufferedImage image, int shift, int shiftVert) {
+	public void drawImage(BufferedImage image, int shift, int shiftVert) {
 		brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
-	void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
+	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
 		if (xy != null) {
 			surfaceCount++;
 			for (int i = 0; i < xy[0].length; i++)
@@ -100,7 +98,7 @@ public class Painter extends JFrame implements Runnable {
 		}
 	}
 	
-	void drawClipPolygon(double[][] xy, double light, Color color, int clipState, boolean frame) {
+	public void drawClipPolygon(double[][] xy, double light, Color color, int clipState, boolean frame) {
 		if (clipState == Surface.CLIP_ADD) {
 			if (clip == null)
 				clip = new Area();
@@ -121,7 +119,7 @@ public class Painter extends JFrame implements Runnable {
 		}
 	}
 	
-	void drawLine(double x1, double y1, double x2, double y2, double light, Color color) {
+	public void drawLine(double x1, double y1, double x2, double y2, double light, Color color) {
 		surfaceCount++;
 		if ((x1 > -.5 && x1 < .5 && y1 < .5 && y1 > -.5) || (x2 > -.5 && x2 < .5 && y2 < .5 && y2 > -.5)) {
 			drawCount++;
@@ -132,13 +130,13 @@ public class Painter extends JFrame implements Runnable {
 		}
 	}
 	
-	void drawRectangle(double x, double y, double width, double height, Color color) {
+	public void drawRectangle(double x, double y, double width, double height, Color color) {
 		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
 		brush.setColor(color);
 		brush.fillRect(xywh[0], xywh[1], xywh[2], xywh[3]);
 	}
 	
-	void drawBlur(double blur) {
+	public void drawBlur(double blur) {
 		if (blurMode == BLUR_DYNAMIC) {
 			blur = Math3D.maxMin(blur, 1, .1);
 			frameBrush.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) blur));
@@ -160,18 +158,10 @@ public class Painter extends JFrame implements Runnable {
 				frameBrush.setComposite(AlphaComposite.Src);
 			setPaintModeString();
 		}
-		
-		if (controller.isKeyPressed(Controller.KEY_1)) {
-			if (++x == 3)
-				x = 0;
-			String[] s = new String[] {"normal", "4x paint()", "4x painterQueue.paint()"};
-			System.out.println("x mode " + s[x]);
-		}
-		
 	}
 	
 	private void setPaintModeString() {
-		debugString[4] = "wire mode " + wireString[wireMode] + " (press / to toggle)  :  blur " + blurString[blurMode] + " (press . to toggle)";
+		DEBUG_STRING[4] = "wire mode " + wireString[wireMode] + " (press / to toggle)  :  blur " + blurString[blurMode] + " (press . to toggle)";
 	}
 	
 	public boolean isPainterQueueDone() {
@@ -182,8 +172,6 @@ public class Painter extends JFrame implements Runnable {
 		this.painterQueue = painterQueue;
 	}
 	
-	private int x = 0;
-	
 	public void run() {
 		while (true) {
 			if (painterQueue.drawReady) {
@@ -192,21 +180,11 @@ public class Painter extends JFrame implements Runnable {
 				Timer.PAINTER_QUEUE_PAINT.timeStart();
 				painterQueue.paint(this);
 				Timer.PAINTER_QUEUE_PAINT.timeEnd();
-				if (x == 2) {
-					painterQueue.paint(this);
-					painterQueue.paint(this);
-					painterQueue.paint(this);
-				}
 				painterQueue.drawReady = false;
-				debugString[5] = "paint surfaceCount: " + surfaceCount + " ; paint drawCount: " + drawCount;
+				DEBUG_STRING[5] = "paint surfaceCount: " + surfaceCount + " ; paint drawCount: " + drawCount;
 				Timer.PAINT.timeStart();
 				paint();
 				Timer.PAINT.timeEnd();
-				if (x == 1) {
-					paint();
-					paint();
-					paint();
-				}
 			}
 			Math3D.sleep(10);
 		}

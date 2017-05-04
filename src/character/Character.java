@@ -4,7 +4,7 @@ import ambient.Music;
 import camera.TrailingCamera;
 import control.Controller;
 import engine.Math3D;
-import paint.Painter;
+import paint.painter.Painter;
 import particle.HookParticle;
 import particle.SmokeParticle;
 import shapes.Cube;
@@ -133,7 +133,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		//		if (vfast)
 		//			Music.WOOSH.play();
 		
-		Painter.debugString[2] = STATE_STRING[state];
+		Painter.DEBUG_STRING[2] = STATE_STRING[state];
 	}
 	
 	private void moveTowardsHook() {

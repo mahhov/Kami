@@ -5,8 +5,8 @@ import control.Controller;
 import engine.Math3D;
 import engine.Timer;
 import list.LList;
-import paint.Painter;
-import paint.PainterQueue;
+import paint.painter.Painter;
+import paint.painterelement.PainterQueue;
 import particle.Particle;
 import shapes.Shape;
 import terrain.Terrain;
@@ -118,7 +118,7 @@ public class World {
 		int[] cameraChunkCoord = getChunkCoord((int) c.x, (int) c.y, (int) c.z);
 		int volumeChunk = (fromChunkCoord[0] - toChunkCoord[0]) * (fromChunkCoord[1] - toChunkCoord[1]) * (fromChunkCoord[2] - toChunkCoord[2]) / -1;
 		
-		Painter.debugString[1] = "(unit 100,000) volume raw " + volumeRaw + " ; (unit 100,000) volume bound " + volumeBound + " ; volume chunk " + volumeChunk;
+		Painter.DEBUG_STRING[1] = "(unit 100,000) volume raw " + volumeRaw + " ; (unit 100,000) volume bound " + volumeBound + " ; volume chunk " + volumeChunk;
 		
 		for (int x = fromChunkCoord[0]; x < cameraChunkCoord[0]; x++)
 			drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.RIGHT);

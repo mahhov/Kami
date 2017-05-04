@@ -2,8 +2,8 @@ package ambient;
 
 import control.Controller;
 import engine.Math3D;
-import paint.PainterImage;
-import paint.PainterQueue;
+import paint.painterelement.PainterImage;
+import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldElement;

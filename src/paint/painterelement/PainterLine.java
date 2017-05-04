@@ -1,4 +1,6 @@
-package paint;
+package paint.painterelement;
+
+import paint.painter.Painter;
 
 import java.awt.*;
 

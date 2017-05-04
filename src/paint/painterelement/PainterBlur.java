@@ -1,4 +1,6 @@
-package paint;
+package paint.painterelement;
+
+import paint.painter.Painter;
 
 public class PainterBlur extends PainterElement{
 	private double blur;

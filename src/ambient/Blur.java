@@ -2,8 +2,8 @@ package ambient;
 
 import character.Character;
 import control.Controller;
-import paint.PainterBlur;
-import paint.PainterQueue;
+import paint.painterelement.PainterBlur;
+import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldElement;

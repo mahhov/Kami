@@ -5,8 +5,10 @@ import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
-import paint.Painter;
-import paint.PainterQueue;
+import paint.painter.Painter;
+import paint.painter.PainterJava;
+import paint.painter.PainterLwjgl;
+import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
@@ -25,7 +27,7 @@ class KamiEngine {
 	KamiEngine() {
 		Math3D.loadTrig(1000);
 		controller = new Controller(FRAME, FRAME);
-		painter = new Painter(FRAME, IMAGE, controller);
+		painter = new PainterLwjgl(FRAME, IMAGE, controller);
 		camera = new TrailingCamera();
 		terrain = new Terrain();
 		createWorld();
@@ -77,7 +79,7 @@ class KamiEngine {
 			Math3D.sleep(10);
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
-				Painter.debugString[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
+				Painter.DEBUG_STRING[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
 				frame = 0;
 				engineFrame = 0;
 				beginTime = endTime;

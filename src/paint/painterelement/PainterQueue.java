@@ -1,6 +1,7 @@
-package paint;
+package paint.painterelement;
 
 import list.LList;
+import paint.painter.Painter;
 
 public class PainterQueue extends PainterElement {
 	private LList<PainterElement> elements;
@@ -15,7 +16,7 @@ public class PainterQueue extends PainterElement {
 		elements = elements.add(e);
 	}
 	
-	void paint(Painter painter) {
+	public void paint(Painter painter) {
 		for (LList<PainterElement> e : tailElement.reverseIterator())
 			e.node.paint(painter);
 	}

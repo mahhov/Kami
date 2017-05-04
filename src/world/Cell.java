@@ -3,9 +3,9 @@ package world;
 import camera.Camera;
 import engine.Timer;
 import list.LList;
-import paint.PainterClipPolygon;
-import paint.PainterLine;
-import paint.PainterQueue;
+import paint.painterelement.PainterClipPolygon;
+import paint.painterelement.PainterLine;
+import paint.painterelement.PainterQueue;
 import shapes.Shape;
 import shapes.drawelement.Line;
 import shapes.drawelement.Surface;
@@ -13,22 +13,22 @@ import shapes.drawelement.Surface;
 class Cell {
 	WorldChunk chunk;
 	private LList<Shape> shapes;
-	
+
 	Cell(WorldChunk chunk) {
 		this.chunk = chunk;
 		shapes = new LList<>();
 	}
-	
+
 	public void add(Shape shape) {
 		chunk.count++;
 		shapes = shapes.add(shape);
 	}
-	
+
 	public void remove(LList<Shape> lShape) {
 		chunk.count--;
 		shapes = shapes.remove(lShape);
 	}
-	
+
 	public void drawAll(PainterQueue painterQueue, Camera c, int xSide, int ySide, int zSide) {
 		Timer.CELL_DRAW_AGGREGATED.timePause();
 		Surface surfaces[];

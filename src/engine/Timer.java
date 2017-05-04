@@ -12,8 +12,8 @@ public class Timer {
 	public static final Time CELL_DRAW_AGGREGATED = new Time("Cell.draw aggregated", 40, true);
 	public static final Time TO_CAMERA_AGGREGATED = new Time("toCamera aggregated", 20, true);
 	
-	public static final Time PAINTER_QUEUE_PAINT = new Time("painterQueue.paint()", 10, true);
-	public static final Time PAINT = new Time("paint()", 10, true);
+	public static final Time PAINTER_QUEUE_PAINT = new Time("painterQueue.paint()", 25, true);
+	public static final Time PAINT = new Time("paint()", 25, true);
 	public static final Time LOOP_1 = new Time("loop 1", 20, true);
 	public static final Time WORLD_DRAW = new Time("world.draw", 100, true);
 	public static final Time FIND = new Time("find", 100, true);
