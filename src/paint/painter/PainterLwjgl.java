@@ -18,27 +18,12 @@ import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class PainterLwjgl implements Painter {
-	
 	// The window handle
 	private long window;
+	public boolean running = true;
+	private PainterQueue painterQueue;
 	
 	public PainterLwjgl(int frameSize, int imageSize, Controller controller) {
-	}
-	
-	public void run() {
-		init();
-		loop();
-		
-		// Free the window callbacks and destroy the window
-		glfwFreeCallbacks(window);
-		glfwDestroyWindow(window);
-		
-		// Terminate GLFW and free the error callback
-		glfwTerminate();
-		glfwSetErrorCallback(null).free();
-	}
-	
-	private void init() {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
 		GLFWErrorCallback.createPrint(System.err).set();
@@ -53,15 +38,15 @@ public class PainterLwjgl implements Painter {
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 		
 		// Create the window
-		window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+		window = glfwCreateWindow(frameSize, frameSize, "Hello World!", NULL, NULL);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
 		
 		// Setup a key callback. It will be called every time a key is pressed, repeated or released.
-		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-			if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-		});
+		//		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+		//			if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+		//				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+		//		});
 		
 		// Get the thread stack and push a new frame
 		try (MemoryStack stack = stackPush()) {
@@ -89,9 +74,7 @@ public class PainterLwjgl implements Painter {
 		
 		// Make the window visible
 		glfwShowWindow(window);
-	}
-	
-	private void loop() {
+		
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
 		// LWJGL detects the context that is current in the current thread,
@@ -102,65 +85,73 @@ public class PainterLwjgl implements Painter {
 		// Set the clear color
 		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
 		
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
-		while (!glfwWindowShouldClose(window)) {
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-			
-			glfwSwapBuffers(window); // swap the color buffers
-			
-			// Poll for window events. The key callback above will only be
-			// invoked during this call.
-			glfwPollEvents();
-		}
+		painterQueue = new PainterQueue();
 	}
 	
-	public static void main(String[] args) {
-		new PainterLwjgl().run();
-	}
-	
-	@Override
-	public void drawImage(BufferedImage image, int shift, int shiftVert) {
+	public void clean() {
+		// Free the window callbacks and destroy the window
+		glfwFreeCallbacks(window);
+		glfwDestroyWindow(window);
 		
+		// Terminate GLFW and free the error callback
+		glfwTerminate();
+		glfwSetErrorCallback(null).free();
 	}
 	
-	@Override
+	public void drawImage(BufferedImage image, int shift, int shiftVert) {
+	}
+	
 	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
 		
 	}
 	
-	@Override
 	public void drawClipPolygon(double[][] xy, double light, Color color, int clipState, boolean frame) {
-		
+	
 	}
 	
-	@Override
 	public void drawLine(double x1, double y1, double x2, double y2, double light, Color color) {
 		
 	}
 	
-	@Override
 	public void drawRectangle(double x, double y, double width, double height, Color color) {
 		
 	}
 	
-	@Override
 	public void drawBlur(double blur) {
 		
 	}
 	
-	@Override
 	public void updateMode(Controller controller) {
 		
 	}
 	
-	@Override
 	public boolean isPainterQueueDone() {
-		return false;
+		return !painterQueue.drawReady;
 	}
 	
-	@Override
 	public void setPainterQueue(PainterQueue painterQueue) {
+		this.painterQueue = painterQueue;
+	}
+	
+	public void run() {
+		if (glfwWindowShouldClose(window)) {
+			clean();
+			running = false;
+			return;
+		}
 		
+		if (painterQueue.drawReady) {
+			painterQueue.paint(this);
+			painterQueue.drawReady = false;
+			//			paint();
+		}
+		
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+		
+		glfwSwapBuffers(window); // swap the color buffers
+		
+		// Poll for window events. The key callback above will only be
+		// invoked during this call.
+		glfwPollEvents();
 	}
 }

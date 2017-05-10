@@ -5,29 +5,28 @@ import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
-import paint.painter.Painter;
-import paint.painter.PainterJava;
 import paint.painter.PainterLwjgl;
+import paint.painter.Painter;
 import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
 
 class KamiEngine {
-	private static final int FRAME = 400, IMAGE = FRAME;
+	private static final int FRAME = 800, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
 	private Controller controller;
-	private Painter painter;
+	private PainterLwjgl painter;
 	private World world;
 	private Terrain terrain;
 	private Character character;
 	private boolean pause;
 	
 	KamiEngine() {
+		painter = new PainterLwjgl(FRAME, IMAGE, controller);
 		Math3D.loadTrig(1000);
 		controller = new Controller(FRAME, FRAME);
-		painter = new PainterLwjgl(FRAME, IMAGE, controller);
 		camera = new TrailingCamera();
 		terrain = new Terrain();
 		createWorld();
@@ -49,8 +48,9 @@ class KamiEngine {
 		//		Music.BGMUSIC.play();
 		int frame = 0, engineFrame = 0;
 		long beginTime = 0, endTime;
-		new Thread(painter).start();
-		while (true) {
+		//		new Thread(painter).start();
+		while (painter.running) {
+			checkPause();
 			while (pause) {
 				checkPause();
 				Math3D.sleep(30);
@@ -71,10 +71,10 @@ class KamiEngine {
 				Timer.WORLD_DRAW.timeEnd();
 				painterQueue.drawReady = true;
 				painter.setPainterQueue(painterQueue);
+				painter.run();
 				frame++;
 			}
 			engineFrame++;
-			checkPause();
 			checkWriteTimer();
 			Math3D.sleep(10);
 			endTime = System.nanoTime() + 1;
