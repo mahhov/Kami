@@ -1,6 +1,8 @@
 package paint.painter;
 
 import control.Controller;
+import engine.Math3D;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
@@ -9,11 +11,16 @@ import paint.painterelement.PainterQueue;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import static camera.Camera.MIN_LIGHT;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -21,9 +28,12 @@ public class PainterLwjgl implements Painter {
 	// The window handle
 	private long window;
 	public boolean running = true;
+	private final int IMAGE_SIZE;
 	private PainterQueue painterQueue;
 	
 	public PainterLwjgl(int frameSize, int imageSize, Controller controller) {
+		IMAGE_SIZE = imageSize;
+		
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
 		GLFWErrorCallback.createPrint(System.err).set();
@@ -83,7 +93,9 @@ public class PainterLwjgl implements Painter {
 		GL.createCapabilities();
 		
 		// Set the clear color
-		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		
 		painterQueue = new PainterQueue();
 	}
@@ -98,15 +110,61 @@ public class PainterLwjgl implements Painter {
 		glfwSetErrorCallback(null).free();
 	}
 	
+	private float[] glTransformColor(double light, Color color) {
+		if (light < MIN_LIGHT)
+			return new float[3];
+		else {
+			light = Math3D.min(1, light);
+			return new float[] {(float) (light * color.getRed() / 255), (float) (light * color.getGreen() / 255), (float) (light * color.getBlue() / 255)};
+		}
+	}
+	
+	private float[] glTransoformN5to5(float[] vertices) {
+		for (int i = 0; i < vertices.length; i += 2) {
+			vertices[i] = vertices[i] * 2;
+			vertices[i + 1] = -vertices[i + 1] * 2;
+		}
+		return vertices;
+	}
+	
+	private float[] glTransform01(float[] vertices) {
+		for (int i = 0; i < vertices.length; i += 2) {
+			vertices[i] = vertices[i] * 2 - 1;
+			vertices[i + 1] = -vertices[i + 1] * 2 + 1;
+		}
+		return vertices;
+	}
+	
+	private void glDraw(int drawMode, float[] vertices, float[] color) {
+		FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(vertices.length);
+		verticesBuffer.put(vertices).flip();
+		int vboID = glGenBuffers();
+		glEnableVertexAttribArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_STATIC_DRAW);
+		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+		glColor3fv(color);
+		glDrawArrays(drawMode, 0, vertices.length);
+	}
+	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
 	}
 	
 	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
-		
+		if (xy != null)
+			for (int i = 0; i < xy[0].length; i++)
+				if (xy[0][i] > -.5 && xy[0][i] < .5 && xy[1][i] < .5 && xy[1][i] > -.5) {
+					float[] vertices = glTransoformN5to5(new float[] {(float) xy[0][0], (float) xy[1][0], (float) xy[0][1], (float) xy[1][1], (float) xy[0][2], (float) xy[1][2], (float) xy[0][3], (float) xy[1][3]});
+					if (frame)
+						glDraw(GL_QUADS, vertices, Color.cyan.getRGBColorComponents(null));
+					else
+						glDraw(GL_QUADS, vertices, glTransformColor(light, color));
+					return;
+				}
 	}
 	
 	public void drawClipPolygon(double[][] xy, double light, Color color, int clipState, boolean frame) {
-	
+		drawPolygon(xy, light, color, frame);
 	}
 	
 	public void drawLine(double x1, double y1, double x2, double y2, double light, Color color) {
@@ -114,7 +172,8 @@ public class PainterLwjgl implements Painter {
 	}
 	
 	public void drawRectangle(double x, double y, double width, double height, Color color) {
-		
+		float[] vertices = glTransform01(new float[] {(float) x, (float) y, (float) (x + width), (float) y, (float) (x + width), (float) (y + height), (float) x, (float) (y + height)});
+		glDraw(GL_QUADS, vertices, color.getRGBColorComponents(null));
 	}
 	
 	public void drawBlur(double blur) {
@@ -141,14 +200,15 @@ public class PainterLwjgl implements Painter {
 		}
 		
 		if (painterQueue.drawReady) {
+			glClear(GL_COLOR_BUFFER_BIT);
 			painterQueue.paint(this);
 			painterQueue.drawReady = false;
-			//			paint();
+			glfwSwapBuffers(window);
+			double[] x = new double[1], y = new double[1];
+			glfwGetCursorPos(window, x, y);
+			glfwSetCursorPos(window, 0, 0);
+			System.out.println(x[0] + " " + y[0]);
 		}
-		
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-		
-		glfwSwapBuffers(window); // swap the color buffers
 		
 		// Poll for window events. The key callback above will only be
 		// invoked during this call.
