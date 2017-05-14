@@ -5,6 +5,7 @@ import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
+import control.ControllerJava;
 import paint.painter.PainterLwjgl;
 import paint.painter.Painter;
 import paint.painterelement.PainterQueue;
@@ -26,7 +27,7 @@ class KamiEngine {
 	KamiEngine() {
 		painter = new PainterLwjgl(FRAME, IMAGE, controller);
 		Math3D.loadTrig(1000);
-		controller = new Controller(FRAME, FRAME);
+		controller = new ControllerJava(FRAME, FRAME);
 		camera = new TrailingCamera();
 		terrain = new Terrain();
 		createWorld();

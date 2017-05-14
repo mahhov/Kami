@@ -1,6 +1,7 @@
 package paint.painter;
 
 import control.Controller;
+import control.ControllerJava;
 import engine.Math3D;
 import engine.Timer;
 import paint.painterelement.PainterQueue;
@@ -34,7 +35,7 @@ public class PainterJava extends JFrame implements Painter {
 	
 	private PainterQueue painterQueue;
 	
-	public PainterJava(int frameSize, int imageSize, Controller controller) {
+	public PainterJava(int frameSize, int imageSize, ControllerJava controller) {
 		setPaintModeString();
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
