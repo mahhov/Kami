@@ -6,6 +6,7 @@ import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
 import control.ControllerJava;
+import control.ControllerLwjgl;
 import paint.painter.PainterLwjgl;
 import paint.painter.Painter;
 import paint.painterelement.PainterQueue;
@@ -17,17 +18,17 @@ class KamiEngine {
 	private static final int FRAME = 800, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
-	private Controller controller;
+	private ControllerLwjgl controller;
 	private PainterLwjgl painter;
 	private World world;
 	private Terrain terrain;
 	private Character character;
 	private boolean pause;
 	
-	KamiEngine() {
-		painter = new PainterLwjgl(FRAME, IMAGE, controller);
+	private KamiEngine() {
 		Math3D.loadTrig(1000);
-		controller = new ControllerJava(FRAME, FRAME);
+		controller = new ControllerLwjgl(FRAME, FRAME);
+		painter = new PainterLwjgl(FRAME, IMAGE, controller);
 		camera = new TrailingCamera();
 		terrain = new Terrain();
 		createWorld();
@@ -44,7 +45,7 @@ class KamiEngine {
 		world.initWorldElements();
 	}
 	
-	void begin() {
+	private void begin() {
 		System.out.println("Begin");
 		//		Music.BGMUSIC.play();
 		int frame = 0, engineFrame = 0;

@@ -1,6 +1,7 @@
 package paint.painter;
 
 import control.Controller;
+import control.ControllerLwjgl;
 import engine.Math3D;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -24,16 +25,15 @@ import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
+//todo : clean up
+
 public class PainterLwjgl implements Painter {
-	// The window handle
 	private long window;
 	public boolean running = true;
-	private final int IMAGE_SIZE;
+	ControllerLwjgl controller;
 	private PainterQueue painterQueue;
 	
-	public PainterLwjgl(int frameSize, int imageSize, Controller controller) {
-		IMAGE_SIZE = imageSize;
-		
+	public PainterLwjgl(int frameSize, int imageSize, ControllerLwjgl controller) {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
 		GLFWErrorCallback.createPrint(System.err).set();
@@ -96,6 +96,11 @@ public class PainterLwjgl implements Painter {
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		
+		this.controller = controller;
+		controller.window = window;
+		glfwSetKeyCallback(window, controller.lwjglKeyboardHandler());
+		glfwSetCursorPosCallback	(window, controller.lwjgtlMousePosHandler());
 		
 		painterQueue = new PainterQueue();
 	}
@@ -192,6 +197,7 @@ public class PainterLwjgl implements Painter {
 		this.painterQueue = painterQueue;
 	}
 	
+	//todo: return to seperate thread
 	public void run() {
 		if (glfwWindowShouldClose(window)) {
 			clean();
@@ -204,10 +210,6 @@ public class PainterLwjgl implements Painter {
 			painterQueue.paint(this);
 			painterQueue.drawReady = false;
 			glfwSwapBuffers(window);
-			double[] x = new double[1], y = new double[1];
-			glfwGetCursorPos(window, x, y);
-			glfwSetCursorPos(window, 0, 0);
-			System.out.println(x[0] + " " + y[0]);
 		}
 		
 		// Poll for window events. The key callback above will only be

@@ -5,7 +5,7 @@ import engine.Math3D;
 import java.awt.event.MouseEvent;
 
 public class Controller {
-	static final int UP = 0, DOWN = 1, PRESSED = 2, RELEASED = 3;
+	public static final int UP = 0, DOWN = 1, PRESSED = 2, RELEASED = 3;
 	public static final int KEY_W = 0, KEY_A = 1, KEY_S = 2, KEY_D = 3, KEY_Q = 4, KEY_E = 5, KEY_R = 6, KEY_F = 7, KEY_Z = 8, KEY_X = 9;
 	public static final int KEY_ESC = 10, KEY_SPACE = 11, KEY_SHIFT = 12, KEY_ENTER = 13, KEY_P = 14;
 	public static final int KEY_1 = 15, KEY_2 = 16, KEY_3 = 17, KEY_4 = 18, KEY_5 = 19, KEY_6 = 20, KEY_7 = 21, KEY_8 = 22, KEY_9 = 23, KEY_0 = 24;
@@ -16,7 +16,7 @@ public class Controller {
 	
 	private Key[] keys;
 	
-	final int centerMouseX, centerMouseY;
+	final int centerMouseX, centerMouseY; // todo: move this to ControllerJava
 	private int mouseMoveX, mouseMoveY;
 	private int mouseState;
 	
