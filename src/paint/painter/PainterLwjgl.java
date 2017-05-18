@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.LinkedList;
 
 import static camera.Camera.MIN_LIGHT;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -100,7 +101,7 @@ public class PainterLwjgl implements Painter {
 		this.controller = controller;
 		controller.window = window;
 		glfwSetKeyCallback(window, controller.lwjglKeyboardHandler());
-		glfwSetCursorPosCallback	(window, controller.lwjgtlMousePosHandler());
+		glfwSetCursorPosCallback(window, controller.lwjgtlMousePosHandler());
 		
 		painterQueue = new PainterQueue();
 	}
@@ -140,16 +141,28 @@ public class PainterLwjgl implements Painter {
 		return vertices;
 	}
 	
+	LinkedList<Float> x;
+	
 	private void glDraw(int drawMode, float[] vertices, float[] color) {
-		FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(vertices.length);
-		verticesBuffer.put(vertices).flip();
-		int vboID = glGenBuffers();
-		glEnableVertexAttribArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_STATIC_DRAW);
-		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
-		glColor3fv(color);
-		glDrawArrays(drawMode, 0, vertices.length);
+		for (float f : vertices)
+			y[ylen++] = f;
+		
+		//				glColor3fv(color);
+		//				GL11.glBegin(GL11.GL_POLYGON);
+		//				for (byte i = 0; i < vertices.length; i += 2)
+		//					GL11.glVertex2d(vertices[i], vertices[i + 1]);
+		//				GL11.glEnd();
+		
+		
+		//				glColor3fv(color);
+		//				FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(vertices.length);
+		//				verticesBuffer.put(vertices).flip();
+		//				int vboID = glGenBuffers();
+		//				glEnableVertexAttribArray(0);
+		//				glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		//				glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_DYNAMIC_DRAW);
+		//				glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+		//				glDrawArrays(drawMode, 0, vertices.length);
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
@@ -160,10 +173,7 @@ public class PainterLwjgl implements Painter {
 			for (int i = 0; i < xy[0].length; i++)
 				if (xy[0][i] > -.5 && xy[0][i] < .5 && xy[1][i] < .5 && xy[1][i] > -.5) {
 					float[] vertices = glTransoformN5to5(new float[] {(float) xy[0][0], (float) xy[1][0], (float) xy[0][1], (float) xy[1][1], (float) xy[0][2], (float) xy[1][2], (float) xy[0][3], (float) xy[1][3]});
-					if (frame)
-						glDraw(GL_QUADS, vertices, Color.cyan.getRGBColorComponents(null));
-					else
-						glDraw(GL_QUADS, vertices, glTransformColor(light, color));
+					glDraw(GL_QUADS, vertices, glTransformColor(light, color));
 					return;
 				}
 	}
@@ -197,6 +207,11 @@ public class PainterLwjgl implements Painter {
 		this.painterQueue = painterQueue;
 	}
 	
+	FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(1000 * 100 * 10);
+	float[] y = new float[1000 * 100 * 10];
+	int ylen;
+	int vboID = -1;
+	
 	//todo: return to seperate thread
 	public void run() {
 		if (glfwWindowShouldClose(window)) {
@@ -206,9 +221,27 @@ public class PainterLwjgl implements Painter {
 		}
 		
 		if (painterQueue.drawReady) {
+			ylen = 0;
+			
 			glClear(GL_COLOR_BUFFER_BIT);
 			painterQueue.paint(this);
 			painterQueue.drawReady = false;
+			
+			verticesBuffer.clear();
+			verticesBuffer.put(y).flip();
+			
+			if (vboID == -1) {
+				vboID = glGenBuffers();
+				glBindBuffer(GL_ARRAY_BUFFER, vboID);
+			}
+			
+			
+			
+			glEnableVertexAttribArray(0);
+			glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_DYNAMIC_DRAW);
+			glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+			glDrawArrays(GL_QUADS, 0, ylen / 2);
+			
 			glfwSwapBuffers(window);
 		}
 		

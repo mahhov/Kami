@@ -5,10 +5,9 @@ import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
-import control.ControllerJava;
 import control.ControllerLwjgl;
-import paint.painter.PainterLwjgl;
 import paint.painter.Painter;
+import paint.painter.PainterLwjgl;
 import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
@@ -82,6 +81,7 @@ class KamiEngine {
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
 				Painter.DEBUG_STRING[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
+				System.out.println("FPS " + frame);
 				frame = 0;
 				engineFrame = 0;
 				beginTime = endTime;
