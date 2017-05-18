@@ -1,4 +1,5 @@
 out/
 media/
 timelog
+*.log
 .idea/workspace.xml
