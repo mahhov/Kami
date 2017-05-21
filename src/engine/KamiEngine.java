@@ -16,6 +16,8 @@ import world.World;
 import world.WorldCreator;
 
 class KamiEngine {
+	private final boolean LWJGL_FLAG; // todo: consider renaming lower case
+	
 	private static final int FRAME = 800, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
@@ -28,7 +30,7 @@ class KamiEngine {
 	
 	private KamiEngine(boolean lwjglFlag) {
 		Math3D.loadTrig(1000);
-		if (lwjglFlag) {
+		if (LWJGL_FLAG = lwjglFlag) {
 			controller = new ControllerLwjgl(FRAME, FRAME);
 			painter = new PainterLwjgl(FRAME, IMAGE, (ControllerLwjgl) controller);
 		} else {
@@ -56,9 +58,10 @@ class KamiEngine {
 		//		Music.BGMUSIC.play();
 		int frame = 0, engineFrame = 0;
 		long beginTime = 0, endTime;
-				new Thread(painter).start();
+		if (!LWJGL_FLAG)
+			new Thread(painter).start();
 		//		while (painter.running) {
-		while (true) {
+		while (!LWJGL_FLAG || ((PainterLwjgl) painter).running) {
 			checkPause();
 			while (pause) {
 				checkPause();
@@ -80,7 +83,8 @@ class KamiEngine {
 				Timer.WORLD_DRAW.timeEnd();
 				painterQueue.drawReady = true;
 				painter.setPainterQueue(painterQueue);
-//				painter.run();
+				if (LWJGL_FLAG)
+					painter.run();
 				frame++;
 			}
 			engineFrame++;
