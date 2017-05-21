@@ -1,7 +1,6 @@
 package engine;
 
 import ambient.Blur;
-import ambient.Music;
 import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;

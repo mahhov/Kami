@@ -302,7 +302,7 @@ public class PainterLwjgl implements Painter {
 		}
 		
 		private void draw(float x, float y) {
-			float size = .05f;
+			float size = .03f;
 			float leftX = -1 + x * size;
 			float topY = 1 - y * size;
 			float rightX = leftX + size;
@@ -328,16 +328,19 @@ public class PainterLwjgl implements Painter {
 		}
 	}
 	
-	CharGlyph charGlyphs[] = new CharGlyph['z' - 'a' + 1];
+	CharGlyph charGlyphs[] = new CharGlyph[127];
 	
 	private void drawStringInit() {
-		for (int i = 'a'; i <= 'z'; i++)
-			charGlyphs[i - 'a'] = new CharGlyph((char) i + "");
+		for (int i = 32; i < charGlyphs.length; i++)
+			charGlyphs[i] = new CharGlyph((char) i + "");
 	}
 	
 	private void drawDebugStrings() {
-		char[] c = "hello".toCharArray();
-		for (int i = 0; i < c.length; i++)
-			charGlyphs[c[i] - 'a'].draw(i, 0);
+		for (int y = 0; y < DEBUG_STRING.length; y++) {
+			char[] c = DEBUG_STRING[y].toCharArray();
+			for (int x = 0; x < c.length; x++)
+				if (c[x] >= 0 && c[x] < charGlyphs.length)
+					charGlyphs[c[x]].draw(x, y);
+		}
 	}
 }
