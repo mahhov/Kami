@@ -20,6 +20,11 @@ public class Timer {
 	public static final Time EXPAND = new Time("expand", 20, true);
 	public static final Time ADD_TO_WORLD = new Time("add to world", 10, true);
 	
+	
+	public static final Time TEMP1 = new Time("temp 1", 10, true);
+	public static final Time TEMP2 = new Time("temp 2", 10, true);
+	public static final Time TEMP3 = new Time("temp 3", 10, true);
+	
 	static void writeFile() {
 		String s = "";
 		s += WORLD_CONSTRUCTOR.toFileString();
@@ -36,6 +41,9 @@ public class Timer {
 		s += FIND.toFileString();
 		s += EXPAND.toFileString();
 		s += ADD_TO_WORLD.toFileString();
+		s += TEMP1.toFileString();
+		s += TEMP2.toFileString();
+		s += TEMP3.toFileString();
 		
 		try {
 			PrintWriter out = new PrintWriter("timelog");
@@ -83,7 +91,11 @@ public class Timer {
 		}
 		
 		private String toFileString() {
-			return write ? toString(avgTime / count) + "\n" : "";
+			if (!write)
+				return "";
+			if (count == 0)
+				return "0 count\n";
+			return toString(avgTime / count) + "\n";
 		}
 	}
 }

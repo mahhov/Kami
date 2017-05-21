@@ -81,7 +81,7 @@ class KamiEngine {
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
 				Painter.DEBUG_STRING[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
-				System.out.println("FPS " + frame);
+				System.out.println("FPS " + frame + " engineFPS " + engineFrame);
 				frame = 0;
 				engineFrame = 0;
 				beginTime = endTime;
@@ -95,7 +95,7 @@ class KamiEngine {
 	}
 	
 	private void checkWriteTimer() {
-		if (controller.isKeyPressed(Controller.KEY_ENTER))
+		if (controller.isKeyPressed(Controller.KEY_BACK_SLASH))
 			Timer.writeFile();
 	}
 	
@@ -111,9 +111,7 @@ class KamiEngine {
 		System.out.println("Space press while running into a wall to climb the wall");
 		System.out.println("Move mouse to move camera and direction");
 		System.out.println("Press shift or press mouse button to throw grappling hook");
-		
-		System.out.println("temp - 1 to switch extra paint mode");
-		System.out.println("temp - enter to write out timer log");
+		System.out.println("temp - \\ to write out timer log");
 	}
 	
 	public static void main(String args[]) {

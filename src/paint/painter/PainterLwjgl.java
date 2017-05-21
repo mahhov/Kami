@@ -3,6 +3,7 @@ package paint.painter;
 import control.Controller;
 import control.ControllerLwjgl;
 import engine.Math3D;
+import engine.Timer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -20,9 +21,6 @@ import static camera.Camera.MIN_LIGHT;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
@@ -103,6 +101,9 @@ public class PainterLwjgl implements Painter {
 		glfwSetKeyCallback(window, controller.lwjglKeyboardHandler());
 		glfwSetCursorPosCallback(window, controller.lwjgtlMousePosHandler());
 		
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+		
 		painterQueue = new PainterQueue();
 	}
 	
@@ -144,8 +145,14 @@ public class PainterLwjgl implements Painter {
 	LinkedList<Float> x;
 	
 	private void glDraw(int drawMode, float[] vertices, float[] color) {
+		for (int i = 0; i < 4; i++) {
+			colorArray[(colorLen * 4 + i) * 3] = color[0];
+			colorArray[(colorLen * 4 + i) * 3 + 1] = color[1];
+			colorArray[(colorLen * 4 + i) * 3 + 2] = color[2];
+		}
+		colorLen++;
 		for (float f : vertices)
-			y[ylen++] = f;
+			vertexArray[bufferLen++] = f;
 		
 		//				glColor3fv(color);
 		//				GL11.glBegin(GL11.GL_POLYGON);
@@ -155,12 +162,12 @@ public class PainterLwjgl implements Painter {
 		
 		
 		//				glColor3fv(color);
-		//				FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(vertices.length);
-		//				verticesBuffer.put(vertices).flip();
+		//				FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
+		//				vertexBuffer.put(vertices).flip();
 		//				int vboID = glGenBuffers();
 		//				glEnableVertexAttribArray(0);
 		//				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		//				glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_DYNAMIC_DRAW);
+		//				glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_DYNAMIC_DRAW);
 		//				glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
 		//				glDrawArrays(drawMode, 0, vertices.length);
 	}
@@ -207,10 +214,12 @@ public class PainterLwjgl implements Painter {
 		this.painterQueue = painterQueue;
 	}
 	
-	FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(1000 * 100 * 10);
-	float[] y = new float[1000 * 100 * 10];
-	int ylen;
-	int vboID = -1;
+	final int bufferSize = 1000 * 100 * 10;
+	float[] vertexArray = new float[bufferSize];
+	float[] colorArray = new float[bufferSize];
+	int bufferLen, colorLen;
+	FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(bufferSize);
+	FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(bufferSize);
 	
 	//todo: return to seperate thread
 	public void run() {
@@ -221,26 +230,27 @@ public class PainterLwjgl implements Painter {
 		}
 		
 		if (painterQueue.drawReady) {
-			ylen = 0;
 			
+			bufferLen = 0;
+			colorLen = 0;
 			glClear(GL_COLOR_BUFFER_BIT);
+			Timer.TEMP1.timeStart();
 			painterQueue.paint(this);
 			painterQueue.drawReady = false;
+			Timer.TEMP1.timeEnd();
 			
-			verticesBuffer.clear();
-			verticesBuffer.put(y).flip();
+			Timer.TEMP2.timeStart();
+			vertexBuffer.clear();
+			vertexBuffer.put(vertexArray).flip();
+			colorBuffer.clear();
+			colorBuffer.put(colorArray).flip();
+			Timer.TEMP2.timeEnd();
 			
-			if (vboID == -1) {
-				vboID = glGenBuffers();
-				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-			}
-			
-			
-			
-			glEnableVertexAttribArray(0);
-			glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_DYNAMIC_DRAW);
-			glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
-			glDrawArrays(GL_QUADS, 0, ylen / 2);
+			Timer.TEMP3.timeStart();
+			glColorPointer(3, GL_FLOAT, 0, colorBuffer);
+			glVertexPointer(2, GL_FLOAT, 0, vertexBuffer);
+			glDrawArrays(GL_QUADS, 0, bufferLen / 2);
+			Timer.TEMP3.timeEnd();
 			
 			glfwSwapBuffers(window);
 		}
