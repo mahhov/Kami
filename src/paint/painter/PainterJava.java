@@ -30,7 +30,7 @@ public class PainterJava extends JFrame implements Painter {
 	private BufferedImage canvas;
 	private Graphics2D brush;
 	private Graphics2D frameBrush;
-	public int surfaceCount, drawCount;
+	int surfaceCount, drawCount;
 	private Area clip;
 	
 	private PainterQueue painterQueue;

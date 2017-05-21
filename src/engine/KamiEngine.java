@@ -15,7 +15,7 @@ import terrain.Terrain;
 import world.World;
 import world.WorldCreator;
 
-class KamiEngine {
+class KamiEngine implements Runnable {
 	private final boolean LWJGL_FLAG; // todo: consider renaming lower case
 	
 	private static final int FRAME = 800, IMAGE = FRAME;
@@ -56,11 +56,13 @@ class KamiEngine {
 	private void begin() {
 		System.out.println("Begin");
 		//		Music.BGMUSIC.play();
+		new Thread(this).start();
+		painter.run();
+	}
+	
+	public void run() {
 		int frame = 0, engineFrame = 0;
 		long beginTime = 0, endTime;
-		if (!LWJGL_FLAG)
-			new Thread(painter).start();
-		//		while (painter.running) {
 		while (!LWJGL_FLAG || ((PainterLwjgl) painter).running) {
 			checkPause();
 			while (pause) {
@@ -83,8 +85,6 @@ class KamiEngine {
 				Timer.WORLD_DRAW.timeEnd();
 				painterQueue.drawReady = true;
 				painter.setPainterQueue(painterQueue);
-				if (LWJGL_FLAG)
-					painter.run();
 				frame++;
 			}
 			engineFrame++;
@@ -93,7 +93,8 @@ class KamiEngine {
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
 				Painter.DEBUG_STRING[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
-				System.out.println("FPS " + frame + " engineFPS " + engineFrame);
+				int surfaceCount = LWJGL_FLAG ? ((PainterLwjgl) painter).surfaceCount : 0;
+				System.out.println("FPS " + frame + " engineFPS " + engineFrame + " " + surfaceCount);
 				frame = 0;
 				engineFrame = 0;
 				beginTime = endTime;
