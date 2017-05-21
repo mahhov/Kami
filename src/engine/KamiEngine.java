@@ -1,6 +1,7 @@
 package engine;
 
 import ambient.Blur;
+import ambient.Music;
 import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
@@ -55,7 +56,7 @@ class KamiEngine implements Runnable {
 	
 	private void begin() {
 		System.out.println("Begin");
-		//		Music.BGMUSIC.play();
+		// Music.BGMUSIC.play();
 		new Thread(this).start();
 		painter.run();
 	}

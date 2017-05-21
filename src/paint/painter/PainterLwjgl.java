@@ -13,6 +13,7 @@ import paint.painterelement.PainterQueue;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.LinkedList;
@@ -102,10 +103,9 @@ public class PainterLwjgl implements Painter {
 		glfwSetKeyCallback(window, controller.lwjglKeyboardHandler());
 		glfwSetCursorPosCallback(window, controller.lwjgtlMousePosHandler());
 		
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		
 		painterQueue = new PainterQueue();
+		
+		drawStringInit();
 	}
 	
 	public void clean() {
@@ -163,6 +163,12 @@ public class PainterLwjgl implements Painter {
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
+		//		int co = image.getColorModel().getNumComponents();
+		//		byte[] data = new byte[co * image.getWidth() * image.getHeight()];
+		//		image.getRaster().getDataElements(0, 0, image.getWidth(), image.getHeight(), data);
+		//		ByteBuffer pixels = BufferUtils.createByteBuffer(data.length);
+		//		pixels.put(data);
+		//		pixels.rewind();
 	}
 	
 	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
@@ -239,9 +245,15 @@ public class PainterLwjgl implements Painter {
 				colorBuffer.clear();
 				colorBuffer.put(colorArray).flip();
 				
+				glEnableClientState(GL_VERTEX_ARRAY);
+				glEnableClientState(GL_COLOR_ARRAY);
 				glColorPointer(3, GL_FLOAT, 0, colorBuffer);
 				glVertexPointer(2, GL_FLOAT, 0, vertexBuffer);
 				glDrawArrays(GL_QUADS, 0, bufferLen / 2);
+				glDisableClientState(GL_VERTEX_ARRAY);
+				glDisableClientState(GL_COLOR_ARRAY);
+				
+				drawDebugStrings();
 				
 				glfwSwapBuffers(window);
 				Timer.PAINT.timeEnd();
@@ -252,5 +264,80 @@ public class PainterLwjgl implements Painter {
 			glfwPollEvents();
 			Math3D.sleep(10);
 		}
+	}
+	
+	private class CharGlyph {
+		private static final int SIZE = 12;
+		private int textureId;
+		
+		CharGlyph(String s) {
+			// create buffered image
+			BufferedImage textImage = new BufferedImage(SIZE, SIZE, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g = (Graphics2D) textImage.getGraphics();
+			g.setColor(Color.WHITE);
+			g.drawString(s, 1, 10);
+			
+			// get rgb
+			int[] pixels = textImage.getRGB(0, 0, SIZE, SIZE, null, 0, SIZE);
+			
+			// create byte buffer
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(SIZE * SIZE * 4);
+			for (int y = 0; y < SIZE; y++) {
+				for (int x = 0; x < SIZE; x++) {
+					int pixel = pixels[y * SIZE + x];
+					byteBuffer.put((byte) ((pixel >> 16) & 0xFF));
+					byteBuffer.put((byte) ((pixel >> 8) & 0xFF));
+					byteBuffer.put((byte) (pixel & 0xFF));
+					byteBuffer.put((byte) ((pixel >> 24) & 0xFF));
+				}
+			}
+			byteBuffer.flip();
+			
+			// create texture
+			textureId = glGenTextures();
+			glBindTexture(GL_TEXTURE_2D, textureId);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SIZE, SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, byteBuffer);
+		}
+		
+		private void draw(float x, float y) {
+			float size = .05f;
+			float leftX = -1 + x * size;
+			float topY = 1 - y * size;
+			float rightX = leftX + size;
+			float bottomY = topY - size;
+			
+			glBindTexture(GL_TEXTURE_2D, textureId);
+			
+			float[] texture = new float[] {0, 0, 1, 0, 1, 1, 0, 1};
+			float[] quad = new float[] {leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY};
+			
+			glEnable(GL_TEXTURE_2D);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glTexCoordPointer(2, GL_FLOAT, 0, texture);
+			glVertexPointer(2, GL_FLOAT, 0, quad);
+			glDrawArrays(GL_QUADS, 0, 4);
+			glDisable(GL_TEXTURE_2D);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glDisable(GL_BLEND);
+		}
+	}
+	
+	CharGlyph charGlyphs[] = new CharGlyph['z' - 'a' + 1];
+	
+	private void drawStringInit() {
+		for (int i = 'a'; i <= 'z'; i++)
+			charGlyphs[i - 'a'] = new CharGlyph((char) i + "");
+	}
+	
+	private void drawDebugStrings() {
+		char[] c = "hello".toCharArray();
+		for (int i = 0; i < c.length; i++)
+			charGlyphs[c[i] - 'a'].draw(i, 0);
 	}
 }
