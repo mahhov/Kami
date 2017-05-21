@@ -5,8 +5,10 @@ import ambient.Sky;
 import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
+import control.ControllerJava;
 import control.ControllerLwjgl;
 import paint.painter.Painter;
+import paint.painter.PainterJava;
 import paint.painter.PainterLwjgl;
 import paint.painterelement.PainterQueue;
 import terrain.Terrain;
@@ -17,17 +19,22 @@ class KamiEngine {
 	private static final int FRAME = 800, IMAGE = FRAME;
 	
 	private TrailingCamera camera;
-	private ControllerLwjgl controller;
-	private PainterLwjgl painter;
+	private Controller controller;
+	private Painter painter;
 	private World world;
 	private Terrain terrain;
 	private Character character;
 	private boolean pause;
 	
-	private KamiEngine() {
+	private KamiEngine(boolean lwjglFlag) {
 		Math3D.loadTrig(1000);
-		controller = new ControllerLwjgl(FRAME, FRAME);
-		painter = new PainterLwjgl(FRAME, IMAGE, controller);
+		if (lwjglFlag) {
+			controller = new ControllerLwjgl(FRAME, FRAME);
+			painter = new PainterLwjgl(FRAME, IMAGE, (ControllerLwjgl) controller);
+		} else {
+			controller = new ControllerJava(FRAME, FRAME);
+			painter = new PainterJava(FRAME, IMAGE, (ControllerJava) controller);
+		}
 		camera = new TrailingCamera();
 		terrain = new Terrain();
 		createWorld();
@@ -49,8 +56,9 @@ class KamiEngine {
 		//		Music.BGMUSIC.play();
 		int frame = 0, engineFrame = 0;
 		long beginTime = 0, endTime;
-		//		new Thread(painter).start();
-		while (painter.running) {
+				new Thread(painter).start();
+		//		while (painter.running) {
+		while (true) {
 			checkPause();
 			while (pause) {
 				checkPause();
@@ -72,7 +80,7 @@ class KamiEngine {
 				Timer.WORLD_DRAW.timeEnd();
 				painterQueue.drawReady = true;
 				painter.setPainterQueue(painterQueue);
-				painter.run();
+//				painter.run();
 				frame++;
 			}
 			engineFrame++;
@@ -116,7 +124,8 @@ class KamiEngine {
 	
 	public static void main(String args[]) {
 		KamiEngine.printInstructions();
-		new KamiEngine().begin();
+		boolean lwjgl = args.length > 0 && args[0].equals("lwjgl");
+		new KamiEngine(lwjgl).begin();
 	}
 }
 

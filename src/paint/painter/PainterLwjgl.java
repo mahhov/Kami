@@ -159,17 +159,6 @@ public class PainterLwjgl implements Painter {
 		//				for (byte i = 0; i < vertices.length; i += 2)
 		//					GL11.glVertex2d(vertices[i], vertices[i + 1]);
 		//				GL11.glEnd();
-		
-		
-		//				glColor3fv(color);
-		//				FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(vertices.length);
-		//				vertexBuffer.put(vertices).flip();
-		//				int vboID = glGenBuffers();
-		//				glEnableVertexAttribArray(0);
-		//				glBindBuffer(GL_ARRAY_BUFFER, vboID);
-		//				glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_DYNAMIC_DRAW);
-		//				glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
-		//				glDrawArrays(drawMode, 0, vertices.length);
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
