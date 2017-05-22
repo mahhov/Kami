@@ -137,7 +137,7 @@ public class Controller {
 		return state == PRESSED;
 	}
 	
-	private class Key {
+	private static class Key {
 		int code, state;
 		
 		private Key(int code) {

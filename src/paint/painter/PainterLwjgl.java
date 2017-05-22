@@ -162,6 +162,17 @@ public class PainterLwjgl implements Painter {
 		//				GL11.glEnd();
 	}
 	
+	private BackgroundTexture backgroundTexture;
+	
+	public void setBackgroundImage(BufferedImage image) {
+		backgroundTexture = new BackgroundTexture(image);
+	}
+	
+	public void drawBackgroundImage(int shift, int shiftVert) {
+		backgroundTexture.draw(shift, shiftVert);
+		//				brush.drawImage(backgroundImage, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
+	}
+	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
 		//		int co = image.getColorModel().getNumComponents();
 		//		byte[] data = new byte[co * image.getWidth() * image.getHeight()];
@@ -266,25 +277,26 @@ public class PainterLwjgl implements Painter {
 		}
 	}
 	
-	private class CharGlyph {
-		private static final int SIZE = 12;
-		private int textureId;
+	private abstract static class Texture {
+		int width, height;
+		int textureId;
 		
-		CharGlyph(String s) {
-			// create buffered image
-			BufferedImage textImage = new BufferedImage(SIZE, SIZE, BufferedImage.TYPE_INT_ARGB);
-			Graphics2D g = (Graphics2D) textImage.getGraphics();
-			g.setColor(Color.WHITE);
-			g.drawString(s, 1, 10);
-			
+		Texture(BufferedImage image) {
+			width = image.getWidth();
+			height = image.getHeight();
+			ByteBuffer byteBuffer = createByteBuffer(image);
+			createTexture(byteBuffer);
+		}
+		
+		private ByteBuffer createByteBuffer(BufferedImage image) {
 			// get rgb
-			int[] pixels = textImage.getRGB(0, 0, SIZE, SIZE, null, 0, SIZE);
+			int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
 			
 			// create byte buffer
-			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(SIZE * SIZE * 4);
-			for (int y = 0; y < SIZE; y++) {
-				for (int x = 0; x < SIZE; x++) {
-					int pixel = pixels[y * SIZE + x];
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(width * height * 4);
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					int pixel = pixels[y * width + x];
 					byteBuffer.put((byte) ((pixel >> 16) & 0xFF));
 					byteBuffer.put((byte) ((pixel >> 8) & 0xFF));
 					byteBuffer.put((byte) (pixel & 0xFF));
@@ -293,33 +305,37 @@ public class PainterLwjgl implements Painter {
 			}
 			byteBuffer.flip();
 			
-			// create texture
+			return byteBuffer;
+		}
+		
+		private void createTexture(ByteBuffer byteBuffer) {
 			textureId = glGenTextures();
 			glBindTexture(GL_TEXTURE_2D, textureId);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, SIZE, SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, byteBuffer);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, byteBuffer);
 		}
 		
-		private void draw(float x, float y) {
-			float size = .03f;
-			float leftX = -1 + x * size;
-			float topY = 1 - y * size;
-			float rightX = leftX + size;
-			float bottomY = topY - size;
-			
+		void draw(float x, float y) {
+			prepDraw();
+			coordDraw(x, y);
+			endDraw();
+		}
+		
+		private void prepDraw() {
 			glBindTexture(GL_TEXTURE_2D, textureId);
-			
-			float[] texture = new float[] {0, 0, 1, 0, 1, 1, 0, 1};
-			float[] quad = new float[] {leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY};
 			
 			glEnable(GL_TEXTURE_2D);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnable(GL_BLEND);
+			
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glTexCoordPointer(2, GL_FLOAT, 0, texture);
-			glVertexPointer(2, GL_FLOAT, 0, quad);
+		}
+		
+		abstract void coordDraw(float x, float y);
+		
+		private void endDraw() {
 			glDrawArrays(GL_QUADS, 0, 4);
 			glDisable(GL_TEXTURE_2D);
 			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -328,7 +344,50 @@ public class PainterLwjgl implements Painter {
 		}
 	}
 	
-	CharGlyph charGlyphs[] = new CharGlyph[127];
+	private static class BackgroundTexture extends Texture {
+		BackgroundTexture(BufferedImage image) {
+			super(image);
+		}
+		
+		void coordDraw(float x, float y) {
+			float[] textureCoord = new float[] {x / width, y / height, (x + 800) / width, y / height, (x + 800) / width, (y + 800) / height, x / width, (y + 800) / height};
+			float[] quad = new float[] {-1, 1, 1, 1, 1, -1, -1, -1};
+			
+			glTexCoordPointer(2, GL_FLOAT, 0, textureCoord);
+			glVertexPointer(2, GL_FLOAT, 0, quad);
+		}
+	}
+	
+	private static class CharGlyph extends Texture {
+		private static final float[] TEXTURE_COORD = new float[] {0, 0, 1, 0, 1, 1, 0, 1};
+		private static final int SIZE = 12;
+		
+		CharGlyph(String s) {
+			super(createImage(s));
+		}
+		
+		private static BufferedImage createImage(String s) {
+			BufferedImage textImage = new BufferedImage(SIZE, SIZE, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D g = (Graphics2D) textImage.getGraphics();
+			g.setColor(Color.WHITE);
+			g.drawString(s, 1, 10);
+			return textImage;
+		}
+		
+		void coordDraw(float x, float y) {
+			float size = .03f;
+			float leftX = -1 + x * size;
+			float topY = 1 - y * size;
+			float rightX = leftX + size;
+			float bottomY = topY - size;
+			float[] quad = new float[] {leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY};
+			
+			glTexCoordPointer(2, GL_FLOAT, 0, TEXTURE_COORD);
+			glVertexPointer(2, GL_FLOAT, 0, quad);
+		}
+	}
+	
+	private CharGlyph charGlyphs[] = new CharGlyph[127];
 	
 	private void drawStringInit() {
 		for (int i = 32; i < charGlyphs.length; i++)

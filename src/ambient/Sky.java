@@ -2,7 +2,7 @@ package ambient;
 
 import control.Controller;
 import engine.Math3D;
-import paint.painterelement.PainterImage;
+import paint.painterelement.PainterBackgroundImage;
 import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 
 public class Sky implements WorldElement, InterfaceElement {
 	private final int WIDTH;
-	private BufferedImage backgroundImage;
+	private PainterBackgroundImage painterBackgroundImage;
 	private int shift, shiftVert;
 	
 	public Sky(int size) {
@@ -24,7 +24,7 @@ public class Sky implements WorldElement, InterfaceElement {
 	
 	private void makeBackgroundImage() {
 		// init
-		backgroundImage = new BufferedImage(WIDTH * 2, WIDTH * 2, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage backgroundImage = new BufferedImage(WIDTH * 2, WIDTH * 2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D brush = (Graphics2D) backgroundImage.getGraphics();
 		// background
 		brush.setColor(new Color(30, 0, 50));
@@ -50,6 +50,8 @@ public class Sky implements WorldElement, InterfaceElement {
 		brush.drawImage(backgroundImage, WIDTH, 0, WIDTH * 2, WIDTH, 0, 0, WIDTH, WIDTH, null); // right
 		brush.drawImage(backgroundImage, 0, WIDTH, WIDTH, WIDTH * 2, 0, 0, WIDTH, WIDTH, null); // bottom
 		brush.drawImage(backgroundImage, WIDTH, WIDTH, WIDTH * 2, WIDTH * 2, 0, 0, WIDTH, WIDTH, null); // right + bottom
+		
+		painterBackgroundImage = new PainterBackgroundImage(backgroundImage);
 	}
 	
 	private void paintBackground(Controller c) {
@@ -73,6 +75,7 @@ public class Sky implements WorldElement, InterfaceElement {
 	}
 	
 	public void draw(PainterQueue painterQueue) {
-		painterQueue.add(new PainterImage(backgroundImage, shift, shiftVert));
+		painterBackgroundImage.setShift(shift, shiftVert);
+		painterQueue.add(painterBackgroundImage);
 	}
 }

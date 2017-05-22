@@ -30,8 +30,9 @@ public class PainterJava extends JFrame implements Painter {
 	private BufferedImage canvas;
 	private Graphics2D brush;
 	private Graphics2D frameBrush;
-	int surfaceCount, drawCount;
+	private int surfaceCount, drawCount;
 	private Area clip;
+	private BufferedImage backgroundImage;
 	
 	private PainterQueue painterQueue;
 	
@@ -73,6 +74,14 @@ public class PainterJava extends JFrame implements Painter {
 			light = Math3D.min(1, light);
 			brush.setColor(new Color((int) (light * color.getRed()), (int) (light * color.getGreen()), (int) (light * color.getBlue())));
 		}
+	}
+	
+	public void setBackgroundImage(BufferedImage image) {
+		backgroundImage = image;
+	}
+	
+	public void drawBackgroundImage(int shift, int shiftVert) {
+		brush.drawImage(backgroundImage, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
