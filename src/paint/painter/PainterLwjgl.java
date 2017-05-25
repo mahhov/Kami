@@ -266,7 +266,7 @@ public class PainterLwjgl implements Painter {
 				
 				drawDebugStrings();
 				
-				glfwSwapBuffers(window);
+					glfwSwapBuffers(window);
 				Timer.PAINT.timeEnd();
 			}
 			
