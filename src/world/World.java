@@ -22,6 +22,8 @@ public class World {
 	private LList<InterfaceElement> backgroundElement;
 	private LList<InterfaceElement> interfaceElement;
 	
+	private WorldDrawer worldDrawer;
+	
 	public World(int chunkWidth, int chunkLength, int chunkHeight) {
 		Timer.WORLD_CONSTRUCTOR.timeStart();
 		width = chunkWidth * CHUNK_SIZE;
@@ -32,6 +34,7 @@ public class World {
 		particle = new LList<>();
 		backgroundElement = new LList<>();
 		interfaceElement = new LList<>();
+		worldDrawer = new WorldDrawer(this);
 		Timer.WORLD_CONSTRUCTOR.timeEnd();
 		System.out.println("world chunk size: " + chunkWidth + " " + chunkLength + " " + chunkHeight);
 	}
@@ -69,55 +72,42 @@ public class World {
 	
 	// DRAWING
 	
-	private WorldChunkDrawer[] drawers;
-	private int currentDrawer;
-	
 	public void draw(PainterQueue painterQueue, Camera c) {
-		drawers = new WorldChunkDrawer[8];
-		currentDrawer = 0;
-		for (int i = 0; i < drawers.length; i++)
-			drawers[i] = new WorldChunkDrawer();
-		
 		Timer.CELL_DRAW_AGGREGATED.timeStart();
 		Timer.CELL_DRAW_AGGREGATED.timePause();
 		Timer.TO_CAMERA_AGGREGATED.timeStart();
 		Timer.TO_CAMERA_AGGREGATED.timePause();
 		
-		Timer.BACKGROUND.timeStart();
 		drawBackground(painterQueue);
-		Timer.BACKGROUND.timeEnd();
-		
-		Timer.CHUNKS.timeStart();
 		drawChunks(painterQueue, c);
-		Timer.CHUNKS.timeEnd();
-		
-		Timer.INTERFACE.timeStart();
 		drawInterface(painterQueue);
-		Timer.INTERFACE.timeEnd();
 		
 		Timer.CELL_DRAW_AGGREGATED.timePause();
 		Timer.CELL_DRAW_AGGREGATED.timeEnd();
 		Timer.TO_CAMERA_AGGREGATED.timePause();
 		Timer.TO_CAMERA_AGGREGATED.timeEnd();
 		
-		for (WorldChunkDrawer drawer : drawers)
-			new Thread(drawer).start();
-		
-		for (WorldChunkDrawer drawer : drawers)
-			drawer.emptyAll(painterQueue);
 	}
 	
 	private void drawBackground(PainterQueue painterQueue) {
+		Timer.BACKGROUND.timeStart();
 		for (LList<InterfaceElement> e : backgroundElement)
 			e.node.draw(painterQueue);
+		Timer.BACKGROUND.timeEnd();
 	}
 	
 	private void drawInterface(PainterQueue painterQueue) {
+		Timer.INTERFACE.timeStart();
 		for (LList<InterfaceElement> e : interfaceElement)
 			e.node.draw(painterQueue);
+		Timer.INTERFACE.timeEnd();
 	}
 	
 	private void drawChunks(PainterQueue painterQueue, Camera c) {
+		Timer.CHUNKS.timeStart();
+		
+		worldDrawer.prepareChunkQueue();
+		
 		int boundaries[] = c.cullBoundaries();
 		int volumeRaw = (boundaries[1] - boundaries[0]) * (boundaries[3] - boundaries[2]) * (boundaries[5] - boundaries[4]) / 100000;
 		
@@ -142,6 +132,10 @@ public class World {
 		for (int x = toChunkCoord[0]; x > cameraChunkCoord[0]; x--)
 			drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.LEFT);
 		drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cameraChunkCoord[0], Math3D.NONE);
+		
+		worldDrawer.flushChunkQueue(painterQueue);
+		
+		Timer.CHUNKS.timeEnd();
 	}
 	
 	private void drawChunksRow(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int x, int xSide) {
@@ -154,10 +148,10 @@ public class World {
 	
 	private void drawChunksColumn(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int x, int y, int xSide, int ySide) {
 		for (int z = fromChunkCoord[2]; z < cameraChunkCoord[2]; z++)
-			drawChunkMulti(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.TOP);
+			worldDrawer.queueChunk(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.TOP);
 		for (int z = toChunkCoord[2]; z > cameraChunkCoord[2]; z--)
-			drawChunkMulti(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.BOTTOM);
-		drawChunkMulti(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, cameraChunkCoord[2], xSide, ySide, Math3D.NONE);
+			worldDrawer.queueChunk(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.BOTTOM);
+		worldDrawer.queueChunk(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, cameraChunkCoord[2], xSide, ySide, Math3D.NONE);
 		
 		//		for (int z = fromChunkCoord[2]; z < cameraChunkCoord[2]; z++)
 		//			drawChunk(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, z, xSide, ySide, Math3D.TOP);
@@ -166,14 +160,7 @@ public class World {
 		//		drawChunk(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, y, cameraChunkCoord[2], xSide, ySide, Math3D.NONE);
 	}
 	
-	private void drawChunkMulti(Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
-		WorldChunkDrawerSetup setup = new WorldChunkDrawerSetup(c, fromChunkCoord, toChunkCoord, cameraChunkCoord, cx, cy, cz, xSide, ySide, zSide);
-		drawers[currentDrawer].addChunk(setup);
-		if (++currentDrawer == drawers.length)
-			currentDrawer = 0;
-	}
-	
-	private void drawChunk(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
+	void drawChunk(PainterQueue painterQueue, Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
 		if (chunk[cx][cy][cz] == null || chunk[cx][cy][cz].isEmpty())
 			return;
 		if (xSide == Math3D.RIGHT) {
@@ -264,55 +251,5 @@ public class World {
 		y -= cy * CHUNK_SIZE;
 		z -= cz * CHUNK_SIZE;
 		return new int[] {cx, cy, cz, x, y, z};
-	}
-	
-	
-	// todo: 1 painter queue per drawer instead of per setup
-	private class WorldChunkDrawer implements Runnable {
-		private LList<WorldChunkDrawerSetup> setup, setupTail;
-		
-		private WorldChunkDrawer() {
-			setup = setupTail = new LList<>();
-		}
-		
-		private void addChunk(WorldChunkDrawerSetup worldChunkDrawerSetup) {
-			setup = setup.add(worldChunkDrawerSetup);
-		}
-		
-		private void emptyAll(PainterQueue painterQueue) {
-			for (LList<WorldChunkDrawerSetup> drawer : setupTail.reverseIterator()) {
-				while (!drawer.node.painterQueue.drawReady)
-					Math3D.sleep(5);
-				painterQueue.add(drawer.node.painterQueue);
-			}
-		}
-		
-		public void run() {
-			for (LList<WorldChunkDrawerSetup> drawer : setupTail.reverseIterator()) {
-				drawChunk(drawer.node.painterQueue, drawer.node.c, drawer.node.fromChunkCoord, drawer.node.toChunkCoord, drawer.node.cameraChunkCoord, drawer.node.cx, drawer.node.cy, drawer.node.cz, drawer.node.xSide, drawer.node.ySide, drawer.node.zSide);
-				drawer.node.painterQueue.drawReady = true;
-			}
-		}
-	}
-	
-	private static class WorldChunkDrawerSetup {
-		private PainterQueue painterQueue;
-		private Camera c;
-		private int[] fromChunkCoord, toChunkCoord, cameraChunkCoord;
-		private int cx, cy, cz, xSide, ySide, zSide;
-		
-		private WorldChunkDrawerSetup(Camera c, int[] fromChunkCoord, int[] toChunkCoord, int[] cameraChunkCoord, int cx, int cy, int cz, int xSide, int ySide, int zSide) {
-			painterQueue = new PainterQueue();
-			this.c = c;
-			this.fromChunkCoord = fromChunkCoord;
-			this.toChunkCoord = toChunkCoord;
-			this.cameraChunkCoord = cameraChunkCoord;
-			this.cx = cx;
-			this.cy = cy;
-			this.cz = cz;
-			this.xSide = xSide;
-			this.ySide = ySide;
-			this.zSide = zSide;
-		}
 	}
 }
