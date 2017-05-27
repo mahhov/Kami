@@ -13,11 +13,10 @@ class WorldDrawer {
 	
 	WorldDrawer(World world) {
 		this.world = world;
-		// todo: can we reuse drawers?
 	}
 	
 	void prepareChunkQueue() {
-		drawers = new WorldChunkDrawer[8];
+		drawers = new WorldChunkDrawer[8]; // todo: test what number of threads is optimal
 		currentDrawer = 0;
 		for (int i = 0; i < drawers.length; i++)
 			drawers[i] = new WorldChunkDrawer();

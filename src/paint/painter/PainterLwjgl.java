@@ -16,7 +16,6 @@ import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.LinkedList;
 
 import static camera.Camera.MIN_LIGHT;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -30,9 +29,15 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 public class PainterLwjgl implements Painter {
 	private long window;
 	public boolean running = true;
-	ControllerLwjgl controller;
 	private PainterQueue painterQueue;
 	public int surfaceCount;
+	
+	private final int bufferSize = 1000 * 100 * 10; // max 151008. todo: make sure not overflow
+	private float[] vertexArray = new float[bufferSize * 2];
+	private float[] colorArray = new float[bufferSize * 3];
+	private int bufferLen, colorLen;
+	private FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(bufferSize * 2);
+	private FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(bufferSize * 3);
 	
 	public PainterLwjgl(int frameSize, int imageSize, ControllerLwjgl controller) {
 		// Setup an error callback. The default implementation
@@ -98,7 +103,6 @@ public class PainterLwjgl implements Painter {
 		
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		
-		this.controller = controller;
 		controller.window = window;
 		glfwSetKeyCallback(window, controller.lwjglKeyboardHandler());
 		glfwSetCursorPosCallback(window, controller.lwjgtlMousePosHandler());
@@ -108,7 +112,7 @@ public class PainterLwjgl implements Painter {
 		drawStringInit();
 	}
 	
-	public void clean() {
+	private void clean() {
 		// Free the window callbacks and destroy the window
 		glfwFreeCallbacks(window);
 		glfwDestroyWindow(window);
@@ -143,9 +147,7 @@ public class PainterLwjgl implements Painter {
 		return vertices;
 	}
 	
-	LinkedList<Float> x;
-	
-	private void glDraw(int drawMode, float[] vertices, float[] color) {
+	private void glDrawQuad(float[] vertices, float[] color) {
 		for (int i = 0; i < 4; i++) {
 			colorArray[(colorLen * 4 + i) * 3] = color[0];
 			colorArray[(colorLen * 4 + i) * 3 + 1] = color[1];
@@ -154,12 +156,6 @@ public class PainterLwjgl implements Painter {
 		colorLen++;
 		for (float f : vertices)
 			vertexArray[bufferLen++] = f;
-		
-		//				glColor3fv(color);
-		//				GL11.glBegin(GL11.GL_POLYGON);
-		//				for (byte i = 0; i < vertices.length; i += 2)
-		//					GL11.glVertex2d(vertices[i], vertices[i + 1]);
-		//				GL11.glEnd();
 	}
 	
 	private BackgroundTexture backgroundTexture;
@@ -170,16 +166,9 @@ public class PainterLwjgl implements Painter {
 	
 	public void drawBackgroundImage(int shift, int shiftVert) {
 		backgroundTexture.draw(shift, shiftVert);
-		//				brush.drawImage(backgroundImage, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
-		//		int co = image.getColorModel().getNumComponents();
-		//		byte[] data = new byte[co * image.getWidth() * image.getHeight()];
-		//		image.getRaster().getDataElements(0, 0, image.getWidth(), image.getHeight(), data);
-		//		ByteBuffer pixels = BufferUtils.createByteBuffer(data.length);
-		//		pixels.put(data);
-		//		pixels.rewind();
 	}
 	
 	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {
@@ -188,7 +177,7 @@ public class PainterLwjgl implements Painter {
 			for (int i = 0; i < xy[0].length; i++)
 				if (xy[0][i] > -.5 && xy[0][i] < .5 && xy[1][i] < .5 && xy[1][i] > -.5) {
 					float[] vertices = glTransoformN5to5(new float[] {(float) xy[0][0], (float) xy[1][0], (float) xy[0][1], (float) xy[1][1], (float) xy[0][2], (float) xy[1][2], (float) xy[0][3], (float) xy[1][3]});
-					glDraw(GL_QUADS, vertices, glTransformColor(light, color));
+					glDrawQuad(vertices, glTransformColor(light, color));
 					return;
 				}
 		}
@@ -204,15 +193,13 @@ public class PainterLwjgl implements Painter {
 	
 	public void drawRectangle(double x, double y, double width, double height, Color color) {
 		float[] vertices = glTransform01(new float[] {(float) x, (float) y, (float) (x + width), (float) y, (float) (x + width), (float) (y + height), (float) x, (float) (y + height)});
-		glDraw(GL_QUADS, vertices, color.getRGBColorComponents(null));
+		glDrawQuad(vertices, color.getRGBColorComponents(null));
 	}
 	
 	public void drawBlur(double blur) {
-		
 	}
 	
 	public void updateMode(Controller controller) {
-		
 	}
 	
 	public boolean isPainterQueueDone() {
@@ -223,14 +210,6 @@ public class PainterLwjgl implements Painter {
 		this.painterQueue = painterQueue;
 	}
 	
-	final int bufferSize = 1000 * 100 * 10;
-	float[] vertexArray = new float[bufferSize];
-	float[] colorArray = new float[bufferSize];
-	int bufferLen, colorLen;
-	FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(bufferSize);
-	FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(bufferSize);
-	
-	//todo: return to seperate thread
 	public void run() {
 		while (running) {
 			if (glfwWindowShouldClose(window)) {
@@ -266,7 +245,7 @@ public class PainterLwjgl implements Painter {
 				
 				drawDebugStrings();
 				
-					glfwSwapBuffers(window);
+				glfwSwapBuffers(window);
 				Timer.PAINT.timeEnd();
 			}
 			
@@ -324,12 +303,10 @@ public class PainterLwjgl implements Painter {
 		
 		private void prepDraw() {
 			glBindTexture(GL_TEXTURE_2D, textureId);
-			
 			glEnable(GL_TEXTURE_2D);
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glEnable(GL_BLEND);
-			
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 		
