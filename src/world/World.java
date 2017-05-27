@@ -114,7 +114,7 @@ public class World {
 		int[] cameraChunkCoord = getChunkCoord((int) c.x, (int) c.y, (int) c.z);
 		int volumeChunk = (fromChunkCoord[0] - toChunkCoord[0]) * (fromChunkCoord[1] - toChunkCoord[1]) * (fromChunkCoord[2] - toChunkCoord[2]) / -1;
 		
-		Painter.DEBUG_STRING[1] = "(unit 100,000) volume raw " + volumeRaw + " ; (unit 100,000) volume bound " + volumeBound + " ; volume chunk " + volumeChunk;
+		Painter.DEBUG_STRING[1] = "(u 100k) volume raw " + volumeRaw + " ; (u 100k) volume bound " + volumeBound + " ; volume chunk " + volumeChunk;
 		
 		for (int x = fromChunkCoord[0]; x < cameraChunkCoord[0]; x++)
 			drawChunksRow(painterQueue, c, fromChunkCoord, toChunkCoord, cameraChunkCoord, x, Math3D.RIGHT);

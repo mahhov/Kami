@@ -30,7 +30,7 @@ public class PainterLwjgl implements Painter {
 	private long window;
 	public boolean running = true;
 	private PainterQueue painterQueue;
-	public int surfaceCount;
+	public int surfaceCount, drawCount;
 	
 	private final int bufferSize = 1000 * 100 * 10; // max recorded 151008 (6 times less)
 	private float[] vertexArray = new float[bufferSize * 2];
@@ -183,6 +183,7 @@ public class PainterLwjgl implements Painter {
 			surfaceCount++;
 			for (int i = 0; i < xy[0].length; i++)
 				if (xy[0][i] > -.5 && xy[0][i] < .5 && xy[1][i] < .5 && xy[1][i] > -.5) {
+					drawCount++;
 					float[] vertices = glTransoformN5to5(new float[] {(float) xy[0][0], (float) xy[1][0], (float) xy[0][1], (float) xy[1][1], (float) xy[0][2], (float) xy[1][2], (float) xy[0][3], (float) xy[1][3]});
 					glDrawQuad(vertices, glTransformColor(light, color));
 					return;
@@ -226,10 +227,9 @@ public class PainterLwjgl implements Painter {
 			}
 			
 			if (painterQueue.drawReady) {
-				surfaceCount = 0;
+				surfaceCount = drawCount = 0;
 				
 				vertexCount = 0;
-				// glClear(GL_COLOR_BUFFER_BIT);
 				Timer.PAINTER_QUEUE_PAINT.timeStart();
 				painterQueue.paint(this);
 				Timer.PAINTER_QUEUE_PAINT.timeEnd();
@@ -249,14 +249,14 @@ public class PainterLwjgl implements Painter {
 				glDisableClientState(GL_VERTEX_ARRAY);
 				glDisableClientState(GL_COLOR_ARRAY);
 				
+				DEBUG_STRING[5] = "surfaceCount: " + surfaceCount + " ; drawCount: " + drawCount;
+				
 				drawDebugStrings();
 				
 				glfwSwapBuffers(window);
 				Timer.PAINT.timeEnd();
 			}
 			
-			// Poll for window events. The key callback above will only be
-			// invoked during this call.
 			glfwPollEvents();
 			Math3D.sleep(10);
 		}

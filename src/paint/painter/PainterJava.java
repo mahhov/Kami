@@ -185,8 +185,7 @@ public class PainterJava extends JFrame implements Painter {
 	public void run() {
 		while (true) {
 			if (painterQueue.drawReady) {
-				surfaceCount = 0;
-				drawCount = 0;
+				surfaceCount = drawCount = 0;
 				Timer.PAINTER_QUEUE_PAINT.timeStart();
 				painterQueue.paint(this);
 				Timer.PAINTER_QUEUE_PAINT.timeEnd();
