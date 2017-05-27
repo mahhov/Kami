@@ -32,11 +32,11 @@ public class ControllerJava extends Controller implements KeyListener, MouseList
 	}
 	
 	public void mousePressed(MouseEvent e) {
-		setMouseState(e.getButton(), PRESSED);
+		setMouseState(PRESSED);
 	}
 	
 	public void mouseReleased(MouseEvent e) {
-		setMouseState(e.getButton(), RELEASED);
+		setMouseState(RELEASED);
 	}
 	
 	public void mouseEntered(MouseEvent e) {

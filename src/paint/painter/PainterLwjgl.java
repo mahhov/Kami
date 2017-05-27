@@ -105,7 +105,8 @@ public class PainterLwjgl implements Painter {
 		
 		controller.window = window;
 		glfwSetKeyCallback(window, controller.lwjglKeyboardHandler());
-		glfwSetCursorPosCallback(window, controller.lwjgtlMousePosHandler());
+		glfwSetCursorPosCallback(window, controller.lwjglMousePosHandler());
+		glfwSetMouseButtonCallback(window, controller.lwjglMouseClickHandler());
 		
 		painterQueue = new PainterQueue();
 		

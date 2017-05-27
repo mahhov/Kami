@@ -2,8 +2,6 @@ package control;
 
 import engine.Math3D;
 
-import java.awt.event.MouseEvent;
-
 public class Controller {
 	public static final int UP = 0, DOWN = 1, PRESSED = 2, RELEASED = 3;
 	public static final int KEY_W = 0, KEY_A = 1, KEY_S = 2, KEY_D = 3, KEY_Q = 4, KEY_E = 5, KEY_R = 6, KEY_F = 7, KEY_Z = 8, KEY_X = 9;
@@ -101,9 +99,8 @@ public class Controller {
 		return state == PRESSED;
 	}
 	
-	void setMouseState(int button, int state) {
-		if (button == MouseEvent.BUTTON1)
-			mouseState = state;
+	void setMouseState(int state) {
+		mouseState = state;
 	}
 	
 	void setMouseMoved(int x, int y) {

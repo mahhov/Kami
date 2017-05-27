@@ -2,6 +2,7 @@ package control;
 
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWMouseButtonCallback;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
@@ -26,7 +27,7 @@ public class ControllerLwjgl extends Controller {
 		};
 	}
 	
-	public GLFWCursorPosCallback lwjgtlMousePosHandler() {
+	public GLFWCursorPosCallback lwjglMousePosHandler() {
 		return new GLFWCursorPosCallback() {
 			public void invoke(long window, double xpos, double ypos) {
 				setMouseMoved((int) (xpos - lastXPos), (int) (ypos - lastYPos));
@@ -36,20 +37,14 @@ public class ControllerLwjgl extends Controller {
 		};
 	}
 	
-	public void update() {
-		//		double[] x = new double[1], y = new double[1];
-		//		 (window, x, y);
-		//		glfwSetCursorPos(window, 0, 0);
-		
-		//		System.out.println(x[0] + " " + y[0]);
+	public GLFWMouseButtonCallback lwjglMouseClickHandler() {
+		return new GLFWMouseButtonCallback() {
+			public void invoke(long window, int button, int action, int mods) {
+				if (action == GLFW_PRESS)
+					setMouseState(PRESSED);
+				else if (action == GLFW_RELEASE)
+					setMouseState(RELEASED);
+			}
+		};
 	}
-	
-	//	setMouseState(e.getButton(), PRESSED);
-	
-	//	setMouseState(e.getButton(), RELEASED);
-	
-	//	int x = e.getX(), y = e.getY();
-	//	setMouseMoved(x, y);
-	//   robot.mouseMove(centerMouseX - x + e.getXOnScreen(), centerMouseY - y + e.getYOnScreen());
-	
 }
