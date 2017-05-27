@@ -1,7 +1,6 @@
 package world;
 
 import camera.Camera;
-import engine.Timer;
 import list.LList;
 import paint.painterelement.PainterClipPolygon;
 import paint.painterelement.PainterLine;
@@ -11,30 +10,28 @@ import shapes.drawelement.Line;
 import shapes.drawelement.Surface;
 
 class Cell {
-	WorldChunk chunk;
+	private WorldChunk chunk;
 	private LList<Shape> shapes;
-
+	
 	Cell(WorldChunk chunk) {
 		this.chunk = chunk;
 		shapes = new LList<>();
 	}
-
+	
 	public void add(Shape shape) {
 		chunk.count++;
 		shapes = shapes.add(shape);
 	}
-
-	public void remove(LList<Shape> lShape) {
+	
+	private void remove(LList<Shape> lShape) {
 		chunk.count--;
 		shapes = shapes.remove(lShape);
 	}
-
-	public void drawAll(PainterQueue painterQueue, Camera c, int xSide, int ySide, int zSide) {
-		Timer.CELL_DRAW_AGGREGATED.timePause();
+	
+	void drawAll(PainterQueue painterQueue, Camera c, int xSide, int ySide, int zSide) {
 		Surface surfaces[];
 		Line line[];
 		for (LList<Shape> lShape : shapes) {
-			Timer.TO_CAMERA_AGGREGATED.timePause();
 			surfaces = lShape.node.drawSurfaces(xSide, ySide, zSide);
 			line = lShape.node.drawLines();
 			if (surfaces == null)
@@ -52,8 +49,6 @@ class Cell {
 							painterQueue.add(new PainterLine(xy[0][0], xy[1][0], xy[0][1], xy[1][1], 1, l.color));
 						}
 			}
-			Timer.TO_CAMERA_AGGREGATED.timePause();
 		}
-		Timer.CELL_DRAW_AGGREGATED.timePause();
 	}
 }

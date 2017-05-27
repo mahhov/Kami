@@ -73,20 +73,9 @@ public class World {
 	// DRAWING
 	
 	public void draw(PainterQueue painterQueue, Camera c) {
-		Timer.CELL_DRAW_AGGREGATED.timeStart();
-		Timer.CELL_DRAW_AGGREGATED.timePause();
-		Timer.TO_CAMERA_AGGREGATED.timeStart();
-		Timer.TO_CAMERA_AGGREGATED.timePause();
-		
 		drawBackground(painterQueue);
 		drawChunks(painterQueue, c);
 		drawInterface(painterQueue);
-		
-		Timer.CELL_DRAW_AGGREGATED.timePause();
-		Timer.CELL_DRAW_AGGREGATED.timeEnd();
-		Timer.TO_CAMERA_AGGREGATED.timePause();
-		Timer.TO_CAMERA_AGGREGATED.timeEnd();
-		
 	}
 	
 	private void drawBackground(PainterQueue painterQueue) {
