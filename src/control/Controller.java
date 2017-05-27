@@ -73,13 +73,13 @@ public class Controller {
 		viewDir = new double[3];
 	}
 	
-	int setKeyState(int keyCode, int state) {
+	boolean setKeyState(int keyCode, int state) {
 		for (Key k : keys)
 			if (k.code == keyCode && (state != PRESSED || k.state == UP)) {
 				k.state = state;
-				return 0;
+				return true;
 			}
-		return -1;
+		return false;
 	}
 	
 	private int getKeyState(int key) {

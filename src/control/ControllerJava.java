@@ -20,7 +20,7 @@ public class ControllerJava extends Controller implements KeyListener, MouseList
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		if (setKeyState(e.getKeyCode(), PRESSED) == -1)
+		if (!setKeyState(e.getKeyCode(), PRESSED))
 			System.out.println("key press: " + e.getKeyCode());
 	}
 	

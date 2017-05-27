@@ -165,6 +165,7 @@ public class PainterLwjgl implements Painter {
 	}
 	
 	public void drawBackgroundImage(int shift, int shiftVert) {
+		
 		backgroundTexture.draw(shift, shiftVert);
 	}
 	
@@ -223,7 +224,7 @@ public class PainterLwjgl implements Painter {
 				
 				bufferLen = 0;
 				colorLen = 0;
-				glClear(GL_COLOR_BUFFER_BIT);
+				// glClear(GL_COLOR_BUFFER_BIT);
 				Timer.PAINTER_QUEUE_PAINT.timeStart();
 				painterQueue.paint(this);
 				Timer.PAINTER_QUEUE_PAINT.timeEnd();
@@ -261,13 +262,17 @@ public class PainterLwjgl implements Painter {
 		int textureId;
 		
 		Texture(BufferedImage image) {
+			this(image, (byte) -1);
+		}
+		
+		Texture(BufferedImage image, byte alpha) {
 			width = image.getWidth();
 			height = image.getHeight();
-			ByteBuffer byteBuffer = createByteBuffer(image);
+			ByteBuffer byteBuffer = createByteBuffer(image, alpha);
 			createTexture(byteBuffer);
 		}
 		
-		private ByteBuffer createByteBuffer(BufferedImage image) {
+		private ByteBuffer createByteBuffer(BufferedImage image, byte alpha) {
 			// get rgb
 			int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
 			
@@ -279,7 +284,7 @@ public class PainterLwjgl implements Painter {
 					byteBuffer.put((byte) ((pixel >> 16) & 0xFF));
 					byteBuffer.put((byte) ((pixel >> 8) & 0xFF));
 					byteBuffer.put((byte) (pixel & 0xFF));
-					byteBuffer.put((byte) ((pixel >> 24) & 0xFF));
+					byteBuffer.put(alpha == -1 ? (byte) ((pixel >> 24) & 0xFF) : alpha);
 				}
 			}
 			byteBuffer.flip();
@@ -323,7 +328,7 @@ public class PainterLwjgl implements Painter {
 	
 	private static class BackgroundTexture extends Texture {
 		BackgroundTexture(BufferedImage image) {
-			super(image);
+			super(image, (byte) 100);
 		}
 		
 		void coordDraw(float x, float y) {

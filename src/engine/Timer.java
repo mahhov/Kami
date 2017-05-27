@@ -9,8 +9,8 @@ public class Timer {
 	public static final Time BACKGROUND = new Time("Background", 10, true);
 	public static final Time CHUNKS = new Time("Chunks", 70, true);
 	public static final Time INTERFACE = new Time("Interface", 10, true);
-	public static final Time CELL_DRAW_AGGREGATED = new Time("Cell.draw aggregated", 40, true);
-	public static final Time TO_CAMERA_AGGREGATED = new Time("toCamera aggregated", 20, true);
+	public static final Time CELL_DRAW_AGGREGATED = new Time("Cell.draw aggregated", 40, false); // todo: support multithreading timer useage
+	public static final Time TO_CAMERA_AGGREGATED = new Time("toCamera aggregated", 20, false);
 	
 	public static final Time PAINTER_QUEUE_PAINT = new Time("painterQueue.paint()", 25, true);
 	public static final Time PAINT = new Time("paint()", 25, true);
@@ -82,7 +82,7 @@ public class Timer {
 			long milli = (endTime - startTime) / 1000000L;
 			avgTime += milli;
 			count++;
-			if (milli >= minDuration)
+			if (milli >= minDuration && write)
 				System.out.println(toString(milli));
 		}
 		
