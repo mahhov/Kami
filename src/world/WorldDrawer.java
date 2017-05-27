@@ -1,7 +1,6 @@
 package world;
 
 import camera.Camera;
-import control.Controller;
 import list.LList;
 import paint.painterelement.PainterQueue;
 

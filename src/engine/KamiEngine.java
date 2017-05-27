@@ -16,7 +16,7 @@ import world.World;
 import world.WorldCreator;
 
 class KamiEngine implements Runnable {
-	private final boolean LWJGL_FLAG; // todo: consider renaming lower case
+	private final boolean LWJGL_FLAG;
 	
 	private static final int FRAME = 800, IMAGE = FRAME;
 	

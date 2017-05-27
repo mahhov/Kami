@@ -59,14 +59,14 @@ public class TrailingCamera extends Camera {
 	}
 	
 	public interface Follow {
-		public double getX();
+		double getX();
 		
-		public double getY();
+		double getY();
 		
-		public double getZ();
+		double getZ();
 		
-		public double getAngle();
+		double getAngle();
 		
-		public double getAngleZ();
+		double getAngleZ();
 	}
 }
