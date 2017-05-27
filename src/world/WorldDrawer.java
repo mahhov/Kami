@@ -1,6 +1,7 @@
 package world;
 
 import camera.Camera;
+import control.Controller;
 import list.LList;
 import paint.painterelement.PainterQueue;
 
@@ -16,7 +17,7 @@ class WorldDrawer {
 	}
 	
 	void prepareChunkQueue() {
-		drawers = new WorldChunkDrawer[8]; // todo: test what number of threads is optimal
+		drawers = new WorldChunkDrawer[7];
 		currentDrawer = 0;
 		for (int i = 0; i < drawers.length; i++)
 			drawers[i] = new WorldChunkDrawer();
