@@ -32,10 +32,10 @@ public class PainterLwjgl implements Painter {
 	private PainterQueue painterQueue;
 	public int surfaceCount;
 	
-	private final int bufferSize = 1000 * 100 * 10; // max 151008. todo: make sure not overflow
+	private final int bufferSize = 1000 * 100 * 10; // max recorded 151008 (6 times less)
 	private float[] vertexArray = new float[bufferSize * 2];
 	private float[] colorArray = new float[bufferSize * 3];
-	private int bufferLen, colorLen;
+	private int vertexCount;
 	private FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(bufferSize * 2);
 	private FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(bufferSize * 3);
 	
@@ -149,14 +149,19 @@ public class PainterLwjgl implements Painter {
 	}
 	
 	private void glDrawQuad(float[] vertices, float[] color) {
+		if (vertexCount > bufferSize - 4)
+			return;
+		
 		for (int i = 0; i < 4; i++) {
-			colorArray[(colorLen * 4 + i) * 3] = color[0];
-			colorArray[(colorLen * 4 + i) * 3 + 1] = color[1];
-			colorArray[(colorLen * 4 + i) * 3 + 2] = color[2];
+			colorArray[(vertexCount) * 3] = color[0];
+			colorArray[(vertexCount) * 3 + 1] = color[1];
+			colorArray[(vertexCount) * 3 + 2] = color[2];
+			
+			vertexArray[(vertexCount) * 2] = vertices[i * 2];
+			vertexArray[(vertexCount) * 2 + 1] = vertices[i * 2 + 1];
+			
+			vertexCount++;
 		}
-		colorLen++;
-		for (float f : vertices)
-			vertexArray[bufferLen++] = f;
 	}
 	
 	private BackgroundTexture backgroundTexture;
@@ -223,8 +228,7 @@ public class PainterLwjgl implements Painter {
 			if (painterQueue.drawReady) {
 				surfaceCount = 0;
 				
-				bufferLen = 0;
-				colorLen = 0;
+				vertexCount = 0;
 				// glClear(GL_COLOR_BUFFER_BIT);
 				Timer.PAINTER_QUEUE_PAINT.timeStart();
 				painterQueue.paint(this);
@@ -241,7 +245,7 @@ public class PainterLwjgl implements Painter {
 				glEnableClientState(GL_COLOR_ARRAY);
 				glColorPointer(3, GL_FLOAT, 0, colorBuffer);
 				glVertexPointer(2, GL_FLOAT, 0, vertexBuffer);
-				glDrawArrays(GL_QUADS, 0, bufferLen / 2);
+				glDrawArrays(GL_QUADS, 0, vertexCount);
 				glDisableClientState(GL_VERTEX_ARRAY);
 				glDisableClientState(GL_COLOR_ARRAY);
 				
