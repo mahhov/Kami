@@ -265,18 +265,34 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			world.addShape((int) hookx, (int) hooky, (int) hookz, hook);
 			double xx, yy, zz;
 			Cube hookRope;
-			int n = 20;
-			for (double i = 0; i < n; i++) {
-				xx = Math3D.avg(x, hookx, i / n);
-				yy = Math3D.avg(y, hooky, i / n);
-				zz = Math3D.avg(z, hookz, i / n);
+			
+			double dx = hookx - x;
+			double dy = hooky - y;
+			double dz = hookz - z;
+			double length = Math3D.magnitude(dx, dy, dz) * 10;
+			dx /= length;
+			dy /= length;
+			dz /= length;
+			for (int i = 0; i < length; i++) {
+				xx = x + dx * i;
+				yy = y + dy * i;
+				zz = z + dz * i;
 				hookRope = new Cube(xx, yy, zz, angle, angleZ, angleTilt, .05, this);
 				world.addShape((int) xx, (int) yy, (int) zz, hookRope);
 			}
+			
+			//			double n = 20;
+			//			for (int i = 0; i < n; i++) {
+			//				xx = Math3D.avg(x, hookx, i / n);
+			//				yy = Math3D.avg(y, hooky, i / n);
+			//				zz = Math3D.avg(z, hookz, i / n);
+			//				hookRope = new Cube(xx, yy, zz, angle, angleZ, angleTilt, .05, this);
+			//				world.addShape((int) xx, (int) yy, (int) zz, hookRope);
+			//			}
 		}
 		
-				Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
-				world.addShape((int) x, (int) y, (int) (z + .5), shape);
+		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+		world.addShape((int) x, (int) y, (int) (z + .5), shape);
 		
 		/*double[] leg = new double[] {.5, .5, .5};
 		double legGap = 1;
