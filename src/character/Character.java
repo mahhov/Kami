@@ -128,7 +128,7 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		applyVelocity(terrain);
 		
 		// woosh sound
-		//		vsq = Math3D.magnitudeSqrd(vx, vy, vz);
+		vsq = Math3D.magnitudeSqrd(vx, vy, vz);
 		//		boolean vfast = vsq > 2;
 		//		if (vfast)
 		//			Music.WOOSH.play();

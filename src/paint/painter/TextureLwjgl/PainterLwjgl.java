@@ -40,6 +40,7 @@ public class PainterLwjgl implements Painter {
 	private FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(bufferSize * 3);
 	
 	private CharGlyphTextureGroup charGlyphTextureGroup;
+	private BackgroundTextureGroup backgroundTextureGroup;
 	
 	public PainterLwjgl(int frameSize, int imageSize, ControllerLwjgl controller) {
 		// Setup an error callback. The default implementation
@@ -166,16 +167,12 @@ public class PainterLwjgl implements Painter {
 		}
 	}
 	
-	private BackgroundTexture backgroundTexture;
-	
 	public void setBackgroundImage(BufferedImage image) {
-		backgroundTexture = new BackgroundTexture();
-		backgroundTexture.init(image);
+		backgroundTextureGroup = new BackgroundTextureGroup(image);
 	}
 	
 	public void drawBackgroundImage(int shift, int shiftVert) {
-		
-		backgroundTexture.draw(shift, shiftVert);
+		backgroundTextureGroup.getTexture().draw(shift, shiftVert);
 	}
 	
 	public void drawImage(BufferedImage image, int shift, int shiftVert) {
@@ -208,6 +205,8 @@ public class PainterLwjgl implements Painter {
 	}
 	
 	public void drawBlur(double blur) {
+		if (backgroundTextureGroup != null)
+			backgroundTextureGroup.setTexture(blur);
 	}
 	
 	public void updateMode(Controller controller) {

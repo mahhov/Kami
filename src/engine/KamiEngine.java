@@ -93,8 +93,6 @@ class KamiEngine implements Runnable {
 			endTime = System.nanoTime() + 1;
 			if (endTime - beginTime > 1000000000L) {
 				Painter.DEBUG_STRING[0] = "draw fps: " + frame + " ; engine fps: " + engineFrame;
-				int surfaceCount = LWJGL_FLAG ? ((PainterLwjgl) painter).surfaceCount : 0;
-				System.out.println("FPS " + frame + " engineFPS " + engineFrame + " " + surfaceCount);
 				frame = 0;
 				engineFrame = 0;
 				beginTime = endTime;
