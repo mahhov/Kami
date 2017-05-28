@@ -9,7 +9,7 @@ import control.ControllerJava;
 import control.ControllerLwjgl;
 import paint.painter.Painter;
 import paint.painter.PainterJava;
-import paint.painter.PainterLwjgl;
+import paint.painter.TextureLwjgl.PainterLwjgl;
 import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
@@ -134,19 +134,20 @@ class KamiEngine implements Runnable {
 	}
 }
 
+// todo ; map ediitor
+// todo : spawn center terrain
+// todo : max range to hook
+// todo : race mode, survival mode, platformer mode 
+
 // todo : graphics
 // todo : shooting
-// todo : survival
 // todo : environment (e.g. clouds, zone types, world generation)
 // todo : true boundless terrain/world
 // todo : border drawing
-// todo : max range to hook, and check intersection finder for slow down bug
 // todo : toggle controls for bg music and sound affects
 // todo : multi cube character collision
 // todo : flying sound affect
 // todo : moving character animation
 // todo : cell shading
-// todo : spawn center terrain
 // todo : flying hiss sound
 // todo : skate state
-// todo : race mode

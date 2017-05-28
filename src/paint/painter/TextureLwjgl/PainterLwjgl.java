@@ -1,4 +1,4 @@
-package paint.painter;
+package paint.painter.TextureLwjgl;
 
 import control.Controller;
 import control.ControllerLwjgl;
@@ -9,11 +9,11 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
+import paint.painter.Painter;
 import paint.painterelement.PainterQueue;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -167,7 +167,8 @@ public class PainterLwjgl implements Painter {
 	private BackgroundTexture backgroundTexture;
 	
 	public void setBackgroundImage(BufferedImage image) {
-		backgroundTexture = new BackgroundTexture(image);
+		backgroundTexture = new BackgroundTexture();
+		backgroundTexture.init(image);
 	}
 	
 	public void drawBackgroundImage(int shift, int shiftVert) {
@@ -262,131 +263,19 @@ public class PainterLwjgl implements Painter {
 		}
 	}
 	
-	private abstract static class Texture {
-		int width, height;
-		int textureId;
-		
-		Texture(BufferedImage image) {
-			this(image, (byte) -1);
-		}
-		
-		Texture(BufferedImage image, byte alpha) {
-			width = image.getWidth();
-			height = image.getHeight();
-			ByteBuffer byteBuffer = createByteBuffer(image, alpha);
-			createTexture(byteBuffer);
-		}
-		
-		private ByteBuffer createByteBuffer(BufferedImage image, byte alpha) {
-			// get rgb
-			int[] pixels = image.getRGB(0, 0, width, height, null, 0, width);
-			
-			// create byte buffer
-			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(width * height * 4);
-			for (int y = 0; y < height; y++) {
-				for (int x = 0; x < width; x++) {
-					int pixel = pixels[y * width + x];
-					byteBuffer.put((byte) ((pixel >> 16) & 0xFF));
-					byteBuffer.put((byte) ((pixel >> 8) & 0xFF));
-					byteBuffer.put((byte) (pixel & 0xFF));
-					byteBuffer.put(alpha == -1 ? (byte) ((pixel >> 24) & 0xFF) : alpha);
-				}
-			}
-			byteBuffer.flip();
-			
-			return byteBuffer;
-		}
-		
-		private void createTexture(ByteBuffer byteBuffer) {
-			textureId = glGenTextures();
-			glBindTexture(GL_TEXTURE_2D, textureId);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, byteBuffer);
-		}
-		
-		void draw(float x, float y) {
-			prepDraw();
-			coordDraw(x, y);
-			endDraw();
-		}
-		
-		private void prepDraw() {
-			glBindTexture(GL_TEXTURE_2D, textureId);
-			glEnable(GL_TEXTURE_2D);
-			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		}
-		
-		abstract void coordDraw(float x, float y);
-		
-		private void endDraw() {
-			glDrawArrays(GL_QUADS, 0, 4);
-			glDisable(GL_TEXTURE_2D);
-			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-			glDisableClientState(GL_VERTEX_ARRAY);
-			glDisable(GL_BLEND);
-		}
-	}
-	
-	private static class BackgroundTexture extends Texture {
-		BackgroundTexture(BufferedImage image) {
-			super(image, (byte) 100);
-		}
-		
-		void coordDraw(float x, float y) {
-			float[] textureCoord = new float[] {x / width, y / height, (x + 800) / width, y / height, (x + 800) / width, (y + 800) / height, x / width, (y + 800) / height};
-			float[] quad = new float[] {-1, 1, 1, 1, 1, -1, -1, -1};
-			
-			glTexCoordPointer(2, GL_FLOAT, 0, textureCoord);
-			glVertexPointer(2, GL_FLOAT, 0, quad);
-		}
-	}
-	
-	private static class CharGlyph extends Texture {
-		private static final float[] TEXTURE_COORD = new float[] {0, 0, 1, 0, 1, 1, 0, 1};
-		private static final int SIZE = 12;
-		
-		CharGlyph(String s) {
-			super(createImage(s));
-		}
-		
-		private static BufferedImage createImage(String s) {
-			BufferedImage textImage = new BufferedImage(SIZE, SIZE, BufferedImage.TYPE_INT_ARGB);
-			Graphics2D g = (Graphics2D) textImage.getGraphics();
-			g.setColor(Color.WHITE);
-			g.drawString(s, 1, 10);
-			return textImage;
-		}
-		
-		void coordDraw(float x, float y) {
-			float size = .03f;
-			float leftX = -1 + x * size;
-			float topY = 1 - y * size;
-			float rightX = leftX + size;
-			float bottomY = topY - size;
-			float[] quad = new float[] {leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY};
-			
-			glTexCoordPointer(2, GL_FLOAT, 0, TEXTURE_COORD);
-			glVertexPointer(2, GL_FLOAT, 0, quad);
-		}
-	}
-	
-	private CharGlyph charGlyphs[] = new CharGlyph[127];
+	private CharGlyphTexture charGlyphTexture[] = new CharGlyphTexture[127];
 	
 	private void drawStringInit() {
-		for (int i = 32; i < charGlyphs.length; i++)
-			charGlyphs[i] = new CharGlyph((char) i + "");
+		for (int i = 32; i < charGlyphTexture.length; i++)
+			charGlyphTexture[i] = new CharGlyphTexture((char) i + "");
 	}
 	
 	private void drawDebugStrings() {
 		for (int y = 0; y < DEBUG_STRING.length; y++) {
 			char[] c = DEBUG_STRING[y].toCharArray();
 			for (int x = 0; x < c.length; x++)
-				if (c[x] >= 0 && c[x] < charGlyphs.length)
-					charGlyphs[c[x]].draw(x, y);
+				if (c[x] >= 0 && c[x] < charGlyphTexture.length)
+					charGlyphTexture[c[x]].draw(x, y);
 		}
 	}
 }
