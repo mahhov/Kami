@@ -39,6 +39,8 @@ public class PainterLwjgl implements Painter {
 	private FloatBuffer vertexBuffer = BufferUtils.createFloatBuffer(bufferSize * 2);
 	private FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(bufferSize * 3);
 	
+	private CharGlyphTextureGroup charGlyphTextureGroup;
+	
 	public PainterLwjgl(int frameSize, int imageSize, ControllerLwjgl controller) {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
@@ -110,7 +112,7 @@ public class PainterLwjgl implements Painter {
 		
 		painterQueue = new PainterQueue();
 		
-		drawStringInit();
+		charGlyphTextureGroup = new CharGlyphTextureGroup();
 	}
 	
 	private void clean() {
@@ -263,19 +265,9 @@ public class PainterLwjgl implements Painter {
 		}
 	}
 	
-	private CharGlyphTexture charGlyphTexture[] = new CharGlyphTexture[127];
-	
-	private void drawStringInit() {
-		for (int i = 32; i < charGlyphTexture.length; i++)
-			charGlyphTexture[i] = new CharGlyphTexture((char) i + "");
-	}
-	
 	private void drawDebugStrings() {
 		for (int y = 0; y < DEBUG_STRING.length; y++) {
-			char[] c = DEBUG_STRING[y].toCharArray();
-			for (int x = 0; x < c.length; x++)
-				if (c[x] >= 0 && c[x] < charGlyphTexture.length)
-					charGlyphTexture[c[x]].draw(x, y);
+			charGlyphTextureGroup.drawString(DEBUG_STRING[y], y);
 		}
 	}
 }
