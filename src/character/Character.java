@@ -253,6 +253,9 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 	}
 	
 	private void addToWorld(World world) {
+		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+		world.addShape((int) x, (int) y, (int) (z + .5), shape);
+		
 		if (hookState == HOOK_ATTACHED)
 			for (int i = 0; i < 10; i++)
 				world.addParticle(new HookParticle(hookx, hooky, hookz));
@@ -291,8 +294,8 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 			//			}
 		}
 		
-		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
-		world.addShape((int) x, (int) y, (int) (z + .5), shape);
+		//		Cube shape = new Cube(x, y, z + .5, angle, angleZ, angleTilt, .5, this);
+		//		world.addShape((int) x, (int) y, (int) (z + .5), shape);
 		
 		/*double[] leg = new double[] {.5, .5, .5};
 		double legGap = 1;
