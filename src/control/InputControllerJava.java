@@ -18,7 +18,7 @@ public class InputControllerJava extends ControllerJavaListener {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyChar() + "");
+//		System.out.println(e.getKeyChar() + "");
 	}
 	
 	public void keyReleased(KeyEvent e) {

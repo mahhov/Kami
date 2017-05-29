@@ -8,32 +8,33 @@ import paint.painterelement.PainterText;
 import java.awt.*;
 
 class ScreenButton extends ScreenItem {
-	private static final Color UP_COLOR = Color.WHITE, HIGHLIGHT_COLOR = Color.LIGHT_GRAY, PRESS_COLOR = Color.GRAY, TEXT_COLOR = Color.BLACK;
+	static final Color UP_COLOR = Color.WHITE, HIGHLIGHT_COLOR = Color.LIGHT_GRAY, PRESS_COLOR = Color.GRAY, TEXT_COLOR = Color.BLACK;
 	private String text;
-	private boolean press, highlight;
+	boolean press, down, highlight;
 	
-	ScreenButton(double left, double width, double top, double height, String text) {
-		super(left, width, top, height);
+	ScreenButton(String text) {
 		this.text = text;
 	}
 	
-	public void handleMouseInput(double screenX, double screenY, int mouseState) {
+	public boolean handleMouseInput(double screenX, double screenY, int mouseState) {
 		highlight = containsScreenCoord(screenX, screenY);
-		press = highlight && mouseState == Controller.DOWN;
+		press = highlight && mouseState == Controller.PRESSED;
+		down = press || (highlight && mouseState == Controller.DOWN);
+		return !highlight;
 	}
 	
 	void draw(PainterQueue painterQueue) {
-		if (press)
-			painterQueue.add(new PainterRectangle(left, top, width, height, PRESS_COLOR));
+		if (down)
+			draw(painterQueue, PRESS_COLOR);
 		else if (highlight)
-			painterQueue.add(new PainterRectangle(left, top, width, height, HIGHLIGHT_COLOR));
+			draw(painterQueue, HIGHLIGHT_COLOR);
 		else
-			painterQueue.add(new PainterRectangle(left, top, width, height, UP_COLOR));
+			draw(painterQueue, UP_COLOR);
+	}
+	
+	void draw(PainterQueue painterQueue, Color fillColor) {
+		painterQueue.add(new PainterRectangle(left, top, width, height, fillColor));
 		painterQueue.add(new PainterRectangle(left, top, width, height, TEXT_COLOR, false));
 		painterQueue.add(new PainterText(left, top, width, height, TEXT_COLOR, text));
 	}
-	
-	boolean isDown() {
-		return press;
-	}
-}
+}	

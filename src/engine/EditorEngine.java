@@ -15,7 +15,7 @@ class EditorEngine implements Runnable {
 	
 	private EditorEngine() {
 		Math3D.loadTrig(1000);
-		editorScreen = new EditorScreen(.1, .1, .8, .8);
+		editorScreen = new EditorScreen(0, 0, 1, 1);
 		controller = new InputControllerJava(FRAME, FRAME);
 		painter = new PainterJava(FRAME, IMAGE, controller);
 	}
