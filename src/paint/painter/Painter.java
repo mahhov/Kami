@@ -26,6 +26,10 @@ public interface Painter extends Runnable {
 	
 	void drawBlur(double blur);
 	
+	void drawText(double x, double y, Color color, String text);
+	
+	void drawTextCentered(double x, double y, double width, double height, Color color, String text);
+	
 	void updateMode(Controller controller);
 	
 	boolean isPainterQueueDone();

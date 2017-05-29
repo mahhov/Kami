@@ -7,6 +7,7 @@ import character.Character;
 import control.Controller;
 import control.ControllerJava;
 import control.ControllerLwjgl;
+import control.ControllerJavaListener;
 import paint.painter.Painter;
 import paint.painter.PainterJava;
 import paint.painter.TextureLwjgl.PainterLwjgl;
@@ -31,11 +32,11 @@ class KamiEngine implements Runnable {
 	private KamiEngine(boolean lwjglFlag) {
 		Math3D.loadTrig(1000);
 		if (LWJGL_FLAG = lwjglFlag) {
-			controller = new ControllerLwjgl(FRAME, FRAME);
+			controller = new ControllerLwjgl();
 			painter = new PainterLwjgl(FRAME, IMAGE, (ControllerLwjgl) controller);
 		} else {
 			controller = new ControllerJava(FRAME, FRAME);
-			painter = new PainterJava(FRAME, IMAGE, (ControllerJava) controller);
+			painter = new PainterJava(FRAME, IMAGE, (ControllerJavaListener) controller);
 		}
 		camera = new TrailingCamera();
 		terrain = new Terrain();

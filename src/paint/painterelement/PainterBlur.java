@@ -9,7 +9,7 @@ public class PainterBlur extends PainterElement{
 		this.blur = blur;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		painter.drawBlur(blur);
 	}
 }

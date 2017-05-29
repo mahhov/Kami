@@ -16,8 +16,8 @@ public class PainterQueue extends PainterElement {
 		elements = elements.add(e);
 	}
 	
-	public void paint(Painter painter) {
+	public void draw(Painter painter) {
 		for (LList<PainterElement> e : tailElement.reverseIterator())
-			e.node.paint(painter);
+			e.node.draw(painter);
 	}
 }

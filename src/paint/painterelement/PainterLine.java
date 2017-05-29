@@ -17,7 +17,7 @@ public class PainterLine extends PainterElement {
 		this.color = color;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		painter.drawLine(x1, y1, x2, y2, light, color);
 	}
 }

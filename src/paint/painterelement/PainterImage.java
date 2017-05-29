@@ -15,7 +15,7 @@ public class PainterImage extends PainterElement {
 		this.shiftVert = shiftVert;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		painter.drawImage(image, shift, shiftVert);
 	}
 }

@@ -209,6 +209,12 @@ public class PainterLwjgl implements Painter {
 			backgroundTextureGroup.setTexture(blur);
 	}
 	
+	public void drawText(double x, double y, Color color, String text) {
+	}
+	
+	public void drawTextCentered(double x, double y, double width, double height, Color color, String text) {
+	}
+	
 	public void updateMode(Controller controller) {
 	}
 	
@@ -233,7 +239,7 @@ public class PainterLwjgl implements Painter {
 				
 				vertexCount = 0;
 				Timer.PAINTER_QUEUE_PAINT.timeStart();
-				painterQueue.paint(this);
+				painterQueue.draw(this);
 				Timer.PAINTER_QUEUE_PAINT.timeEnd();
 				painterQueue.drawReady = false;
 				

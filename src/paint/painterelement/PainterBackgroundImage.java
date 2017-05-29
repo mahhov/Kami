@@ -19,7 +19,7 @@ public class PainterBackgroundImage extends PainterElement {
 		this.shiftVert = shiftVert;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		if (!set) {
 			set = true;
 			painter.setBackgroundImage(image);

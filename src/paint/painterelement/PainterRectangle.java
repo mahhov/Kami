@@ -16,7 +16,7 @@ public class PainterRectangle extends PainterElement {
 		this.color = color;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		painter.drawRectangle(x, y, width, height, color);
 	}
 }

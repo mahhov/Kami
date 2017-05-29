@@ -54,7 +54,7 @@ public class Sky implements WorldElement, InterfaceElement {
 		painterBackgroundImage = new PainterBackgroundImage(backgroundImage);
 	}
 	
-	private void paintBackground(Controller c) {
+	private void drawBackground(Controller c) {
 		double anglePercent = -(c.viewAngle.get() / Math.PI / 2) % 1;
 		if (anglePercent < 0)
 			anglePercent++;
@@ -71,7 +71,7 @@ public class Sky implements WorldElement, InterfaceElement {
 	}
 	
 	public void update(World world, Terrain terrain, Controller controller) {
-		paintBackground(controller);
+		drawBackground(controller);
 	}
 	
 	public void draw(PainterQueue painterQueue) {

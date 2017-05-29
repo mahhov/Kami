@@ -14,14 +14,13 @@ public class Controller {
 	
 	private Key[] keys;
 	
-	final int centerMouseX, centerMouseY; // todo: move this to ControllerJava
 	private int mouseMoveX, mouseMoveY;
 	private int mouseState;
 	
 	public double[] viewOrig, viewDir;
 	public Math3D.Angle viewAngle, viewAngleZ;
 	
-	Controller(int width, int height) {
+	Controller() {
 		keys = new Key[40];
 		keys[KEY_W] = new Key(87);
 		keys[KEY_A] = new Key(65);
@@ -64,9 +63,6 @@ public class Controller {
 		keys[KEY_LEFT_CAROT] = new Key(44);
 		keys[KEY_RIGHT_CAROT] = new Key(46);
 		
-		this.centerMouseX = width / 2;
-		this.centerMouseY = height / 2;
-		
 		viewOrig = new double[3];
 		viewDir = new double[3];
 	}
@@ -104,8 +100,8 @@ public class Controller {
 	}
 	
 	void setMouseMoved(int x, int y) {
-		mouseMoveX += x - centerMouseX;
-		mouseMoveY += y - centerMouseY;
+		mouseMoveX += x;
+		mouseMoveY += y;
 	}
 	
 	public int[] getMouseMovement() {

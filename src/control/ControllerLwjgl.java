@@ -12,10 +12,6 @@ public class ControllerLwjgl extends Controller {
 	public long window;
 	private double lastXPos, lastYPos;
 	
-	public ControllerLwjgl(int width, int height) {
-		super(0, 0);
-	}
-	
 	public GLFWKeyCallback lwjglKeyboardHandler() {
 		return new GLFWKeyCallback() {
 			public void invoke(long window, int key, int scancode, int action, int mods) {

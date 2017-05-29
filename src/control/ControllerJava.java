@@ -1,13 +1,18 @@
 package control;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
-public class ControllerJava extends Controller implements KeyListener, MouseListener, MouseMotionListener {
+public class ControllerJava extends ControllerJavaListener {
 	private Robot robot;
+	final int centerMouseX, centerMouseY;
 	
 	public ControllerJava(int width, int height) {
-		super(width, height);
+		super();
+		
+		centerMouseX = width / 2;
+		centerMouseY = height / 2;
 		
 		try {
 			robot = new Robot();
@@ -49,8 +54,8 @@ public class ControllerJava extends Controller implements KeyListener, MouseList
 	}
 	
 	public void mouseMoved(MouseEvent e) {
-		int x = e.getX(), y = e.getY();
+		int x = e.getX() - centerMouseX, y = e.getY() - centerMouseY;
 		setMouseMoved(x, y);
-		robot.mouseMove(centerMouseX - x + e.getXOnScreen(), centerMouseY - y + e.getYOnScreen());
+		robot.mouseMove(e.getXOnScreen() - x, e.getYOnScreen() - y);
 	}
 }	

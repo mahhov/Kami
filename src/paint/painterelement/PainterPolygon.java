@@ -17,7 +17,7 @@ public class PainterPolygon extends PainterElement {
 		this.frame = frame;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		painter.drawPolygon(xy, light, color, frame);
 	}
 }

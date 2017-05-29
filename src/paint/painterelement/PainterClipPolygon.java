@@ -19,7 +19,7 @@ public class PainterClipPolygon extends PainterElement {
 		this.frame = frame;
 	}
 	
-	void paint(Painter painter) {
+	void draw(Painter painter) {
 		painter.drawClipPolygon(xy, light, color, clipState, frame);
 	}
 }
