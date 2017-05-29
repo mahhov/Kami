@@ -16,7 +16,7 @@ class BackgroundTextureGroup extends TextureGroup<BackgroundTexture> {
 		texture = new BackgroundTexture[4];
 		for (int i = 0; i < texture.length; i++) {
 			texture[i] = new BackgroundTexture();
-			texture[i].init(imageARGB, width, height, (byte) (120 * (i + 1) / texture.length));
+			texture[i].init(imageARGB, width, height, (120 * (i + 1) / texture.length));
 		}
 		
 		active = texture.length - 1;

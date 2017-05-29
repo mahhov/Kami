@@ -13,7 +13,7 @@ abstract class Texture {
 		init(image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth()), image.getWidth(), image.getHeight());
 	}
 	
-	void init(BufferedImage image, byte alpha) {
+	void init(BufferedImage image, int alpha) {
 		init(image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth()), image.getWidth(), image.getHeight(), alpha);
 	}
 	
@@ -24,7 +24,7 @@ abstract class Texture {
 		textureId = createTexture(byteBuffer, width, height);
 	}
 	
-	void init(int[] imageARGB, int width, int height, byte alpha) {
+	void init(int[] imageARGB, int width, int height, int alpha) {
 		this.width = width;
 		this.height = height;
 		ByteBuffer byteBuffer = createByteBuffer(imageARGB, width, height, alpha);
@@ -47,7 +47,7 @@ abstract class Texture {
 		return byteBuffer;
 	}
 	
-	private static ByteBuffer createByteBuffer(int[] imageARGB, int width, int height, byte alpha) {
+	private static ByteBuffer createByteBuffer(int[] imageARGB, int width, int height, int alpha) {
 		ByteBuffer byteBuffer = ByteBuffer.allocateDirect(width * height * 4);
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
@@ -55,7 +55,7 @@ abstract class Texture {
 				byteBuffer.put((byte) ((argb >> 16) & 0xFF));
 				byteBuffer.put((byte) ((argb >> 8) & 0xFF));
 				byteBuffer.put((byte) (argb & 0xFF));
-				byteBuffer.put(alpha);
+				byteBuffer.put((byte) alpha);
 			}
 		}
 		byteBuffer.flip();
@@ -84,7 +84,7 @@ abstract class Texture {
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // todo: find out if other blends can get rid of artifacts on low alpha
 	}
 	
 	abstract void coordDraw(float x, float y);
