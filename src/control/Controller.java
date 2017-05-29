@@ -111,7 +111,7 @@ public class Controller {
 		return r;
 	}
 	
-	private int getMouseState() {
+	public int getMouseState() {
 		int r = mouseState;
 		if (r == PRESSED)
 			mouseState = DOWN;

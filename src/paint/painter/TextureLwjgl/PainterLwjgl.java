@@ -204,6 +204,9 @@ public class PainterLwjgl implements Painter {
 		glDrawQuad(vertices, color.getRGBColorComponents(null));
 	}
 	
+	public void drawRectangleFrame(double x, double y, double width, double height, Color color) {
+	}
+	
 	public void drawBlur(double blur) {
 		if (backgroundTextureGroup != null)
 			backgroundTextureGroup.setTexture(blur);

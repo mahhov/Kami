@@ -13,7 +13,6 @@ import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 import static camera.Camera.MIN_LIGHT;
-import static com.sun.java.accessibility.util.AWTEventMonitor.*;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
 public class PainterJava implements Painter {
@@ -47,14 +46,15 @@ public class PainterJava implements Painter {
 		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, TYPE_INT_RGB);
 		brush = (Graphics2D) canvas.getGraphics();
 		fontMetrics = brush.getFontMetrics();
+		jframe.setUndecorated(true);
 		jframe.getContentPane().setSize(FRAME_SIZE, FRAME_SIZE);
 		jframe.pack();
 		borderSize = jframe.getHeight();
 		jframe.setSize(FRAME_SIZE, FRAME_SIZE + borderSize);
 		jframe.setLocationRelativeTo(null);
-		addMouseListener(controller);
-		addKeyListener(controller);
-		addMouseMotionListener(controller);
+		jframe.addMouseListener(controller);
+		jframe.addKeyListener(controller);
+		jframe.addMouseMotionListener(controller);
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setIgnoreRepaint(true);
 		jframe.setVisible(true);
@@ -149,6 +149,12 @@ public class PainterJava implements Painter {
 		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
 		brush.setColor(color);
 		brush.fillRect(xywh[0], xywh[1], xywh[2], xywh[3]);
+	}
+	
+	public void drawRectangleFrame(double x, double y, double width, double height, Color color) {
+		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
+		brush.setColor(color);
+		brush.drawRect(xywh[0], xywh[1], xywh[2], xywh[3]);
 	}
 	
 	public void drawBlur(double blur) {

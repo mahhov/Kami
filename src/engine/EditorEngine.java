@@ -16,7 +16,7 @@ class EditorEngine implements Runnable {
 	private EditorEngine() {
 		Math3D.loadTrig(1000);
 		editorScreen = new EditorScreen(.1, .1, .8, .8);
-		controller = new InputControllerJava();
+		controller = new InputControllerJava(FRAME, FRAME);
 		painter = new PainterJava(FRAME, IMAGE, controller);
 	}
 	
@@ -37,6 +37,7 @@ class EditorEngine implements Runnable {
 				painter.setPainterQueue(painterQueue);
 				frame++;
 			}
+			editorScreen.handleMouseInput(controller);
 			engineFrame++;
 			Math3D.sleep(10);
 			endTime = System.nanoTime() + 1;

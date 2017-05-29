@@ -15,7 +15,7 @@ abstract class ScreenItem {
 		bottom = top + height;
 	}
 	
-	void handleMouseClick(double screenX, double screenY) {
+	void handleMouseInput(double screenX, double screenY, int mouseState) {
 	}
 	
 	void draw(PainterQueue painterQueue) {

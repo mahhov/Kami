@@ -24,6 +24,8 @@ public interface Painter extends Runnable {
 	
 	void drawRectangle(double x, double y, double width, double height, Color color);
 	
+	void drawRectangleFrame(double x, double y, double width, double height, Color color);
+	
 	void drawBlur(double blur);
 	
 	void drawText(double x, double y, Color color, String text);

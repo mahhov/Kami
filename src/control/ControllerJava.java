@@ -9,8 +9,6 @@ public class ControllerJava extends ControllerJavaListener {
 	final int centerMouseX, centerMouseY;
 	
 	public ControllerJava(int width, int height) {
-		super();
-		
 		centerMouseX = width / 2;
 		centerMouseY = height / 2;
 		
