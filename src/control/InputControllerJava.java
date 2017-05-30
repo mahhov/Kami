@@ -18,7 +18,7 @@ public class InputControllerJava extends ControllerJavaListener {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-//		System.out.println(e.getKeyChar() + "");
+		//		System.out.println(e.getKeyChar() + "");
 	}
 	
 	public void keyReleased(KeyEvent e) {
@@ -43,6 +43,8 @@ public class InputControllerJava extends ControllerJavaListener {
 	}
 	
 	public void mouseDragged(MouseEvent e) {
+		mouseX = 1. * e.getX() / WIDTH;
+		mouseY = 1. * e.getY() / HEIGHT;
 	}
 	
 	public void mouseMoved(MouseEvent e) {

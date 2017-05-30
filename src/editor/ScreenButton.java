@@ -8,7 +8,6 @@ import paint.painterelement.PainterText;
 import java.awt.*;
 
 class ScreenButton extends ScreenItem {
-	static final Color UP_COLOR = Color.WHITE, HIGHLIGHT_COLOR = Color.LIGHT_GRAY, PRESS_COLOR = Color.GRAY, TEXT_COLOR = Color.BLACK;
 	private String text;
 	boolean press, down, highlight;
 	

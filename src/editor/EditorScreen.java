@@ -16,7 +16,7 @@ public class EditorScreen {
 		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("START")), 4, 0, 2, 1);
 		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("END")), 6, 0, 2, 1);
 		
-		cell.addScreenItem(new ScreenButton("VERT MAP"), 0, 2, 2, 16);
+		cell.addScreenItem(new ScreenTable(1, 10), 0, 2, 2, 16);
 		cell.addScreenItem(new ScreenButton("UP"), 3, 1, 16, 1);
 		cell.addScreenItem(new ScreenButton("DOWN"), 3, 18, 16, 1);
 		cell.addScreenItem(new ScreenButton("L"), 2, 2, 1, 16);

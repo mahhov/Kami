@@ -2,7 +2,10 @@ package editor;
 
 import paint.painterelement.PainterQueue;
 
+import java.awt.*;
+
 abstract class ScreenItem {
+	static final Color UP_COLOR = Color.WHITE, HIGHLIGHT_COLOR = Color.LIGHT_GRAY, PRESS_COLOR = Color.GRAY, TEXT_COLOR = Color.BLACK;
 	double left, right, width;
 	double top, bottom, height;
 	
@@ -15,7 +18,7 @@ abstract class ScreenItem {
 		bottom = top + height;
 	}
 	
-	// return false on stop propogation
+	// return false on stop propogation - todo: reverse, return true on stop propogation
 	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
 		return true;
 	}
