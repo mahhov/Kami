@@ -15,7 +15,7 @@ class ScreenButton extends ScreenItem {
 		this.text = text;
 	}
 	
-	public boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
 		highlight = containsScreenCoord(screenX, screenY);
 		press = highlight && mouseState == Controller.PRESSED;
 		down = press || (highlight && mouseState == Controller.DOWN);

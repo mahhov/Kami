@@ -50,6 +50,12 @@ public class Math3D {
 		return dx * dx + dy * dy;
 	}
 	
+	public static int[] magnitudeSign(int value) {
+		if (value < 0)
+			return new int[] {-value, -1};
+		return new int[] {value, 1};
+	}
+	
 	public static double[] normalize(double[] v) {
 		double mag = magnitude(v);
 		for (int i = 0; i < v.length; i++)

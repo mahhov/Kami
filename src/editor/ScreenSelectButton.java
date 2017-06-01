@@ -13,10 +13,10 @@ class ScreenSelectButton extends ScreenToggleButton {
 		this.group = group;
 	}
 	
-	public boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
 		super.handleMouseInput(screenX, screenY, mouseState);
 		if (press) {
-			group.clearSelection();
+			group.setSelect(id);
 			toggle = true;
 		}
 		return !highlight;

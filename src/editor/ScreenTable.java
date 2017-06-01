@@ -1,6 +1,7 @@
 package editor;
 
 import control.Controller;
+import engine.Math3D;
 import paint.painterelement.PainterQueue;
 import paint.painterelement.PainterRectangle;
 
@@ -10,7 +11,7 @@ class ScreenTable extends ScreenItem {
 	private int numColumns, numRows;
 	private double columnWidth, rowHeight;
 	private int highlightColumn, highlightRow;
-	private boolean down;
+	private boolean down, pressed;
 	private int anchorColumn, anchorRow; // for select line & rect
 	private boolean[][] select;
 	static final int SELECT_PEN = 0, SELECT_LINE = 1, SELECT_RECTANGLE = 2;
@@ -31,7 +32,7 @@ class ScreenTable extends ScreenItem {
 		rowHeight = height / numRows;
 	}
 	
-	public boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
 		if (!containsScreenCoord(screenX, screenY)) {
 			highlightColumn = -1;
 			return true;
@@ -40,46 +41,92 @@ class ScreenTable extends ScreenItem {
 		double[] xy = screenToItemCoord(screenX, screenY);
 		highlightColumn = (int) (xy[0] * numColumns);
 		highlightRow = (int) (xy[1] * numRows);
-		down = mouseState == Controller.DOWN;
+		pressed = mouseState == Controller.PRESSED;
+		down = pressed || mouseState == Controller.DOWN;
 		if (!down)
 			return false;
 		
-		// todo : seperate helper function
+		updateSelect();
+		return false;
+	}
+	
+	private void updateSelect() {
 		switch (selectShape) {
 			case SELECT_PEN:
 				select[highlightColumn][highlightRow] = selectMode;
 				break;
 			case SELECT_LINE:
-				if (anchorColumn == -1) {
-					anchorColumn = highlightColumn;
-					anchorRow = highlightRow;
-				} else {
-					// do this
-					anchorColumn = -1;
-				}
+				if (pressed)
+					if (anchorColumn == -1) {
+						anchorColumn = highlightColumn;
+						anchorRow = highlightRow;
+					} else {
+						int[] dx = Math3D.magnitudeSign(highlightColumn - anchorColumn);
+						int[] dy = Math3D.magnitudeSign(highlightRow - anchorRow);
+						if (dx[0] > dy[0] * 3) {
+							highlightColumn += dx[1];
+							for (; anchorColumn != highlightColumn; anchorColumn += dx[1])
+								select[anchorColumn][anchorRow] = selectMode;
+						} else if (dy[0] > dx[0] * 3) {
+							highlightRow += dy[1];
+							for (; anchorRow != highlightRow; anchorRow += dy[1])
+								select[anchorColumn][anchorRow] = selectMode;
+						} else {
+							highlightColumn += dx[1];
+							highlightRow += dy[1];
+							for (; anchorColumn != highlightColumn && anchorRow != highlightRow; anchorColumn += dx[1], anchorRow += dy[1])
+								select[anchorColumn][anchorRow] = selectMode;
+						}
+						anchorColumn = -1;
+					}
 				break;
 			case SELECT_RECTANGLE:
-				if (anchorColumn == -1) {
-					anchorColumn = highlightColumn;
-					anchorRow = highlightRow;
-				} else {
-					int xd = anchorColumn < highlightColumn ? 1 : -1;
-					int yd = anchorRow < highlightRow ? 1 : -1;
-					for (int x = anchorColumn; x < highlightColumn; x += xd)
-						for (int y = anchorRow; y < highlightRow; y += yd)
-							select[x][y] = selectMode;
-					anchorColumn = -1;
-				}
+				if (pressed)
+					if (anchorColumn == -1) {
+						anchorColumn = highlightColumn;
+						anchorRow = highlightRow;
+					} else {
+						int xd = anchorColumn < highlightColumn ? 1 : -1;
+						int yd = anchorRow < highlightRow ? 1 : -1;
+						highlightColumn += xd;
+						highlightRow += yd;
+						for (; anchorColumn != highlightColumn; anchorColumn += xd)
+							for (int y = anchorRow; y != highlightRow; y += yd)
+								select[anchorColumn][y] = selectMode;
+						anchorColumn = -1;
+					}
 				break;
 		}
-		return false;
+	}
+	
+	void clearCurrent() {
+		anchorColumn = -1;
+	}
+	
+	void clearAll() {
+		clearCurrent();
+		for (int x = 0; x < numColumns; x++)
+			for (int y = 0; y < numRows; y++)
+				select[x][y] = false;
+	}
+	
+	void setSelectShape(int value) {
+		if (value == SELECT_PEN)
+			clearCurrent();
+		selectShape = value;
+	}
+	
+	void setSelectMode(boolean value) {
+		selectMode = value;
 	}
 	
 	void draw(PainterQueue painterQueue) {
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 		for (int x = 0; x < numColumns; x++)
 			for (int y = 0; y < numRows; y++)
-				if (x == highlightColumn && y == highlightRow)
+				if (x == anchorColumn && y == anchorRow)
+					drawRect(painterQueue, x, y, PRESS_COLOR, true);
+				else if (x == highlightColumn && y == highlightRow)
 					if (down || select[x][y])
 						drawRect(painterQueue, x, y, PRESS_COLOR, true);
 					else

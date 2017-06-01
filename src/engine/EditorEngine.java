@@ -37,7 +37,7 @@ class EditorEngine implements Runnable {
 				painter.setPainterQueue(painterQueue);
 				frame++;
 			}
-			editorScreen.handleMouseInput(controller);
+			editorScreen.update(controller);
 			engineFrame++;
 			Math3D.sleep(10);
 			endTime = System.nanoTime() + 1;

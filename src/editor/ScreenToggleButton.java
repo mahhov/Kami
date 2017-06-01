@@ -9,7 +9,7 @@ class ScreenToggleButton extends ScreenButton {
 		super(text);
 	}
 	
-	public boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
 		super.handleMouseInput(screenX, screenY, mouseState);
 		toggle ^= press;
 		return !highlight;
