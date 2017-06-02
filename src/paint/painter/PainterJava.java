@@ -89,8 +89,8 @@ public class PainterJava implements Painter {
 		brush.drawImage(backgroundImage, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
 	}
 	
-	public void drawImage(BufferedImage image, int shift, int shiftVert) {
-		brush.drawImage(image, 0, 0, 800, 800, shift, shiftVert, shift + 800, shiftVert + 800, null);
+	public void drawImage(BufferedImage image, double dstx, double dsty, double width, double height) {
+		brush.drawImage(image, (int) (dstx * FRAME_SIZE), (int) (dsty * FRAME_SIZE), (int) ((dstx + width) * FRAME_SIZE), (int) ((dsty + height) * FRAME_SIZE), 0, 0, image.getWidth(), image.getHeight(), null);
 	}
 	
 	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {

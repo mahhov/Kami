@@ -175,7 +175,7 @@ public class PainterLwjgl implements Painter {
 		backgroundTextureGroup.getTexture().draw(shift, shiftVert);
 	}
 	
-	public void drawImage(BufferedImage image, int shift, int shiftVert) {
+	public void drawImage(BufferedImage image, double fromx, double fromy, double tox, double toy) {
 	}
 	
 	public void drawPolygon(double[][] xy, double light, Color color, boolean frame) {

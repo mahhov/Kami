@@ -2,10 +2,12 @@ package editor;
 
 import control.Controller;
 import engine.Math3D;
+import paint.painterelement.PainterImage;
 import paint.painterelement.PainterQueue;
 import paint.painterelement.PainterRectangle;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 class ScreenTable extends ScreenItem {
 	private int numColumns, numRows;
@@ -17,6 +19,7 @@ class ScreenTable extends ScreenItem {
 	static final int SELECT_PEN = 0, SELECT_LINE = 1, SELECT_RECTANGLE = 2;
 	private int selectShape; // pen, line, rect
 	private boolean selectMode; // select / unselect
+	private BufferedImage image;
 	
 	ScreenTable(int numColumns, int numRows) {
 		this.numColumns = numColumns;
@@ -120,7 +123,18 @@ class ScreenTable extends ScreenItem {
 		selectMode = value;
 	}
 	
+	boolean[][] getSelect() {
+		return select;
+	}
+	
+	void setImage(BufferedImage image) {
+		this.image = image;
+	}
+	
 	void draw(PainterQueue painterQueue) {
+		if (image != null)
+			painterQueue.add(new PainterImage(image, left, top, width, height));
+		
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 		for (int x = 0; x < numColumns; x++)
 			for (int y = 0; y < numRows; y++)

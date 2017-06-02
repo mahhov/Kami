@@ -14,7 +14,7 @@ public interface Painter extends Runnable {
 	
 	void drawBackgroundImage(int shift, int shiftVert);
 	
-	void drawImage(BufferedImage image, int shift, int shiftVert);
+	void drawImage(BufferedImage image, double fromx, double fromy, double tox, double toy);
 	
 	void drawPolygon(double[][] xy, double light, Color color, boolean frame);
 	

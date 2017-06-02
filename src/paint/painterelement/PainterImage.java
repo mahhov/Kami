@@ -6,16 +6,17 @@ import java.awt.image.BufferedImage;
 
 public class PainterImage extends PainterElement {
 	private BufferedImage image;
-	private int shift;
-	private int shiftVert;
+	private double dstx, dsty, width, height;
 	
-	public PainterImage(BufferedImage image, int shift, int shiftVert) {
+	public PainterImage(BufferedImage image, double dstx, double dsty, double width, double height) {
 		this.image = image;
-		this.shift = shift;
-		this.shiftVert = shiftVert;
+		this.dstx = dstx;
+		this.dsty = dsty;
+		this.width = width;
+		this.height = height;
 	}
 	
 	void draw(Painter painter) {
-		painter.drawImage(image, shift, shiftVert);
+		painter.drawImage(image, dstx, dsty, width, height);
 	}
 }
