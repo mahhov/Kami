@@ -6,8 +6,6 @@ import paint.painterelement.PainterQueue;
 import java.awt.*;
 
 class EditorMap implements ImageProvider {
-	private static final Color CLEAR_COLOR = new Color(0, 0, 0, 0), FILL_COLOR = new Color(100, 100, 200), OUTLINE_COLOR = Color.BLACK; //todo: constant fill color definition
-	
 	private int mapWidth, mapLength, mapHeight;
 	private int[][][] map;
 	private int scrollX, scrollY;
@@ -54,40 +52,41 @@ class EditorMap implements ImageProvider {
 						double frontBottomY = backBottomY + blockHeight * height;
 						double frontTopY = backTopY + blockHeight * height;
 						
+						double[][] rightxy = null, frontxy = null, topxy = null;
+						
 						// fill
 						
 						// right face
 						if (isEmpty(x + 1, y, z)) {
-							double[][] xy = new double[][] {{rightTopX, rightBottomX, rightBottomX, rightTopX}, {backTopY, backBottomY, frontBottomY, frontTopY}};
-							painterQueue.add(new PainterPolygon(xy, 1, new Color(80, 150, 200), false));
+							rightxy = new double[][] {{rightTopX, rightBottomX, rightBottomX, rightTopX}, {backTopY, backBottomY, frontBottomY, frontTopY}};
+							painterQueue.add(new PainterPolygon(rightxy, 1, new Color(80, 150, 200), false));
 						}
 						
 						// front face
 						if (isEmpty(x, y + 1, z)) {
-							double[][] xy = new double[][] {{leftTopX, rightTopX, rightBottomX, leftBottomX}, {frontTopY, frontTopY, frontBottomY, frontBottomY}};
-							painterQueue.add(new PainterPolygon(xy, 1, new Color(100, 170, 220), false));
+							frontxy = new double[][] {{leftTopX, rightTopX, rightBottomX, leftBottomX}, {frontTopY, frontTopY, frontBottomY, frontBottomY}};
+							painterQueue.add(new PainterPolygon(frontxy, 1, new Color(100, 170, 220), false));
 						}
 						
 						// top face
 						if (isEmpty(x, y, z + 1)) {
-							double[][] xy = new double[][] {{leftTopX, rightTopX, rightTopX, leftTopX}, {backTopY, backTopY, frontTopY, frontTopY}};
-							painterQueue.add(new PainterPolygon(xy, 1, new Color(120, 190, 240), false));
+							topxy = new double[][] {{leftTopX, rightTopX, rightTopX, leftTopX}, {backTopY, backTopY, frontTopY, frontTopY}};
+							painterQueue.add(new PainterPolygon(topxy, 1, new Color(120, 190, 240), false));
 						}
 						
 						// // outline
-						// brush.setColor(OUTLINE_COLOR);
-						// 
-						// // right face
-						// if (isEmpty(x + 1, y, z))
-						// 	brush.drawPolygon(new int[] {rightTopX, rightBottomX, rightBottomX, rightTopX}, new int[] {backTopY, backBottomY, frontBottomY, frontTopY}, 4);
-						// 
-						// // front face
-						// if (isEmpty(x, y + 1, z))
-						// 	brush.drawPolygon(new int[] {leftTopX, rightTopX, rightBottomX, leftBottomX}, new int[] {frontTopY, frontTopY, frontBottomY, frontBottomY}, 4);
-						// 
-						// // top face
-						// if (isEmpty(x, y, z + 1))
-						// 	brush.drawPolygon(new int[] {leftTopX, rightTopX, rightTopX, leftTopX}, new int[] {backTopY, backTopY, frontTopY, frontTopY}, 4);
+						
+						// right face
+						if (rightxy != null)
+							painterQueue.add(new PainterPolygon(rightxy, 1, null, true));
+						
+						// front face
+						if (frontxy != null)
+							painterQueue.add(new PainterPolygon(frontxy, 1, null, true));
+						
+						// top face
+						if (topxy != null)
+							painterQueue.add(new PainterPolygon(topxy, 1, null, true));
 					}
 	}
 	
