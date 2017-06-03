@@ -22,6 +22,7 @@ public class EditorScreen {
 		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("BLOCK")), 2, 0, 2, 1);
 		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("START")), 4, 0, 2, 1);
 		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("END")), 6, 0, 2, 1);
+		toolGroup.setSelect(1);
 		
 		cell.addScreenItem(drawButton = new ScreenButton("DRAW"), 10, 0, 2, 1);
 		
@@ -62,8 +63,10 @@ public class EditorScreen {
 		cell.handleMouseInput(controller.mouseX, controller.mouseY, controller.getMouseState());
 		
 		if (drawButton.press) {
-			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect() + 1); // todo : dont forget to remove + 1
+			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
 			mainMapTable.setImage(editorMap.createImage());
+			vertMapTable.clearAll();
+			mainMapTable.clearAll();
 		}
 	}
 	

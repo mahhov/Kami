@@ -20,8 +20,9 @@ class SelectButtonGroup {
 	}
 	
 	void setSelect(int value) {
+		int i = count;
 		for (LList<ScreenSelectButton> sb : selectButton)
-			sb.node.toggle = false;
+			sb.node.toggle = --i == value;
 		select = value;
 	}
 	

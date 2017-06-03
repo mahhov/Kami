@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 class EditorMap {
-	private static final Color CLEAR_COLOR = new Color(0, 0, 0, 0), FILL_COLOR = new Color(100, 100, 200), OUTLINE_COLOR = Color.BLACK;
+	private static final Color CLEAR_COLOR = new Color(0, 0, 0, 0), FILL_COLOR = new Color(100, 100, 200), OUTLINE_COLOR = Color.BLACK; //todo: constant fill color definition
 	private int width, length, height;
 	private int[][][] map;
 	private int imageWidth, imageHeight;
@@ -22,6 +22,7 @@ class EditorMap {
 		this.imageHeight = imageHeight;
 		image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
 		brush = (Graphics2D) image.getGraphics();
+		brush.setBackground(CLEAR_COLOR);
 		
 		blockWidth = imageWidth / width;
 		blockHeight = imageHeight / length;
@@ -40,8 +41,7 @@ class EditorMap {
 	}
 	
 	BufferedImage createImage() {
-		brush.setColor(CLEAR_COLOR);
-		brush.fillRect(0, 0, imageWidth, imageHeight);
+		brush.clearRect(0, 0, imageWidth, imageHeight);
 		
 		for (int z = 0; z < height; z++)
 			for (int x = 0; x < width; x++)
@@ -62,19 +62,24 @@ class EditorMap {
 						int frontTopY = backTopY + blockHeight;
 						
 						// fill
-						brush.setColor(FILL_COLOR);
 						
 						// right face
-						if (isEmpty(x + 1, y, z))
+						if (isEmpty(x + 1, y, z)) {
+							brush.setColor(new Color(80, 150, 200));
 							brush.fillPolygon(new int[] {rightTopX, rightBottomX, rightBottomX, rightTopX}, new int[] {backTopY, backBottomY, frontBottomY, frontTopY}, 4);
+						}
 						
 						// front face
-						if (isEmpty(x, y + 1, z))
+						if (isEmpty(x, y + 1, z)) {
+							brush.setColor(new Color(100, 170, 220));
 							brush.fillPolygon(new int[] {leftTopX, rightTopX, rightBottomX, leftBottomX}, new int[] {frontTopY, frontTopY, frontBottomY, frontBottomY}, 4);
+						}
 						
 						// top face
-						if (isEmpty(x, y, z + 1))
-							brush.fillPolygon(new int[] {leftTopX, rightTopX, rightTopX, leftTopX}, new int[] {backTopY, backTopY, frontTopY, frontTopY}, 4);// right face
+						if (isEmpty(x, y, z + 1)) {
+							brush.setColor(new Color(120, 190, 240));
+							brush.fillPolygon(new int[] {leftTopX, rightTopX, rightTopX, leftTopX}, new int[] {backTopY, backTopY, frontTopY, frontTopY}, 4);
+						}
 						
 						// outline
 						brush.setColor(OUTLINE_COLOR);
