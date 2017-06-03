@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 class EditorMap {
+	private static final Color CLEAR_COLOR = new Color(0, 0, 0, 0), FILL_COLOR = new Color(100, 100, 200), OUTLINE_COLOR = Color.BLACK;
 	private int width, length, height;
 	private int[][][] map;
 	private int imageWidth, imageHeight;
@@ -19,13 +20,14 @@ class EditorMap {
 		map = new int[width][length][height];
 		this.imageWidth = imageWidth;
 		this.imageHeight = imageHeight;
-		image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
 		brush = (Graphics2D) image.getGraphics();
 		
 		blockWidth = imageWidth / width;
 		blockHeight = imageHeight / length;
 		System.out.println(blockWidth + " " + blockHeight);
-		blockXShift = blockYShift = 10;
+		blockXShift = 3;
+		blockYShift = 9;
 	}
 	
 	void updateMap(boolean[][] select, boolean[][] vertSelect, int value) {
@@ -38,16 +40,62 @@ class EditorMap {
 	}
 	
 	BufferedImage createImage() {
-		brush.setColor(Color.WHITE);
+		brush.setColor(CLEAR_COLOR);
 		brush.fillRect(0, 0, imageWidth, imageHeight);
 		
-		brush.setColor(Color.BLUE);
-		for (int x = 0; x < width; x++)
-			for (int y = 0; y < length; y++)
-				for (int z = 0; z < height; z++)
-					if (map[x][y][z] == 1)
-						brush.drawRect(x * blockWidth - z * blockXShift, y * blockHeight - z * blockYShift, blockWidth, blockHeight);
+		for (int z = 0; z < height; z++)
+			for (int x = 0; x < width; x++)
+				for (int y = 0; y < length; y++)
+					if (map[x][y][z] == 1) {
+						int topZ = z + 1;
+						
+						// x
+						int leftBottomX = x * blockWidth - z * blockXShift;
+						int leftTopX = x * blockWidth - topZ * blockXShift;
+						int rightBottomX = leftBottomX + blockWidth;
+						int rightTopX = leftTopX + blockWidth;
+						
+						// y
+						int backBottomY = y * blockHeight - z * blockYShift;
+						int backTopY = y * blockHeight - topZ * blockYShift;
+						int frontBottomY = backBottomY + blockHeight;
+						int frontTopY = backTopY + blockHeight;
+						
+						// fill
+						brush.setColor(FILL_COLOR);
+						
+						// right face
+						if (isEmpty(x + 1, y, z))
+							brush.fillPolygon(new int[] {rightTopX, rightBottomX, rightBottomX, rightTopX}, new int[] {backTopY, backBottomY, frontBottomY, frontTopY}, 4);
+						
+						// front face
+						if (isEmpty(x, y + 1, z))
+							brush.fillPolygon(new int[] {leftTopX, rightTopX, rightBottomX, leftBottomX}, new int[] {frontTopY, frontTopY, frontBottomY, frontBottomY}, 4);
+						
+						// top face
+						if (isEmpty(x, y, z + 1))
+							brush.fillPolygon(new int[] {leftTopX, rightTopX, rightTopX, leftTopX}, new int[] {backTopY, backTopY, frontTopY, frontTopY}, 4);// right face
+						
+						// outline
+						brush.setColor(OUTLINE_COLOR);
+						
+						// right face
+						if (isEmpty(x + 1, y, z))
+							brush.drawPolygon(new int[] {rightTopX, rightBottomX, rightBottomX, rightTopX}, new int[] {backTopY, backBottomY, frontBottomY, frontTopY}, 4);
+						
+						// front face
+						if (isEmpty(x, y + 1, z))
+							brush.drawPolygon(new int[] {leftTopX, rightTopX, rightBottomX, leftBottomX}, new int[] {frontTopY, frontTopY, frontBottomY, frontBottomY}, 4);
+						
+						// top face
+						if (isEmpty(x, y, z + 1))
+							brush.drawPolygon(new int[] {leftTopX, rightTopX, rightTopX, leftTopX}, new int[] {backTopY, backTopY, frontTopY, frontTopY}, 4);
+					}
 		
 		return image;
+	}
+	
+	private boolean isEmpty(int x, int y, int z) {
+		return x < 0 || x >= width || y < 0 || y >= length || z < 0 || z >= height || map[x][y][z] == 0;
 	}
 }

@@ -132,9 +132,6 @@ class ScreenTable extends ScreenItem {
 	}
 	
 	void draw(PainterQueue painterQueue) {
-		if (image != null)
-			painterQueue.add(new PainterImage(image, left, top, width, height));
-		
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 		for (int x = 0; x < numColumns; x++)
 			for (int y = 0; y < numRows; y++)
@@ -149,6 +146,11 @@ class ScreenTable extends ScreenItem {
 					drawRect(painterQueue, x, y, HIGHLIGHT_COLOR, true);
 				else
 					drawRect(painterQueue, x, y, TEXT_COLOR, false);
+		
+		if (image != null)
+			painterQueue.add(new PainterImage(image, left, top, width, height));
+		
+		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 	}
 	
 	private void drawRect(PainterQueue painterQueue, int x, int y, Color color, boolean fill) {
