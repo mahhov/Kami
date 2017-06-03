@@ -14,6 +14,8 @@ public class EditorScreen {
 	private EditorMap editorMap;
 	
 	public EditorScreen(double left, double top, double width, double height) {
+		editorMap = new EditorMap(MAP_WIDTH, MAP_LENGTH, MAP_HEIGHT);
+		
 		cell = new ScreenCell(.02, 20, 20);
 		cell.setPosition(left, top, width, height);
 		
@@ -26,13 +28,13 @@ public class EditorScreen {
 		
 		cell.addScreenItem(drawButton = new ScreenButton("DRAW"), 10, 0, 2, 1);
 		
-		cell.addScreenItem(vertMapTable = new ScreenTable(1, MAP_HEIGHT), 0, 2, 2, 16);
+		cell.addScreenItem(vertMapTable = new ScreenTable(1, MAP_HEIGHT, null), 0, 2, 2, 16);
 		cell.addScreenItem(new ScreenButton("UP"), 3, 1, 16, 1);
 		cell.addScreenItem(new ScreenButton("DOWN"), 3, 18, 16, 1);
 		cell.addScreenItem(new ScreenButton("L"), 2, 2, 1, 16);
 		cell.addScreenItem(new ScreenButton("R"), 19, 2, 1, 16);
-		cell.addScreenItem(new ScreenButton("MINI MAP"), 14, 13, 4, 4);
-		cell.addScreenItem(mainMapTable = new ScreenTable(MAP_WIDTH, MAP_LENGTH), 3, 2, 16, 16);
+		cell.addScreenItem(new ScreenImageContainer(editorMap), 14, 13, 4, 4);
+		cell.addScreenItem(mainMapTable = new ScreenTable(MAP_WIDTH, MAP_LENGTH, editorMap), 3, 2, 16, 16);
 		
 		cell.addScreenItem(clearAllSelectionButton = new ScreenButton("CLEAR ALL SELECTION"), 0, 19, 4, 1);
 		cell.addScreenItem(clearSelectionButton = new ScreenButton("CLEAR SELECTION"), 4, 19, 4, 1);
@@ -42,8 +44,6 @@ public class EditorScreen {
 		cell.addScreenItem(drawGroup.add(new ScreenSelectButton("FREE PEN")), 14, 19, 2, 1);
 		cell.addScreenItem(drawGroup.add(new ScreenSelectButton("LINE")), 16, 19, 2, 1);
 		cell.addScreenItem(drawGroup.add(new ScreenSelectButton("RECT")), 18, 19, 2, 1);
-		
-		editorMap = new EditorMap(MAP_WIDTH, MAP_LENGTH, MAP_HEIGHT, (int) (mainMapTable.width * 800), (int) (mainMapTable.height * 800));
 	}
 	
 	public void update(InputControllerJava controller) {
@@ -64,7 +64,6 @@ public class EditorScreen {
 		
 		if (drawButton.press) {
 			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
-			mainMapTable.setImage(editorMap.createImage());
 			vertMapTable.clearAll();
 			mainMapTable.clearAll();
 		}

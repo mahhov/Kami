@@ -2,12 +2,10 @@ package editor;
 
 import control.Controller;
 import engine.Math3D;
-import paint.painterelement.PainterImage;
 import paint.painterelement.PainterQueue;
 import paint.painterelement.PainterRectangle;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 class ScreenTable extends ScreenItem {
 	private int numColumns, numRows;
@@ -19,14 +17,15 @@ class ScreenTable extends ScreenItem {
 	static final int SELECT_PEN = 0, SELECT_LINE = 1, SELECT_RECTANGLE = 2;
 	private int selectShape; // pen, line, rect
 	private boolean selectMode; // select / unselect
-	private BufferedImage image;
+	private ImageProvider imageProvider;
 	
-	ScreenTable(int numColumns, int numRows) {
+	ScreenTable(int numColumns, int numRows, ImageProvider imageProvider) {
 		this.numColumns = numColumns;
 		this.numRows = numRows;
 		select = new boolean[numColumns][numRows];
 		anchorColumn = -1;
 		selectMode = true;
+		this.imageProvider = imageProvider;
 	}
 	
 	void setPosition(double left, double top, double width, double height) {
@@ -127,10 +126,6 @@ class ScreenTable extends ScreenItem {
 		return select;
 	}
 	
-	void setImage(BufferedImage image) {
-		this.image = image;
-	}
-	
 	void draw(PainterQueue painterQueue) {
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 		for (int x = 0; x < numColumns; x++)
@@ -147,8 +142,8 @@ class ScreenTable extends ScreenItem {
 				else
 					drawRect(painterQueue, x, y, TEXT_COLOR, false);
 		
-		if (image != null)
-			painterQueue.add(new PainterImage(image, left, top, width, height));
+		if (imageProvider != null)
+			imageProvider.provideImage(painterQueue, left, top, width, height, true);
 		
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 	}
