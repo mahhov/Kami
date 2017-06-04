@@ -39,6 +39,19 @@ class EditorMap implements ImageProvider {
 	}
 	
 	public void provideImage(PainterQueue painterQueue, double left, double top, double width, double height, boolean all) {
+		boolean[][] shadow = new boolean[mapWidth][mapLength];
+		for (int x = 0; x < mapWidth; x++)
+			for (int y = 0; y < mapLength; y++)
+				if (map[x][y][0] == 0) {
+					int z = 1;
+					while (z < mapHeight && map[x][y][z] == 0)
+						z++;
+					if (z < mapHeight)
+						shadow[x][y] = true;
+				}
+		
+		int alphaAmount = alpha ? 40 : 255;
+		
 		for (int z = 0; z < mapHeight; z++)
 			for (int x = 0; x < mapWidth; x++)
 				for (int y = 0; y < mapLength; y++)
@@ -58,7 +71,6 @@ class EditorMap implements ImageProvider {
 						double frontTopY = backTopY + blockHeight * height;
 						
 						double[][] rightxy = null, frontxy = null, topxy = null;
-						int alphaAmount = alpha ? 40 : 255;
 						
 						// fill
 						
@@ -80,7 +92,7 @@ class EditorMap implements ImageProvider {
 							painterQueue.add(new PainterPolygon(topxy, 1, new Color(100, 190, 240, alphaAmount), false));
 						}
 						
-						// // outline
+						// outline
 						
 						// right face
 						if (rightxy != null)
@@ -93,6 +105,16 @@ class EditorMap implements ImageProvider {
 						// top face
 						if (topxy != null)
 							painterQueue.add(new PainterPolygon(topxy, 1, null, true));
+						
+					} else if (z == 0 && shadow[x][y]) {
+						// shadow 
+						double leftBottomX = (x * blockWidth - z * blockXShift) * width - .5 + left;
+						double rightBottomX = leftBottomX + blockWidth * width;
+						double backBottomY = (y * blockHeight - z * blockYShift) * height - .5 + top;
+						double frontBottomY = backBottomY + blockHeight * height;
+						
+						double[][] bottomxy = new double[][] {{leftBottomX, rightBottomX, rightBottomX, leftBottomX}, {backBottomY, backBottomY, frontBottomY, frontBottomY}};
+						painterQueue.add(new PainterPolygon(bottomxy, 1, new Color(100, 100, 100, alphaAmount), false));
 					}
 	}
 	
