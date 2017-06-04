@@ -31,13 +31,14 @@ public class EditorScreen {
 		cell.addScreenItem(zoomOutButton = new ScreenButton("ZOOM OUT"), 14, 0, 2, 1);
 		cell.addScreenItem(zoomInButton = new ScreenButton("ZOOM IN"), 16, 0, 2, 1);
 		
-		cell.addScreenItem(vertMapTable = new ScreenTable(1, MAP_HEIGHT, null), 0, 2, 2, 16);
+		cell.addScreenItem(vertMapTable = new ScreenTable(1, MAP_HEIGHT), 0, 2, 2, 16);
 		cell.addScreenItem(new ScreenButton("UP"), 3, 1, 16, 1);
 		cell.addScreenItem(new ScreenButton("DOWN"), 3, 18, 16, 1);
 		cell.addScreenItem(new ScreenButton("L"), 2, 2, 1, 16);
 		cell.addScreenItem(new ScreenButton("R"), 19, 2, 1, 16);
-		cell.addScreenItem(new ScreenImageContainer(editorMap), 14, 13, 4, 4);
-		cell.addScreenItem(mainMapTable = new ScreenTable(MAP_WIDTH, MAP_LENGTH, editorMap), 3, 2, 16, 16);
+		cell.addScreenItem(new ScreenImageContainer(editorMap, true), 14, 13, 4, 4);
+		cell.addScreenItem(new ScreenImageContainer(editorMap, false), 3, 2, 16, 16);
+		cell.addScreenItem(mainMapTable = new ScreenTable(MAP_WIDTH, MAP_LENGTH), 3, 2, 16, 16);
 		
 		cell.addScreenItem(clearAllSelectionButton = new ScreenButton("CLEAR ALL SELECTION"), 0, 19, 4, 1);
 		cell.addScreenItem(clearSelectionButton = new ScreenButton("CLEAR SELECTION"), 4, 19, 4, 1);
@@ -69,6 +70,7 @@ public class EditorScreen {
 			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
 			mainMapTable.clearAll();
 		}
+		//		editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
 		
 		editorMap.setAlpha(alphaButton.toggle);
 	}
@@ -79,7 +81,6 @@ public class EditorScreen {
 	}
 }
 
-//todo: alpha
 //todo scroll
 //todo preview
 //todo 3d  view

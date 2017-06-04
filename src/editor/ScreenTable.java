@@ -17,15 +17,13 @@ class ScreenTable extends ScreenItem {
 	static final int SELECT_PEN = 0, SELECT_LINE = 1, SELECT_RECTANGLE = 2;
 	private int selectShape; // pen, line, rect
 	private boolean selectMode; // select / unselect
-	private ImageProvider imageProvider;
 	
-	ScreenTable(int numColumns, int numRows, ImageProvider imageProvider) {
+	ScreenTable(int numColumns, int numRows) {
 		this.numColumns = numColumns;
 		this.numRows = numRows;
 		select = new boolean[numColumns][numRows];
 		anchorColumn = -1;
 		selectMode = true;
-		this.imageProvider = imageProvider;
 	}
 	
 	void setPosition(double left, double top, double width, double height) {
@@ -141,9 +139,6 @@ class ScreenTable extends ScreenItem {
 					drawRect(painterQueue, x, y, HIGHLIGHT_COLOR, true);
 				else
 					drawRect(painterQueue, x, y, TEXT_COLOR, false);
-		
-		if (imageProvider != null)
-			imageProvider.provideImage(painterQueue, left, top, width, height, true);
 		
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 	}
