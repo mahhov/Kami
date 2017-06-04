@@ -7,8 +7,8 @@ public class EditorScreen {
 	private static final int MAP_WIDTH = 16, MAP_LENGTH = 16, MAP_HEIGHT = 10;
 	
 	private ScreenCell cell;
-	private ScreenButton clearAllSelectionButton, clearSelectionButton, drawButton;
-	private ScreenToggleButton unselectModeButton;
+	private ScreenButton clearAllSelectionButton, clearSelectionButton, drawButton, zoomOutButton, zoomInButton;
+	private ScreenToggleButton unselectModeButton, alphaButton;
 	private ScreenTable vertMapTable, mainMapTable;
 	private SelectButtonGroup toolGroup, drawGroup;
 	private EditorMap editorMap;
@@ -27,6 +27,9 @@ public class EditorScreen {
 		toolGroup.setSelect(1);
 		
 		cell.addScreenItem(drawButton = new ScreenButton("DRAW"), 10, 0, 2, 1);
+		cell.addScreenItem(alphaButton = new ScreenToggleButton("ALPHA"), 12, 0, 2, 1);
+		cell.addScreenItem(zoomOutButton = new ScreenButton("ZOOM OUT"), 14, 0, 2, 1);
+		cell.addScreenItem(zoomInButton = new ScreenButton("ZOOM IN"), 16, 0, 2, 1);
 		
 		cell.addScreenItem(vertMapTable = new ScreenTable(1, MAP_HEIGHT, null), 0, 2, 2, 16);
 		cell.addScreenItem(new ScreenButton("UP"), 3, 1, 16, 1);
@@ -64,9 +67,10 @@ public class EditorScreen {
 		
 		if (drawButton.press) {
 			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
-			vertMapTable.clearAll();
 			mainMapTable.clearAll();
 		}
+		
+		editorMap.setAlpha(alphaButton.toggle);
 	}
 	
 	
@@ -74,3 +78,9 @@ public class EditorScreen {
 		cell.draw(painterQueue);
 	}
 }
+
+//todo: alpha
+//todo scroll
+//todo preview
+//todo 3d  view
+//todo keybarod shortcuts

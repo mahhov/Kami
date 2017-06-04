@@ -13,7 +13,6 @@ import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 import static camera.Camera.MIN_LIGHT;
-import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
 public class PainterJava implements Painter {
 	// paint mode
@@ -43,7 +42,7 @@ public class PainterJava implements Painter {
 		setPaintModeString();
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
-		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, TYPE_INT_RGB);
+		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, BufferedImage.TYPE_INT_ARGB_PRE);
 		brush = (Graphics2D) canvas.getGraphics();
 		fontMetrics = brush.getFontMetrics();
 		jframe.setUndecorated(true);
@@ -69,6 +68,7 @@ public class PainterJava implements Painter {
 		for (int i = 0; i < OUTPUT_STRING.length; i++)
 			brush.drawString(OUTPUT_STRING[i], 25, 650 + 25 * i);
 		frameBrush.drawImage(canvas, 0, borderSize, null);
+		
 		//		frameBrush.drawImage(canvas, 0, borderSize, FRAME_SIZE, borderSize + FRAME_SIZE, 0, 0, IMAGE_SIZE, IMAGE_SIZE, null);
 	}
 	
@@ -77,7 +77,7 @@ public class PainterJava implements Painter {
 			brush.setColor(Color.black);
 		else {
 			light = Math3D.min(1, light);
-			brush.setColor(new Color((int) (light * color.getRed()), (int) (light * color.getGreen()), (int) (light * color.getBlue())));
+			brush.setColor(new Color((int) (light * color.getRed()), (int) (light * color.getGreen()), (int) (light * color.getBlue()), color.getAlpha()));
 		}
 	}
 	
@@ -160,7 +160,7 @@ public class PainterJava implements Painter {
 	public void drawBlur(double blur) {
 		if (blurMode == BLUR_DYNAMIC) {
 			blur = Math3D.maxMin(blur, 1, .1);
-			frameBrush.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) blur));
+			//			frameBrush.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) blur));
 		}
 	}
 	
@@ -186,10 +186,10 @@ public class PainterJava implements Painter {
 		if (controller.isKeyPressed(Controller.KEY_RIGHT_CAROT)) {
 			if (++blurMode == 3)
 				blurMode = 0;
-			if (blurMode == BLUR_FULL)
-				frameBrush.setComposite(BLUR_COMPOSITE);
-			else if (blurMode == BLUR_OFF)
-				frameBrush.setComposite(AlphaComposite.Src);
+			//			if (blurMode == BLUR_FULL)
+			//				frameBrush.setComposite(BLUR_COMPOSITE);
+			//			else if (blurMode == BLUR_OFF)
+			//				frameBrush.setComposite(AlphaComposite.Src);
 			setPaintModeString();
 		}
 	}
