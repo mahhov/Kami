@@ -30,9 +30,9 @@ public class ScreenCell extends ScreenItem {
 		screenItem.setPosition(left + margin + columnWidthMargin * x, top + margin + rowHeightMargin * y, width * columnWidthMargin - margin, height * rowHeightMargin - margin);
 	}
 	
-	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState, char charInput, int charState) {
 		for (LList<ScreenItem> i : itemTail.reverseIterator())
-			if (!i.node.handleMouseInput(screenX, screenY, mouseState))
+			if (!i.node.handleMouseInput(screenX, screenY, mouseState, charInput, charState))
 				mouseState = Controller.UP;
 		return true;
 	}

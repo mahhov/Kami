@@ -5,7 +5,8 @@ import java.awt.event.MouseEvent;
 
 public class InputControllerJava extends ControllerJavaListener {
 	private final int WIDTH, HEIGHT;
-	private char charPress;
+	public char charInput;
+	private int charState;
 	private boolean space, shift;
 	public double mouseX, mouseY;
 	
@@ -18,11 +19,22 @@ public class InputControllerJava extends ControllerJavaListener {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		//		System.out.println(e.getKeyChar() + "");
+		charInput = e.getKeyChar();
+		charState = PRESSED;
 	}
 	
 	public void keyReleased(KeyEvent e) {
-		//		setKeyState(e.getKeyCode(), RELEASED);
+		if (charInput == e.getKeyChar())
+			charState = RELEASED;
+	}
+	
+	public int getCharState() {
+		int r = charState;
+		if (r == PRESSED)
+			charState = DOWN;
+		else if (r == RELEASED)
+			charState = UP;
+		return r;
 	}
 	
 	public void mouseClicked(MouseEvent e) {

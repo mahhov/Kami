@@ -19,7 +19,7 @@ abstract class ScreenItem {
 	}
 	
 	// return false on stop propogation - todo: reverse, return true on stop propogation
-	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState, char charInput, int charState) {
 		return true;
 	}
 	

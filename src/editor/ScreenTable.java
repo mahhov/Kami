@@ -32,7 +32,7 @@ class ScreenTable extends ScreenItem {
 		rowHeight = height / numRows;
 	}
 	
-	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	boolean handleMouseInput(double screenX, double screenY, int mouseState, char charInput, int charState) {
 		if (!containsScreenCoord(screenX, screenY)) {
 			highlightColumn = -1;
 			return true;

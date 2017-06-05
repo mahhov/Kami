@@ -9,16 +9,23 @@ import java.awt.*;
 
 class ScreenButton extends ScreenItem {
 	private String text;
+	private char shortcutKey;
 	boolean press, down, highlight;
 	
 	ScreenButton(String text) {
 		this.text = text;
 	}
 	
-	boolean handleMouseInput(double screenX, double screenY, int mouseState) {
+	ScreenButton(String text, char shortcutKey) {
+		this.text = text + " [" + shortcutKey + "]";
+		this.shortcutKey = shortcutKey;
+	}
+	
+	boolean handleMouseInput(double screenX, double screenY, int mouseState, char charInput, int charState) {
 		highlight = containsScreenCoord(screenX, screenY);
-		press = highlight && mouseState == Controller.PRESSED;
-		down = press || (highlight && mouseState == Controller.DOWN);
+		boolean shortcutKeyInput = charInput == shortcutKey;
+		press = shortcutKeyInput && charState == Controller.PRESSED || highlight && mouseState == Controller.PRESSED; // order of ops: && before ||
+		down = press || shortcutKeyInput && charState == Controller.DOWN || highlight && mouseState == Controller.DOWN;
 		return !highlight;
 	}
 	
