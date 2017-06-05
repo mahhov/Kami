@@ -82,6 +82,5 @@ public class EditorScreen {
 }
 
 //todo scroll
-//todo preview
 //todo 3d  view
 //todo keybarod shortcuts
