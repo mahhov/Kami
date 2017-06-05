@@ -43,10 +43,9 @@ class EditorMap implements ImageProvider {
 	
 	void updatePreviewMap(boolean[][] select, boolean[][] vertSelect) {
 		for (int z = 0; z < mapHeight; z++)
-			if (vertSelect[0][z])
-				for (int x = 0; x < mapWidth; x++)
-					for (int y = 0; y < mapLength; y++)
-						preview[x][y][vertSelect[0].length - z - 1] = select[x][y];
+			for (int x = 0; x < mapWidth; x++)
+				for (int y = 0; y < mapLength; y++)
+					preview[x][y][vertSelect[0].length - z - 1] = select[x][y] && vertSelect[0][z];
 	}
 	
 	void setAlpha(boolean value) {
