@@ -70,7 +70,7 @@ public class EditorScreen {
 			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
 			mainMapTable.clearAll();
 		}
-		//		editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
+		editorMap.updatePreviewMap(mainMapTable.getSelect(), vertMapTable.getSelect());
 		
 		editorMap.setAlpha(alphaButton.toggle);
 	}

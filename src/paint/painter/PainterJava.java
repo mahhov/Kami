@@ -42,7 +42,7 @@ public class PainterJava implements Painter {
 		setPaintModeString();
 		FRAME_SIZE = frameSize;
 		IMAGE_SIZE = imageSize;
-		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, BufferedImage.TYPE_INT_ARGB_PRE);
+		canvas = new BufferedImage(IMAGE_SIZE, IMAGE_SIZE, BufferedImage.TYPE_INT_ARGB);
 		brush = (Graphics2D) canvas.getGraphics();
 		fontMetrics = brush.getFontMetrics();
 		jframe.setUndecorated(true);
@@ -68,6 +68,7 @@ public class PainterJava implements Painter {
 		for (int i = 0; i < OUTPUT_STRING.length; i++)
 			brush.drawString(OUTPUT_STRING[i], 25, 650 + 25 * i);
 		frameBrush.drawImage(canvas, 0, borderSize, null);
+		frameBrush.setComposite(BLUR_COMPOSITE);
 		
 		//		frameBrush.drawImage(canvas, 0, borderSize, FRAME_SIZE, borderSize + FRAME_SIZE, 0, 0, IMAGE_SIZE, IMAGE_SIZE, null);
 	}
@@ -102,7 +103,7 @@ public class PainterJava implements Painter {
 					int[][] xyScaled = Math3D.transform(xy, IMAGE_SIZE, IMAGE_SIZE / 2);
 					brush.setStroke(new BasicStroke(1));
 					if (frame) {
-						brush.setColor(Color.cyan);
+						brush.setColor(Color.CYAN);
 						brush.drawPolygon(xyScaled[0], xyScaled[1], xyScaled[0].length);
 					} else {
 						setColor(light, color);
