@@ -1,5 +1,6 @@
 package editor;
 
+import engine.Math3D;
 import paint.painterelement.PainterPolygon;
 import paint.painterelement.PainterQueue;
 
@@ -11,41 +12,53 @@ class EditorMap implements ImageProvider {
 			{{60, 150, 200}, {80, 170, 220}, {100, 190, 240}}, // block==1
 			{{200, 150, 60}, {220, 170, 80}, {240, 190, 100}}, // preview
 	}; // [block][face][rgb]
+	
 	private int mapWidth, mapLength, mapHeight;
 	private int[][][] map;
-	private boolean[][][] preview;
-	private int scrollX, scrollY;
+	private int preview[][][], previewCounter;
 	private boolean alpha;
 	
-	private double blockWidth, blockHeight, blockXShift, blockYShift;
+	private int scrollX, scrollY, zoom;
+	private int mapHalfShowWidthDefault, mapHalfShowLengthDefault;
+	private int mapHalfShowWidth, mapHalfShowLength;
+	private final double blockXShift, blockYShift;
+	private final double blockWidthDefault, blockHeightDefault;
 	
 	EditorMap(int mapWidth, int mapLength, int mapHeight) {
+		mapHalfShowWidthDefault = 4;
+		mapHalfShowLengthDefault = 4;
 		this.mapWidth = mapWidth;
 		this.mapLength = mapLength;
 		this.mapHeight = mapHeight;
 		map = new int[mapWidth][mapLength][mapHeight];
-		preview = new boolean[mapWidth][mapLength][mapHeight];
+		preview = new int[mapWidth][mapLength][mapHeight];
+		previewCounter = 4;
 		
-		blockWidth = 1.0 / mapWidth;
-		blockHeight = 1.0 / mapLength;
+		blockWidthDefault = 1.0 / mapWidth;
+		blockHeightDefault = 1.0 / mapLength;
 		blockXShift = .005;
 		blockYShift = .015;
+		
+		zoom = 1;
+		scroll(0, 0, 0);
 	}
 	
 	void updateMap(boolean[][] select, boolean[][] vertSelect, int value) {
-		for (int z = 0; z < mapHeight; z++)
+		for (int z = 0; z < vertSelect[0].length; z++)
 			if (vertSelect[0][z])
-				for (int x = 0; x < mapWidth; x++)
-					for (int y = 0; y < mapLength; y++)
+				for (int x = 0; x < select.length; x++)
+					for (int y = 0; y < select[0].length; y++)
 						if (select[x][y])
-							map[x][y][vertSelect[0].length - z - 1] = value;
+							map[scrollX - mapHalfShowWidth + x][scrollY - mapHalfShowLength + y][vertSelect[0].length - z - 1] = value;
 	}
 	
 	void updatePreviewMap(boolean[][] select, boolean[][] vertSelect) {
-		for (int z = 0; z < mapHeight; z++)
-			for (int x = 0; x < mapWidth; x++)
-				for (int y = 0; y < mapLength; y++)
-					preview[x][y][vertSelect[0].length - z - 1] = select[x][y] && vertSelect[0][z];
+		previewCounter++;
+		for (int z = 0; z < vertSelect[0].length; z++)
+			for (int x = 0; x < select.length; x++)
+				for (int y = 0; y < select[0].length; y++)
+					if (select[x][y] && vertSelect[0][z])
+						preview[scrollX - mapHalfShowWidth + x][scrollY - mapHalfShowLength + y][vertSelect[0].length - z - 1] = previewCounter;
 	}
 	
 	void setAlpha(boolean value) {
@@ -53,9 +66,23 @@ class EditorMap implements ImageProvider {
 	}
 	
 	public void provideImage(PainterQueue painterQueue, double left, double top, double width, double height, boolean all) {
+		if (all)
+			provideImage(painterQueue, left, top, width, height, 0, 0, mapWidth, mapLength, blockWidthDefault, blockHeightDefault);
+		else {
+			double startX = Math3D.maxMin(scrollX - mapHalfShowWidth, mapWidth, 0);
+			double startY = Math3D.maxMin(scrollY - mapHalfShowLength, mapLength, 0);
+			double endX = Math3D.maxMin(scrollX + mapHalfShowWidth, mapWidth, 0);
+			double endY = Math3D.maxMin(scrollY + mapHalfShowLength, mapLength, 0);
+			double blockWidth = .5 / mapHalfShowWidth;
+			double blockHeight = .5 / mapHalfShowLength;
+			provideImage(painterQueue, left, top, width, height, startX, startY, endX, endY, blockWidth, blockHeight);
+		}
+	}
+	
+	private void provideImage(PainterQueue painterQueue, double left, double top, double width, double height, double startX, double startY, double endX, double endY, double blockWidth, double blockHeight) {
 		boolean[][] shadow = new boolean[mapWidth][mapLength];
-		for (int x = 0; x < mapWidth; x++)
-			for (int y = 0; y < mapLength; y++)
+		for (int x = (int) startX; x < endX; x++)
+			for (int y = (int) startY; y < endY; y++)
 				if (map[x][y][0] == 0) {
 					int z = 1;
 					while (z < mapHeight && map[x][y][z] == 0)
@@ -67,20 +94,22 @@ class EditorMap implements ImageProvider {
 		int alphaAmount = alpha ? 40 : 255;
 		
 		for (int z = 0; z < mapHeight; z++)
-			for (int x = 0; x < mapWidth; x++)
-				for (int y = 0; y < mapLength; y++)
-					if (map[x][y][z] == 1 || preview[x][y][z]) {
+			for (int x = (int) startX; x < endX; x++)
+				for (int y = (int) startY; y < endY; y++)
+					if (map[x][y][z] == 1 || preview[x][y][z] == previewCounter) {
 						int topZ = z + 1;
 						
 						// x
-						double leftBottomX = (x * blockWidth - z * blockXShift) * width - .5 + left;
-						double leftTopX = (x * blockWidth - topZ * blockXShift) * width - .5 + left;
+						double offX = x - startX;
+						double leftBottomX = (offX * blockWidth - z * blockXShift) * width - .5 + left;
+						double leftTopX = (offX * blockWidth - topZ * blockXShift) * width - .5 + left;
 						double rightBottomX = leftBottomX + blockWidth * width;
 						double rightTopX = leftTopX + blockWidth * width;
 						
 						// y
-						double backBottomY = (y * blockHeight - z * blockYShift) * height - .5 + top;
-						double backTopY = (y * blockHeight - topZ * blockYShift) * height - .5 + top;
+						double offY = y - startY;
+						double backBottomY = (offY * blockHeight - z * blockYShift) * height - .5 + top;
+						double backTopY = (offY * blockHeight - topZ * blockYShift) * height - .5 + top;
 						double frontBottomY = backBottomY + blockHeight * height;
 						double frontTopY = backTopY + blockHeight * height;
 						
@@ -139,5 +168,13 @@ class EditorMap implements ImageProvider {
 	
 	private boolean isEmpty(int x, int y, int z) {
 		return x < 0 || x >= mapWidth || y < 0 || y >= mapLength || z < 0 || z >= mapHeight || map[x][y][z] == 0;
+	}
+	
+	void scroll(int dx, int dy, int dz) {
+		zoom = Math3D.maxMin(zoom + dz, 10, 1);
+		mapHalfShowWidth = mapHalfShowWidthDefault * zoom;
+		mapHalfShowLength = mapHalfShowLengthDefault * zoom;
+		scrollX = Math3D.maxMin(scrollX + dx * zoom, mapWidth - mapHalfShowWidth, mapHalfShowWidth);
+		scrollY = Math3D.maxMin(scrollY + dy * zoom, mapLength - mapHalfShowLength, mapHalfShowLength);
 	}
 }

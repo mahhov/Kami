@@ -18,7 +18,8 @@ class ScreenImageContainer extends ScreenItem {
 		if (frame) {
 			painterQueue.add(new PainterRectangle(left, top, width, height, Color.WHITE));
 			painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
-		}
-		imageProvider.provideImage(painterQueue, left, top, width, height, true);
+			imageProvider.provideImage(painterQueue, left, top, width, height, true);
+		} else
+			imageProvider.provideImage(painterQueue, left, top, width, height, false);
 	}
 }
