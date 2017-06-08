@@ -152,9 +152,11 @@ class EditorMap implements ImageProvider {
 						
 					} else if (z == 0 && shadow[x][y]) {
 						// shadow 
-						double leftBottomX = (x * blockWidth - z * blockXShift) * width - .5 + left;
+						double offX = x - startX;
+						double offY = y - startY;
+						double leftBottomX = (offX * blockWidth - z * blockXShift) * width - .5 + left;
 						double rightBottomX = leftBottomX + blockWidth * width;
-						double backBottomY = (y * blockHeight - z * blockYShift) * height - .5 + top;
+						double backBottomY = (offY * blockHeight - z * blockYShift) * height - .5 + top;
 						double frontBottomY = backBottomY + blockHeight * height;
 						
 						double[][] bottomxy = new double[][] {{leftBottomX, rightBottomX, rightBottomX, leftBottomX}, {backBottomY, backBottomY, frontBottomY, frontBottomY}};
