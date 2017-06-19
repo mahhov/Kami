@@ -49,6 +49,11 @@ class EditorMap extends ScreenTable implements ImageProvider {
 		scroll(0, 0, 0);
 	}
 	
+	void setPosition(double left, double top, double width, double height) {
+		super.setPosition(left, top, width, height);
+		scroll(0, 0, 0);
+	}
+	
 	void updateMap(boolean[][] select, boolean[][] vertSelect, int value) {
 		for (int z = 0; z < vertSelect[0].length; z++)
 			if (vertSelect[0][z])
@@ -181,10 +186,10 @@ class EditorMap extends ScreenTable implements ImageProvider {
 		scrollX = Math3D.maxMin(scrollX + dx * zoom, mapWidth - mapHalfShowWidth, mapHalfShowWidth);
 		scrollY = Math3D.maxMin(scrollY + dy * zoom, mapLength - mapHalfShowLength, mapHalfShowLength);
 		
-		startX = scrollX - mapHalfShowWidth; // Math3D.maxMin(scrollX - mapHalfShowWidth, mapWidth, 0);
-		startY = scrollY - mapHalfShowLength; // Math3D.maxMin(scrollY - mapHalfShowLength, mapLength, 0);
-		endX = scrollX + mapHalfShowWidth; // Math3D.maxMin(scrollX + mapHalfShowWidth, mapWidth, 0);
-		endY = scrollY + mapHalfShowLength; // Math3D.maxMin(scrollY + mapHalfShowLength, mapLength, 0);
+		startX = scrollX - mapHalfShowWidth;
+		startY = scrollY - mapHalfShowLength;
+		endX = scrollX + mapHalfShowWidth;
+		endY = scrollY + mapHalfShowLength;
 		blockWidth = .5 / mapHalfShowWidth;
 		blockHeight = .5 / mapHalfShowLength;
 		
