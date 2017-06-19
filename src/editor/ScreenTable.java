@@ -9,7 +9,7 @@ import java.awt.*;
 
 class ScreenTable extends ScreenItem {
 	private int numColumns, numRows;
-	private double columnWidth, rowHeight;
+	double columnWidth, rowHeight;
 	private int highlightColumn, highlightRow;
 	private boolean down, pressed;
 	private int anchorColumn, anchorRow; // for select line & rect
@@ -39,8 +39,9 @@ class ScreenTable extends ScreenItem {
 		}
 		
 		double[] xy = screenToItemCoord(screenX, screenY);
-		highlightColumn = (int) (xy[0] * numColumns);
-		highlightRow = (int) (xy[1] * numRows);
+		int[] gridCoord = itemToGridCoord(xy);
+		highlightColumn = gridCoord[0];
+		highlightRow = gridCoord[1];
 		pressed = mouseState == Controller.PRESSED;
 		down = pressed || mouseState == Controller.DOWN;
 		if (!down)
@@ -124,10 +125,22 @@ class ScreenTable extends ScreenItem {
 		return select;
 	}
 	
+	int[] itemToGridCoord(double[] xy) {
+		return new int[] {(int) (xy[0] * numColumns), (int) (xy[1] * numRows)};
+	}
+	
+	double[] gridToScreenCoord(int gridx, int gridy) {
+		return new double[] {left + columnWidth * gridx, top + rowHeight * gridy};
+	}
+	
 	void draw(PainterQueue painterQueue) {
+		drawGrid(painterQueue, 0, 0, numColumns, numRows);
 		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
-		for (int x = 0; x < numColumns; x++)
-			for (int y = 0; y < numRows; y++)
+	}
+	
+	void drawGrid(PainterQueue painterQueue, int startX, int startY, int endX, int endY) {
+		for (int x = (int) startX; x < endX; x++)
+			for (int y = (int) startY; y < endY; y++)
 				if (x == anchorColumn && y == anchorRow)
 					drawRect(painterQueue, x, y, PRESS_COLOR, true);
 				else if (x == highlightColumn && y == highlightRow)
@@ -139,11 +152,10 @@ class ScreenTable extends ScreenItem {
 					drawRect(painterQueue, x, y, HIGHLIGHT_COLOR, true);
 				else
 					drawRect(painterQueue, x, y, TEXT_COLOR, false);
-		
-		painterQueue.add(new PainterRectangle(left, top, width, height, Color.BLACK, false));
 	}
 	
 	private void drawRect(PainterQueue painterQueue, int x, int y, Color color, boolean fill) {
-		painterQueue.add(new PainterRectangle(left + columnWidth * x, top + rowHeight * y, columnWidth, rowHeight, color, fill));
+		double[] screenxy = gridToScreenCoord(x, y);
+		painterQueue.add(new PainterRectangle(screenxy[0], screenxy[1], columnWidth, rowHeight, color, fill));
 	}
 }

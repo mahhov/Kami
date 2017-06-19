@@ -10,7 +10,7 @@ public class EditorScreen {
 	private ScreenCell cell;
 	private ScreenButton clearAllSelectionButton, clearSelectionButton, drawButton, zoomOutButton, zoomInButton;
 	private ScreenToggleButton unselectModeButton, alphaButton;
-	private ScreenTable vertMapTable, mainMapTable;
+	private ScreenTable vertMapTable;
 	private SelectButtonGroup toolGroup, drawGroup;
 	private EditorMap editorMap;
 	private ScreenButton upButton, downButton, leftButton, rightButton;
@@ -38,9 +38,8 @@ public class EditorScreen {
 		cell.addScreenItem(downButton = new ScreenButton("DOWN", 's'), 3, 18, 16, 1);
 		cell.addScreenItem(leftButton = new ScreenButton("L", 'a'), 2, 2, 1, 16);
 		cell.addScreenItem(rightButton = new ScreenButton("R", 'd'), 19, 2, 1, 16);
-		cell.addScreenItem(new ScreenImageContainer(editorMap, true), 14, 13, 4, 4);
-		cell.addScreenItem(new ScreenImageContainer(editorMap, false), 3, 2, 16, 16);
-		cell.addScreenItem(mainMapTable = new ScreenTable(16, 16), 3, 2, 16, 16);
+		cell.addScreenItem(new ScreenImageContainer(editorMap), 14, 13, 4, 4);
+		cell.addScreenItem(editorMap, 3, 2, 16, 16);
 		
 		cell.addScreenItem(clearAllSelectionButton = new ScreenButton("CLEAR ALL SELECTION", 'c'), 0, 19, 4, 1);
 		cell.addScreenItem(clearSelectionButton = new ScreenButton("CLEAR SELECTION", 'z'), 4, 19, 4, 1);
@@ -55,24 +54,24 @@ public class EditorScreen {
 	public void update(InputControllerJava controller) {
 		if (clearSelectionButton.press) {
 			vertMapTable.clearCurrent();
-			mainMapTable.clearCurrent();
+			editorMap.clearCurrent();
 		}
 		if (clearAllSelectionButton.press) {
 			vertMapTable.clearAll();
-			mainMapTable.clearAll();
+			editorMap.clearAll();
 		}
-		mainMapTable.setSelectShape(drawGroup.getSelect());
+		editorMap.setSelectShape(drawGroup.getSelect());
 		
 		vertMapTable.setSelectMode(!unselectModeButton.toggle);
-		mainMapTable.setSelectMode(!unselectModeButton.toggle);
+		editorMap.setSelectMode(!unselectModeButton.toggle);
 		
 		cell.handleMouseInput(controller.mouseX, controller.mouseY, controller.getMouseState(), controller.charInput, controller.getCharState());
 		
 		if (drawButton.press) {
-			editorMap.updateMap(mainMapTable.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
-			mainMapTable.clearAll();
+			editorMap.updateMap(editorMap.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
+			editorMap.clearAll();
 		}
-		editorMap.updatePreviewMap(mainMapTable.getSelect(), vertMapTable.getSelect());
+		editorMap.updatePreviewMap(editorMap.getSelect(), vertMapTable.getSelect());
 		
 		editorMap.setAlpha(alphaButton.toggle);
 		
