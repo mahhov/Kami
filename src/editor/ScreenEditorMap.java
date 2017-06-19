@@ -7,7 +7,7 @@ import paint.painterelement.PainterQueue;
 import java.awt.*;
 
 //todo: clean up
-class EditorMap extends ScreenTable implements ImageProvider {
+class ScreenEditorMap extends ScreenTable implements ImageProvider {
 	private static final int RIGHT_FACE = 0, FRONT_FACE = 1, TOP_FACE = 2;
 	private static final int[][][] FACE_COLOR = new int[][][] {
 			{{60, 150, 200}, {80, 170, 220}, {100, 190, 240}}, // block==1
@@ -28,7 +28,7 @@ class EditorMap extends ScreenTable implements ImageProvider {
 	int startX, startY, endX, endY;
 	double blockWidth, blockHeight;
 	
-	EditorMap(int mapWidth, int mapLength, int mapHeight) {
+	ScreenEditorMap(int mapWidth, int mapLength, int mapHeight) {
 		super(mapWidth, mapLength);
 		
 		mapHalfShowWidthDefault = 4;
