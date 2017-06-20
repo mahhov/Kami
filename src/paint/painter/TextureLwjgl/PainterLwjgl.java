@@ -218,6 +218,9 @@ public class PainterLwjgl implements Painter {
 	public void drawTextCentered(double x, double y, double width, double height, Color color, String text) {
 	}
 	
+	public void drawTextVertical(double x, double y, double width, double height, Color color, String text) {
+	}
+	
 	public void updateMode(Controller controller) {
 	}
 	

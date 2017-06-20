@@ -14,6 +14,7 @@ public class EditorScreen {
 	private SelectButtonGroup toolGroup, drawGroup, triggerGroup;
 	private ScreenEditorMap screenEditorMap;
 	private ScreenButton upButton, downButton, leftButton, rightButton;
+	private ScreenButton saveButton, loadButton;
 	
 	public EditorScreen(double left, double top, double width, double height) {
 		screenEditorMap = new ScreenEditorMap(MAP_WIDTH, MAP_LENGTH, MAP_HEIGHT);
@@ -21,7 +22,7 @@ public class EditorScreen {
 		cell = new ScreenCell(.02, 21, 21);
 		cell.setPosition(left, top, width, height);
 		
-		// trigger
+		// trigger 
 		triggerGroup = new SelectButtonGroup();
 		cell.addScreenItem(triggerGroup.add(new ScreenSelectButton("T 1")), 0, 0, 1, 1);
 		cell.addScreenItem(triggerGroup.add(new ScreenSelectButton("T 2")), 1, 0, 1, 1);
@@ -59,8 +60,8 @@ public class EditorScreen {
 		cell.addScreenItem(screenEditorMap, 3, 3, 16, 16);
 		
 		// load, save
-		cell.addScreenItem(drawButton = new ScreenButton("LOAD", 'L'), 20, 3, 1, 1);
-		cell.addScreenItem(drawButton = new ScreenButton("SAVE", 'S'), 20, 4, 1, 1);
+		cell.addScreenItem(loadButton = new ScreenButton("LOAD", 'L', true), 20, 3, 1, 3);
+		cell.addScreenItem(saveButton = new ScreenButton("SAVE", 'S', true), 20, 6, 1, 3);
 		
 		// selection
 		cell.addScreenItem(clearAllSelectionButton = new ScreenButton("CLEAR ALL SELECTION", 'c'), 0, 20, 4, 1);

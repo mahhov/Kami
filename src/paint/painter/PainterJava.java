@@ -176,6 +176,21 @@ public class PainterJava implements Painter {
 		brush.drawString(text, xywh[0] + (xywh[2] - textWidth) / 2, xywh[1] + 5 + xywh[3] / 2);
 	}
 	
+	public void drawTextVertical(double x, double y, double width, double height, Color color, String text) {
+		int xywh[] = Math3D.transform(new double[] {x, y, width, height}, IMAGE_SIZE);
+		brush.setColor(color);
+		int textWidth;
+		String t;
+		
+		int yy = (int) (y + xywh[1] + 5 + xywh[3] / 2) - 7 * (text.length() - 1);
+		for (char c : text.toCharArray()) {
+			t = c + "";
+			textWidth = fontMetrics.stringWidth(t);
+			brush.drawString(t, (int) (xywh[0] + (xywh[2] - textWidth) / 2), yy);
+			yy += 14;
+		}
+	}
+	
 	public void updateMode(Controller controller) {
 		if (controller.isKeyPressed(Controller.KEY_SLASH)) {
 			if (++wireMode == 3)

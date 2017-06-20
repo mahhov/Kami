@@ -11,6 +11,7 @@ class ScreenButton extends ScreenItem {
 	private String text;
 	private char shortcutKey;
 	boolean press, down, highlight;
+	private boolean vertical;
 	
 	ScreenButton(String text) {
 		this.text = text;
@@ -19,6 +20,12 @@ class ScreenButton extends ScreenItem {
 	ScreenButton(String text, char shortcutKey) {
 		this.text = text + " [" + shortcutKey + "]";
 		this.shortcutKey = shortcutKey;
+	}
+	
+	ScreenButton(String text, char shortcutKey, boolean vertical) {
+		this.text = text + " " + shortcutKey;
+		this.shortcutKey = shortcutKey;
+		this.vertical = vertical;
 	}
 	
 	boolean handleMouseInput(double screenX, double screenY, int mouseState, char charInput, int charState) {
@@ -41,6 +48,6 @@ class ScreenButton extends ScreenItem {
 	void draw(PainterQueue painterQueue, Color fillColor) {
 		painterQueue.add(new PainterRectangle(left, top, width, height, fillColor));
 		painterQueue.add(new PainterRectangle(left, top, width, height, TEXT_COLOR, false));
-		painterQueue.add(new PainterText(left, top, width, height, TEXT_COLOR, text));
+		painterQueue.add(new PainterText(left, top, width, height, TEXT_COLOR, text, vertical));
 	}
 }	
