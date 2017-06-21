@@ -6,15 +6,15 @@ import paint.painterelement.PainterQueue;
 public class EditorScreen {
 	private static final int MAP_WIDTH = 80, MAP_LENGTH = 80, MAP_HEIGHT = 10;
 	
-	// todo : reorganize
 	private ScreenCell cell;
-	private ScreenButton clearAllSelectionButton, clearSelectionButton, drawButton, zoomOutButton, zoomInButton;
-	private ScreenToggleButton unselectModeButton, alphaButton;
-	private ScreenTable vertMapTable;
-	private SelectButtonGroup toolGroup, drawGroup, triggerGroup;
-	private ScreenEditorMap screenEditorMap;
+	private SelectButtonGroup triggerGroup, toolGroup, drawGroup;
+	private ScreenButton drawButton, zoomOutButton, zoomInButton;
 	private ScreenButton upButton, downButton, leftButton, rightButton;
 	private ScreenButton saveButton, loadButton;
+	private ScreenButton clearAllSelectionButton, clearSelectionButton;
+	private ScreenToggleButton alphaButton, unselectModeButton;
+	private ScreenTable vertMapTable;
+	private ScreenEditorMap screenEditorMap;
 	
 	public EditorScreen(double left, double top, double width, double height) {
 		screenEditorMap = new ScreenEditorMap(MAP_WIDTH, MAP_LENGTH, MAP_HEIGHT);
@@ -76,6 +76,13 @@ public class EditorScreen {
 	}
 	
 	public void update(InputControllerJava controller) {
+		cell.handleMouseInput(controller.mouseX, controller.mouseY, controller.getMouseState(), controller.charInput, controller.getCharState());
+		updateSelection();
+		updateDrawing();
+		updateScroll();
+	}
+	
+	private void updateSelection() {
 		if (clearSelectionButton.press) {
 			vertMapTable.clearCurrent();
 			screenEditorMap.clearCurrent();
@@ -88,9 +95,9 @@ public class EditorScreen {
 		
 		vertMapTable.setSelectMode(!unselectModeButton.toggle);
 		screenEditorMap.setSelectMode(!unselectModeButton.toggle);
-		
-		cell.handleMouseInput(controller.mouseX, controller.mouseY, controller.getMouseState(), controller.charInput, controller.getCharState());
-		
+	}
+	
+	private void updateDrawing() {
 		if (drawButton.press) {
 			screenEditorMap.updateMap(screenEditorMap.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
 			screenEditorMap.clearAll();
@@ -98,7 +105,9 @@ public class EditorScreen {
 		screenEditorMap.updatePreviewMap(screenEditorMap.getSelect(), vertMapTable.getSelect());
 		
 		screenEditorMap.setAlpha(alphaButton.toggle);
-		
+	}
+	
+	private void updateScroll() {
 		if (upButton.press)
 			screenEditorMap.scroll(0, -1, 0);
 		if (downButton.press)
