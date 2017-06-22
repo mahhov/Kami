@@ -14,10 +14,10 @@ public class EditorScreen {
 	private ScreenButton clearAllSelectionButton, clearSelectionButton;
 	private ScreenToggleButton alphaButton, unselectModeButton;
 	private ScreenTable vertMapTable;
-	private ScreenEditorMap screenEditorMap;
+	private ScreenEditorMap editorMap;
 	
 	public EditorScreen(double left, double top, double width, double height) {
-		screenEditorMap = new ScreenEditorMap(MAP_WIDTH, MAP_LENGTH, MAP_HEIGHT);
+		editorMap = new ScreenEditorMap(MAP_WIDTH, MAP_LENGTH, MAP_HEIGHT);
 		
 		cell = new ScreenCell(.02, 21, 21);
 		cell.setPosition(left, top, width, height);
@@ -56,12 +56,12 @@ public class EditorScreen {
 		cell.addScreenItem(downButton = new ScreenButton("DOWN", 's'), 3, 19, 16, 1);
 		cell.addScreenItem(leftButton = new ScreenButton("L", 'a'), 2, 3, 1, 16);
 		cell.addScreenItem(rightButton = new ScreenButton("R", 'd'), 19, 3, 1, 16);
-		cell.addScreenItem(new ScreenImageContainer(screenEditorMap), 14, 14, 4, 4);
-		cell.addScreenItem(screenEditorMap, 3, 3, 16, 16);
+		cell.addScreenItem(new ScreenImageContainer(editorMap), 14, 14, 4, 4);
+		cell.addScreenItem(editorMap, 3, 3, 16, 16);
 		
 		// load, save
-		cell.addScreenItem(loadButton = new ScreenButton("LOAD", 'L', true), 20, 3, 1, 3);
-		cell.addScreenItem(saveButton = new ScreenButton("SAVE", 'S', true), 20, 6, 1, 3);
+		cell.addScreenItem(loadButton = new ScreenButton("LOAD", 'l', true), 20, 3, 1, 3);
+		cell.addScreenItem(saveButton = new ScreenButton("SAVE", 'p', true), 20, 6, 1, 3);
 		
 		// selection
 		cell.addScreenItem(clearAllSelectionButton = new ScreenButton("CLEAR ALL SELECTION", 'c'), 0, 20, 4, 1);
@@ -80,46 +80,54 @@ public class EditorScreen {
 		updateSelection();
 		updateDrawing();
 		updateScroll();
+		updateStore();
 	}
 	
 	private void updateSelection() {
 		if (clearSelectionButton.press) {
 			vertMapTable.clearCurrent();
-			screenEditorMap.clearCurrent();
+			editorMap.clearCurrent();
 		}
 		if (clearAllSelectionButton.press) {
 			vertMapTable.clearAll();
-			screenEditorMap.clearAll();
+			editorMap.clearAll();
 		}
-		screenEditorMap.setSelectShape(drawGroup.getSelect());
+		editorMap.setSelectShape(drawGroup.getSelect());
 		
 		vertMapTable.setSelectMode(!unselectModeButton.toggle);
-		screenEditorMap.setSelectMode(!unselectModeButton.toggle);
+		editorMap.setSelectMode(!unselectModeButton.toggle);
 	}
 	
 	private void updateDrawing() {
 		if (drawButton.press) {
-			screenEditorMap.updateMap(screenEditorMap.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
-			screenEditorMap.clearAll();
+			editorMap.updateMap(editorMap.getSelect(), vertMapTable.getSelect(), toolGroup.getSelect());
+			editorMap.clearAll();
 		}
-		screenEditorMap.updatePreviewMap(screenEditorMap.getSelect(), vertMapTable.getSelect());
+		editorMap.updatePreviewMap(editorMap.getSelect(), vertMapTable.getSelect());
 		
-		screenEditorMap.setAlpha(alphaButton.toggle);
+		editorMap.setAlpha(alphaButton.toggle);
 	}
 	
 	private void updateScroll() {
 		if (upButton.press)
-			screenEditorMap.scroll(0, -1, 0);
+			editorMap.scroll(0, -1, 0);
 		if (downButton.press)
-			screenEditorMap.scroll(0, 1, 0);
+			editorMap.scroll(0, 1, 0);
 		if (leftButton.press)
-			screenEditorMap.scroll(-1, 0, 0);
+			editorMap.scroll(-1, 0, 0);
 		if (rightButton.press)
-			screenEditorMap.scroll(1, 0, 0);
+			editorMap.scroll(1, 0, 0);
 		if (zoomOutButton.press)
-			screenEditorMap.scroll(0, 0, +1);
+			editorMap.scroll(0, 0, +1);
 		if (zoomInButton.press)
-			screenEditorMap.scroll(0, 0, -1);
+			editorMap.scroll(0, 0, -1);
+	}
+	
+	private void updateStore() {
+		if (saveButton.press)
+			editorMap.storeSave();
+		if (loadButton.press)
+			editorMap.storeLoad();
 	}
 	
 	public void draw(PainterQueue painterQueue) {

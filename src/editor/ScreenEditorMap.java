@@ -5,17 +5,17 @@ import paint.painterelement.PainterPolygon;
 import paint.painterelement.PainterQueue;
 
 import java.awt.*;
+import java.io.Serializable;
 
 //todo: clean up
-class ScreenEditorMap extends ScreenTable implements ImageProvider {
+class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable {
 	private static final int RIGHT_FACE = 0, FRONT_FACE = 1, TOP_FACE = 2;
 	private static final int[][][] FACE_COLOR = new int[][][] {
 			{{60, 150, 200}, {80, 170, 220}, {100, 190, 240}}, // block==1
 			{{200, 150, 60}, {220, 170, 80}, {240, 190, 100}}, // preview
 	}; // [block][face][rgb]
 	
-	private int mapWidth, mapLength, mapHeight;
-	private int[][][] map;
+	private Blueprint blueprint;
 	private int preview[][][], previewCounter;
 	private boolean alpha;
 	
@@ -33,15 +33,12 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 		
 		mapHalfShowWidthDefault = 4;
 		mapHalfShowLengthDefault = 4;
-		this.mapWidth = mapWidth;
-		this.mapLength = mapLength;
-		this.mapHeight = mapHeight;
-		map = new int[mapWidth][mapLength][mapHeight];
-		preview = new int[mapWidth][mapLength][mapHeight];
+		blueprint = new Blueprint(mapWidth, mapLength, mapHeight);
+		preview = new int[blueprint.width][blueprint.length][blueprint.height];
 		previewCounter = 0;
 		
-		blockWidthDefault = 1.0 / mapWidth;
-		blockHeightDefault = 1.0 / mapLength;
+		blockWidthDefault = 1.0 / blueprint.width;
+		blockHeightDefault = 1.0 / blueprint.length;
 		blockXShift = .005;
 		blockYShift = .015;
 		
@@ -60,7 +57,7 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 				for (int x = 0; x < select.length; x++)
 					for (int y = 0; y < select[0].length; y++)
 						if (select[x][y])
-							map[x][y][vertSelect[0].length - z - 1] = value;
+							blueprint.blueprint[x][y][vertSelect[0].length - z - 1][0] = value;
 	}
 	
 	void updatePreviewMap(boolean[][] select, boolean[][] vertSelect) {
@@ -77,18 +74,18 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 	}
 	
 	public void provideImage(PainterQueue painterQueue, double left, double top, double width, double height) {
-		drawContents(painterQueue, left, top, width, height, 0, 0, mapWidth, mapLength, blockWidthDefault, blockHeightDefault);
+		drawContents(painterQueue, left, top, width, height, 0, 0, blueprint.width, blueprint.length, blockWidthDefault, blockHeightDefault);
 	}
 	
 	private boolean[][] getShadow(double startX, double startY, double endX, double endY) {
-		boolean[][] shadow = new boolean[mapWidth][mapLength];
+		boolean[][] shadow = new boolean[blueprint.width][blueprint.length];
 		for (int x = (int) startX; x < endX; x++)
 			for (int y = (int) startY; y < endY; y++)
-				if (map[x][y][0] == 0) {
+				if (blueprint.blueprint[x][y][0][0] == 0) {
 					int z = 1;
-					while (z < mapHeight && map[x][y][z] == 0)
+					while (z < blueprint.height && blueprint.blueprint[x][y][z][0] == 0)
 						z++;
-					if (z < mapHeight)
+					if (z < blueprint.height)
 						shadow[x][y] = true;
 				}
 		return shadow;
@@ -101,10 +98,10 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 		double[][] rightxy = null, frontxy = null, topxy = null, bottomxy = null;
 		int alphaAmount = alpha ? 40 : 255;
 		
-		for (int z = 0; z < mapHeight; z++)
+		for (int z = 0; z < blueprint.height; z++)
 			for (int x = (int) startX; x < endX; x++)
 				for (int y = (int) startY; y < endY; y++)
-					if (map[x][y][z] == 1 || preview[x][y][z] == previewCounter) {
+					if (blueprint.blueprint[x][y][z][0] == 1 || preview[x][y][z] == previewCounter) {
 						topZ = z + 1;
 						
 						// x
@@ -121,7 +118,7 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 						frontBottomY = backBottomY + blockHeight * height;
 						frontTopY = backTopY + blockHeight * height;
 						
-						block = map[x][y][z] == 1 ? 0 : 1;
+						block = blueprint.blueprint[x][y][z][0] == 1 ? 0 : 1;
 						
 						// fill
 						
@@ -176,15 +173,15 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 	}
 	
 	private boolean isEmpty(int x, int y, int z) {
-		return x < 0 || x >= mapWidth || y < 0 || y >= mapLength || z < 0 || z >= mapHeight || map[x][y][z] == 0;
+		return x < 0 || x >= blueprint.width || y < 0 || y >= blueprint.length || z < 0 || z >= blueprint.height || blueprint.blueprint[x][y][z][0] == 0;
 	}
 	
 	void scroll(int dx, int dy, int dz) {
 		zoom = Math3D.maxMin(zoom + dz, 10, 1);
 		mapHalfShowWidth = mapHalfShowWidthDefault * zoom;
 		mapHalfShowLength = mapHalfShowLengthDefault * zoom;
-		scrollX = Math3D.maxMin(scrollX + dx * zoom, mapWidth - mapHalfShowWidth, mapHalfShowWidth);
-		scrollY = Math3D.maxMin(scrollY + dy * zoom, mapLength - mapHalfShowLength, mapHalfShowLength);
+		scrollX = Math3D.maxMin(scrollX + dx * zoom, blueprint.width - mapHalfShowWidth, mapHalfShowWidth);
+		scrollY = Math3D.maxMin(scrollY + dy * zoom, blueprint.length - mapHalfShowLength, mapHalfShowLength);
 		
 		startX = scrollX - mapHalfShowWidth;
 		startY = scrollY - mapHalfShowLength;
@@ -212,5 +209,13 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider {
 	void draw(PainterQueue painterQueue) {
 		drawGrid(painterQueue, startX, startY, endX, endY);
 		drawContents(painterQueue, left, top, width, height, startX, startY, endX, endY, blockWidth, blockHeight);
+	}
+	
+	void storeSave() {
+		blueprint.save(blueprint.DEFAULT_PATH);
+	}
+	
+	void storeLoad() {
+		blueprint = Blueprint.load(Blueprint.DEFAULT_PATH);
 	}
 }
