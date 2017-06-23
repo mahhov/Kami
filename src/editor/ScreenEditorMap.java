@@ -77,7 +77,7 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 		drawContents(painterQueue, left, top, width, height, 0, 0, blueprint.width, blueprint.length, blockWidthDefault, blockHeightDefault);
 	}
 	
-	private boolean[][] getShadow(double startX, double startY, double endX, double endY) {
+	private boolean[][] getShadow(int startX, int startY, int endX, int endY) {
 		boolean[][] shadow = new boolean[blueprint.width][blueprint.length];
 		for (int x = (int) startX; x < endX; x++)
 			for (int y = (int) startY; y < endY; y++)
@@ -91,7 +91,7 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 		return shadow;
 	}
 	
-	private void drawContents(PainterQueue painterQueue, double left, double top, double width, double height, double startX, double startY, double endX, double endY, double blockWidth, double blockHeight) {
+	private void drawContents(PainterQueue painterQueue, double left, double top, double width, double height, int startX, int startY, int endX, int endY, double blockWidth, double blockHeight) {
 		boolean[][] shadow = getShadow(startX, startY, endX, endY);
 		double offX, leftBottomX, leftTopX, rightBottomX, rightTopX, offY, backBottomY, backTopY, frontBottomY, frontTopY;
 		int block, topZ;
@@ -123,19 +123,19 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 						// fill
 						
 						// right face
-						if (isEmpty(x + 1, y, z) || alpha) {
+						if (isEmpty(x + 1, y, z, startX, endX, startY, endY) || alpha) {
 							rightxy = new double[][] {{rightTopX, rightBottomX, rightBottomX, rightTopX}, {backTopY, backBottomY, frontBottomY, frontTopY}};
 							painterQueue.add(new PainterPolygon(rightxy, 1, createColor(block, RIGHT_FACE, alphaAmount), false));
 						}
 						
 						// front face
-						if (isEmpty(x, y + 1, z) || alpha) {
+						if (isEmpty(x, y + 1, z, startX, endX, startY, endY) || alpha) {
 							frontxy = new double[][] {{leftTopX, rightTopX, rightBottomX, leftBottomX}, {frontTopY, frontTopY, frontBottomY, frontBottomY}};
 							painterQueue.add(new PainterPolygon(frontxy, 1, createColor(block, FRONT_FACE, alphaAmount), false));
 						}
 						
 						// top face
-						if (isEmpty(x, y, z + 1) || alpha) {
+						if (isEmpty(x, y, z + 1, startX, endX, startY, endY) || alpha) {
 							topxy = new double[][] {{leftTopX, rightTopX, rightTopX, leftTopX}, {backTopY, backTopY, frontTopY, frontTopY}};
 							painterQueue.add(new PainterPolygon(topxy, 1, createColor(block, TOP_FACE, alphaAmount), false));
 						}
@@ -172,8 +172,8 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 		return new Color(FACE_COLOR[block][face][0], FACE_COLOR[block][face][1], FACE_COLOR[block][face][2], alpha);
 	}
 	
-	private boolean isEmpty(int x, int y, int z) {
-		return x < 0 || x >= blueprint.width || y < 0 || y >= blueprint.length || z < 0 || z >= blueprint.height || blueprint.blueprint[x][y][z][0] == 0;
+	private boolean isEmpty(int x, int y, int z, int startX, int endX, int startY, int endY) {
+		return x < startX || x >= endX || y < startY || y >= endY || z < 0 || z >= blueprint.height || blueprint.blueprint[x][y][z][0] == 0;
 	}
 	
 	void scroll(int dx, int dy, int dz) {
