@@ -8,8 +8,8 @@ public class Blueprint implements Serializable {
 	final static int EMPTY = 0, BLOCK = 1, START = 2, END = 3, TRIGGER = 4, TRIGGER_FROM = 5, TRIGGER_TO = 6;
 	final static String[] MODULE_NAMES = new String[] {"EMPTY", "BLOCK", "START", "END", "TRIGGER", "T FROM", "T TO"};
 	
-	int width, length, height;
-	int[][][][] blueprint;
+	public int width, length, height;
+	public int[][][][] blueprint;
 	
 	Blueprint() {
 	}
@@ -59,7 +59,7 @@ public class Blueprint implements Serializable {
 		}
 	}
 	
-	static Blueprint load(String path) {
+	public static Blueprint load(String path) {
 		try {
 			FileInputStream fileIn = new FileInputStream(path);
 			ObjectInputStream objectIn = new ObjectInputStream(fileIn);

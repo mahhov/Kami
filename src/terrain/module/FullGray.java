@@ -1,4 +1,4 @@
-package terrain.terrainmodule;
+package terrain.module;
 
 import engine.Math3D;
 

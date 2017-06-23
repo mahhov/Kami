@@ -3,7 +3,7 @@ package terrain;
 import engine.Math3D;
 import shapes.Shape;
 import shapes.ShapeParent;
-import terrain.terrainmodule.TerrainModule;
+import terrain.module.TerrainModule;
 import world.World;
 
 public class TerrainChunk implements ShapeParent {

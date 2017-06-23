@@ -38,13 +38,13 @@ class KamiEngine implements Runnable {
 			painter = new PainterJava(FRAME, IMAGE, (ControllerJavaListener) controller);
 		}
 		camera = new TrailingCamera();
-		terrain = new Terrain();
+		terrain = new Terrain("blueprint.txt");
 		createWorld();
 	}
 	
 	private void createWorld() {
-		world = new World(terrain.width / World.CHUNK_SIZE, terrain.length / World.CHUNK_SIZE, terrain.height / World.CHUNK_SIZE);
-		character = new Character(5, 5, 5);
+		world = new World(terrain.width, terrain.length, terrain.height);
+		character = new Character(50, 50, 50);
 		camera.setFollow(character);
 		world.addElement(character);
 		world.addElement(new Sky(FRAME));
