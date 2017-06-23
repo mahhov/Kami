@@ -6,15 +6,14 @@ import camera.TrailingCamera;
 import character.Character;
 import control.Controller;
 import control.ControllerJava;
-import control.ControllerLwjgl;
 import control.ControllerJavaListener;
+import control.ControllerLwjgl;
 import paint.painter.Painter;
 import paint.painter.PainterJava;
 import paint.painter.TextureLwjgl.PainterLwjgl;
 import paint.painterelement.PainterQueue;
 import terrain.Terrain;
 import world.World;
-import world.WorldCreator;
 
 class KamiEngine implements Runnable {
 	private final boolean LWJGL_FLAG;
@@ -44,8 +43,7 @@ class KamiEngine implements Runnable {
 	}
 	
 	private void createWorld() {
-		WorldCreator wc = new WorldCreator(terrain.width / World.CHUNK_SIZE, terrain.length / World.CHUNK_SIZE, terrain.height / World.CHUNK_SIZE);
-		world = wc.world;
+		world = new World(terrain.width / World.CHUNK_SIZE, terrain.length / World.CHUNK_SIZE, terrain.height / World.CHUNK_SIZE);
 		character = new Character(5, 5, 5);
 		camera.setFollow(character);
 		world.addElement(character);
