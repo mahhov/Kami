@@ -17,6 +17,7 @@ public class Timer {
 	public static final Time FIND = new Time("find", 100, true);
 	public static final Time EXPAND = new Time("expand", 20, true);
 	public static final Time ADD_TO_WORLD = new Time("add to world", 10, true);
+	public static final Time TERRAIN_GENERATOR = new Time("terrain generator", 2, true);
 	
 	
 	public static final Time TEMP1 = new Time("temp 1", 10, true);
@@ -37,6 +38,7 @@ public class Timer {
 		s += FIND.toFileString();
 		s += EXPAND.toFileString();
 		s += ADD_TO_WORLD.toFileString();
+		s += TERRAIN_GENERATOR.toFileString();
 		s += TEMP1.toFileString();
 		s += TEMP2.toFileString();
 		s += TEMP3.toFileString();

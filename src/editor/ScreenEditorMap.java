@@ -123,19 +123,19 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 						// fill
 						
 						// right face
-						if (isEmpty(x + 1, y, z, startX, endX, startY, endY) || alpha) {
+						if (blueprint.isEmpty(x + 1, y, z, startX, endX, startY, endY) || alpha) {
 							rightxy = new double[][] {{rightTopX, rightBottomX, rightBottomX, rightTopX}, {backTopY, backBottomY, frontBottomY, frontTopY}};
 							painterQueue.add(new PainterPolygon(rightxy, 1, createColor(block, RIGHT_FACE, alphaAmount), false));
 						}
 						
 						// front face
-						if (isEmpty(x, y + 1, z, startX, endX, startY, endY) || alpha) {
+						if (blueprint.isEmpty(x, y + 1, z, startX, endX, startY, endY) || alpha) {
 							frontxy = new double[][] {{leftTopX, rightTopX, rightBottomX, leftBottomX}, {frontTopY, frontTopY, frontBottomY, frontBottomY}};
 							painterQueue.add(new PainterPolygon(frontxy, 1, createColor(block, FRONT_FACE, alphaAmount), false));
 						}
 						
 						// top face
-						if (isEmpty(x, y, z + 1, startX, endX, startY, endY) || alpha) {
+						if (blueprint.isEmpty(x, y, z + 1, startX, endX, startY, endY) || alpha) {
 							topxy = new double[][] {{leftTopX, rightTopX, rightTopX, leftTopX}, {backTopY, backTopY, frontTopY, frontTopY}};
 							painterQueue.add(new PainterPolygon(topxy, 1, createColor(block, TOP_FACE, alphaAmount), false));
 						}
@@ -170,10 +170,6 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 	
 	private Color createColor(int block, int face, int alpha) {
 		return new Color(FACE_COLOR[block][face][0], FACE_COLOR[block][face][1], FACE_COLOR[block][face][2], alpha);
-	}
-	
-	private boolean isEmpty(int x, int y, int z, int startX, int endX, int startY, int endY) {
-		return x < startX || x >= endX || y < startY || y >= endY || z < 0 || z >= blueprint.height || blueprint.blueprint[x][y][z][0] == 0;
 	}
 	
 	void scroll(int dx, int dy, int dz) {

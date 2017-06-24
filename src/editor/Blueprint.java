@@ -5,8 +5,8 @@ import java.io.*;
 public class Blueprint implements Serializable {
 	static final String DEFAULT_PATH = "blueprint.txt";
 	private static final long serialVersionUID = "blueprint".hashCode();
-	final static int EMPTY = 0, BLOCK = 1, START = 2, END = 3, TRIGGER = 4, TRIGGER_FROM = 5, TRIGGER_TO = 6;
-	final static String[] MODULE_NAMES = new String[] {"EMPTY", "BLOCK", "START", "END", "TRIGGER", "T FROM", "T TO"};
+	final static int EMPTY = 0, BLOCK = 1, START = 2, END = 3, TRIGGER = 4, TRIGGER_FROM = 5, TRIGGER_TO = 6; // todo: use these constants
+	final static String[] MODULE_NAMES = new String[] {"EMPTY", "BLOCK", "START", "END", "TRIGGER", "T FROM", "T TO"}; //todo: use these names in editor
 	
 	public int width, length, height;
 	public int[][][][] blueprint;
@@ -19,6 +19,14 @@ public class Blueprint implements Serializable {
 		this.length = length;
 		this.height = height;
 		blueprint = new int[width][length][height][3];
+	}
+	
+	public boolean isEmpty(int x, int y, int z) {
+		return x < 0 || x >= width || y < 0 || y >= length || z < 0 || z >= height || blueprint[x][y][z][0] == EMPTY;
+	}
+	
+	public boolean isEmpty(int x, int y, int z, int startX, int endX, int startY, int endY) {
+		return x < startX || x >= endX || y < startY || y >= endY || z < 0 || z >= height || blueprint[x][y][z][0] == EMPTY;
 	}
 	
 	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
