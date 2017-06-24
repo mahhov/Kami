@@ -41,13 +41,8 @@ public class EditorScreen {
 		
 		// block type
 		toolGroup = new SelectButtonGroup();
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("EMPTY", '0')), 0, 1, 2, 1);
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("BLOCK", '1')), 2, 1, 2, 1);
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("START", '2')), 4, 1, 2, 1);
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("END", '3')), 6, 1, 2, 1);
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("TRIGGER", '4')), 10, 1, 3, 1);
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("T FROM", '5')), 13, 1, 3, 1);
-		cell.addScreenItem(toolGroup.add(new ScreenSelectButton("T TO", '6')), 16, 1, 3, 1);
+		for (int i = 0; i < Blueprint.MODULE_NAMES.length; i++)
+			cell.addScreenItem(toolGroup.add(new ScreenSelectButton(Blueprint.MODULE_NAMES[i], (char) (i + 48))), i * 2, 1, 2, 1);
 		toolGroup.setSelect(1);
 		
 		// map, vert, scroll, minimap

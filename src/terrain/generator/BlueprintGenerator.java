@@ -52,7 +52,7 @@ public class BlueprintGenerator extends Generator {
 		for (int bx = startBlueX; bx < endBlueX; bx++)
 			for (int by = startBlueY; by < endBlueY; by++)
 				for (int bz = startBlueZ; bz < endBlueZ; bz++)
-					if (blueprint.blueprint[bx][by][bz][0] == 1)
+					if (blueprint.blueprint[bx][by][bz][0] == Blueprint.BLOCK)
 						generateBlueprintCoord(bx, by, bz);
 		
 		Timer.TERRAIN_GENERATOR.timeEnd();

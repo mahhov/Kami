@@ -5,8 +5,8 @@ import java.io.*;
 public class Blueprint implements Serializable {
 	static final String DEFAULT_PATH = "blueprint.txt";
 	private static final long serialVersionUID = "blueprint".hashCode();
-	final static int EMPTY = 0, BLOCK = 1, START = 2, END = 3, TRIGGER = 4, TRIGGER_FROM = 5, TRIGGER_TO = 6; // todo: use these constants
-	final static String[] MODULE_NAMES = new String[] {"EMPTY", "BLOCK", "START", "END", "TRIGGER", "T FROM", "T TO"}; //todo: use these names in editor
+	public final static int EMPTY = 0, BLOCK = 1, START = 2, END = 3, TRIGGER = 4, TRIGGER_FROM = 5, TRIGGER_TO = 6;
+	final static String[] MODULE_NAMES = new String[] {"EMPTY", "BLOCK", "START", "END", "TRIGGER", "T FROM", "T TO"};
 	
 	public int width, length, height;
 	public int[][][][] blueprint;

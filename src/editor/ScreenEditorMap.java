@@ -81,9 +81,9 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 		boolean[][] shadow = new boolean[blueprint.width][blueprint.length];
 		for (int x = (int) startX; x < endX; x++)
 			for (int y = (int) startY; y < endY; y++)
-				if (blueprint.blueprint[x][y][0][0] == 0) {
+				if (blueprint.blueprint[x][y][0][0] == Blueprint.EMPTY) {
 					int z = 1;
-					while (z < blueprint.height && blueprint.blueprint[x][y][z][0] == 0)
+					while (z < blueprint.height && blueprint.blueprint[x][y][z][0] == Blueprint.EMPTY)
 						z++;
 					if (z < blueprint.height)
 						shadow[x][y] = true;
@@ -118,7 +118,7 @@ class ScreenEditorMap extends ScreenTable implements ImageProvider, Serializable
 						frontBottomY = backBottomY + blockHeight * height;
 						frontTopY = backTopY + blockHeight * height;
 						
-						block = blueprint.blueprint[x][y][z][0] == 1 ? 0 : 1;
+						block = blueprint.blueprint[x][y][z][0] == Blueprint.BLOCK ? 0 : 1;
 						
 						// fill
 						
