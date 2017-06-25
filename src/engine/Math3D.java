@@ -370,6 +370,13 @@ public class Math3D {
 		return aa;
 	}
 	
+	public static double[] transform(double[] a, double scale, double[] shift) {
+		double[] aa = new double[a.length];
+		for (int i = 0; i < a.length; i++)
+			aa[i] = a[i] * scale + shift[i];
+		return aa;
+	}
+	
 	public static int[][] transform(double[][] a, int scale, int shift) {
 		int[][] aa = new int[a.length][a[0].length];
 		for (int i = 0; i < a.length; i++)

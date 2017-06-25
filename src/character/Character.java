@@ -162,7 +162,9 @@ public class Character implements WorldElement, TrailingCamera.Follow, ShapePare
 		hooky = y;
 		hookz = z;
 		
-		double[] xyz = terrain.findIntersection(controller.viewOrig, controller.viewDir, false, false, true, 0);
+		double scale = Math3D.magnitude(controller.viewOrig[0] - x, controller.viewOrig[1] - y);
+		double orig[] = Math3D.transform(controller.viewDir, scale, controller.viewOrig);
+		double[] xyz = terrain.findIntersection(orig, controller.viewDir, false, false, true, 0);
 		xyz[0] -= x;
 		xyz[1] -= y;
 		xyz[2] -= z;
