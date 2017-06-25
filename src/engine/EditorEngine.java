@@ -54,21 +54,3 @@ class EditorEngine implements Runnable {
 		new EditorEngine().begin();
 	}
 }
-
-// todo ; map ediitor
-// todo : spawn center terrain
-// todo : max range to hook
-// todo : race mode, survival mode, platformer mode 
-
-// todo : graphics
-// todo : shooting
-// todo : environment (e.g. clouds, zone types, world generation)
-// todo : true boundless terrain/world
-// todo : border drawing
-// todo : toggle controls for bg music and sound affects
-// todo : multi cube character collision
-// todo : flying sound affect
-// todo : moving character animation
-// todo : cell shading
-// todo : flying hiss sound
-// todo : skate state
