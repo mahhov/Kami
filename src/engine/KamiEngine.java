@@ -131,8 +131,6 @@ class KamiEngine implements Runnable {
 	}
 }
 
-// todo : grapling hook aim min distance
-
 // todo ; map ediitor
 // todo : spawn center terrain
 // todo : max range to hook
